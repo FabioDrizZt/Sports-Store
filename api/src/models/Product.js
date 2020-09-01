@@ -8,5 +8,23 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      set(value) { this.setDataValue('description', value.toLowerCase()); }
+    },
+    price: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+      validate: { min: 0 }
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    image: {
+      type: DataTypes.STRING,
+      defaultValue
+    }
   });
 };
