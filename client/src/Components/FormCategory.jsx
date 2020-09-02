@@ -17,3 +17,4 @@ function FormCategory() {
         </form>        
     )
 }
+export default FormCategory;
