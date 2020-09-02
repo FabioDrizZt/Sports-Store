@@ -6,10 +6,9 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false
+    },    description: {
+      type: DataTypes.TEXT,
+      defaultValue: "Este producto no tiene descripción."
     }
   })
 };
