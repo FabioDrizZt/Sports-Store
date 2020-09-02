@@ -1,5 +1,9 @@
 const server = require('express').Router();
-const { Product,ProductCategory } = require('../db.js');
+
+
+
+const { Product,Category,ProductCategory } = require('../db.js');
+
 
 server.get('/', (req, res, next) => {
 	Product.findAll()
@@ -8,6 +12,7 @@ server.get('/', (req, res, next) => {
 		})
 		.catch(next);
 });
+
 
 server.post("/:idProducto/category/:idCategoria",(req,res)=>{
 	const id = req.params.idProducto;
@@ -23,6 +28,13 @@ server.delete("/:idProducto/category/:idCategoria",(req,res)=>{
 		if (deletedRecord === 1) { res.status(200).json({ message: "Review cleared successfully" }); }
 		else { res.status(404).json({ message: "Review not found" })}
 })
+
+server.post("/category",(req,res)=>{
+	//suponemos que la data viene por body
+Category.create({name:req.body.name,description:req.body.description})
+.then(category=>res.send(category))
+.catch(err=>res.send(err))
+
 })
 
 module.exports = server;
