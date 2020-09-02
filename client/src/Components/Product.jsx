@@ -4,28 +4,29 @@ import ProductCard from './ProductCard';
 
 // Este componente envia informacion al ProductCard que le dará una maquetacion de tarjeta...
 
-const Product = ({ titulo, descripcion, precio, cantidad, imagen }) => {
+const Product = ({ name, description, price, stock, image, size }) => {
     return (
-        <ProductCard 
-            titulo={titulo}
-            descripcion={descripcion}
-            precio={precio}
-            cantidad={cantidad}
-            imagen={imagen}
-        />
+        <div class="card" style="width: 18rem;">
 
-)
-}
+            <img src={image} class="card-img-top" alt="Product Image"/>
+
+            <div class="card-body">
+                <h5 class="card-title">{name}</h5>
+                <p class="card-text">{description}</p>
+            </div>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Size: {size}</li>
+                <li class="list-group-item">Precio: {price}</li>
+                <li class="list-group-item">Stock: {stock}</li>
+            </ul>
+            
+            <div class="card-body">
+                <a href="#" class="card-link">Agregar al carrito</a>
+            </div>
+
+        </div>
+    )
+};
 
 export default Product;
-
-
-
-
-        {/* <div>
-            <span>Nombre: {titulo}</span>
-            <span>Descripcion{descripcion}</span>
-            <span>Precio {precio}</span>
-            <span>Cantidad {cantidad}</span>
-        </div> */}
-    
