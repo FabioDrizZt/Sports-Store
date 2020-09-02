@@ -28,5 +28,4 @@ const Product = ({ name, description, price, stock, image, size }) => {
         </div>
     )
 };
-
 export default Product;
