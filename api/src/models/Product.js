@@ -7,24 +7,22 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    description: {
+    }, size: {
       type: DataTypes.STRING,
-      allowNull: false,
-      set(value) { this.setDataValue('description', value.toLowerCase()); }
-    },
-    price: {
-      type: DataTypes.DECIMAL,
+    }, description: {
+      type: DataTypes.TEXT,
+      defaultValue: "Este producto no tiene descripción."
+    }, price: {
+      type: DataTypes.FLOAT,
       allowNull: false,
       validate: { min: 0 }
-    },
-    stock: {
+    }, stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    image: {
+      validate: { min: 0 }
+    }, image: {
       type: DataTypes.STRING,
-      defaultValue
+      defaultValue: "https://bagwellpromotions.com/wp-content/uploads/2014/03/sports.jpg",
     }
   });
 };
