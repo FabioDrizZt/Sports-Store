@@ -1,8 +1,6 @@
 import { React } from 'react';
-import { Route, Link } from 'react-router-dom';
 
-
-const Product = ({ titulo, descripcion, precio, cantidad }) => {
+export default function Product({ titulo, descripcion, precio, cantidad }) {
     return (
         <div>
             <span>{titulo}</span>
@@ -12,4 +10,4 @@ const Product = ({ titulo, descripcion, precio, cantidad }) => {
         </div>
     )
 
-}
+};
