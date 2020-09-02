@@ -1,0 +1,19 @@
+.cardStyle {
+border: solid 2px grey;
+margin: 20px;
+width: 30%;
+}
+.button {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.price {
+    font-size: 20px;
+    color: black
+}
+
+.img {
+    width: 200px;
+}

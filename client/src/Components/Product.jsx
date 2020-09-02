@@ -1,6 +1,8 @@
-import { React } from 'react';
-import { Route, Link } from 'react-router-dom';
+import React from 'react';
+// import { Route, Link } from 'react-router-dom';
+import ProductCard from './ProductCard';
 
+// Este componente envia informacion al ProductCard que le dará una maquetacion de tarjeta...
 
 const Product = ({ name, description, price, stock, image, size }) => {
     return (
