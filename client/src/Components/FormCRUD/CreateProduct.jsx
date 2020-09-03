@@ -9,8 +9,8 @@ function CreateProduct (){
                 <input type="text" id="name" name="name" />
             </div>
             <div className="form-group">
-                <label for="descripcion">Descripción</label> 
-                <input type="text" id="descripcion" name="descripcion"/>
+                <label for="description">Descripción</label> 
+                <input type="text" id="description" name="description"/>
             </div>
             <div className="form-group">
                <label for="precio">Precio</label> 
@@ -22,7 +22,7 @@ function CreateProduct (){
             </div>
             <div className="form-group">
                <label for="imagen">Imagen</label> 
-                <input type="text" id="imagen" name="imagen"/>
+                <input type="text" id="image" name="image"/>
             </div>
             <input type="submit" value="Crear"/>
         </form>

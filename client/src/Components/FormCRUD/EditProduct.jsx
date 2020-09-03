@@ -1,6 +1,6 @@
 import React from "./node_modules/react";
 
-function editProduct (){
+function EditProduct (){
     return(
         <form>
             <legend>Editar Producto</legend>
@@ -29,4 +29,4 @@ function editProduct (){
     )
 }
 
-export default editProduct
+export default EditProduct

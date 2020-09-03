@@ -11,9 +11,14 @@ server.get("/", (req, res, next) => {
 
 
 server.post("/",(req,res) => {
-	if (!req.body.name || !req.body.size || !req.body.description || !req.body.price || !req.body.stock || !req.body.image) {
-		res.sendStatus(404);
-	}
+
+  //siempre tira un 404 a pesar de que le llegan todos los datos, esta mal el if
+
+	// if (!req.body.name || !req.body.size || !req.body.description || !req.body.price || !req.body.stock || !req.body.image) {
+	// 	res.sendStatus(404);
+  // }
+  
+
 	Product.create({
 		name: req.body.name,
 		size: req.body.size,

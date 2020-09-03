@@ -1,6 +1,6 @@
 import React from "react"
 
-function deleteProduct (){
+function DeleteProduct (){
     return(
         <form>
         <legend>Eliminar Producto</legend>
@@ -14,4 +14,4 @@ function deleteProduct (){
     )
 }
 
-export default deleteProduct
+export default DeleteProduct
