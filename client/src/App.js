@@ -3,11 +3,11 @@ import { Route } from 'react-router-dom';
 import { useSelector } from "react-redux";
 //import logo from './logo.svg';
 import './App.css';
+
 import Product from './Components/Product.jsx';
-import SearchBar from './Components/SearchBar.jsx';
 import Products from './Components/Products.jsx';
-
-
+import NavBar from './Components/NavBar.jsx'
+import CreateProduct from './Components/FormCRUD/CreateProduct.js';
 
 function App() {
   const products= useSelector(state => state.products)
@@ -22,10 +22,12 @@ function App() {
   }
   return (
     <div className="App">
+      <NavBar />
       <Route
         exact path='/product'
         render={() => <Product />}
       />
+
       <Route
         exact path='/searchBar'
         render={() => <SearchBar />}
@@ -40,6 +42,9 @@ function App() {
           exact path='/products/:id'
           render={({ match }) => <Product productName={onFilterId(match.params.id)} />}
         />
+
+      <CreateProduct />
+
     </div>
   );
 }
