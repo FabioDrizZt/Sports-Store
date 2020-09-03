@@ -112,7 +112,7 @@ server.get ('/category/:nombreCat', (req,res) => {
     where: {name: req.params.nombreCat},
   })
   .then((category) => {
-    product_category.findAll({      
+    product_category.FindAll({      
       where: {CategoryId: category.id},
         include: [{ model: Product }, {model: Category}]
     }).then (productCategory => res.status(200).json(productCategory))    
