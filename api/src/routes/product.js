@@ -9,12 +9,31 @@ server.get("/", (req, res, next) => {
     .catch(next);
 });
 
+
+server.post("/",(req,res) => {
+	if (!req.body.name || !req.body.size || !req.body.description || !req.body.price || !req.body.stock || !req.body.image) {
+		res.sendStatus(404);
+	}
+	Product.create({
+		name: req.body.name,
+		size: req.body.size,
+		description: req.body.description,
+		price: req.body.price,
+		stock: req.body.stock,
+		image: req.body.image
+	})
+	.then(product => {
+		res.status(201).send(product);
+	})
+	.catch(err => res.send(err))
+
 server.post("/:idProducto/category/:idCategoria", (req, res) => {
   const id = req.params.idProducto;
   const idCategoria = req.params.idCategoria;
   ProductCategory.create({ ProductId: id, CategoryId: idCategoria })
     .then((pc) => res.send(pc))
     .catch((err) => res.send(err));
+
 });
 
 server.delete("/:idProducto/category/:idCategoria", (req, res) => {
@@ -36,6 +55,12 @@ server.post("/category", (req, res) => {
     .catch((err) => res.send(err));
 });
 
+server.post("/category",(req,res) => {
+	//suponemos que la data viene por body
+Category.create({name:req.body.name,description:req.body.description})
+.then(category=>res.send(category))
+.catch(err=>res.send(err))
+
 //S19 : Crear Ruta para eliminar Categoria
 server.delete("/category/:id", (req, res, next) => {
   Category.destroy({
@@ -53,6 +78,7 @@ server.delete("/category/:id", (req, res, next) => {
     .catch((error) => {
       res.status(500).json(error);
     });
+
 });
 
 //S20 : Crear ruta para Modificar Categoria
