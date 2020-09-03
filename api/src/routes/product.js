@@ -1,5 +1,6 @@
 const server = require("express").Router();
 const { Product, Category, ProductCategory } = require("../db.js");
+const { json } = require("body-parser");
 
 server.get("/", (req, res, next) => {
   Product.findAll()
@@ -11,9 +12,14 @@ server.get("/", (req, res, next) => {
 
 
 server.post("/",(req,res) => {
-	if (!req.body.name || !req.body.size || !req.body.description || !req.body.price || !req.body.stock || !req.body.image) {
-		res.sendStatus(404);
-	}
+
+  //siempre tira un 404 a pesar de que le llegan todos los datos, esta mal el if
+
+	// if (!req.body.name || !req.body.size || !req.body.description || !req.body.price || !req.body.stock || !req.body.image) {
+	// 	res.sendStatus(404);
+  // }
+  
+
 	Product.create({
 		name: req.body.name,
 		size: req.body.size,
@@ -26,18 +32,18 @@ server.post("/",(req,res) => {
 		res.status(201).send(product);
 	})
 	.catch(err => res.send(err))
-
+})
 server.post("/:idProducto/category/:idCategoria", (req, res) => {
   const id = req.params.idProducto;
   const idCategoria = req.params.idCategoria;
-  ProductCategory.create({ ProductId: id, CategoryId: idCategoria })
+  product_category.create({ ProductId: id, CategoryId: idCategoria })
     .then((pc) => res.send(pc))
     .catch((err) => res.send(err));
 
 });
 
 server.delete("/:idProducto/category/:idCategoria", (req, res) => {
-  ProductCategory.destroy({
+  product_category.destroy({
     where: { ProductId: req.params.id, CategoryId: req.params.idCategoria },
   }).then((deletedRecord) => {
     if (deletedRecord === 1) {
@@ -60,7 +66,7 @@ server.post("/category",(req,res) => {
 Category.create({name:req.body.name,description:req.body.description})
 .then(category=>res.send(category))
 .catch(err=>res.send(err))
-
+})
 //S19 : Crear Ruta para eliminar Categoria
 server.delete("/category/:id", (req, res, next) => {
   Category.destroy({
@@ -99,6 +105,7 @@ server.put("/category/:id", (req, res, next) => {
       });
   });
 });
+
 //S22 : Crear Ruta que devuelva los productos de X categoria
 server.get ('/category/:nombreCat', (req,res) => {  
   Category.FindOne({    
@@ -114,4 +121,5 @@ server.get ('/category/:nombreCat', (req,res) => {
     res.status(400).json({ error });
   });
 })
+
 module.exports = server;
