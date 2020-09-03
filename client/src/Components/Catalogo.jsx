@@ -4,7 +4,7 @@ import ProductCard from './ProductCard'
 function Catalogo (props){
     return (
     <div>
-        <ProductCard 
+         <ProductCard 
             
         />
     </div>)

@@ -1,5 +1,6 @@
 const server = require("express").Router();
 const { Product, Category, ProductCategory } = require("../db.js");
+const { json } = require("body-parser");
 
 server.get("/", (req, res, next) => {
   Product.findAll()
@@ -12,13 +13,13 @@ server.get("/", (req, res, next) => {
 server.post("/:idProducto/category/:idCategoria", (req, res) => {
   const id = req.params.idProducto;
   const idCategoria = req.params.idCategoria;
-  ProductCategory.create({ ProductId: id, CategoryId: idCategoria })
+  product_category.create({ ProductId: id, CategoryId: idCategoria })
     .then((pc) => res.send(pc))
     .catch((err) => res.send(err));
 });
 
 server.delete("/:idProducto/category/:idCategoria", (req, res) => {
-  ProductCategory.destroy({
+  product_category.destroy({
     where: { ProductId: req.params.id, CategoryId: req.params.idCategoria },
   }).then((deletedRecord) => {
     if (deletedRecord === 1) {
@@ -73,5 +74,21 @@ server.put("/category/:id", (req, res, next) => {
       });
   });
 });
+
+//S22 : Crear Ruta que devuelva los productos de X categoria
+server.get ('/category/:nombreCat', (req,res) => {  
+  Category.FindOne({    
+    where: {name: req.params.nombreCat},
+  })
+  .then((category) => {
+    product_category.findAll({      
+      where: {CategoryId: category.id},
+        include: [{ model: Product }, {model: Category}]
+    }).then (productCategory => res.status(200).json(productCategory))    
+  })
+  .catch((error) => {
+    res.status(400).json({ error });
+  });
+})
 
 module.exports = server;
