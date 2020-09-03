@@ -26,7 +26,7 @@ server.post("/",(req,res) => {
 		res.status(201).send(product);
 	})
 	.catch(err => res.send(err))
-
+})
 server.post("/:idProducto/category/:idCategoria", (req, res) => {
   const id = req.params.idProducto;
   const idCategoria = req.params.idCategoria;
@@ -60,7 +60,7 @@ server.post("/category",(req,res) => {
 Category.create({name:req.body.name,description:req.body.description})
 .then(category=>res.send(category))
 .catch(err=>res.send(err))
-
+})
 //S19 : Crear Ruta para eliminar Categoria
 server.delete("/category/:id", (req, res, next) => {
   Category.destroy({
