@@ -1,10 +1,12 @@
 import React from 'react';
-
-// import logo from './logo.svg';
-
+import { Route } from 'react-router-dom';
+// import { useSelector } from "react-redux";
+//import logo from './logo.svg';
 import './App.css';
-import Routes from './Routes';
-
+import Catalogo from "./Components/Catalogo"
+import Product from './Components/Product.jsx';
+import NavBar from './Components/NavBar.jsx'
+import CreateProduct from './Components/FormCRUD/CreateProduct.jsx';
 
 function App() {
   // const products= useSelector(state => state.products)
@@ -19,6 +21,10 @@ function App() {
   // }
   return (
     <div className="App">
+   
+      <NavBar />
+    
+   
       <Routes />
       {/* <NavBar /> */}
       {/* <Route
@@ -30,6 +36,8 @@ function App() {
       {/* S14 : Crear Ruta para mostrar el componente Catalogo */}
       {/* <Route
         exact path='/products'
+        render={() => <Catalogo />}
+      />
         render={() => <Products />}
       /> */}
       {/* S15 : Crear Ruta para ver el detalle de un producto según el id. */}

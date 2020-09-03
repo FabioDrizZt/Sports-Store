@@ -2,7 +2,7 @@ import React from "react"
 
 function CreateProduct (){
     return (
-        <form method="POST" action="/products">
+        <form method="POST" action="http://localhost:3001/products">
             <legend>Crear Producto</legend>
             <div className="form-group">
                 <label for="name">Nombre</label> 
@@ -19,6 +19,10 @@ function CreateProduct (){
             <div className="form-group">
                <label for="stock">Stock</label> 
                 <input type="number" id="stock" name="stock" />
+            </div>
+            <div className="form-group">
+               <label for="imagen">Size</label> 
+                <input type="text" id="size" name="size"/>
             </div>
             <div className="form-group">
                <label for="imagen">Imagen</label> 
