@@ -1,14 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-// import { useSelector } from "react-redux";
-//import logo from './logo.svg';
-import './App.css';
 
-import Product from './Components/Product.jsx';
-import Products from './Components/Products.jsx';
-import NavBar from './Components/NavBar.jsx'
-import CreateProduct from "../src/Components/FormCRUD/CreateProduct"
-import SearchBar from "../src/Components/SearchBar"
+// import logo from './logo.svg';
+
+import './App.css';
+import Routes from './Routes';
+
 
 function App() {
   // const products= useSelector(state => state.products)
@@ -23,16 +19,14 @@ function App() {
   // }
   return (
     <div className="App">
-      <NavBar />
+      <Routes />
+      {/* <NavBar /> */}
       {/* <Route
         exact path='/product'
         render={() => <Product />}
-      />
-
-      <Route
-        exact path='/searchBar'
-        render={() => <SearchBar />}
       /> */}
+
+
       {/* S14 : Crear Ruta para mostrar el componente Catalogo */}
       {/* <Route
         exact path='/products'
@@ -43,8 +37,8 @@ function App() {
           exact path='/products/:id'
           render={({ match }) => <Product productName={onFilterId(match.params.id)} />}
         /> */}
- <CreateProduct />      
-     
+
+      {/* <CreateProduct /> */}
 
     </div>
   );
