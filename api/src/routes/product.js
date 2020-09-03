@@ -99,5 +99,19 @@ server.put("/category/:id", (req, res, next) => {
       });
   });
 });
-
+//S22 : Crear Ruta que devuelva los productos de X categoria
+server.get ('/category/:nombreCat', (req,res) => {  
+  Category.FindOne({    
+    where: {name: req.params.nombreCat},
+  })
+  .then((category) => {
+    product_category.FindAll({      
+      where: {CategoryId: category.id},
+        include: [{ model: Product }, {model: Category}]
+    }).then (productCategory => res.status(200).json(productCategory))    
+  })
+  .catch((error) => {
+    res.status(400).json({ error });
+  });
+})
 module.exports = server;
