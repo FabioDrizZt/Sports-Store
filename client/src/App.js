@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import Catalogo from "./Components/Catalogo"
 import Product from './Components/Product.jsx';
+import CatalogFilter from './Components/CatalogFilter.jsx';
 import NavBar from './Components/NavBar/NavBar.jsx'
 import CreateProduct from './Components/FormCRUD/CreateProduct.jsx';
 
@@ -47,6 +48,11 @@ function App() {
         /> */}
 
       { <CreateProduct /> }
+
+      <Route
+        exact path='/catalogFilter'
+        render={() => <CatalogFilter />}
+      />
 
     </div>
   );
