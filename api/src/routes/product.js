@@ -19,19 +19,25 @@ server.get("/categories", (req, res, next) => {
     .catch(next);
 });
 
-server.post("/", (req, res) => {
-  Product.create({
-    name: req.body.name,
-    size: req.body.size,
-    description: req.body.description,
-    price: req.body.price,
-    stock: req.body.stock,
-    image: req.body.image,
-  })
-    .then((product) => {
-      res.status(201).send(product);
-    })
-    .catch((err) => res.send(err));
+
+server.post("/",(req,res) => {
+  for (const key in req.body) {
+    if (req.body[key]==="") {
+     res.status(400).send("Debes llenar todos los campos")      
+    }
+  }
+	Product.create({
+		name: req.body.name,
+		size: req.body.size,
+		description: req.body.description,
+		price: req.body.price,
+		stock: req.body.stock,
+		image: req.body.image
+	})
+	.then(product => {
+		res.status(201).send(product);
+	})
+  .catch(err => res.send(err))
 });
 
 //S26 : Crear ruta para Modificar Producto
