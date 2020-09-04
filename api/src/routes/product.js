@@ -1,6 +1,7 @@
 const server = require("express").Router();
 const { Product, Category, ProductCategory } = require("../db.js");
 const { json } = require("body-parser");
+const {Op} = require("sequelize");
 
 
 server.get("/", (req, res, next) => {
@@ -132,11 +133,11 @@ server.put("/category/:id", (req, res, next) => {
 
 //S22 : Crear Ruta que devuelva los productos de X categoria
 server.get ('/category/:nombreCat', (req,res) => {  
-  Category.FindOne({    
+  Category.findOne({    
     where: {name: req.params.nombreCat},
   })
   .then((category) => {
-    product_category.FindAll({      
+    product_category.findAll({      
       where: {CategoryId: category.id},
         include: [{ model: Product }, {model: Category}]
     }).then (productCategory => res.status(200).json(productCategory))    
@@ -145,5 +146,13 @@ server.get ('/category/:nombreCat', (req,res) => {
     res.status(400).json({ error });
   });
 })
+
+//S23: Crear ruta que retorne productos segun el keyword de búsqueda
+server.get("/search",(req,res)=>{
+  Product.findAll({
+    where:{[Op.or]:[{ name: { [Op.like]: '%' + req.query.query + '%' } },{ description: { [Op.like]: '%' + req.query.query + '%' } }]},
+  }).then(products=>res.status(200).json(products))
+  .catch(error=>res.status(400).json({error}))
+});
 
 module.exports = server;
