@@ -78,6 +78,22 @@ server.delete("/:idProducto/category/:idCategoria", (req, res) => {
   });
 });
 
+// S27 eliminar un producto DELETE /products/:id
+// PUT /products/:id
+// Retorna 200 si se elimino con exito.
+server.delete("/:id",(req,res)=>{
+  console.log(req.params.id)
+  Product.destroy({where:{id:req.params.id}})
+  .then(deletedRecord=>{
+    if(deletedRecord===1){
+      res.status(200).json({ message: "Se elimino el producto" });
+    }else{
+      res.status(404).json({ message: "Producto no encontrado" });
+    }
+  })
+})
+
+
 server.post("/category", (req, res) => {
   //suponemos que la data viene por body
   Category.create({ name: req.body.name, description: req.body.description })

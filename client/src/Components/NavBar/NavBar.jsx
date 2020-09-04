@@ -12,6 +12,9 @@ export default function NavBar() {
         <Link to="/">
           Home
         </Link>
+        <Link to="/formcrud">
+          Form CRUD
+        </Link>
     </nav>
   );
 }

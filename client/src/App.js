@@ -9,6 +9,7 @@ import Product from './Components/Product.jsx';
 import NavBar from './Components/NavBar/NavBar.jsx';
 import './Components/NavBar/NavBar.css';
 import CreateProduct from './Components/FormCRUD/CreateProduct.jsx';
+import FormCrud from "./Components/FormCRUD/FormCrud"
 
 function App() {
   // const products= useSelector(state => state.products)
@@ -45,8 +46,8 @@ function App() {
           exact path='/products/:id'
           render={({ match }) => <Product productName={onFilterId(match.params.id)} />}
         /> */}
-
-    <CreateProduct /> 
+    <Route exact path="/formcrud" component={FormCrud} />
+   
 
       {/* <Route
         exact path='/catalogFilter'
