@@ -21,6 +21,11 @@ server.get("/categories", (req, res, next) => {
 });
 
 server.post("/",(req,res) => {
+  for (const key in req.body) {
+    if (req.body[key]==="") {
+     res.status(400).send("Debes llenar todos los campos")      
+    }
+  }
 	Product.create({
 		name: req.body.name,
 		size: req.body.size,
