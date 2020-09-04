@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import Catalogo from "./Components/Catalogo"
 import Product from './Components/Product.jsx';
-import CatalogFilter from './Components/CatalogFilter.jsx';
+// import CatalogFilter from './Components/CatalogFilter.jsx';
 import NavBar from './Components/NavBar/NavBar.jsx'
 import CreateProduct from './Components/FormCRUD/CreateProduct.jsx';
 
@@ -28,31 +28,29 @@ function App() {
    
       {/*<Route />*/}
       {/* <NavBar /> */}
-      {/* <Route
+      <Route
         exact path='/product'
         render={() => <Product />}
-      /> */}
+      />
 
 
       {/* S14 : Crear Ruta para mostrar el componente Catalogo */}
       <Route
         exact path='/products'
         render={() => <Catalogo />}
-      />
-        render={() => <Product />}
-       
+      />       
       {/* S15 : Crear Ruta para ver el detalle de un producto según el id. */}
       {/* <Route
           exact path='/products/:id'
           render={({ match }) => <Product productName={onFilterId(match.params.id)} />}
         /> */}
 
-      { <CreateProduct /> }
+    <CreateProduct /> 
 
-      <Route
+      {/* <Route
         exact path='/catalogFilter'
         render={() => <CatalogFilter />}
-      />
+      /> */}
 
     </div>
   );
