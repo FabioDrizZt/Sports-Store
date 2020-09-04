@@ -11,9 +11,6 @@ server.get("/", (req, res, next) => {
 
 
 server.post("/",(req,res) => {
-	if (!req.body.name || !req.body.size || !req.body.description || !req.body.price || !req.body.stock || !req.body.image) {
-		res.sendStatus(404);
-	}
 	Product.create({
 		name: req.body.name,
 		size: req.body.size,
@@ -25,7 +22,31 @@ server.post("/",(req,res) => {
 	.then(product => {
 		res.status(201).send(product);
 	})
-	.catch(err => res.send(err))
+  .catch(err => res.send(err))
+});
+
+
+//S26 : Crear ruta para Modificar Producto
+server.put("/products/:id", (req, res) => {
+  Product.FindOne({
+    where: { id: req.params.id },
+  }).then((product) => {
+    product.update({
+      name: req.body.name,
+      size: req.body.size,
+      description: req.body.description,
+      price: req.body.price,
+      stock: req.body.stock,
+      image: req.body.image
+      })
+      .then((category) => {
+        res.status(200).json({ category });
+      })
+      .catch((error) => {
+        res.status(400).json({ error });
+      });
+    });
+});
 
 server.post("/:idProducto/category/:idCategoria", (req, res) => {
   const id = req.params.idProducto;
@@ -60,6 +81,7 @@ server.post("/category",(req,res) => {
 Category.create({name:req.body.name,description:req.body.description})
 .then(category=>res.send(category))
 .catch(err=>res.send(err))
+});
 
 //S19 : Crear Ruta para eliminar Categoria
 server.delete("/category/:id", (req, res, next) => {
