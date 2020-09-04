@@ -5,7 +5,6 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import Catalogo from "./Components/Catalogo"
 import Product from './Components/Product.jsx';
-import CatalogFilter from './Components/CatalogFilter.jsx';
 import NavBar from './Components/NavBar/NavBar.jsx'
 import CreateProduct from './Components/FormCRUD/CreateProduct.jsx';
 
@@ -39,7 +38,7 @@ function App() {
         exact path='/products'
         render={() => <Catalogo />}
       />
-        render={() => <Product />}
+        {/* render={() => <Product />} */}
        
       {/* S15 : Crear Ruta para ver el detalle de un producto según el id. */}
       {/* <Route
@@ -47,13 +46,7 @@ function App() {
           render={({ match }) => <Product productName={onFilterId(match.params.id)} />}
         /> */}
 
-      { <CreateProduct /> }
-
-      <Route
-        exact path='/catalogFilter'
-        render={() => <CatalogFilter />}
-      />
-
+      {/* <CreateProduct /> */} 
     </div>
   );
 }

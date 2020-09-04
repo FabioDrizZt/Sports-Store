@@ -11,6 +11,13 @@ server.get("/", (req, res, next) => {
     .catch(next);
 });
 
+server.get("/categories", (req, res, next) => {
+  Category.findAll()
+    .then((categories) => {
+      res.send(categories);
+    })
+    .catch(next);
+});
 
 server.post("/",(req,res) => {
 	Product.create({
