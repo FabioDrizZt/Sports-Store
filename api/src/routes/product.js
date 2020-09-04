@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { Product, Category, ProductCategory } = require("../db.js");
+const { Product, Category, product_category } = require("../db.js");
 const { json } = require("body-parser");
 const {Op} = require("sequelize");
 
@@ -36,8 +36,8 @@ server.post("/",(req,res) => {
 });
 
 //S26 : Crear ruta para Modificar Producto
-server.put("/products/:id", (req, res) => {
-  Product.FindOne({
+server.put("/:id", (req, res) => {
+  Product.findOne({
     where: { id: req.params.id },
   }).then((product) => {
     product.update({
@@ -60,7 +60,7 @@ server.put("/products/:id", (req, res) => {
 server.post("/:idProducto/category/:idCategoria", (req, res) => {
   const id = req.params.idProducto;
   const idCategoria = req.params.idCategoria;
-  product_category.create({ ProductId: id, CategoryId: idCategoria })
+  product_category.create({ productId: id, categoryId: idCategoria })
     .then((pc) => res.send(pc))
     .catch((err) => res.send(err));
 
@@ -68,12 +68,12 @@ server.post("/:idProducto/category/:idCategoria", (req, res) => {
 
 server.delete("/:idProducto/category/:idCategoria", (req, res) => {
   product_category.destroy({
-    where: { ProductId: req.params.id, CategoryId: req.params.idCategoria },
+    where: { productId: req.params.idProducto, categoryId: req.params.idCategoria },
   }).then((deletedRecord) => {
     if (deletedRecord === 1) {
-      res.status(200).json({ message: "Review cleared successfully" });
+      res.status(200).json({ message: "Se elimino la categoria al producto" });
     } else {
-      res.status(404).json({ message: "Review not found" });
+      res.status(404).json({ message: "Categoria no encontrada" });
     }
   });
 });
@@ -83,13 +83,6 @@ server.post("/category", (req, res) => {
   Category.create({ name: req.body.name, description: req.body.description })
     .then((category) => res.send(category))
     .catch((err) => res.send(err));
-});
-
-server.post("/category",(req,res) => {
-	//suponemos que la data viene por body
-Category.create({name:req.body.name,description:req.body.description})
-.then(category=>res.send(category))
-.catch(err=>res.send(err))
 });
 
 //S19 : Crear Ruta para eliminar Categoria
@@ -114,7 +107,7 @@ server.delete("/category/:id", (req, res, next) => {
 
 //S20 : Crear ruta para Modificar Categoria
 server.put("/category/:id", (req, res, next) => {
-  Category.FindOne({
+  Category.findOne({
     where: { id: req.params.id },
   }).then((category) => {
     category
@@ -131,15 +124,15 @@ server.put("/category/:id", (req, res, next) => {
   });
 });
 
-//S22 : Crear Ruta que devuelva los productos de X categoria
+//S22 : Crear Ruta que devuelva los productos de X categoria    *******Falla*********
 server.get ('/category/:nombreCat', (req,res) => {  
   Category.findOne({    
     where: {name: req.params.nombreCat},
   })
   .then((category) => {
     product_category.findAll({      
-      where: {CategoryId: category.id},
-        include: [{ model: Product }, {model: Category}]
+      where: {categoryId: category.id},
+      //  include: [{ model: Category }]
     }).then (productCategory => res.status(200).json(productCategory))    
   })
   .catch((error) => {
@@ -148,9 +141,11 @@ server.get ('/category/:nombreCat', (req,res) => {
 })
 
 //S23: Crear ruta que retorne productos segun el keyword de búsqueda
+// /search?query=valor
 server.get("/search",(req,res)=>{
   Product.findAll({
-    where:{[Op.or]:[{ name: { [Op.like]: '%' + req.query.query + '%' } },{ description: { [Op.like]: '%' + req.query.query + '%' } }]},
+    where:{[Op.or]:[{ name: { [Op.like]: '%' + req.query.query + '%' } },
+    { description: { [Op.like]: '%' + req.query.query + '%' } }]},
   }).then(products=>res.status(200).json(products))
   .catch(error=>res.status(400).json({error}))
 });
