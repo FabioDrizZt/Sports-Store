@@ -1,8 +1,9 @@
 import React from 'react';
 import './ProductCard.css'
+import {Link} from "react-router-dom";
 
 // Estaria bueno que cada producto tenga un subtitulo
-function ProductCard({ titulo, descripcion, precio, cantidad, imagen }) {
+function ProductCard({ id, titulo, descripcion, precio, cantidad, imagen }) {
 
     return (
         <div className="card col-sm-4 cardStyle">
@@ -11,12 +12,14 @@ function ProductCard({ titulo, descripcion, precio, cantidad, imagen }) {
             <img className="card-img-top img" src={imagen} alt="Imagen Producto" />
             <div className="card-title">    
                 <label>
-                <h3 className="card-title">{ titulo }</h3>                
+                <Link to={`/products/${id}`}>
+                    <h3 className="card-title">{ titulo }</h3>     
+                </Link>
                 </label>
             </div>
                 <hr/>
 
-                <h5 className="card-text">PRODUCT INFO</h5>
+                <h5 className="card-text">Descripcion del producto</h5>
                 <p>{ descripcion }</p>
                 <p>{ cantidad }</p>
             <div className="button">    
