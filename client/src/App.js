@@ -6,7 +6,8 @@ import './App.css';
 import Catalogo from "./Components/Catalogo"
 import Product from './Components/Product.jsx';
 // import CatalogFilter from './Components/CatalogFilter.jsx';
-import NavBar from './Components/NavBar/NavBar.jsx'
+import NavBar from './Components/NavBar/NavBar.jsx';
+import './Components/NavBar/NavBar.css';
 import CreateProduct from './Components/FormCRUD/CreateProduct.jsx';
 
 function App() {
