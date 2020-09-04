@@ -46,7 +46,7 @@ function Catalogo(props) {
       {products &&
         products.map((x) => (
           <ProductCard
-            key={x.id}
+            id={x.id}
             titulo={x.name}
             descripcion={x.description}
             precio={x.price}
