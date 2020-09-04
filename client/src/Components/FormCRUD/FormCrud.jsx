@@ -3,6 +3,13 @@ import CreateProduct from "./CreateProduct";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
+const style={  
+    width:"50%",
+    margin:"2rem auto",
+    position:"relative",   
+}
+
+
 function FormCrud (){
 const [products, setProducts] = useState(null);
 
@@ -14,7 +21,7 @@ useEffect(() => {
     .then(function (data) {
      setProducts(data);
     });
-}, [products]);
+}, []);
 
 function eliminar(id) {
     return fetch("http://localhost:3001/products/"+id,{method:"DELETE"})
@@ -46,11 +53,14 @@ return(
     <CreateProduct/>
     <div>
 {products&&products.map(x=>
-<p>Nombre: {x.name}  
-<button onClick={()=>eliminar(x.id)}>Eliminar</button>
-<button onClick={()=>editar(x.id)}>Editar</button>
-<span>id:{x.id}</span>
-</p>
+<div style={style}>
+<span>Nombre: {x.name}.</span>
+<span> Id: {x.id}</span>
+<span style={{position:"absolute",right:0}}>
+    <button className="btn btn-danger" onClick={()=>eliminar(x.id)}>Eliminar</button>
+    <button className="btn btn-warning" onClick={()=>editar(x.id)}>Editar</button>
+</span>
+</div>
 )
 }
     </div>
