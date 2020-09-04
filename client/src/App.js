@@ -6,7 +6,7 @@ import './App.css';
 import Catalogo from "./Components/Catalogo"
 import Product from './Components/Product.jsx';
 import CatalogFilter from './Components/CatalogFilter.jsx';
-import NavBar from './Components/NavBar.jsx'
+import NavBar from './Components/NavBar/NavBar.jsx'
 import CreateProduct from './Components/FormCRUD/CreateProduct.jsx';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
       <NavBar />
     
    
-      <Routes />
+      {/*<Route />*/}
       {/* <NavBar /> */}
       {/* <Route
         exact path='/product'
@@ -35,19 +35,19 @@ function App() {
 
 
       {/* S14 : Crear Ruta para mostrar el componente Catalogo */}
-      {/* <Route
+      <Route
         exact path='/products'
         render={() => <Catalogo />}
       />
-        render={() => <Products />}
-      /> */}
+        render={() => <Product />}
+       
       {/* S15 : Crear Ruta para ver el detalle de un producto según el id. */}
       {/* <Route
           exact path='/products/:id'
           render={({ match }) => <Product productName={onFilterId(match.params.id)} />}
         /> */}
 
-      {/* <CreateProduct /> */}
+      { <CreateProduct /> }
 
       <Route
         exact path='/catalogFilter'
