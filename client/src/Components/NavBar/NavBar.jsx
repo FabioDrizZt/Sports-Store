@@ -8,7 +8,9 @@ export default function NavBar() {
     <nav className="optionContainer navbar navbar-dark bg-dark">
 
       <div className="containerLogo">
-        <img className="img navbar-brand" src="https://i.pinimg.com/originals/bf/34/ec/bf34ec49cb756dec79940fa5864932f1.png" />
+        <Link className="option" to="/">
+          <img className="img navbar-brand" src="https://i.pinimg.com/originals/bf/34/ec/bf34ec49cb756dec79940fa5864932f1.png" />
+        </Link>
       </div>
 
       <Link className="option" to="/products">

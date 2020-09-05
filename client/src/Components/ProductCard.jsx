@@ -24,6 +24,7 @@ function ProductCard({ id, titulo, descripcion, precio, cantidad, imagen }) {
                 <p>{ cantidad }</p>
             <div className="button">    
                 <p className="price"><b>$ { precio }</b></p>
+                <button className="btn btn-warning ">Ver mas</button>
                 <button className="btn btn-success ">Agregar a Carrito</button>
             </div>
             </div>

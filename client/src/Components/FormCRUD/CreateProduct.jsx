@@ -7,7 +7,8 @@ import "./CreateProduct.css";
 
 function CreateProduct (){
     return (
-        <form className="container" method="POST" action="http://localhost:3001/products">
+        <div className="containerAll">
+        <form className="containerPro" method="POST" action="http://localhost:3001/products">
             <legend>Crear Producto</legend>
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label" for="name">Nombre</label> 
@@ -65,7 +66,7 @@ function CreateProduct (){
               </div> */}
             <button className="btn btn-primary" type="submit" value="Crear">ENVIAR</button>
         </form>
-       
+        </div>
     )
 }
 
