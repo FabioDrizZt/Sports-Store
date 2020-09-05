@@ -31,6 +31,7 @@ server.get("/category/:nombreCat", (req, res) => {
     res.status(400).json({ error });
   });
 });
+
 //S23: Crear ruta que retorne productos segun el keyword de búsqueda
 // /search?query=valor
 server.get("/search", (req, res) => {
@@ -52,6 +53,33 @@ server.get("/:id", (req, res) => {
     where: { id: req.params.id },
   }).then((products) => res.status(200).json(products))
     .catch((error) => res.status(400).json({ error }));
+});
+
+//S26 : Crear ruta para Modificar Producto
+server.put("/:id", (req, res) => {  
+  console.log(req.query)
+  Product.findOne({
+    where: { id: req.params.id },
+  }).then((product) => {
+    product
+      .update({
+        name: req.body.name,
+        size: req.body.size,
+        description: req.body.description,
+        price: req.body.price,
+        stock: req.body.stock,
+        image: req.body.image,
+      })
+      .then((category) => {
+        console.log(category)
+        res.status(200).json( category );
+       
+      })
+      .catch((error) => {
+        res.status(400).json( error );
+      });
+  });
+
 });
 // S17 : Crear ruta para agregar categorias de un producto.
 // POST /products/:idProducto/category/:idCategoria
