@@ -42,10 +42,10 @@ function App() {
         render={() => <Catalogo />}
       />       
       {/* S15 : Crear Ruta para ver el detalle de un producto según el id. */}
-      {/* <Route
+      {<Route
           exact path='/products/:id'
-          render={({ match }) => <Product productName={onFilterId(match.params.id)} />}
-        /> */}
+          render={({ match }) => <Product productName={(match.params.id)} />}
+        />}
     <Route exact path="/formcrud" component={FormCrud} />
    
 

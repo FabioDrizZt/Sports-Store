@@ -1,6 +1,29 @@
-.style {
-    height: 70px;
+.optionContainer {
+    height: 90px;
     display: flex;
-    justify-content: flex-end;
-    padding:20px;
+    justify-content: space-between;
 }
+
+.containerLogo {
+    display: flex;
+    margin-left: 30px;
+}
+
+.option {
+    position: relative;
+    right: 18%;
+    font-size: 25px;
+    color: white;
+}
+
+.img {
+    width: 25%;
+}
+.container {
+display: flex;
+align-items: flex-end;
+}
+
+
+
+

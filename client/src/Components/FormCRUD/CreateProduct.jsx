@@ -1,5 +1,9 @@
 import React from "react";
 import "./CreateProduct.css";
+// import React, { useState, useEffect } from "react";
+        
+// function CreateProduct() {
+// const [category, setCategory] = useState(null);
 
 function CreateProduct (){
     return (
@@ -47,6 +51,18 @@ function CreateProduct (){
                 </div>
             </div>
 
+            {/* <div className="form-group">
+              <label for="category">Categoría</label>
+                <select>
+                  <option disabled seleted value>
+                    Filtrar por Categoría
+                  </option>
+                    {category &&
+                     category.map((c) => {
+                      return <option key={c.name}> {c.name} </option>;
+                    })}
+                </select>
+              </div> */}
             <button className="btn btn-primary" type="submit" value="Crear">ENVIAR</button>
         </form>
        
