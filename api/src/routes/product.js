@@ -41,7 +41,8 @@ server.post("/",(req,res) => {
 });
 
 //S26 : Crear ruta para Modificar Producto
-server.put("/:id", (req, res) => {
+server.put("/:id", (req, res) => {  
+  console.log(req.query)
   Product.findOne({
     where: { id: req.params.id },
   }).then((product) => {
@@ -55,10 +56,12 @@ server.put("/:id", (req, res) => {
         image: req.body.image,
       })
       .then((category) => {
-        res.status(200).json({ category });
+        console.log(category)
+        res.status(200).json( category );
+       
       })
       .catch((error) => {
-        res.status(400).json({ error });
+        res.status(400).json( error );
       });
   });
 });
