@@ -1,55 +1,74 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import "./CreateProduct.css";
+// import React, { useState, useEffect } from "react";
+        
+// function CreateProduct() {
+// const [category, setCategory] = useState(null);
 
-function CreateProduct() {
-  const [category, setCategory] = useState(null);
+function CreateProduct (){
+    return (
+        <form className="container" method="POST" action="http://localhost:3001/products">
+            <legend>Crear Producto</legend>
+            <div className="form-group row">
+                <label className="col-sm-2 col-form-label" for="name">Nombre</label> 
+                <div class="col-sm-10">
+                    <input className="form-control" type="text" id="name" name="name" placeholder="Zapatillas..."/>
+                </div>
+            </div>
 
-  return (
-    <form method="POST" action="http://localhost:3001/products">
+            <div className="form-group row">
+                <label className="col-sm-2 col-form-label" for="description">Descripción</label> 
+                <div class="col-sm-10">
+                    <input className="form-control" type="text" id="description" name="description" placeholder="¿Qué dirias de tu producto?"/>
+                </div>
+            </div>
 
-      <legend>Crear Producto</legend>
-      <div className="form-group">
-        <label for="name">Nombre</label>
-        <input type="text" id="name" name="name" />
-      </div>
-      <div className="form-group">
-        <label for="description">Descripción</label>
-        <input type="text" id="description" name="description" />
-      </div>
-      <div className="form-group">
-        <label for="precio">Precio</label>
-        <input type="number" id="price" name="price" />
-      </div>
-      <div className="form-group">
-        <label for="stock">Stock</label>
-        <input type="number" id="stock" name="stock" />
-      </div>
+            <div className="form-group row">
+                <label className="col-sm-2 col-form-label" for="price">Precio</label> 
+                <div class="col-sm-10">
+                    <input className="form-control" type="number" id="price" name="price" placeholder=""/>
+                </div>
+            </div>
 
-      <div className="form-group">
-        <label for="imagen">Size</label>
-        <input type="text" id="size" name="size" />
-      </div>
+            <div className="form-group row">
+                <label className="col-sm-2 col-form-label" for="stock">Stock</label> 
+                <div class="col-sm-10">
+                    <input className="form-control" type="number" id="stock" name="stock" placeholder=""/>
+                </div>
+            </div>
 
-      <div className="form-group">
-        <label for="imagen">Imagen</label>
-        <input type="text" id="image" name="image" />
-      </div>
+            <div className="form-group row">
+                <label className="col-sm-2 col-form-label" for="size">Size</label> 
+                <div class="col-sm-10">
+                    <input className="form-control" type="text" id="size" name="size" placeholder=""/>
+                </div>
+            </div>
 
-      <div className="form-group">
-        <label for="category">Categoría</label>
-        <select>
-          <option disabled seleted value>
-            Filtrar por Categoría
-          </option>
-          {category &&
-            category.map((c) => {
-              return <option key={c.name}> {c.name} </option>;
-            })}
-        </select>
-      </div>
+            <div className="form-group row">
+                <label className="col-sm-2 col-form-label" for="image">Imagen</label> 
+                <div class="col-sm-10">
+                    <input className="form-control" type="text" id="image" name="image" placeholder=""/>
+                </div>
+            </div>
 
-      <input type="submit" value="Crear" />
-    </form>
-  );
+            {/* <div className="form-group">
+              <label for="category">Categoría</label>
+                <select>
+                  <option disabled seleted value>
+                    Filtrar por Categoría
+                  </option>
+                    {category &&
+                     category.map((c) => {
+                      return <option key={c.name}> {c.name} </option>;
+                    })}
+                </select>
+              </div> */}
+            <button className="btn btn-primary" type="submit" value="Crear">ENVIAR</button>
+        </form>
+       
+    )
 }
 
-export default CreateProduct;
+export default CreateProduct
+
+
