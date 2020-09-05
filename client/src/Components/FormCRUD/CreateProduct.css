@@ -1,8 +1,13 @@
-.container {
+.containerAll {
+    display: flex;
+    justify-content: center;
+}
+
+.containerPro {
     width: 60%;
-    height: 450px;
+    height: 435px;
     margin-top: 20px;
     border: 1px solid grey;
     border-radius: 20px;
-    padding: 25px;
+    padding: 15px;
 }
