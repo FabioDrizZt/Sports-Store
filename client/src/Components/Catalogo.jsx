@@ -15,7 +15,6 @@ function Catalogo() {
 
   function filtrarCatalogo(nombreCat) {
     dispatch(getCategoryProducts(nombreCat));
-    window.location.reload();
   }
 
   return (
