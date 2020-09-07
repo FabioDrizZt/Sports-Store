@@ -4,11 +4,15 @@ const { Op } = require("sequelize");
 
 // S21 : Crear ruta que devuelva todos los productos
 server.get("/", (req, res, next) => {
-  Product_category.findAll({
-    include: [{ model: Category }, { model: Product }]
-  }).then((product_category) => { res.send(product_category); })
-    .catch(err => res.send(err))
-});
+  Product.findAll({
+    include: [{ model: Category }],
+  }).then(r => { res.send(r) })
+    .catch(e => { res.sendStatus(400) })
+})
+/*  Product_category.findAll({
+     include: [{ model: Category }, { model: Product }]
+   }).then((product_category) => { res.send(product_category); })
+     .catch(err => res.send(err)) */
 // S21 : Crear ruta que devuelva todas las categories
 server.get("/categories", (req, res, next) => {
   Category.findAll()
@@ -20,16 +24,10 @@ server.get("/categories", (req, res, next) => {
 // "GET /products/categoria/:nombreCat
 // Retorna todos los productos de {nombreCat} Categoría."
 server.get("/category/:nombreCat", (req, res) => {
-  Category.findOne({
-    where: { name: req.params.nombreCat },
-  }).then((category) => {
-    Product_category.findAll({
-      where: { categoryId: category.id },
-      include: [{ model: Category }, { model: Product }]
-    }).then((pc) => res.status(200).json(pc));
-  }).catch((error) => {
-    res.status(400).json({ error });
-  });
+  Product.findAll({
+    include: [{ model: Category, where: {name: req.params.nombreCat} }],
+  }).then(r => { res.send(r) })
+    .catch(e => { res.sendStatus(400) })
 });
 
 //S23: Crear ruta que retorne productos segun el keyword de búsqueda
@@ -98,10 +96,12 @@ server.put("/:id", (req, res) => {
     description: req.body.description,
     price: req.body.price,
     stock: req.body.stock,
-    image: req.body.image},{where:{ id: req.params.id }})
-  .then(()=>res.status(201).send("Producto id "+req.params.id+" actualizado"))
-  .catch((error) => {res.status(400).json( error );    
-  });
+    image: req.body.image
+  }, { where: { id: req.params.id } })
+    .then(() => res.status(201).send("Producto id " + req.params.id + " actualizado"))
+    .catch((error) => {
+      res.status(400).json(error);
+    });
 });
 //S20 : Crear ruta para Modificar Categoria
 // PUT /products/category/:id
