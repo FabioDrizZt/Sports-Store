@@ -91,21 +91,16 @@ server.post("/:idProducto/category/:idCategoria", (req, res) => {
 // Modifica el producto con id: id. Retorna 400 si los campos enviados no son correctos.
 // Retorna 200 si se modificó con exito, y retorna los datos del producto modificado.
 server.put("/:id", (req, res) => {
-  Product.findOne({
-    where: { id: req.params.id },
-  }).then((product) => {
-    product.update({
-      name: req.body.name,
-      size: req.body.size,
-      description: req.body.description,
-      price: req.body.price,
-      stock: req.body.stock,
-      image: req.body.image,
-    }).then((category) => {
-      res.status(200).json({ category });
-    }).catch((error) => {
-      res.status(400).json({ error });
-    });
+  console.log(req.body)
+  Product.update({
+    name: req.body.name,
+    size: req.body.size,
+    description: req.body.description,
+    price: req.body.price,
+    stock: req.body.stock,
+    image: req.body.image},{where:{ id: req.params.id }})
+  .then(()=>res.status(201).send("Producto id "+req.params.id+" actualizado"))
+  .catch((error) => {res.status(400).json( error );    
   });
 });
 //S20 : Crear ruta para Modificar Categoria

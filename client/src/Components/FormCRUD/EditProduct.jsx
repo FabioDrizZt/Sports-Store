@@ -1,6 +1,9 @@
 import React,{useState,useEffect} from "react";
+import { updateProduct } from "../../actions/index";
+import { useDispatch } from "react-redux";
 
 function EditProduct (props){
+    const dispatch = useDispatch();
     const idProduct = props.match.match.params.id;
     const [editProduct, setEditProduct] = useState(null); 
 
@@ -32,20 +35,8 @@ function EditProduct (props){
 
     
     function sendData (e){       
-    const putMethod = {
-        method: 'PUT', // Method itself
-        // headers: {
-        //  'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
-        // },
-        // body: JSON.stringify(input)// We send data in JSON format
-    }
-    return fetch("http://localhost:3001/products/"+idProduct,putMethod)
-    .then(function (response) {      
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data)     
-    })
+        e.preventDefault();
+        dispatch(updateProduct(idProduct,input))
     }
 
     return(
