@@ -1,32 +1,33 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getProducts, getCategories, getCategoryProducts } from "../actions";
 
-function Catalogo(props) {
-  const productos = useSelector(state=>state.products);
-  const [category, setCategory] = useState(null);
-
+function Catalogo() {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
+  const categories = useSelector((state) => state.categories);
 
   useEffect(() => {
-    fetch("http://localhost:3001/products/categories")
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        setCategory(data);
-      });
+    dispatch(getProducts());
+    dispatch(getCategories());
   }, []);
+
+  function filtrarCatalogo(nombreCat) {
+    dispatch(getCategoryProducts(nombreCat));
+    window.location.reload();
+  }
 
   return (
     //props: titulo, descripcion, precio, cantidad, imagen
     <React.Fragment>
       <div>
-        <select onChange={(e) => Catalogo(e.target.value)}>
+        <select onChange={(e) => filtrarCatalogo(e.target.value)}>
           <option disabled seleted value>
             FILTRAR POR CATEGORIA
           </option>
-          {category &&
-            category.map((c) => {
+          {categories &&
+            categories.map((c) => {
               return <option key={c.name}> {c.name} </option>;
             })}
         </select>
@@ -35,8 +36,8 @@ function Catalogo(props) {
         </button>
       </div>
       <h1>Catálogo</h1>
-      {productos &&
-        productos.map((x) => (
+      {products &&
+        products.map((x) => (
           <ProductCard
             id={x.id}
             titulo={x.name}
