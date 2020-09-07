@@ -1,10 +1,16 @@
 import "./CreateProduct.css";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from "../../actions/index";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getCategories } from "../../actions";
 
 function CreateProduct() {
   const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories);
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
+  
   const [errors, setErrors] = useState({
     name: "",
     description: "",
@@ -33,14 +39,17 @@ function CreateProduct() {
       [e.target.name]: e.target.value,
     });
   };
-  function submitProduct(e,input){
+  function submitProduct(e, input) {
     e.preventDefault();
-    dispatch(createProduct(input))
+    dispatch(createProduct(input));
+  }
+  function noVacio(obj) {
+    return Object.keys(obj).length !== 0;
   }
 
   return (
     <div className="containerAll">
-      <form className="containerPro" onSubmit={e=>submitProduct(e,input)}>
+      <form className="containerPro" onSubmit={(e) => submitProduct(e, input)}>
         <legend>Crear Producto</legend>
         <div className="form-group row">
           <label className="col-sm-2 col-form-label" for="name">
@@ -56,6 +65,7 @@ function CreateProduct() {
               value={input.name}
               onChange={handleInputChange}
             />
+            {errors.name && <p className="danger">{errors.name}</p>}
           </div>
         </div>
 
@@ -73,6 +83,9 @@ function CreateProduct() {
               value={input.description}
               onChange={handleInputChange}
             />
+            {errors.description && (
+              <p className="danger">{errors.description}</p>
+            )}
           </div>
         </div>
 
@@ -90,6 +103,7 @@ function CreateProduct() {
               value={input.price}
               onChange={handleInputChange}
             />
+            {errors.price && <p className="danger">{errors.price}</p>}
           </div>
         </div>
 
@@ -107,6 +121,7 @@ function CreateProduct() {
               value={input.stock}
               onChange={handleInputChange}
             />
+            {errors.stock && <p className="danger">{errors.stock}</p>}
           </div>
         </div>
 
@@ -124,6 +139,7 @@ function CreateProduct() {
               value={input.size}
               onChange={handleInputChange}
             />
+            {errors.size && <p className="danger">{errors.size}</p>}
           </div>
         </div>
 
@@ -141,22 +157,30 @@ function CreateProduct() {
               value={input.image}
               onChange={handleInputChange}
             />
+            {errors.image && <p className="danger">{errors.image}</p>}
           </div>
         </div>
 
-        {/* <div className="form-group">
-              <label for="category">Categoría</label>
-                <select>
-                  <option disabled seleted value>
-                    Filtrar por Categoría
-                  </option>
-                    {category &&
-                     category.map((c) => {
-                      return <option key={c.name}> {c.name} </option>;
-                    })}
-                </select>
-              </div> */}
-        <button className="btn btn-primary" type="submit" value="Crear">
+        {
+          <div className="form-group">
+            <label for="category">Categoría</label>
+            <select>
+              <option disabled seleted value>
+                Filtrar por Categoría
+              </option>
+              {categories &&
+                categories.map((c) => {
+                  return <option key={c.name}> {c.name} </option>;
+                })}
+            </select>
+          </div>
+        }
+        <button
+          className="btn btn-primary"
+          type="submit"
+          disabled={noVacio(errors)}
+          value="Crear"
+        >
           ENVIAR
         </button>
       </form>
@@ -166,12 +190,24 @@ function CreateProduct() {
 
 export function validate({ name, description, price, stock, size, image }) {
   let errors = {};
-  if (!name) {errors.name='Debe cargar el nombre'}
-  if (!description) {errors.description='Debe cargar description'}
-  if (!price) {errors.price='Debe cargar price'}
-  if (!stock) {errors.stock='Debe cargar stock'}
-  if (!size) {errors.size='Debe cargar size'}
-  if (!image) {errors.image='Debe cargar image'}
+  if (!name) {
+    errors.name = "Debe cargar el nombre";
+  }
+  if (!description) {
+    errors.description = "Debe cargar description";
+  }
+  if (!price) {
+    errors.price = "Debe cargar price";
+  }
+  if (!stock) {
+    errors.stock = "Debe cargar stock";
+  }
+  if (!size) {
+    errors.size = "Debe cargar size";
+  }
+  if (!image) {
+    errors.image = "Debe cargar image";
+  }
   return errors;
 }
 
