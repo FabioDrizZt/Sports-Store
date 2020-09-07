@@ -1,13 +1,13 @@
 const server = require("express").Router();
-const { Product, Category, product_category } = require("../db.js");
+const { Product, Category, Product_category } = require("../db.js");
 const { Op } = require("sequelize");
 
 // S21 : Crear ruta que devuelva todos los productos
 server.get("/", (req, res, next) => {
-  Product.findAll()
-    .then((products) => {
-      res.send(products);
-    }).catch(err => res.send(err))
+  Product_category.findAll({
+    include: [{ model: Category }, { model: Product }]
+  }).then((product_category) => { res.send(product_category); })
+    .catch(err => res.send(err))
 });
 // S21 : Crear ruta que devuelva todas las categories
 server.get("/categories", (req, res, next) => {
@@ -23,10 +23,10 @@ server.get("/category/:nombreCat", (req, res) => {
   Category.findOne({
     where: { name: req.params.nombreCat },
   }).then((category) => {
-    product_category.findAll({
+    Product_category.findAll({
       where: { categoryId: category.id },
-      include: [{ model: Category }]
-    }).then((productCategory) => res.status(200).json(productCategory));
+      include: [{ model: Category }, { model: Product }]
+    }).then((pc) => res.status(200).json(pc));
   }).catch((error) => {
     res.status(400).json({ error });
   });
@@ -82,7 +82,7 @@ server.post("/category", (req, res) => {
 server.post("/:idProducto/category/:idCategoria", (req, res) => {
   const id = req.params.idProducto;
   const idCategoria = req.params.idCategoria;
-  product_category.create({ productId: id, categoryId: idCategoria })
+  Product_category.create({ productId: id, categoryId: idCategoria })
     .then((pc) => res.send(pc))
     .catch((err) => res.send(err));
 });
@@ -125,7 +125,7 @@ server.put("/category/:id", (req, res, next) => {
 // DELETE /products/:idProducto/category/:idCategoria
 // Elimina la categoria al producto.
 server.delete("/:idProducto/category/:idCategoria", (req, res) => {
-  product_category.destroy({
+  Product_category.destroy({
     where: {
       productId: req.params.idProducto,
       categoryId: req.params.idCategoria,
