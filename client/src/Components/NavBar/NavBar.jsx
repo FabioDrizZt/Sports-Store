@@ -21,6 +21,9 @@ export default function NavBar() {
       </Link>
       <Link className="option" to="/formcrud">
         Productos
+      </Link >
+      <Link className="option" to="/category">
+        Categorías
       </Link>
 
       <SearchBar />
