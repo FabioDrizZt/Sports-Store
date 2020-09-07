@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import CreateProduct from "./CreateProduct";
 import {Link} from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const style={  
     width:"50%",
@@ -10,17 +11,9 @@ const style={
 
 
 function FormCrud (){
-const [products, setProducts] = useState(null);
+const products = useSelector(state=>state.products)
 
-useEffect(() => {
-    fetch("http://localhost:3001/products")
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-     setProducts(data);
-    });
-}, []);
+
 
 function eliminar(id) {
     return fetch("http://localhost:3001/products/"+id,{method:"DELETE"})

@@ -34,6 +34,7 @@ function CreateProduct() {
     });
   };
   function submitProduct(e,input){
+    e.preventDefault();
     dispatch(createProduct(input))
   }
 

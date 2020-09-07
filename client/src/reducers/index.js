@@ -32,13 +32,13 @@ function rootReducer(state = initialState, action) {
             return { ...state, products: action.payload }
         } case SEARCH_PRODUCTS: {
             return { ...state, products: action.payload }
-        } case CREATE_PRODUCT: {
+        } case CREATE_PRODUCT: {           
             return { ...state, products: state.products.concat(action.payload) }
         } case CREATE_CATEGORY: {
             return { ...state, categories: state.categories.concat(action.payload) }
         } case CREATE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.concat(action.payload) }
-        } case UPDATE_PRODUCT: {
+        } case UPDATE_PRODUCT: {           
             return { ...state, products: state.products.filter(product => product.name !== action.payload.named) }
         } case UPDATE_CATEGORY: {
             return { ...state, categories: state.categories.filter(category => category.name !== action.payload.name) }

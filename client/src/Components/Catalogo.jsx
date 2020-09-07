@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
+import { useSelector } from "react-redux";
 
 function Catalogo(props) {
-  const [products, setProducts] = useState(null);
+  const productos = useSelector(state=>state.products);
   const [category, setCategory] = useState(null);
 
-  useEffect(() => {
-    fetch("http://localhost:3001/products")
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        setProducts(data);
-      });
-  }, []);
 
   useEffect(() => {
     fetch("http://localhost:3001/products/categories")
@@ -43,8 +35,8 @@ function Catalogo(props) {
         </button>
       </div>
       <h1>Catálogo</h1>
-      {products &&
-        products.map((x) => (
+      {productos &&
+        productos.map((x) => (
           <ProductCard
             id={x.id}
             titulo={x.name}

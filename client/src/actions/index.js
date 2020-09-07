@@ -80,9 +80,9 @@ export function createProductCategory(idProducto, idCategoria) {
             }).catch(error => alert(error, 'error'))
     }
 }
-export function updateProduct(id) {
+export function updateProduct(id,input) {
     return function (dispatch) {
-        axios.put(`${SERVER_ADDRESS}/products/${id}`)
+        axios.put(`${SERVER_ADDRESS}/products/${id}`,input)
             .then(res => {
                 dispatch({ type: UPDATE_PRODUCT, payload: res.data });
             }).catch(error => alert(error, 'error'))
