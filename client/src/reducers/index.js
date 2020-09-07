@@ -17,13 +17,14 @@ import {
 const initialState = {
     products: [],
     categories: [],
-    productCategories: []
+    productCategories: [],
+    product:[]
 }
 
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case GET_PRODUCT: {
-            return { ...state, products: action.payload }
+            return { ...state, product: action.payload }
         } case GET_PRODUCTS: {
             return { ...state, products: action.payload }
         } case GET_CATEGORIES: {

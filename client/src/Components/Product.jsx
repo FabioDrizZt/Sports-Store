@@ -8,7 +8,7 @@ import { getProduct } from "../actions";
 
 const Product = (props) => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.product);
   useEffect(() => {
     dispatch(getProduct(props.productName));
   }, []);
