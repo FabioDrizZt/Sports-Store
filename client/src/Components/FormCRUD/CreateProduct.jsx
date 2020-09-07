@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { getCategories } from "../../actions";
 
 function CreateProduct() {
+  
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
   useEffect(() => {
