@@ -50,7 +50,7 @@ export function getCategoryProducts(nombreCat) {
 }
 export function searchProducts(value) {
     return function (dispatch) {
-        axios.get(`${SERVER_ADDRESS}/products/?query=${value}`)
+        axios.get(`${SERVER_ADDRESS}/products/search/?query=${value}`)
             .then(res => {
                 dispatch({ type: SEARCH_PRODUCTS, payload: res.data });
             }).catch(error => alert(error, 'error'))
