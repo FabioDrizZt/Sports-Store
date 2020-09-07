@@ -10,6 +10,7 @@ import NavBar from './Components/NavBar/NavBar.jsx';
 import './Components/NavBar/NavBar.css';
 import EditProduct from './Components/FormCRUD/EditProduct.jsx';
 import FormCrud from "./Components/FormCRUD/FormCrud";
+import Home from "./Components/Home"
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
   // }
   return (
     <div className="App">
-   
+      
       <NavBar />
     
    
@@ -35,7 +36,10 @@ function App() {
         exact path='/product'
         render={() => <Product />}
       />
-
+    <Route
+        exact path='/'
+        render={() => <Home />}
+      />
 
       {/* S14 : Crear Ruta para mostrar el componente Catalogo */}
       <Route
