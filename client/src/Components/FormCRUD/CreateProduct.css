@@ -11,3 +11,10 @@
     border-radius: 20px;
     padding: 15px;
 }
+
+.danger {
+    display: 'block';
+    margin-top: '7px';
+    color: red;
+    font-size: '13px';
+}
