@@ -1,4 +1,5 @@
 import axios from 'axios';
+const SERVER_ADDRESS = 'http://localhost:3001';
 
 export const GET_PRODUCT = 'GET_PRODUCT';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
@@ -14,9 +15,10 @@ export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const REMOVE_CATEGORY = 'REMOVE_CATEGORY';
 export const REMOVE_PRODUCT_CATEGORY = 'REMOVE_PRODUCT_CATEGORY';
 
+
 export function getProduct(id) {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/products/${id}`)
+        axios.get(`${SERVER_ADDRESS}/products/${id}`)
             .then(res => {
                 dispatch({ type: GET_PRODUCT, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -24,7 +26,7 @@ export function getProduct(id) {
 }
 export function getProducts() {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/products`)
+        axios.get(`${SERVER_ADDRESS}/products`)
             .then(res => {
                 dispatch({ type: GET_PRODUCTS, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -32,7 +34,7 @@ export function getProducts() {
 }
 export function getCategories() {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/products/categories`)
+        axios.get(`${SERVER_ADDRESS}/products/categories`)
             .then(res => {
                 dispatch({ type: GET_CATEGORIES, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -40,7 +42,7 @@ export function getCategories() {
 }
 export function getCategoryProducts(nombreCat) {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/products/category/${nombreCat}`)
+        axios.get(`${SERVER_ADDRESS}/products/category/${nombreCat}`)
             .then(res => {
                 dispatch({ type: GET_CATEGORY_PRODUCTS, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -48,7 +50,7 @@ export function getCategoryProducts(nombreCat) {
 }
 export function searchProducts(value) {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/products/?query=${value}`)
+        axios.get(`${SERVER_ADDRESS}/products/?query=${value}`)
             .then(res => {
                 dispatch({ type: SEARCH_PRODUCTS, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -56,7 +58,7 @@ export function searchProducts(value) {
 }
 export function createProduct(input) {
     return function (dispatch) {
-        axios.post(`http://localhost:3001/products/`, input)
+        axios.post(`${SERVER_ADDRESS}/products/`, input)
             .then(res => {
                 dispatch({ type: CREATE_PRODUCT, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -64,7 +66,7 @@ export function createProduct(input) {
 }
 export function createCategory(input) {
     return function (dispatch) {
-        axios.post(`http://localhost:3001/products/category`, input)
+        axios.post(`${SERVER_ADDRESS}/products/category`, input)
             .then(res => {
                 dispatch({ type: CREATE_CATEGORY, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -72,7 +74,7 @@ export function createCategory(input) {
 }
 export function createProductCategory(idProducto, idCategoria) {
     return function (dispatch) {
-        axios.post(`http://localhost:3001/products/${idProducto}/category/${idCategoria}`)
+        axios.post(`${SERVER_ADDRESS}/products/${idProducto}/category/${idCategoria}`)
             .then(res => {
                 dispatch({ type: CREATE_PRODUCT_CATEGORY, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -80,7 +82,7 @@ export function createProductCategory(idProducto, idCategoria) {
 }
 export function updateProduct(id) {
     return function (dispatch) {
-        axios.put(`http://localhost:3001/products/${id}`)
+        axios.put(`${SERVER_ADDRESS}/products/${id}`)
             .then(res => {
                 dispatch({ type: UPDATE_PRODUCT, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -88,7 +90,7 @@ export function updateProduct(id) {
 }
 export function updateCategory(id) {
     return function (dispatch) {
-        axios.put(`http://localhost:3001/products/category/${id}`)
+        axios.put(`${SERVER_ADDRESS}/products/category/${id}`)
             .then(res => {
                 dispatch({ type: UPDATE_CATEGORY, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -96,7 +98,7 @@ export function updateCategory(id) {
 }
 export function removeProduct(id) {
     return function (dispatch) {
-        return axios.delete(`http://localhost:3001/products/${id}`)
+        return axios.delete(`${SERVER_ADDRESS}/products/${id}`)
             .then(res => {
                 dispatch({ type: REMOVE_PRODUCT, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -104,7 +106,7 @@ export function removeProduct(id) {
 }
 export function removeCategory(id) {
     return function (dispatch) {
-        return axios.delete(`http://localhost:3001/products/categories/${id}`)
+        return axios.delete(`${SERVER_ADDRESS}/products/categories/${id}`)
             .then(res => {
                 dispatch({ type: REMOVE_CATEGORY, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -112,7 +114,7 @@ export function removeCategory(id) {
 }
 export function removeProductCategory(idProducto, idCategoria) {
     return function (dispatch) {
-        return axios.delete(`http://localhost:3001/${idProducto}/categories/${idCategoria}`)
+        return axios.delete(`${SERVER_ADDRESS}/${idProducto}/categories/${idCategoria}`)
             .then(res => {
                 dispatch({ type: REMOVE_PRODUCT_CATEGORY, payload: res.data });
             }).catch(error => alert(error, 'error'))
