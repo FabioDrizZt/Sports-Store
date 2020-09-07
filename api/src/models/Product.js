@@ -7,11 +7,13 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      set(value) {this.setDataValue('name', value.toLowerCase())}
     }, size: {
       type: DataTypes.STRING,
     }, description: {
       type: DataTypes.TEXT,
-      defaultValue: "Este producto no tiene descripción."
+      defaultValue: "Este producto no tiene descripción.",
+      set(value) {this.setDataValue('name', value.toLowerCase())}
     }, price: {
       type: DataTypes.FLOAT,
       allowNull: false,
