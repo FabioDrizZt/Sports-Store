@@ -25,7 +25,7 @@ server.get("/category/:nombreCat", (req, res) => {
   }).then((category) => {
     product_category.findAll({
       where: { categoryId: category.id },
-      //  include: [{ model: Category }]
+      include: [{ model: Category }]
     }).then((productCategory) => res.status(200).json(productCategory));
   }).catch((error) => {
     res.status(400).json({ error });
@@ -38,8 +38,8 @@ server.get("/search", (req, res) => {
   Product.findAll({
     where: {
       [Op.or]: [
-        { name: { [Op.like]: "%" + req.query.query + "%" } },
-        { description: { [Op.like]: "%" + req.query.query + "%" } },
+        { name: { [Op.like]: "%" + req.query.query.toLowerCase() + "%" } },
+        { description: { [Op.like]: "%" + req.query.query.toLowerCase() + "%" } },
       ],
     },
   }).then((products) => res.status(200).json(products))
