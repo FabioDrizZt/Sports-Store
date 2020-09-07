@@ -65,6 +65,7 @@ export function createProduct(input) {
     }
 }
 export function createCategory(input) {
+    console.log(input);
     return function (dispatch) {
         axios.post(`${SERVER_ADDRESS}/products/category`, input)
             .then(res => {
