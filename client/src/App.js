@@ -10,7 +10,9 @@ import NavBar from './Components/NavBar/NavBar.jsx';
 import './Components/NavBar/NavBar.css';
 import EditProduct from './Components/FormCRUD/EditProduct.jsx';
 import FormCrud from "./Components/FormCRUD/FormCrud";
-import Home from "./Components/Home"
+import FormCategory from './Components/FormCategory';
+import Home from "./Components/Home";
+
 
 
 function App() {
@@ -51,6 +53,12 @@ function App() {
           exact path='/products/:id'
           render={({ match }) => <Product productName={(match.params.id)} />}
         />}
+        <Route 
+        exact path = '/category'
+          render = {() => <FormCategory />}
+        
+        />
+
     <Route exact path="/formcrud" component={FormCrud} />
     <Route exact path="/edit/product/:id" render={(match)=><EditProduct match={match}/>} />
 
