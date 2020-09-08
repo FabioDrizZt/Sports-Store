@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { User} = require("../db.js");
+const { User, Order} = require("../db.js");
 
 //S34 ruta para crear usuario
 server.post("/",(req,res)=>{
@@ -13,6 +13,7 @@ server.post("/",(req,res)=>{
       }).then(user => {res.status(200).send(user); 
       }).catch(err => res.send(err))
 });
+
 
 // S35 : Crear Ruta para modificar Usuario
 
@@ -29,5 +30,15 @@ server.put("/:id",(req,res)=>{
     .send("Usuario id: " + req.params.id + " actualizado satisfactoriamente"))
     .catch(err => res.send(err))
 });
+
+/**S44 S44 : Crear ruta que retorne todas las ordenes
+Esta ruta puede recibir el query string status y deberá devolver sólo las ordenes con ese status. */
+server.get("/orders",(req,res)=>{
+  const status = req.query.status;
+  Order.findAll({where:{state:status}})
+  .then(orders=>{res.send(orders)})
+  .catch(error=>res.send(error))
+})
+
 
 module.exports = server;
