@@ -107,16 +107,15 @@ server.put("/:id", (req, res) => {
 //S20 : Crear ruta para Modificar Categoria
 // PUT /products/category/:id
 server.put("/category/:id", (req, res, next) => {
-  Category.findOne({
-    where: { id: req.params.id },
-  }).then((category) => {
-    category.update({
-      name: req.body.name,
-      description: req.body.description,
-    }).then((category) => { res.status(200).json({ category }); })
-      .catch((error) => { res.status(400).json({ error }); });
+  console.log(req.body)
+  Category.update({
+    name:req.body.name,
+    description:req.body.description},
+    {where: { id: req.params.id }})
+    .then((category) => {res.status(200).json({ category }); })
+    .catch((error) => { res.status(400).json({ error }); });
   });
-});
+
 // S17 : Crear ruta para sacar categorias de un producto.
 // DELETE /products/:idProducto/category/:idCategoria
 // Elimina la categoria al producto.

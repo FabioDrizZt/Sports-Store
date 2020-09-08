@@ -91,9 +91,9 @@ export function updateProduct(id,input) {
             .catch(error => alert(error, 'error'))
     }
 }
-export function updateCategory(id) {
+export function updateCategory(id,input) {
     return function (dispatch) {
-        axios.put(`${SERVER_ADDRESS}/products/category/${id}`)
+        axios.put(`${SERVER_ADDRESS}/products/category/${id}`,input)
             .then(res => {
                 dispatch({ type: UPDATE_CATEGORY, payload: res.data });
             }).catch(error => alert(error, 'error'))
@@ -109,7 +109,7 @@ export function removeProduct(id) {
 }
 export function removeCategory(id) {
     return function (dispatch) {
-        return axios.delete(`${SERVER_ADDRESS}/products/categories/${id}`)
+        return axios.delete(`${SERVER_ADDRESS}/products/category/${id}`)
             .then(res => {
                 dispatch({ type: REMOVE_CATEGORY, payload: res.data });
             }).catch(error => alert(error, 'error'))
