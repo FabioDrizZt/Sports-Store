@@ -5,13 +5,12 @@ import React, { useState, useEffect } from "react";
 import { getCategories } from "../../actions";
 
 function CreateProduct() {
-  
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
   useEffect(() => {
     dispatch(getCategories());
   }, []);
-  
+
   const [errors, setErrors] = useState({
     name: "",
     description: "",
@@ -174,16 +173,16 @@ function CreateProduct() {
                   return <option key={c.name}> {c.name} </option>;
                 })}
             </select>
+            <button
+              className="btn btn-primary"
+              type="submit"
+              disabled={noVacio(errors)}
+              value="Crear"
+            >
+              ENVIAR
+            </button>
           </div>
         }
-        <button
-          className="btn btn-primary"
-          type="submit"
-          disabled={noVacio(errors)}
-          value="Crear"
-        >
-          ENVIAR
-        </button>
       </form>
     </div>
   );
