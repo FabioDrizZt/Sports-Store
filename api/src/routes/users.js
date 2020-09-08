@@ -30,6 +30,14 @@ server.put("/:id",(req,res)=>{
     .send("Usuario id: " + req.params.id + " actualizado satisfactoriamente"))
     .catch(err => res.send(err))
 });
+// S37 : Crear Ruta para eliminar Usuario DELETE /users/:id
+server.delete("/:id", (req, res) => {
+  User.destroy({ where: { id: req.params.id } })
+    .then(deletedRecord => {
+      if (deletedRecord === 1) res.status(200).json({ message: "Se elimino el Usuario" });
+      else res.status(404).json({ message: "Usuario no encontrado" });
+    })
+})
 
 /**S44 S44 : Crear ruta que retorne todas las ordenes
 Esta ruta puede recibir el query string status y deberá devolver sólo las ordenes con ese status. */
