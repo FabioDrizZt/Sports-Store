@@ -42,11 +42,14 @@ server.get("/orders",(req,res)=>{
 
 /*S38 : Crear Ruta para agregar Item al Carrito
 POST /users/:idUser/cart */
-server.post("/users/:idUser/cart",(req,res)=>{
+server.post("/:idUser/cart",(req,res)=>{
   const id=req.params.idUser;
-  Item_cart.create({userId:id})
-  .then(()=>res.send())
-  .catch((error)=>res.send(error))
+  const idOrder; Order.findOne({where: { userId: id }}) 
+  .then(order => { idOrder = order.id; 
+  }).then( Orderproduct.create({productId: req.body.id}, {orderId: idOrder}, {price: req.body.price}, {amount: 1}) )
+  .then(resp => {res.send(resp) 
+    }).catch(error => { res.send(error) 
+  }) 
 })
 
 
