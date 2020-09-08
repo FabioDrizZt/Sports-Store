@@ -1,13 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
-import { createCategory } from "../actions/index";
+import { createCategory,removeCategory,updateCategory,getCategories } from "../actions/index";
 import React, { useState, useEffect } from "react";
 import './FormCategory.css';
 
 
 
 function FormCategory() { 
+  const [editar,setEditar] = useState(false);
+  const [idCategoria,setIdCategoria] = useState(null);
   const dispatch = useDispatch();
-  const categories = useSelector(state=>state.categories)
+  const categories = useSelector(state=>state.categories);
+
 function validate({ name, description}) {
     let errors = {};
     if (!name) {
@@ -34,28 +37,45 @@ function validate({ name, description}) {
             [e.target.name]: e.target.value,
           })
         );
-
-    setInput({
+      setInput({
         ...input,
         [e.target.name]: e.target.value,
         });
     };
+
+    useEffect(() => {      
+      dispatch(getCategories());
+    },[]);
+
     function noVacio(obj) {
         return Object.keys(obj).length !== 0;
       }
       function submitCategory(e, input) {
         e.preventDefault();
-        dispatch(createCategory(input));
+        if(editar){
+          dispatch(updateCategory(idCategoria,input));
+        }else{
+          dispatch(createCategory(input));
+        }      
       }
 
-    return (
+      function editarCategoria (categoria){
+        setEditar(!editar)   
+          
+      }
+
+      function eliminarCategoria(categoria){
+        dispatch(removeCategory(categoria.id))
+      }
+
+    return (   
       <div className="row">     
         <div className="col-5">
           <form onSubmit = {(e) => submitCategory(e,input)} className="col formCateg">
-            <h3>Crear Categorias</h3>
+              <h3>{editar ? "Editar" :" Crear"} Categorias</h3>
             <div className="form-group" >
                 <label for="formGroupExampleInput">Nombre de la Categoria</label>
-                <input 
+                <input                    
                     name ="name" 
                     type="text" 
                     className="form-control" 
@@ -65,7 +85,7 @@ function validate({ name, description}) {
                     />
                    {errors.name && <p className="danger">{errors.name}</p>}
                 <label for="formGroupExampleInput">Descripcion de la Categoria</label>
-                <input 
+                <input            
                 name = "description"
                 type="text" className="form-control" id="descriptionCategory"
                 onChange = {handleInputChange}
@@ -74,8 +94,12 @@ function validate({ name, description}) {
                 <button 
                     type="submit" 
                     className="btn btn-primary boton"
-                    disabled={noVacio(errors)}
-                >AGREGAR</button>
+                    disabled={noVacio(errors)}>
+                      {editar ? "EDITAR" : "AGREGAR"}</button>
+                      {editar&&
+                <button className="btn btn-primary boton ml-1" onClick={()=>editarCategoria()}>
+                  CREAR
+                </button>}
             </div>
         </form>        
         </div>
@@ -87,12 +111,14 @@ function validate({ name, description}) {
         <p className="col"><b>Descripcion: </b>{x.description}<hr/></p>
         <p className="col"><b>ID: :</b> {x.id}<hr/></p>
         <div className="col botonList">
-          <button type="button" className="btn btn-danger">ELIMINAR</button>
-          <button type="button" className="btn btn-info">EDITAR</button>
+          <button type="button" className="btn btn-danger" onClick={()=>eliminarCategoria(x)}>ELIMINAR</button>
+          <button type="button" className="btn btn-warning" onClick={()=>{
+            editarCategoria(x)
+            setIdCategoria(x.id);  
+      }}>EDITAR</button>
         </div>
       </div>)}     
-      </div>
-     
+      </div>     
     </div>
     )
 }
