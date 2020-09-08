@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { createCategory } from "../actions/index";
 import React, { useState, useEffect } from "react";
+import './FormCategory.css';
 
 
 
@@ -49,8 +50,8 @@ function validate({ name, description}) {
 
     return (
       <div className="row">     
-        <div className="col-6">
-          <form onSubmit = {(e) => submitCategory(e,input)} className="col">
+        <div className="col-5">
+          <form onSubmit = {(e) => submitCategory(e,input)} className="col formCateg">
             <h3>Crear Categorias</h3>
             <div className="form-group" >
                 <label for="formGroupExampleInput">Nombre de la Categoria</label>
@@ -72,16 +73,25 @@ function validate({ name, description}) {
                  {errors.description && <p className="danger">{errors.description}</p>}
                 <button 
                     type="submit" 
-                    className="btn btn-primary"
+                    className="btn btn-primary boton"
                     disabled={noVacio(errors)}
-                >Agregar</button>
+                >AGREGAR</button>
             </div>
         </form>        
         </div>
-        <div className="col-6">
+        <div className="col-7 formCateg">
           <h3>Listado de categorias</h3>
-      {categories&&categories.map(x=><p>Nombre: {x.name} Descripcion: {x.description}<hr/></p>)}     
+      {categories&&categories.map(x=>
+      <div className="row">
+        <p className="col"><b>Nombre: </b>{x.name}<hr/></p> 
+        <p className="col"><b>Descripcion: </b>{x.description}<hr/></p>
+        <p className="col"><b>ID: :</b> {x.id}<hr/></p>
+        <div className="col botonList">
+          <button type="button" className="btn btn-danger">ELIMINAR</button>
+          <button type="button" className="btn btn-info">EDITAR</button>
         </div>
+      </div>)}     
+      </div>
      
     </div>
     )
