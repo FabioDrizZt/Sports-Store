@@ -98,7 +98,8 @@ server.put("/:id", (req, res) => {
     stock: req.body.stock,
     image: req.body.image
   }, { where: { id: req.params.id } })
-    .then(() => res.status(201).send("Producto id " + req.params.id + " actualizado"))
+    .then(() => res.status(201)
+    .send("Producto id " + req.params.id + " actualizado satisfactoriamente"))
     .catch((error) => {
       res.status(400).json(error);
     });

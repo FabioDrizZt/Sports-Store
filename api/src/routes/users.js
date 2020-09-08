@@ -14,4 +14,20 @@ server.post("/",(req,res)=>{
       }).catch(err => res.send(err))
 });
 
+// S35 : Crear Ruta para modificar Usuario
+
+server.put("/:id",(req,res)=>{
+  User.update({
+      name: req.body.name,
+      lastName: req.body.lastName,
+      DNI: req.body.DNI,
+      email: req.body.email,
+      password: req.body.password,
+      role: req.body.role
+    }, {where: { id: req.params.id }})
+    .then( () => res.status(201)
+    .send("Usuario id: " + req.params.id + " actualizado satisfactoriamente"))
+    .catch(err => res.send(err))
+});
+
 module.exports = server;
