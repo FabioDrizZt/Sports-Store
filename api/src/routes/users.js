@@ -48,5 +48,18 @@ server.get("/orders",(req,res)=>{
   .catch(error=>res.send(error))
 })
 
+/*S38 : Crear Ruta para agregar Item al Carrito
+POST /users/:idUser/cart */
+server.post("/:idUser/cart",(req,res)=>{
+  const id=req.params.idUser;
+  const idOrder; Order.findOne({where: { userId: id }}) 
+  .then(order => { idOrder = order.id; 
+  }).then( Orderproduct.create({productId: req.body.id}, {orderId: idOrder}, {price: req.body.price}, {amount: 1}) )
+  .then(resp => {res.send(resp) 
+    }).catch(error => { res.send(error) 
+  }) 
+})
+
+
 
 module.exports = server;
