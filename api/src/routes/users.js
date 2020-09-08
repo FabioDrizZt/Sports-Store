@@ -30,6 +30,15 @@ server.put("/:id",(req,res)=>{
     .send("Usuario id: " + req.params.id + " actualizado satisfactoriamente"))
     .catch(err => res.send(err))
 });
+
+// S36 : Crear Ruta que retorne todos los Usuarios
+// GET /users
+server.get("/", (req, res) => {
+  User.findAll({
+  }).then(users => { res.send(users)
+  }).catch(err => res.status(400).json({ err })) 
+});
+
 // S37 : Crear Ruta para eliminar Usuario DELETE /users/:id
 server.delete("/:id", (req, res) => {
   User.destroy({ where: { id: req.params.id } })
