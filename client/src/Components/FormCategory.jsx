@@ -45,7 +45,7 @@ function validate({ name, description}) {
 
     useEffect(() => {      
       dispatch(getCategories());
-    },[]);
+    },[getCategories]);
 
     function noVacio(obj) {
         return Object.keys(obj).length !== 0;
