@@ -86,7 +86,9 @@ export function updateProduct(id,input) {
         axios.put(`${SERVER_ADDRESS}/products/${id}`,input)
             .then(res => {
                 dispatch({ type: UPDATE_PRODUCT, payload: res.data });
-            }).catch(error => alert(error, 'error'))
+            }).then(()=> alert("Se modifico el prodcto"))
+            
+            .catch(error => alert(error, 'error'))
     }
 }
 export function updateCategory(id) {

@@ -191,22 +191,22 @@ function CreateProduct() {
 export function validate({ name, description, price, stock, size, image }) {
   let errors = {};
   if (!name) {
-    errors.name = "Debe cargar el nombre";
+    errors.name = "Debe cargar el Nombre";
   }
   if (!description) {
-    errors.description = "Debe cargar description";
+    errors.description = "Debe cargar Descripción";
   }
   if (!price) {
-    errors.price = "Debe cargar price";
+    errors.price = "Debe cargar Precio";
   }
   if (!stock) {
-    errors.stock = "Debe cargar stock";
+    errors.stock = "Debe cargar Stock";
   }
   if (!size) {
-    errors.size = "Debe cargar size";
+    errors.size = "Debe cargar Talla";
   }
   if (!image) {
-    errors.image = "Debe cargar image";
+    errors.image = "Debe cargar Imagen";
   }
   return errors;
 }
