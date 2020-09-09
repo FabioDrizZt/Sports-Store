@@ -95,5 +95,17 @@ server.post("/:idUser/cart", (req, res) => {
   });
 });
 
+/*S41 : Crear Ruta para editar las cantidades del carrito
+PUT /users/:idUser/cart */
+server.put("/:idUser/cart", (req, res, next) => {
+  Order.update({
+    amount: req.body.amount
+  }, { where: { id: req.params.idUser } })
+    .then(() => res.status(201)
+    .send("Cantidad de la orden " + req.params.id + " aumentada con éxito"))
+    .catch((error) => {
+      res.status(400).json(error);
+    });
+});
 
 module.exports = server;
