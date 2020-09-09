@@ -46,10 +46,18 @@ function CreateProduct() {
   function noVacio(obj) {
     return Object.keys(obj).length !== 0;
   }
+  function clearForm () {
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (input.value = "")
+    );
+    setInput({
+      values: [{}]
+    });
+  };
 
   return (
     <div className="containerAll">
-      <form className="containerPro" onSubmit={(e) => submitProduct(e, input)}>
+      <form className="containerPro" onSubmit={(e) => {submitProduct(e, input); clearForm()}}>
         <legend>Crear Producto</legend>
         <div className="form-group row">
           <label className="col-sm-2 col-form-label" for="name">
@@ -58,7 +66,8 @@ function CreateProduct() {
           <div class="col-sm-10">
             <input
               className="form-control"
-              type="text"
+              type="text reset"
+              defaultValue="reset"
               id="name"
               name="name"
               placeholder="Articulo deportivo..."

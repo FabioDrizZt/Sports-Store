@@ -42,10 +42,7 @@ function validate({ name, description}) {
         [e.target.name]: e.target.value,
         });
     };
-
-    useEffect(() => {      
-      dispatch(getCategories());
-    },[getCategories]);
+ 
 
     function noVacio(obj) {
         return Object.keys(obj).length !== 0;
@@ -67,11 +64,17 @@ function validate({ name, description}) {
       function eliminarCategoria(categoria){
         dispatch(removeCategory(categoria.id))
       }
+      //Rama FormClear:
+      function clearForm() {
+        Array.from(document.querySelectorAll("input")).forEach(
+          input => (input.value = "")
+        );
+      }
 
     return (   
       <div className="row">     
         <div className="col-5">
-          <form onSubmit = {(e) => submitCategory(e,input)} className="col formCateg">
+          <form onSubmit = {(e) => {submitCategory(e,input); clearForm()}} className="col formCateg">
               <h3>{editar ? "Editar" :" Crear"} Categorias</h3>
             <div className="form-group" >
                 <label for="formGroupExampleInput">Nombre de la Categoria</label>
@@ -97,8 +100,8 @@ function validate({ name, description}) {
                     disabled={noVacio(errors)}>
                       {editar ? "EDITAR" : "AGREGAR"}</button>
                       {editar&&
-                <button className="btn btn-primary boton ml-1" onClick={()=>editarCategoria()}>
-                  CREAR
+                <button className="btn btn-secondary boton ml-1" onClick={()=>editarCategoria()}>
+                  CANCELAR
                 </button>}
             </div>
         </form>        
