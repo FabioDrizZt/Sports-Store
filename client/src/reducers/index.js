@@ -42,11 +42,12 @@ function rootReducer(state = initialState, action) {
         } case UPDATE_PRODUCT: {           
             return { ...state, products: state.products.filter(product => product.name !== action.payload.named) }
         } case UPDATE_CATEGORY: {
-            return { ...state, categories: state.categories.filter(category => category.name !== action.payload.name) }
+            let categories = [...state.categories.filter(x=>x.id!==action.payload.id)]
+            return { ...state, categories: categories.concat(action.payload) }
         } case REMOVE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.name !== action.payload.name) }
         } case REMOVE_CATEGORY: {
-            return { ...state, categories: state.categories.filter(category => category.name !== action.payload.name) }
+            return { ...state, categories: state.categories.filter(category => category.id !== action.payload) }
         } case REMOVE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.filter(productCategory => productCategory.name !== action.payload.name) }
         }
