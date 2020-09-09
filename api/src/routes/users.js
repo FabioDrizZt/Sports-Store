@@ -102,7 +102,7 @@ server.put("/:idUser/cart", (req, res, next) => {
     amount: req.body.amount
   }, { where: { id: req.params.idUser } })
     .then(() => res.status(201)
-    .send("Cantidad de la orden " + req.params.id + " aumentada con éxito"))
+    .send("Cantidad de la orden " + req.params.idUser + " aumentada con éxito"))
     .catch((error) => {
       res.status(400).json(error);
     });
