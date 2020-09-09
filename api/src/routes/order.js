@@ -1,7 +1,7 @@
 const server = require("express").Router();
-const { Order,Orderproduct } = require("../db.js");
+const { Order,Orderproduct } = require("../db");
 const { Op } = require("sequelize");
-const Orderproduct = require("../models/Orderproduct.js");
+
 
 /**S44 S44 : Crear ruta que retorne todas las ordenes
 Esta ruta puede recibir el query string status y deberá devolver sólo las ordenes con ese status. */
@@ -22,3 +22,5 @@ server.get ('/:id', (req, res) => {
     .then((orders) => res.send(orders))
     .catch((e) => res.status(400).json(e))
 })
+
+module.exports = server;
