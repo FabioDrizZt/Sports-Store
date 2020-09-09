@@ -95,7 +95,7 @@ export function updateCategory(id,input) {
     return function (dispatch) {
         axios.put(`${SERVER_ADDRESS}/products/category/${id}`,input)
             .then(res => {
-                dispatch({ type: UPDATE_CATEGORY, payload: res.data });
+                dispatch({ type: UPDATE_CATEGORY, payload: {id:id,name:input.name,description:input.description} });
             }).catch(error => alert(error, 'error'))
     }
 }
@@ -111,7 +111,7 @@ export function removeCategory(id) {
     return function (dispatch) {
         return axios.delete(`${SERVER_ADDRESS}/products/category/${id}`)
             .then(res => {
-                dispatch({ type: REMOVE_CATEGORY, payload: res.data });
+                dispatch({ type: REMOVE_CATEGORY, payload: id });
             }).catch(error => alert(error, 'error'))
     }
 }
