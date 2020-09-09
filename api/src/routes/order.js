@@ -23,4 +23,18 @@ server.get ('/:id', (req, res) => {
     .catch((e) => res.status(400).json(e))
 })
 
+//S47 : Crear Ruta para modificar una Orden
+// PUT /orders/:id
+server.put("/:id", (req,res) => {
+    Order.update({ 
+      id: req.body.id,
+      cantidad: req.body.cantidad
+    }, { where: { id: req.params.id } })
+    .then( () => res.status(200)
+    .send("Orden id " + req.params.id + "actualizado satisfactoriamente"))
+    .catch((err) => {
+        res.status(400).json({ err });
+    })
+})
+
 module.exports = server;
