@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from "../../actions/index";
 import React, { useState, useEffect } from "react";
 import { getCategories } from "../../actions";
+import AsignarProducto from "./AsignarProducto"
 
 function CreateProduct() {
   const dispatch = useDispatch();
@@ -170,7 +171,7 @@ function CreateProduct() {
           </div>
         </div>
 
-        {
+{/*         
           <div className="form-group">
             <label for="category">Categoría</label>
             <select>
@@ -181,7 +182,7 @@ function CreateProduct() {
                 categories.map((c) => {
                   return <option key={c.name}> {c.name} </option>;
                 })}
-            </select>
+            </select> */}
             <button
               className="btn btn-primary"
               type="submit"
@@ -190,8 +191,9 @@ function CreateProduct() {
             >
               ENVIAR
             </button>
-          </div>
-        }
+          {/* </div> */}
+        
+        <AsignarProducto/>
       </form>
     </div>
   );
