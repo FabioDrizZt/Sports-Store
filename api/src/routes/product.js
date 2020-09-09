@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { Product, Category, Product_category } = require("../db.js");
+const { Product, Category, productcategory } = require("../db.js");
 const { Op } = require("sequelize");
 
 // S21 : Crear ruta que devuelva todos los productos
@@ -80,7 +80,7 @@ server.post("/category", (req, res) => {
 server.post("/:idProducto/category/:idCategoria", (req, res) => {
   const id = req.params.idProducto;
   const idCategoria = req.params.idCategoria;
-  Product_category.create({ productId: id, categoryId: idCategoria })
+  productcategory.create({ productId: id, categoryId: idCategoria })
     .then((pc) => res.send(pc))
     .catch((err) => res.send(err));
 });

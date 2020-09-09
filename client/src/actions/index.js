@@ -74,6 +74,7 @@ export function createCategory(input) {
     }
 }
 export function createProductCategory(idProducto, idCategoria) {
+    console.log(idProducto,idCategoria)
     return function (dispatch) {
         axios.post(`${SERVER_ADDRESS}/products/${idProducto}/category/${idCategoria}`)
             .then(res => {
@@ -103,7 +104,7 @@ export function removeProduct(id) {
     return function (dispatch) {
         return axios.delete(`${SERVER_ADDRESS}/products/${id}`)
             .then(res => {
-                dispatch({ type: REMOVE_PRODUCT, payload: res.data });
+                dispatch({ type: REMOVE_PRODUCT, payload: id });
             }).catch(error => alert(error, 'error'))
     }
 }

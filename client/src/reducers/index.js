@@ -45,6 +45,8 @@ function rootReducer(state = initialState, action) {
             let categories = [...state.categories.filter(x=>x.id!==action.payload.id)]
             return { ...state, categories: categories.concat(action.payload) }
         } case REMOVE_PRODUCT: {
+            console.log(action.payload);
+            console.log(state.products)
             return { ...state, products: state.products.filter(product => product.name !== action.payload.name) }
         } case REMOVE_CATEGORY: {
             return { ...state, categories: state.categories.filter(category => category.id !== action.payload) }
