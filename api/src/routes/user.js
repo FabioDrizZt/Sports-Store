@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { User, Order} = require("../db.js");
+const { User, Order, OrderProduct} = require("../db.js");
 
 //S34 ruta para crear usuario
 server.post("/",(req,res)=>{
@@ -40,5 +40,19 @@ server.get("/orders",(req,res)=>{
   .catch(error=>res.send(error))
 })
 
+// S45 : Crear Ruta que retorne todas las Ordenes de los usuarios GET /users/:id/orders
+server.get("/:id/orders", (req,res) => {
+  const id = req.params.id;
+  Order.findAll({
+    where: {     
+      userId: id //Condición de Busqueda
+    },
+    include: {
+      model: OrderProduct,
+    },
+  }) 
+  .then((orders) => res.send(orders))
+  .catch((e) => res.status(400).json(e))
+})
 
 module.exports = server;
