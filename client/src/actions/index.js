@@ -14,7 +14,9 @@ export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const REMOVE_CATEGORY = 'REMOVE_CATEGORY';
 export const REMOVE_PRODUCT_CATEGORY = 'REMOVE_PRODUCT_CATEGORY';
+export const UPDATE_ORDER_AMOUNT = "UPDATE_ORDER_AMOUNT";
 export const ADD_TO_CART = "ADD_TO_CART";
+
 
 export function getProduct(id) {
     return function (dispatch) {
@@ -121,13 +123,24 @@ export function removeProductCategory(idProducto, idCategoria) {
             .then(res => {
                 dispatch({ type: REMOVE_PRODUCT_CATEGORY, payload: res.data });
             }).catch(error => alert(error, 'error'))
+          
     }
 }
+
+export function updateOrderAmount(idUser,input) {
+    return function (dispatch) {
+        axios.put(`${SERVER_ADDRESS}/${idUser}/cart/`,input)
+            .then(res => {
+                dispatch({ type: UPDATE_ORDER_AMOUNT, payload: {amount:input.amount} });
+                  }).catch(error => alert(error, 'error'))
+    }
+        }
 export function addtoCart(idUsuario){
     return function (dispatch) {
         axios.post(`${SERVER_ADDRESS}/${idUsuario}/cart`)
             .then(res => {
                 dispatch({ type: ADD_TO_CART, payload: res.data });
+
             }).catch(error => alert(error, 'error'))
     }
 }

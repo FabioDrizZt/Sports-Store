@@ -12,7 +12,9 @@ import {
     REMOVE_PRODUCT,
     REMOVE_CATEGORY,
     REMOVE_PRODUCT_CATEGORY,
+    UPDATE_ORDER_AMOUNT,
     ADD_TO_CART,
+
 } from '../actions';
 
 const initialState = {
@@ -52,6 +54,11 @@ function rootReducer(state = initialState, action) {
             return { ...state, categories: state.categories.filter(category => category.id !== action.payload) }
         } case REMOVE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.filter(productCategory => productCategory.name !== action.payload.name) }
+
+        }case UPDATE_ORDER_AMOUNT: {
+            let amount = [...state.amount.filter(x=>x.amount!==action.payload.amount)]
+            return { ...state, amount: amount.concat(action.payload) }
+        }
         } case ADD_TO_CART: {
             return { ...state, cart: state.cart.concat(action.payload) }
         }
