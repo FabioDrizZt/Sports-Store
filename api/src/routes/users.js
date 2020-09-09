@@ -48,14 +48,6 @@ server.delete("/:id", (req, res) => {
     })
 })
 
-/**S44 S44 : Crear ruta que retorne todas las ordenes
-Esta ruta puede recibir el query string status y deberá devolver sólo las ordenes con ese status. */
-server.get("/orders",(req,res)=>{
-  const status = req.query.status;
-  Order.findAll({where:{state:status}})
-  .then(orders=>{res.send(orders)})
-  .catch(error=>res.send(error))
-})
 
 // S45 : Crear Ruta que retorne todas las Ordenes de los usuarios GET /users/:id/orders
 server.get("/:id/orders", (req,res) => {
