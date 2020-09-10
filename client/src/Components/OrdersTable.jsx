@@ -19,7 +19,7 @@ function OrdersTable() {
     <div>
       
       {orders && orders.map((x) => {
-            <Cart>
+           return <Cart
               id = {x.id}
               name = {x.name}
               description = {x.description}
@@ -28,7 +28,7 @@ function OrdersTable() {
               amount = {x.amount}
               stock = {x.stock}
               image = {x.image}
-            </Cart>;
+          />
       })}
     </div>
   );
