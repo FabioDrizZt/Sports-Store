@@ -7,9 +7,11 @@ import {
   getCategoryProducts,
   createProduct,
 } from "../actions";
-import "./AsigCate.css";
+import "./Admin.css";
 import FormCategory from "./FormCategory";
 import CreateProduct from "./FormCRUD/CreateProduct";
+import Catalogo from "./Catalogo";
+import CatalogoCategories from "./CatalogoCategories";
 
 // Importe useRef de react, agregue la constante draggingItem y el handleDragStart
 
@@ -67,23 +69,10 @@ export default function AsigCate() {
         </div>
         <div className="asignacion">
           <div className="productsColum">
-            <h1>Productos</h1>
-            <select onChange={(e) => filtrarCatalogo(e.target.value)}>
-              <option disabled seleted value>
-                FILTRAR POR CATEGORIA
-              </option>
-              {categories &&
-                categories.map((c) => {
-                  return <option key={c.name}> {c.name} </option>;
-                })}
-            </select>
-            <button type="button" onClick={() => window.location.reload()}>
-              Ver todos los productos
-            </button>
-
+          <Catalogo />
             {/* Agregue un key al map para poder colocar la funcionalidad de drag, onDragStar, draggable  */}
 
-            {products &&
+            {/* {products &&
               products.map((x, index) => (
                 <ProductCard
                   key={x.id}
@@ -97,12 +86,13 @@ export default function AsigCate() {
                   onDragEnd={handleDragEnd}
                   draggable
                 />
-              ))}
+              ))} */}
           </div>
           <div className="categoriesColum">
             {/* Agregue un key al map para poder colocar la funcionalidad de drag, onDragStar, draggable  */}
+            <CatalogoCategories />
 
-            <h1>Listado de categorias</h1>
+            {/* <h1>Listado de categorias</h1>
             {categories &&
               categories.map((x, index) => (
                 <p
@@ -114,26 +104,7 @@ export default function AsigCate() {
                 >
                   Nombre: {x.name} Descripcion: {x.description} <hr />
                 </p>
-              ))}
-          </div>
-          <div className="usersColum">
-            <h1>Usuarios</h1>
-            {users &&
-              users.map((x, index) => (
-                <UserCard
-                  key={x.id}
-                  id={x.id}
-                  name={x.name}
-                  lastName={x.lastName}
-                  DNI={x.DNI}
-                  email={x.email}
-                  password={x.password}
-                  onDragStart={(e) => handleDragStart(e, index)}
-                  onDragEnter={(e) => handleDragEnter(e, index)}
-                  onDragEnd={handleDragEnd}
-                  draggable
-                />
-              ))}
+              ))} */}
           </div>
         </div>
       </div>

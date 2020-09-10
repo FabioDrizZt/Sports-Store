@@ -40,6 +40,9 @@ export default function NavBar() {
             <li>
               <Link className="option" to="/category">Categorías</Link>
             </li>
+            <li>
+              <Link className="option" to="/admin">Admin</Link>
+            </li>
                         
       <li><Link className="option" to="/users">        Usuarios      </Link></li>
           </ul>
