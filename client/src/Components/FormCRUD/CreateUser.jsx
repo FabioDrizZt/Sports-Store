@@ -11,7 +11,7 @@ const CreateUser = () => {
     DNI: "",
     email: "",
     password: "",
-    role: "usuario",
+    role: "user",
   });
 
   function User(e, input) {
@@ -23,7 +23,7 @@ const CreateUser = () => {
       DNI: "",
       email: "",
       password: "",
-      role: "usuario",
+      role: "user",
     });
   }
 
