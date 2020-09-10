@@ -14,6 +14,8 @@ export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const REMOVE_CATEGORY = 'REMOVE_CATEGORY';
 export const REMOVE_PRODUCT_CATEGORY = 'REMOVE_PRODUCT_CATEGORY';
+export const UPDATE_ORDER_AMOUNT = "UPDATE_ORDER_AMOUNT";
+export const ADD_TO_CART = "ADD_TO_CART";
 
 
 export function getProduct(id) {
@@ -74,6 +76,7 @@ export function createCategory(input) {
     }
 }
 export function createProductCategory(idProducto, idCategoria) {
+    console.log(idProducto,idCategoria)
     return function (dispatch) {
         axios.post(`${SERVER_ADDRESS}/products/${idProducto}/category/${idCategoria}`)
             .then(res => {
@@ -103,7 +106,7 @@ export function removeProduct(id) {
     return function (dispatch) {
         return axios.delete(`${SERVER_ADDRESS}/products/${id}`)
             .then(res => {
-                dispatch({ type: REMOVE_PRODUCT, payload: res.data });
+                dispatch({ type: REMOVE_PRODUCT, payload: id });
             }).catch(error => alert(error, 'error'))
     }
 }
@@ -120,6 +123,25 @@ export function removeProductCategory(idProducto, idCategoria) {
         return axios.delete(`${SERVER_ADDRESS}/${idProducto}/categories/${idCategoria}`)
             .then(res => {
                 dispatch({ type: REMOVE_PRODUCT_CATEGORY, payload: res.data });
+            }).catch(error => alert(error, 'error'))
+          
+    }
+}
+
+export function updateOrderAmount(idUser,input) {
+    return function (dispatch) {
+        axios.put(`${SERVER_ADDRESS}/${idUser}/cart/`,input)
+            .then(res => {
+                dispatch({ type: UPDATE_ORDER_AMOUNT, payload: {amount:input.amount} });
+                  }).catch(error => alert(error, 'error'))
+    }
+        }
+export function addtoCart(idUsuario){
+    return function (dispatch) {
+        axios.post(`${SERVER_ADDRESS}/${idUsuario}/cart`)
+            .then(res => {
+                dispatch({ type: ADD_TO_CART, payload: res.data });
+
             }).catch(error => alert(error, 'error'))
     }
 }

@@ -61,6 +61,7 @@ const style={
             descripcion={x.description}
             precio={x.price}
             imagen={x.image}
+            stock={x.stock}
           />
         ))}
     </React.Fragment>

@@ -42,10 +42,7 @@ function validate({ name, description}) {
         [e.target.name]: e.target.value,
         });
     };
-
-    useEffect(() => {      
-      dispatch(getCategories());
-    },[getCategories]);
+ 
 
     function noVacio(obj) {
         return Object.keys(obj).length !== 0;
@@ -103,8 +100,8 @@ function validate({ name, description}) {
                     disabled={noVacio(errors)}>
                       {editar ? "EDITAR" : "AGREGAR"}</button>
                       {editar&&
-                <button className="btn btn-primary boton ml-1" onClick={()=>editarCategoria()}>
-                  CREAR
+                <button className="btn btn-secondary boton ml-1" onClick={()=>editarCategoria()}>
+                  CANCELAR
                 </button>}
             </div>
         </form>        
