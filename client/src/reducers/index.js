@@ -75,7 +75,7 @@ function rootReducer(state = initialState, action) {
         } case UPDATE_USER: {
             return { ...state, users: state.users.filter(user => user.id !== action.payload.id) }
         } case REMOVE_PRODUCT: {
-            return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
+            return { ...state, products: state.products.filter(product => product.id !== action.payload) }
         } case REMOVE_CATEGORY: {
             return { ...state, categories: state.categories.filter(category => category.id !== action.payload) }
         } case REMOVE_PRODUCT_CATEGORY: {
