@@ -9,6 +9,7 @@ export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
 export const GET_CARTUSER = 'GET_CARTUSER';
 export const GET_USER = 'GET_USER';
 export const CREATE_PRODUCT = 'CREATE_PRODUCT';
+export const CREATE_USER = 'CREATE_USER';
 export const CREATE_CATEGORY = 'CREATE_CATEGORY';
 export const CREATE_PRODUCT_CATEGORY = 'CREATE_PRODUCT_CATEGORY';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
@@ -81,6 +82,14 @@ export function createProduct(input) {
         axios.post(`${SERVER_ADDRESS}/products/`, input)
             .then(res => {
                 dispatch({ type: CREATE_PRODUCT, payload: res.data });
+            }).catch(error => alert(error, 'error'))
+    }
+}
+export function createUser(input) {
+    return function (dispatch) {
+        axios.post(`${SERVER_ADDRESS}/users/`, input)
+            .then(res => {
+                dispatch({ type: CREATE_USER, payload: res.data });
             }).catch(error => alert(error, 'error'))
     }
 }

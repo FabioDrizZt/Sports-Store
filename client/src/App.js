@@ -10,6 +10,7 @@ import NavBar from './Components/NavBar/NavBar.jsx';
 import './Components/NavBar/NavBar.css';
 import EditProduct from './Components/FormCRUD/EditProduct.jsx';
 import FormCrud from "./Components/FormCRUD/FormCrud";
+import UserCrud from "./Components/FormCRUD/UserCrud";
 import FormCategory from './Components/FormCategory';
 import Home from "./Components/Home";
 
@@ -63,10 +64,7 @@ function App() {
 
   return (
     <div className="App">
-
       <NavBar />
-
-
       {/*<Route />*/}
       {/* <NavBar /> */}
       <Route
@@ -85,24 +83,23 @@ function App() {
       />
       {/* S15 : Crear Ruta para ver el detalle de un producto según el id. */}
       {<Route
+        exact path='/products/:id'
+        render={({ match }) => <Product productName={(match.params.id)} />}
+      />}
+      <Route
+        exact path='/category'
+        render={() => <FormCategory />}
+      />
 
-          exact path='/products/:id'
-          render={({ match }) => <Product productName={(match.params.id)} />}
-        />}
-        <Route 
-        exact path = '/category'
-          render = {() => <FormCategory />}
-        
-        />
-
-    <Route exact path="/formcrud" component={FormCrud} />
+      <Route exact path="/formcrud" component={FormCrud} />
+      <Route exact path="/users" component={UserCrud} />
+      <Route exact path="/edit/product/:id" render={(match) => <EditProduct match={match} />} />
     <Route exact path="/edit/product/:id" render={(match)=><EditProduct match={match}/>} />
     <Route 
         exact path = '/cart'
           render = {() => <Cart />}
         
         />
-   
 
         exact path='/products/:id'
         render={({ match }) => <Product productName={(match.params.id)} />}
