@@ -16,7 +16,7 @@ import Home from "./Components/Home";
 import Cart from "./Components/Cart";
 import Order from "./Components/Order";
 import Admin from "./Components/Admin";
-import ClosedOrders from "./Components/ClosedOrders";
+import OrdersTable from "./Components/OrdersTable";
 
 function App() {
   // const products= useSelector(state => state.products)
@@ -104,7 +104,7 @@ function App() {
         render={(match) => <EditProduct match={match} />}
       />
       <Route exact path="/admin" render={() => <Admin />} />
-      <Route exact path="/admin/orders" render={() => <ClosedOrders />} />
+      <Route exact path="/admin/orders" render={() => <OrdersTable />} />
       
     </div>
   );
