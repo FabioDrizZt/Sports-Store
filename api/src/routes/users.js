@@ -119,7 +119,7 @@ server.post("/:idUser/cart", (req, res) => {
 /*S40 : Crear Ruta para vaciar el carrito
 DELETE /users/:idUser/cart/ */
 server.delete("/:idUser/cart/",(req,res)=>{
-  Order.destroy({ where: { id: req.params.idUser } })
+  Order.destroy({ where: { id: req.params.idUser, state: "open" } })
     .then(deletedRecord => {
       if (deletedRecord === 1) res.status(200).json({ message: "Se eliminó el carrito" });
       else res.status(404).json({ message: "Carrito no encontrado" });
@@ -131,7 +131,7 @@ PUT /users/:idUser/cart */
 server.put("/:idUser/cart", (req, res) => {
   Order.update({
     amount: req.body.amount
-  }, { where: { id: req.params.idUser } })
+  }, { where: { id: req.params.idUser, state: "open" } })
     .then(() => res.status(201)
     .send("Cantidad de la orden " + req.params.idUser + " aumentada con éxito"))
     .catch((error) => {
