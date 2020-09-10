@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "../SearchBar.jsx";
 import {Link} from "react-router-dom";
 import "./NavBar.css";
+import cart from "../../cart.png"
 
 export default function NavBar() {
 
@@ -22,6 +23,9 @@ export default function NavBar() {
           <div>
           <SearchBar />
           </div>
+          <Link to="/cart">
+          <img src={cart} alt="cart" className="mr-4"/>
+          </Link>
         </header>
         <aside className="font sidebar">
           <button className="sidebar-close-button" onClick={closeMenu}>
