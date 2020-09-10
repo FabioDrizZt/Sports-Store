@@ -66,46 +66,24 @@ function App() {
       {/* <NavBar /> */}
       <Route exact path="/product" render={() => <Product />} />
       <Route exact path="/" render={() => <Home />} />
-
       {/* S14 : Crear Ruta para mostrar el componente Catalogo */}
       <Route exact path="/products" render={() => <Catalogo />} />
-      {/* S15 : Crear Ruta para ver el detalle de un producto según el id. */}
-      {
-        <Route
-          exact
-          path="/products/:id"
-          render={({ match }) => <Product productName={match.params.id} />}
-        />
-      }
+      {/* S15 : Crear Ruta para ver el detalle de un producto según el id. */} 
       <Route exact path="/category" render={() => <FormCategory />} />
       <Route exact path="/formcrud" component={FormCrud} />
       <Route exact path="/users" component={UserCrud} />
-      <Route
-        exact
-        path="/edit/product/:id"
-        render={(match) => <EditProduct match={match} />}
-      />
-      <Route
-        exact
-        path="/edit/product/:id"
-        render={(match) => <EditProduct match={match} />}
-      />
-      <Route exact path="/cart" render={() => <Cart />} />
-      <Route
-        exact
-        path="/products/:id"
-        render={({ match }) => <Product productName={match.params.id} />}
-      />
-      <Route exact path="/category" render={() => <FormCategory />} />
-      <Route exact path="/order" render={() => <Order />} />
-      <Route
-        exact
-        path="/edit/product/:id"
-        render={(match) => <EditProduct match={match} />}
-      />
-      <Route exact path="/admin" render={() => <Admin />} />
+      <Route exact path="/cart" render={() => <Cart />} />    
       <Route exact path="/admin/orders" render={() => <OrdersTable />} />
-      
+      <Route exact path="/edit/product/:id" render={(match) => <EditProduct match={match} />} />
+      <Route exact path = '/cart' render = {() => <Cart />} />    
+      <Route exact path='/order' render={() => <Order  />} />
+      <Route exact path='/admin' render={() => <Admin />} />
+      {/* <Route
+        exact path='/catalogFilter'
+        render={() => <CatalogFilter />}
+      /> */}
+
+
     </div>
   );
 }

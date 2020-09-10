@@ -266,10 +266,10 @@ export function updateOrderAmount(idUser, input) {
   };
 }
 
-export function addtoCart(idUsuario) {
+export function addtoCart(idUsuario,product) {
   return function (dispatch) {
     axios
-      .post(`${SERVER_ADDRESS}/${idUsuario}/cart`)
+      .post(`${SERVER_ADDRESS}/${idUsuario}/cart`,product)
       .then((res) => {
         dispatch({ type: ADD_TO_CART, payload: res.data });
       })
