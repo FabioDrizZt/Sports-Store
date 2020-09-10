@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import CreateProduct from "./CreateProduct";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {getProducts, getProduct } from "../../actions/index"
 
 const style = {
   width: "50%",
@@ -11,6 +12,7 @@ const style = {
 
 function FormCrud() {
   const products = useSelector((state) => state.products);
+  const dispatch = useDispatch()
 
   function eliminar(id) {
     return fetch("http://localhost:3001/products/" + id, { method: "DELETE" })
@@ -21,6 +23,7 @@ function FormCrud() {
         alert("producto eliminado");
       });
   }
+
 
   return (
     <React.Fragment>

@@ -34,12 +34,12 @@ export default function NavBar() {
             <li>
               <Link className="option" to="/">Inicio</Link>
             </li>
-            <li>
+            {/* <li>    -------> Estas opciones son solo para el Admin, no deberian estar en la nav
               <Link className="option" to="/formCrud">Productos</Link >
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link className="option" to="/category">Categorías</Link>
-            </li>
+            </li> */}
             <li>
               <Link className="option" to="/admin">Admin</Link>
             </li>
