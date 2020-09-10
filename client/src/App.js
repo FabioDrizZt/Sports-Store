@@ -100,10 +100,10 @@ function App() {
           render = {() => <Cart />}
         
         />
-
+      <Route
         exact path='/products/:id'
         render={({ match }) => <Product productName={(match.params.id)} />}
-      />}
+      />
       <Route
         exact path='/category'
         render={() => <FormCategory />}
@@ -115,7 +115,7 @@ function App() {
         render={() => <Order  />}
 
       />
-      <Route exact path="/formcrud" component={FormCrud} />
+     
       <Route exact path="/edit/product/:id" render={(match) => <EditProduct match={match} />} />
 
 
