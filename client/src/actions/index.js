@@ -5,6 +5,7 @@ export const GET_PRODUCT = 'GET_PRODUCT';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_CATEGORY_PRODUCTS = 'GET_CATEGORY_PRODUCTS';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const GET_ORDER = 'GET_ORDER';
 export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
 export const GET_CARTUSER = 'GET_CARTUSER';
 export const GET_USER = 'GET_USER';
@@ -52,6 +53,14 @@ export function getCategoryProducts(nombreCat) {
             .then(res => {
                 dispatch({ type: GET_CATEGORY_PRODUCTS, payload: res.data });
             }).catch(error => alert(error, 'error'))
+    }
+}
+export function getOrder(id){
+    return function (dispatch){
+        axios.get(`${SERVER_ADDRESS}/order/${id}`)
+        .then(res => {
+            dispatch({ type: GET_ORDER, payload: res.data})
+        }).catch(error => alert(error, 'error'))
     }
 }
 export function searchProducts(value) {
