@@ -1,25 +1,29 @@
 import {
+    // aca van los actions del GET
     GET_PRODUCT,
     GET_PRODUCTS,
     GET_CATEGORIES,
     GET_CATEGORY_PRODUCTS,
     GET_ORDER,
     GET_ORDERS,
-    SEARCH_PRODUCTS,
     GET_CARTUSER,
     GET_USER,
+    SEARCH_PRODUCTS,
+    // aca van los actions del POST/CREATE
     CREATE_PRODUCT,
     CREATE_USER,
     CREATE_CATEGORY,
     CREATE_PRODUCT_CATEGORY,
+    ADD_TO_CART,
+    // aca van los actions del UPDATE
     UPDATE_PRODUCT,
     UPDATE_CATEGORY,
-    REMOVE_PRODUCT,
     UPDATE_USER,
+    UPDATE_ORDER_AMOUNT,
+    // aca van los actions del DELETE/REMOVE
+    REMOVE_PRODUCT,
     REMOVE_CATEGORY,
     REMOVE_PRODUCT_CATEGORY,
-    UPDATE_ORDER_AMOUNT,
-    ADD_TO_CART,
     REMOVE_CART
 } from '../actions';
 
