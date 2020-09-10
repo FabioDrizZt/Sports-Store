@@ -11,14 +11,14 @@ export default function SearchBar() {
   return (
     <form className="form-inline my-2 my-lg-0">
       <input
-        className="search form-control mr-sm-2"
+       className="form-control form-control-lg mb-0"
         type="search"
         placeholder="Articulo..."
         onChange={(e) => setInput(e.target.value)}
       />
       <Link to="/Products">
         <button
-          class="btn btn-success my-2 my-sm-0"
+          class="btn btn-warning btn-lg"
           type="submit"
           onClick={(e) => dispatch(searchProducts(input))}
         >

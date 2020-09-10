@@ -12,7 +12,11 @@ import EditProduct from './Components/FormCRUD/EditProduct.jsx';
 import FormCrud from "./Components/FormCRUD/FormCrud";
 import FormCategory from './Components/FormCategory';
 import Home from "./Components/Home";
+
 import Cart from "./Components/Cart";
+
+import Order from "./Components/Order";
+
 
 
 
@@ -28,48 +32,48 @@ function App() {
   //   }
   // }
 
-// Scroll up (cuando le damos click al boton)
+  // Scroll up (cuando le damos click al boton)
 
-document.getElementById("button-up").addEventListener("click", scrollUp);
+  document.getElementById("button-up").addEventListener("click", scrollUp);
 
-function scrollUp() {
-  var currentScroll = document.documentElement.scrollTop;
-  if(currentScroll > 0) {
-    window.requestAnimationFrame(scrollUp);
-    window.scrollTo (0, currentScroll - (currentScroll / 10));
-    buttonUp.style.transform = "scale(0)";
+  function scrollUp() {
+    var currentScroll = document.documentElement.scrollTop;
+    if (currentScroll > 0) {
+      window.requestAnimationFrame(scrollUp);
+      window.scrollTo(0, currentScroll - (currentScroll / 10));
+      buttonUp.style.transform = "scale(0)";
+    }
   }
-}
 
-// --------------------------------------------- 
-//scroll para que aparezca el boton
+  // --------------------------------------------- 
+  //scroll para que aparezca el boton
 
-var buttonUp = document.getElementById("button-up");
+  var buttonUp = document.getElementById("button-up");
 
-window.onscroll = function() {
-  var scroll = document.documentElement.scrollTop;
+  window.onscroll = function () {
+    var scroll = document.documentElement.scrollTop;
 
-  if(scroll > 500) {
-    buttonUp.style.transform = "scale(1)";
-  } else if(scroll < 500) {
-    buttonUp.style.transform = "scale(0)";
+    if (scroll > 500) {
+      buttonUp.style.transform = "scale(1)";
+    } else if (scroll < 500) {
+      buttonUp.style.transform = "scale(0)";
+    }
   }
-}
-// -----------------------------------------------
+  // -----------------------------------------------
 
   return (
     <div className="App">
-      
+
       <NavBar />
-    
-   
+
+
       {/*<Route />*/}
       {/* <NavBar /> */}
       <Route
         exact path='/product'
         render={() => <Product />}
       />
-    <Route
+      <Route
         exact path='/'
         render={() => <Home />}
       />
@@ -78,9 +82,10 @@ window.onscroll = function() {
       <Route
         exact path='/products'
         render={() => <Catalogo />}
-      />       
+      />
       {/* S15 : Crear Ruta para ver el detalle de un producto según el id. */}
       {<Route
+
           exact path='/products/:id'
           render={({ match }) => <Product productName={(match.params.id)} />}
         />}
@@ -98,6 +103,26 @@ window.onscroll = function() {
         
         />
    
+
+        exact path='/products/:id'
+        render={({ match }) => <Product productName={(match.params.id)} />}
+      />}
+      <Route
+        exact path='/category'
+        render={() => <FormCategory />}
+
+      />
+
+      <Route
+        exact path='/order'
+        render={() => <Order  />}
+
+      />
+      <Route exact path="/formcrud" component={FormCrud} />
+      <Route exact path="/edit/product/:id" render={(match) => <EditProduct match={match} />} />
+
+
+
 
       {/* <Route
         exact path='/catalogFilter'
