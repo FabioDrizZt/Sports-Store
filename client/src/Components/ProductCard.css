@@ -1,5 +1,6 @@
 .cardStyle {
-border: solid 2px grey;
+border: solid 1px grey;
+border-radius: 15px;
 margin: 20px;
 width: 30%;
 display: inline-block;
@@ -12,9 +13,37 @@ display: inline-block;
 
 .price {
     font-size: 20px;
+    font-weight: bold;
     color: black
 }
 
 .img {
-    width: 200px;
+    width: 13rem;
+    border-radius: 1rem;
+
+}
+.b {
+    background: linear-gradient(to top, #004e92, #000428);
+    color: white;
+}
+
+.b:hover {
+    color: yellow;
+}
+
+.titleCard a {
+    color: black;
+    text-decoration: none;
+}
+
+.titleCard {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.containerImgTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

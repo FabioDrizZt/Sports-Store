@@ -14,6 +14,11 @@ import UserCrud from "./Components/FormCRUD/UserCrud";
 import FormCategory from './Components/FormCategory';
 import Home from "./Components/Home";
 
+import Cart from "./Components/Cart";
+
+import Order from "./Components/Order";
+
+
 
 
 function App() {
@@ -89,6 +94,30 @@ function App() {
       <Route exact path="/formcrud" component={FormCrud} />
       <Route exact path="/users" component={UserCrud} />
       <Route exact path="/edit/product/:id" render={(match) => <EditProduct match={match} />} />
+    <Route exact path="/edit/product/:id" render={(match)=><EditProduct match={match}/>} />
+    <Route 
+        exact path = '/cart'
+          render = {() => <Cart />}
+        
+        />
+
+        exact path='/products/:id'
+        render={({ match }) => <Product productName={(match.params.id)} />}
+      />}
+      <Route
+        exact path='/category'
+        render={() => <FormCategory />}
+
+      />
+
+      <Route
+        exact path='/order'
+        render={() => <Order  />}
+
+      />
+      <Route exact path="/formcrud" component={FormCrud} />
+      <Route exact path="/edit/product/:id" render={(match) => <EditProduct match={match} />} />
+
 
 
 

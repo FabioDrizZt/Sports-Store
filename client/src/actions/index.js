@@ -6,6 +6,8 @@ export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_CATEGORY_PRODUCTS = 'GET_CATEGORY_PRODUCTS';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
+export const GET_CARTUSER = 'GET_CARTUSER';
+export const GET_USER = 'GET_USER';
 export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const CREATE_USER = 'CREATE_USER';
 export const CREATE_CATEGORY = 'CREATE_CATEGORY';
@@ -59,6 +61,22 @@ export function searchProducts(value) {
             }).catch(error => alert(error, 'error'))
     }
 }
+export function getCartUser(id) {
+    return function (dispatch) {
+        axios.get(`${SERVER_ADDRESS}/users/${id}/cart`)
+            .then(res => {
+                dispatch({ type: GET_CARTUSER, payload: res.data });
+            }).catch(error => alert(error, 'error'))
+    }
+}
+export function getUser() {
+    return function (dispatch) {
+        axios.get(`${SERVER_ADDRESS}/users/me`)
+            .then(res => {
+                dispatch({ type: GET_USER, payload: res.data });
+            }).catch(error => alert(error, 'error'))
+    }
+}
 export function createProduct(input) {
     return function (dispatch) {
         axios.post(`${SERVER_ADDRESS}/products/`, input)
@@ -85,7 +103,7 @@ export function createCategory(input) {
     }
 }
 export function createProductCategory(idProducto, idCategoria) {
-    console.log(idProducto,idCategoria)
+    console.log(idProducto, idCategoria)
     return function (dispatch) {
         axios.post(`${SERVER_ADDRESS}/products/${idProducto}/category/${idCategoria}`)
             .then(res => {
@@ -93,21 +111,21 @@ export function createProductCategory(idProducto, idCategoria) {
             }).catch(error => alert(error, 'error'))
     }
 }
-export function updateProduct(id,input) {
+export function updateProduct(id, input) {
     return function (dispatch) {
-        axios.put(`${SERVER_ADDRESS}/products/${id}`,input)
+        axios.put(`${SERVER_ADDRESS}/products/${id}`, input)
             .then(res => {
                 dispatch({ type: UPDATE_PRODUCT, payload: res.data });
-            }).then(()=> alert("Se modifico el prodcto"))
-            
+            }).then(() => alert("Se modifico el prodcto"))
+
             .catch(error => alert(error, 'error'))
     }
 }
-export function updateCategory(id,input) {
+export function updateCategory(id, input) {
     return function (dispatch) {
-        axios.put(`${SERVER_ADDRESS}/products/category/${id}`,input)
+        axios.put(`${SERVER_ADDRESS}/products/category/${id}`, input)
             .then(res => {
-                dispatch({ type: UPDATE_CATEGORY, payload: {id:id,name:input.name,description:input.description} });
+                dispatch({ type: UPDATE_CATEGORY, payload: { id: id, name: input.name, description: input.description } });
             }).catch(error => alert(error, 'error'))
     }
 }
@@ -133,19 +151,19 @@ export function removeProductCategory(idProducto, idCategoria) {
             .then(res => {
                 dispatch({ type: REMOVE_PRODUCT_CATEGORY, payload: res.data });
             }).catch(error => alert(error, 'error'))
-          
+
     }
 }
 
-export function updateOrderAmount(idUser,input) {
+export function updateOrderAmount(idUser, input) {
     return function (dispatch) {
-        axios.put(`${SERVER_ADDRESS}/${idUser}/cart/`,input)
+        axios.put(`${SERVER_ADDRESS}/${idUser}/cart/`, input)
             .then(res => {
-                dispatch({ type: UPDATE_ORDER_AMOUNT, payload: {amount:input.amount} });
-                  }).catch(error => alert(error, 'error'))
+                dispatch({ type: UPDATE_ORDER_AMOUNT, payload: { amount: input.amount } });
+            }).catch(error => alert(error, 'error'))
     }
-        }
-export function addtoCart(idUsuario){
+}
+export function addtoCart(idUsuario) {
     return function (dispatch) {
         axios.post(`${SERVER_ADDRESS}/${idUsuario}/cart`)
             .then(res => {
