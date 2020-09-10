@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { User, Order, OrderProduct} = require("../db.js");
+const { User, Order, Orderproduct} = require("../db.js");
 
 //S34 ruta para crear usuario
 server.post("/",(req,res)=>{
@@ -48,6 +48,27 @@ server.delete("/:id", (req, res) => {
     })
 })
 
+//S39 : Crear Ruta que retorne todos los items del Carrito
+// GET /users/:idUser/cart
+
+server.get("/:idUser/cart", (req,res) => {
+  const id = req.params.idUser;
+  Order.findOrCreate({
+    where: {     
+      userId: id, //Condición de Busqueda
+      state: "open"
+    },
+    defaults: { 
+      userId: id,
+      state: "open" },
+    include: {
+      model: Orderproduct,
+    },
+  }) 
+  .then((orders) => res.send(orders))
+  .catch((e) => res.status(400).json(e))
+});
+
 
 // S45 : Crear Ruta que retorne todas las Ordenes de los usuarios GET /users/:id/orders
 server.get("/:id/orders", (req,res) => {
@@ -57,12 +78,12 @@ server.get("/:id/orders", (req,res) => {
       userId: id //Condición de Busqueda
     },
     include: {
-      model: OrderProduct,
+      model: Orderproduct,
     },
   }) 
   .then((orders) => res.send(orders))
   .catch((e) => res.status(400).json(e))
-})
+});
 
 /*S38 : Crear Ruta para agregar Item al Carrito
 POST /users/:idUser/cart */
