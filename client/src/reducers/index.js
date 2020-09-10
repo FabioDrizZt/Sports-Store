@@ -60,7 +60,7 @@ function rootReducer(state = initialState, action) {
         }case UPDATE_ORDER_AMOUNT: {
             let amount = [...state.amount.filter(x=>x.amount!==action.payload.amount)]
             return { ...state, amount: amount.concat(action.payload) }
-        }
+        
         } case ADD_TO_CART: {
             return { ...state, cart: state.cart.concat(action.payload) }
         }
