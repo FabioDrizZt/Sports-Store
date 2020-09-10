@@ -43,6 +43,9 @@ export default function NavBar() {
             <li>
               <Link className="option" to="/admin">Admin</Link>
             </li>
+            <li>
+              <Link className="option" to="/admin/orders">Ordenes</Link>
+            </li>
                         
       <li><Link className="option" to="/users">        Usuarios      </Link></li>
           </ul>

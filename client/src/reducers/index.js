@@ -9,17 +9,19 @@ import {
     GET_CARTUSER,
     GET_USER,
     SEARCH_PRODUCTS,
+    GET_USERS,
     // aca van los actions del POST/CREATE
     CREATE_PRODUCT,
     CREATE_USER,
     CREATE_CATEGORY,
     CREATE_PRODUCT_CATEGORY,
     ADD_TO_CART,
-    // aca van los actions del UPDATE
+    // aca van los actions del UPDATE/MODIFICAR
     UPDATE_PRODUCT,
     UPDATE_CATEGORY,
     UPDATE_USER,
     UPDATE_ORDER_AMOUNT,
+    UPDATE_ORDER,
     // aca van los actions del DELETE/REMOVE
     REMOVE_PRODUCT,
     REMOVE_CATEGORY,
@@ -59,6 +61,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, cart: action.payload }
         } case GET_USER: {
             return { ...state, cart: action.payload }
+        } case GET_USERS: {
+            return { ...state, cart: action.payload }
         } case CREATE_PRODUCT: {        
             return { ...state, products: state.products.concat(action.payload) }
         } case CREATE_USER: {
@@ -74,6 +78,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, categories: categories.concat(action.payload) }
         } case UPDATE_USER: {
             return { ...state, users: state.users.filter(user => user.id !== action.payload.id) }
+        } case UPDATE_ORDER: {
+            return { ...state, orders: state.orders.filter(order => order.id !== action.payload.id) }
         } case REMOVE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload) }
         } case REMOVE_CATEGORY: {
