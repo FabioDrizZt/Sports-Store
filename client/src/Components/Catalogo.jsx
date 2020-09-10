@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, getCategories, getCategoryProducts } from "../actions";
+import './Catalogo.css';
 
 function Catalogo() {
   const dispatch = useDispatch();
@@ -16,24 +17,41 @@ function Catalogo() {
   function filtrarCatalogo(nombreCat) {
     dispatch(getCategoryProducts(nombreCat));
   }
+const style={
+  height:"100vh",
+  backgroundImage:"url('https://cdn.pixabay.com/photo/2019/12/06/21/42/lone-tree-4678305_960_720.jpg')",
+  backgroundSize:"cover"
+}
+
 
   return (
     //props: titulo, descripcion, precio, cantidad, imagen
     <React.Fragment>
-      <div>
-        <select onChange={(e) => filtrarCatalogo(e.target.value)}>
-          <option disabled seleted value>
-            FILTRAR POR CATEGORIA
-          </option>
-          {categories &&
-            categories.map((c) => {
-              return <option key={c.name}> {c.name} </option>;
-            })}
-        </select>
-        <button type="button" onClick={() => window.location.reload()}>
-          Ver todos los productos
-        </button>
-      </div>
+<div style={style} className="jumbotron jumbotron-fluid">
+  <div className="containerCenter container">
+    <h1 className="display-4">Hacé realidad tus sueños</h1>
+    <p className="lead">Date el gusto de tener lo que necesitas con Sports Store</p>
+    <div className="container catalogContainer">
+      <select className="custom-select" onChange={(e) => filtrarCatalogo(e.target.value)}>
+        <option disabled seleted value>FILTRAR POR CATEGORIA</option>
+        <option selected>Elige una Categoria</option>
+          {categories && categories.map((c) => {
+            return <option key={c.name}> {c.name} </option>;
+          })}
+      </select>
+
+      <button className="btn btn-danger" type="button" onClick={() => window.location.reload()}>
+        Todos los Productos
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+      <hr/>
+
       <h1>Catálogo</h1>
       {products &&
         products.map((x) => (
