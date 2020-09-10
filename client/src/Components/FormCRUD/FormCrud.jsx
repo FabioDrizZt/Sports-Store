@@ -11,7 +11,7 @@ function FormCrud() {
   function eliminar(id) {
    dispatch(removeProduct(id))
   }
-
+  
   return (
     <React.Fragment>
       <CreateProduct />

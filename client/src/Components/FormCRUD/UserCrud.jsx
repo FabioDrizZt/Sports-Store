@@ -10,7 +10,7 @@ const style = {
 };
 
 function UserCrud() {
-  const users = useSelector((state) => state.products);
+  const users = useSelector((state) => state.users);
 
   function eliminar(id) {
     return fetch("http://localhost:3001/users/" + id, { method: "DELETE" })
