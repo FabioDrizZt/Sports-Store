@@ -9,7 +9,7 @@ const style = {
   position: "relative",
 };
 
-function FormCrud() {
+function UserCrud() {
   const users = useSelector((state) => state.products);
 
   function eliminar(id) {
@@ -42,32 +42,14 @@ function FormCrud() {
                           <h3 class="font-weight-bold my-2">DNI:{u.DNI}</h3>
                           <h5 class="font-weight-bold my-2">email: {u.email}</h5>
                           <h5 class="font-weight-bold my-2">Role: {u.role}</h5>
-
-                          <ul class="list-inline small">
-                            <li class="list-inline-item m-0">
-                              <i class="fa fa-star text-success"></i>
-                            </li>
-                            <li class="list-inline-item m-0">
-                              <i class="fa fa-star text-success"></i>
-                            </li>
-                            <li class="list-inline-item m-0">
-                              <i class="fa fa-star text-success"></i>
-                            </li>
-                            <li class="list-inline-item m-0">
-                              <i class="fa fa-star text-success"></i>
-                            </li>
-                            <li class="list-inline-item m-0">
-                              <i class="fa fa-star-o text-gray"></i>
-                            </li>
-                          </ul>
                         </div>
                       </div>
-                      <img
+                  {/*     <img
                         src={u.image}
                         alt={u.name}
                         width="200"
                         class="ml-lg-5 order-1 order-lg-2"
-                      />
+                      /> */}
                     </div>
                     <span style={{ position:"-webkit-sticky" , right: 0 }}>
                       <button
@@ -91,4 +73,4 @@ function FormCrud() {
   );
 }
 
-export default FormCrud;
+export default UserCrud;
