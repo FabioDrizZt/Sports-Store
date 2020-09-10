@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUser } from "../../actions/index.js";
-import { useHistory } from "react-router-dom";
 
 const CreateUser = () => {
+  const dispatch = useDispatch();
+
   const [input, setInput] = useState({
     name: "",
     lastName: "",
@@ -12,16 +13,10 @@ const CreateUser = () => {
     password: "",
     role: "usuario",
   });
-  const history = useHistory();
-  const dispatch = useDispatch();
 
   function User(e, input) {
     e.preventDefault();
-
-    dispatch(createUser(input)).then(() => {
-      history.push("/users");
-      window.location.reload();
-    });
+    dispatch(createUser(input));
     setInput({
       name: "",
       lastName: "",
