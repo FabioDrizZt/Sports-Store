@@ -14,6 +14,7 @@ import {
     UPDATE_PRODUCT,
     UPDATE_CATEGORY,
     REMOVE_PRODUCT,
+    UPDATE_USER,
     REMOVE_CATEGORY,
     REMOVE_PRODUCT_CATEGORY,
     UPDATE_ORDER_AMOUNT,
@@ -58,12 +59,14 @@ function rootReducer(state = initialState, action) {
         } case CREATE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.concat(action.payload) }
         } case UPDATE_PRODUCT: {
-            return { ...state, products: state.products.filter(product => product.name !== action.payload.named) }
+            return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
         } case UPDATE_CATEGORY: {
             let categories = [...state.categories.filter(x => x.id !== action.payload.id)]
             return { ...state, categories: categories.concat(action.payload) }
+        } case UPDATE_USER: {
+            return { ...state, users: state.users.filter(user => user.id !== action.payload.id) }
         } case REMOVE_PRODUCT: {
-            return { ...state, products: state.products.filter(product => product.name !== action.payload.name) }
+            return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
         } case REMOVE_CATEGORY: {
             return { ...state, categories: state.categories.filter(category => category.id !== action.payload) }
         } case REMOVE_PRODUCT_CATEGORY: {
