@@ -5,9 +5,12 @@ const { Op } = require("sequelize");
 
 /**S44 S44 : Crear ruta que retorne todas las ordenes
 Esta ruta puede recibir el query string status y deberá devolver sólo las ordenes con ese status. */
-server.get("/orders",(req,res)=>{
+server.get("/",(req,res)=>{
     const status = req.query.status;
-    Order.findAll({where:{state:status}})
+    Order.findAll({
+        where:{state:status},
+        include: [{model: Orderproduct}]
+    })
     .then(orders=>{res.send(orders)})
     .catch(error=>res.send(error))
   })  

@@ -4,6 +4,7 @@ import {
     GET_CATEGORIES,
     GET_CATEGORY_PRODUCTS,
     GET_ORDER,
+    GET_ORDERS,
     SEARCH_PRODUCTS,
     GET_CARTUSER,
     GET_USER,
@@ -26,6 +27,7 @@ const initialState = {
     products: [],
     categories: [],
     order:[],
+    orders:[],
     productCategories: [],
     product: [],
     cart: [],
@@ -45,6 +47,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, products: action.payload }
         } case GET_ORDER: {
             return {...state, order: action.payload}
+        } case GET_ORDERS: {
+            return {...state, orders: action.payload}
         } case SEARCH_PRODUCTS: {
             return { ...state, products: action.payload }
         } case GET_CARTUSER: {
