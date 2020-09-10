@@ -19,6 +19,7 @@ export const REMOVE_CATEGORY = 'REMOVE_CATEGORY';
 export const REMOVE_PRODUCT_CATEGORY = 'REMOVE_PRODUCT_CATEGORY';
 export const UPDATE_ORDER_AMOUNT = "UPDATE_ORDER_AMOUNT";
 export const ADD_TO_CART = "ADD_TO_CART";
+export const UPDATE_USER = 'UPDATE_USER';
 
 
 export function getProduct(id) {
@@ -127,6 +128,15 @@ export function updateCategory(id, input) {
             .then(res => {
                 dispatch({ type: UPDATE_CATEGORY, payload: { id: id, name: input.name, description: input.description } });
             }).catch(error => alert(error, 'error'))
+    }
+}
+export function updateUser(id,input) {
+    return function (dispatch) {
+        axios.put(`${SERVER_ADDRESS}/users/${id}`,input)
+            .then(res => {
+                dispatch({ type: UPDATE_USER, payload: res.data });
+            }).then(()=> alert("Se modifico el usuario"))
+            .catch(error => alert(error, 'error'))
     }
 }
 export function removeProduct(id) {
