@@ -92,23 +92,22 @@ server.post("/:idUser/cart", (req, res) => {
   Order.findOrCreate({
     where: { userId: id, state: "open" },
     defaults: { userId: id, state: "open" },
-  }).then((order) => {
+   })
+   .then((order) => {
     Orderproduct.findOrCreate({
       where: {
-        productId: req.body.id,
-        orderId: order.id,
-        price: req.body.price,
-        amount: req.body.amount,
+      productId: req.body.id,  
+      orderId: order[0].id
       },
       defaults: {
         productId: req.body.id,
-        orderId: order.id,
+        orderId: order[0].id,
         price: req.body.price,
         amount: req.body.amount,
       },
     })
-      .then((resp) => {
-        res.send(resp);
+    .then((resp) => {
+        res.send(resp[0]);
       })
       .catch((error) => {
         res.send(error);
