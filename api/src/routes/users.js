@@ -116,9 +116,19 @@ server.post("/:idUser/cart", (req, res) => {
   });
 });
 
+/*S40 : Crear Ruta para vaciar el carrito
+DELETE /users/:idUser/cart/ */
+server.delete("/:idUser/cart/",(req,res)=>{
+  Order.destroy({ where: { id: req.params.idUser } })
+    .then(deletedRecord => {
+      if (deletedRecord === 1) res.status(200).json({ message: "Se eliminó el carrito" });
+      else res.status(404).json({ message: "Carrito no encontrado" });
+    })
+})
+
 /*S41 : Crear Ruta para editar las cantidades del carrito
 PUT /users/:idUser/cart */
-server.put("/:idUser/cart", (req, res, next) => {
+server.put("/:idUser/cart", (req, res) => {
   Order.update({
     amount: req.body.amount
   }, { where: { id: req.params.idUser } })
