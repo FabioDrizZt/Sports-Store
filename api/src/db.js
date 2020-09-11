@@ -42,10 +42,13 @@ User.hasMany(Cart);
 Cart.belongsTo(User);
 
 //S32 : Crear Modelo de Línea de Orden
-Cart.belongsToMany(Product, { through: Order });
-Product.belongsToMany(Cart, { through: Order });
+// Cart.belongsToMany(Product, { through: Order });
+// Product.belongsToMany(Cart, { through: Order });
 
-
+Cart.hasMany(Order);
+Order.belongsTo(Cart);
+Product.hasMany(Order);
+Order.belongsTo(Product);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

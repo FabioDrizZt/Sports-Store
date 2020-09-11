@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { User, Cart, Order } = require("../db.js");
+const { User, Cart, Order, Product } = require("../db.js");
 
 // -----> ***** GET ***** <-----
 // S36 : Crear Ruta que retorne todos los Usuarios
@@ -16,17 +16,25 @@ server.get("/", (req, res) => {
 // GET /users/:idUser/cart
 server.get("/:idUser/cart", (req, res) => {
   const id = req.params.idUser;
-  Order.findOne({
+  Cart.findOne({
     where: {
       userId: id, //Condición de Busqueda
       state: "open",
     },
-    include: [{
-      model: Order,
-    }],
   })
-    .then((cart) => res.send(cart))
+  .then((cart) => {
+    Order.findAll({
+      where: {
+        cartId: cart.id
+      },
+      include: [{
+        model: Product
+      }
+    ]
+    })
+    .then((orders) => res.send(orders))
     .catch((e) => res.status(400).json(e));
+  })
 });
 
 // S45 : Crear Ruta que retorne todas las Ordenes de los usuarios GET /users/:id/orders

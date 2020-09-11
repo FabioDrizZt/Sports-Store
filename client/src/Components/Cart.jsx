@@ -9,6 +9,7 @@ import Order from './Order';
 let carrito={
   id:1,
   amount: 5,
+  price:400,
    product: {
     id : 2,
     name : "Zapa",
@@ -17,20 +18,19 @@ let carrito={
     price : 500,
     stock : 8,
     image : "https://static.mercadoshops.com/zapatilla-salomon-speedcross-hombre-trail-running-v_iZ878255024XsZ230467303XpZ1XfZ230467303-23380324018-5XvZdxIM.jpg",
-  }    ,
-  user:{
-    id:3
-  }
+  }   
 }
 const Cart = (carrito) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
 
+
   // useEffect(() => {
   //   dispatch(getUser());
   //   dispatch(getCartUser(1));
   // }, [getCartUser, getUser]);
+
 
   // var total = cart.reduce(function(prev, cur) {
   //   return prev + (cur.product.price * cur.amount);
