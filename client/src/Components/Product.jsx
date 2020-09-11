@@ -16,7 +16,7 @@ const Product = (props) => {
  
   //FALTA EL ID DEL USER, no hay nada en el store User
   function agregarAlCarrito(product){
-    dispatch(addtoCart(user.id,{productId:product.id,price:product.price,amount:1}))
+    dispatch(addtoCart(1,{productId:product.id,price:product.price,amount:1}))
   }
 
   return (
