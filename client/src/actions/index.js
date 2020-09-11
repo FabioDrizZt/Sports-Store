@@ -286,6 +286,32 @@ export function removeProductCategory(idProducto, idCategoria) {
       .catch((error) => alert(error, "error"));
   };
 }
+
+
+export function updateOrderAmount(idUser, input) {
+  return function (dispatch) {
+    axios
+      .put(`${SERVER_ADDRESS}/${idUser}/cart/`, input)
+      .then((res) => {
+        dispatch({
+          type: UPDATE_ORDER_AMOUNT,
+          payload: { amount: input.amount },
+        });
+      })
+      .catch((error) => alert(error, "error"));
+  };
+}
+
+export function addtoCart(idUsuario, product) {
+  return function (dispatch) {
+    axios.post(`${SERVER_ADDRESS}/users/${idUsuario}/cart`,product)
+      .then((res) => {
+        dispatch({ type: ADD_TO_CART, payload: res.data });
+      })
+      .catch((error) => alert(error, "error"));
+  };
+}
+
 export function removeCart(idUsuario) {
   return function (dispatch) {
     axios

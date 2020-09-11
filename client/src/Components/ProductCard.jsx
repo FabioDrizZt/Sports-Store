@@ -10,7 +10,7 @@ function ProductCard({ id, titulo, descripcion, precio, cantidad, imagen,stock }
     const dispatch = useDispatch();
     //NO HAY NADA EN EL STORE USER TODAVIA
     function agregarAlCarrito(id,precio,cantidad){
-        dispatch(addtoCart(user.id,{productId:id,price:precio,amount:cantidad}))
+        dispatch(addtoCart(1,{productId:id,price:precio,amount:cantidad}))
       }
     
     return (
@@ -33,12 +33,13 @@ function ProductCard({ id, titulo, descripcion, precio, cantidad, imagen,stock }
                 <Link to={`/products/${id}`}>
                 <button className="btn btn-warning ">Ver mas</button>
                 </Link>
+                <Link to="/cart">
                 <button 
                 onClick={()=>agregarAlCarrito(id,precio,cantidad)}
                 className={stock===0?"btn btn-secondary":"btn btn-success"} 
                 disabled={stock===0?true:false}>
                     {stock===0 ? "No disponible": "Agregar a Carrito"}</button>
-            
+                    </Link>
             
            
             </div>

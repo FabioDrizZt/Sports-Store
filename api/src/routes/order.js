@@ -20,6 +20,7 @@ server.get("/", (req, res) => {
             .catch(error => res.send(error))
     }
 })
+
 //S46 : Crear Ruta que retorne una orden en particular. GET /orders/:id
 server.get('/:id', (req, res) => {
     Cart.findOne({

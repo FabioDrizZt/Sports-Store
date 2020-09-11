@@ -57,7 +57,8 @@ function rootReducer(state = initialState, action) {
             return {...state, order: action.payload}
         } case GET_ORDERS: {
             return {...state, orders: action.payload}
-        } case SEARCH_PRODUCTS: {
+        }
+         case SEARCH_PRODUCTS: {
             return { ...state, products: action.payload }
         } case GET_CARTUSER: {
             return { ...state, cart: action.payload }
@@ -105,6 +106,13 @@ function rootReducer(state = initialState, action) {
             return { ...state, productCategories: state.productCategories.filter(productCategory => productCategory.name !== action.payload.name) }
         } case REMOVE_USER:{
             return {...state, users: state.user.filter(user =>user.name !== action.payload.name)}
+        }case UPDATE_ORDER_AMOUNT: {
+            let amount = [...state.amount.filter(x => x.amount !== action.payload.amount)]
+            return { ...state, amount: amount.concat(action.payload) }
+        } case ADD_TO_CART: {
+            let productoId = action.payload.productId;
+            let productInCart = state.products.filter(x=>x.id=productoId)
+            return { ...state, cart: state.cart.concat(productInCart) }
         } case REMOVE_CART: {
             return { ...state, cart: state.cart.filter(order => order.id !== action.payload.id) }
         }
