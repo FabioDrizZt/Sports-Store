@@ -24,6 +24,7 @@ export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
 export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_ORDER_AMOUNT = "UPDATE_ORDER_AMOUNT";
 export const UPDATE_ORDER = "UPDATE_ORDER";
+export const CLOSE_CART = "CLOSE_CART"
 // aca van los actions del DELETE/REMOVE
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const REMOVE_CATEGORY = "REMOVE_CATEGORY";
@@ -112,13 +113,14 @@ export function getCartUser(id) {
   };
 }
 export function getUser() {
-  return function (dispatch) {
-    axios
+  return  function (dispatch) {
+    /* axios
       .get(`${SERVER_ADDRESS}/users/me`)
-      .then((res) => {
-        dispatch({ type: GET_USER, payload: res.data });
-      })
-      .catch((error) => alert(error, "error"));
+      .then((res) => { */
+        dispatch({ type: GET_USER }); // dispatch({ type: GET_USER, payload: res.data });
+
+      /* })
+      .catch((error) => alert(error, "error")); */
   };
 }
 
@@ -222,6 +224,17 @@ export function updateOrder(id, input) {
       .catch((error) => alert(error, "error"));
   };
 }
+export function closeCart(id) {
+  return function (dispatch) {
+    axios
+      .patch(`${SERVER_ADDRESS}/orders/${id}`)
+      .then((res) => {
+        dispatch({ type: CLOSE_CART, payload: id });
+      })
+      .then(() => alert("Se cerro el carrito"))
+      .catch((error) => alert(error, "error"));
+  };
+}
 export function removeProduct(id) {
   return function (dispatch) {
     return axios
@@ -267,10 +280,10 @@ export function updateOrderAmount(idUser, input) {
   };
 }
 
-export function addtoCart(idUsuario,product) {
+export function addtoCart(idUsuario, product) {
   return function (dispatch) {
     axios
-      .post(`${SERVER_ADDRESS}/${idUsuario}/cart`,product)
+      .post(`${SERVER_ADDRESS}/${idUsuario}/cart`, product)
       .then((res) => {
         dispatch({ type: ADD_TO_CART, payload: res.data });
       })
@@ -288,12 +301,12 @@ export function removeCart(idUsuario) {
   };
 }
 
-export function removeUser(idUsuario){
-  return function(dispatch){
+export function removeUser(idUsuario) {
+  return function (dispatch) {
     axios
       .delete(`${SERVER_ADDRESS}/${idUsuario}`)
       .then((res) => {
-        dispatch({type:REMOVE_USER, payload: res.data});
+        dispatch({ type: REMOVE_USER, payload: res.data });
       })
       .catch((error) => alert(error, "error"));
   }

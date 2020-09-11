@@ -22,6 +22,7 @@ import {
     UPDATE_USER,
     UPDATE_ORDER_AMOUNT,
     UPDATE_ORDER,
+    CLOSE_CART,
     // aca van los actions del DELETE/REMOVE
     REMOVE_PRODUCT,
     REMOVE_CATEGORY,
@@ -61,7 +62,15 @@ function rootReducer(state = initialState, action) {
         } case GET_CARTUSER: {
             return { ...state, cart: action.payload }
         } case GET_USER: {
-            return { ...state, cart: action.payload }
+            return { ...state, user: { // provisorio hasta q se cree el action con el payload
+                id:1,
+                name: "Joaquin",
+                lastName: "Musculoso",
+                DNI:"27432915",
+                email:"chao@ejemplo.com",
+                password:"blablabla",
+                role:"user"
+                } }
         } case GET_USERS: {
             return { ...state, cart: action.payload }
         } case CREATE_PRODUCT: {        
@@ -81,6 +90,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, users: state.users.filter(user => user.id !== action.payload.id) }
         } case UPDATE_ORDER: {
             return { ...state, orders: state.orders.filter(order => order.id !== action.payload.id) }
+        } case CLOSE_CART: {
+            return { ...state, carts: state.carts.map(c => {if (c.id == action.payload.id) {c.state="closed"}}) }
         } case REMOVE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload) }
         } case REMOVE_CATEGORY: {
