@@ -74,8 +74,7 @@ function App() {
       <Route exact path="/users" component={UserCrud} />
       <Route exact path="/cart" render={() => <Cart />} />    
       <Route exact path="/admin/orders" render={() => <OrdersTable />} />
-      <Route exact path="/edit/product/:id" render={(match) => <EditProduct match={match} />} />
-      <Route exact path = '/cart' render = {() => <Cart />} />    
+      <Route exact path="/edit/product/:id" render={(match) => <EditProduct match={match} />} />  
       <Route exact path='/order' render={() => <Order  />} />
       <Route exact path='/admin' render={() => <Admin />} />
       {/* <Route
