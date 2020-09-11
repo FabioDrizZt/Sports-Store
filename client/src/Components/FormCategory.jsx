@@ -104,23 +104,7 @@ function validate({ name, description}) {
                   CANCELAR
                 </button>}
             </div>
-        </form>        
-        </div>
-        <div className="col-7 formCateg">
-          <h3>Listado de categorias</h3>
-      {categories&&categories.map(x=>
-      <div className="row">
-        <p className="col"><b>Nombre: </b>{x.name}<hr/></p> 
-        <p className="col"><b>Descripcion: </b>{x.description}<hr/></p>
-        <p className="col"><b>ID: :</b> {x.id}<hr/></p>
-        <div className="col botonList">
-          <button type="button" className="btn btn-danger" onClick={()=>eliminarCategoria(x)}>ELIMINAR</button>
-          <button type="button" className="btn btn-warning" onClick={()=>{
-            editarCategoria(x)
-            setIdCategoria(x.id);  
-      }}>EDITAR</button>
-        </div>
-      </div>)}     
+        </form>           
       </div>     
     </div>
     )
