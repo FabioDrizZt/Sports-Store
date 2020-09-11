@@ -5,12 +5,20 @@ const { Cart,Order } = require("../db");
 Esta ruta puede recibir el query string status y deberá devolver sólo las ordenes con ese status. */
 server.get("/",(req,res)=>{
     const status = req.query.status;
+    if(status===undefined){
+        Cart.findAll({   
+        include: [{model: Order}] //no funciona el include
+        })
+        .then(carts=>{res.send(carts)})
+        .catch(error=>res.send(error))
+    }else{
     Cart.findAll({
         where:{state:status},
         include: [{model: Order}]
     })
     .then(carts=>{res.send(carts)})
     .catch(error=>res.send(error))
+}
   })  
 //S46 : Crear Ruta que retorne una orden en particular. GET /orders/:id
 server.get ('/:id', (req, res) => {

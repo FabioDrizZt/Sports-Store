@@ -1,17 +1,17 @@
 import React, {useEffect} from "react";
-// import { Route, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import ProductCard from "./ProductCard";
 import { useSelector,useDispatch } from "react-redux";
 import { getProduct,addtoCart } from "../actions";
 
 // Este componente envia informacion al ProductCard que le dará una maquetacion de tarjeta...
 
-const Product = (props) => {
+const Product = (props) => {  
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product);
   const user = useSelector(state=>state.user);
   useEffect(() => {
-    dispatch(getProduct(props.productName));
+    dispatch(getProduct(props.match.match.params.id));
   }, []);
  
   //FALTA EL ID DEL USER, no hay nada en el store User
@@ -20,6 +20,7 @@ const Product = (props) => {
   }
 
   return (
+    products&&
     <div className="row">
       <div id="description" className="description col-6">
         <img src={products.image} className="img-fluid"/>
@@ -30,13 +31,15 @@ const Product = (props) => {
           <span>
             Precio: {products.price} / Stock: {products.stock}
           </span>
-          <div>        
+          <div>      
+            <Link to="/cart">
             <button
             onClick={()=>agregarAlCarrito(products)}
             className={products.stock===0?"btn btn-secondary":"btn btn-success"} 
             disabled={products.stock===0?true:false}>
             {products.stock===0 ? "No disponible": "Agregar a Carrito"}
             </button>
+            </Link>  
           </div>
         </div>
         

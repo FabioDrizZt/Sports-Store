@@ -64,7 +64,7 @@ function App() {
       <NavBar />
       {/*<Route />*/}
       {/* <NavBar /> */}
-      <Route exact path="/product" render={() => <Product />} />
+      <Route exact path="/products/:id" render={(match) => <Product match={match} />} />
       <Route exact path="/" render={() => <Home />} />
       {/* S14 : Crear Ruta para mostrar el componente Catalogo */}
       <Route exact path="/products" render={() => <Catalogo />} />
