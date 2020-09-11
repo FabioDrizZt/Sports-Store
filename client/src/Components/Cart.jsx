@@ -4,35 +4,52 @@ import { getCartUser, getUser } from "../actions"
 import { useSelector, useDispatch } from "react-redux";
 import s from "./Cart.css";
 import Checkout from "./Checkout";
-// import Order from "./Order";
+import Order from './Order';
 
-const Cart = () => {
+let carrito={
+  id:1,
+  amount: 5,
+   product: {
+    id : 2,
+    name : "Zapa",
+    description : "re piola",
+    size : "43",
+    price : 500,
+    stock : 8,
+    image : "https://static.mercadoshops.com/zapatilla-salomon-speedcross-hombre-trail-running-v_iZ878255024XsZ230467303XpZ1XfZ230467303-23380324018-5XvZdxIM.jpg",
+  }    ,
+  user:{
+    id:3
+  }
+}
+const Cart = (carrito) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
 
-/*   useEffect(() => {
+  useEffect(() => {
     dispatch(getUser());
     dispatch(getCartUser(user.id));
-  }, [getCartUser, getUser]); */
+  }, [getCartUser, getUser]);
 
-  var total = 125000 // aca va a tener q hacer un calculo 
+  var total = cart.reduce(function(prev, cur) {
+    return prev + (cur.product.price * cur.amount);
+  }, 0);
 
   return (
     <div className={s.container}>
       {cart &&
-        cart.map((c) => (            
-          <div>Producto:</div>
-          //   <Order
-          //     amount={c.amount}
-          //     name={c.product.name}
-          //     img={c.product.image}
-          //     price={c.product.price}
-          //     stock={c.product.stock}
-          //     size={c.product.size}
-          //     productId={c.productId}
-          //     userId={user.id}
-          //   />
+        cart.map((c) => (         
+            <Order
+              amount={c.amount}
+              name={c.product.name}
+              img={c.product.image}
+              price={c.product.price}
+              stock={c.product.stock}
+              size={c.product.size}
+              productId={c.productId}
+              userId={user.id}
+            />
         ))}
 
       <div className={s.subtotal}>

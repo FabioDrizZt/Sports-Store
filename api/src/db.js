@@ -30,20 +30,20 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Product, Category, Product_category, Order, User, Orderproduct } = sequelize.models;
+const { Product, Category, Cart, User, Order } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
  Product.belongsToMany(Category, { through: "productcategory" });
  Category.belongsToMany(Product, { through: "productcategory" });
 
-// Relacion User <--> Order
-User.hasMany(Order);
-Order.belongsTo(User);
+// Relacion User <--> Cart
+User.hasMany(Cart);
+Cart.belongsTo(User);
 
 //S32 : Crear Modelo de Línea de Orden
-Order.belongsToMany(Product, { through: Orderproduct });
-Product.belongsToMany(Order, { through: Orderproduct });
+Cart.belongsToMany(Product, { through: Order });
+Product.belongsToMany(Cart, { through: Order });
 
 
 

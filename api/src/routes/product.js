@@ -25,7 +25,7 @@ server.get("/categories", (req, res, next) => {
 // Retorna todos los productos de {nombreCat} Categoría."
 server.get("/category/:nombreCat", (req, res) => {
   Product.findAll({
-    include: [{ model: Category, where: {name: req.params.nombreCat} }],
+    include: [{ model: Category, where: { name: req.params.nombreCat } }],
   }).then(r => { res.send(r) })
     .catch(e => { res.sendStatus(400) })
 });
@@ -90,31 +90,31 @@ server.post("/:idProducto/category/:idCategoria", (req, res) => {
 // Retorna 200 si se modificó con exito, y retorna los datos del producto modificado.
 server.put("/:id", (req, res) => {
   console.log(req.body)
-  Product.update({
-    name: req.body.name,
-    size: req.body.size,
-    description: req.body.description,
-    price: req.body.price,
-    stock: req.body.stock,
-    image: req.body.image
-  }, { where: { id: req.params.id } })
-    .then(() => res.status(201)
-    .send("Producto id " + req.params.id + " actualizado satisfactoriamente"))
-    .catch((error) => {
-      res.status(400).json(error);
-    });
+  Product.findOne({ where: { id: req.params.id } })
+    .then(product => {
+      product.update({
+        name: req.body.name,
+        size: req.body.size,
+        description: req.body.description,
+        price: req.body.price,
+        stock: req.body.stock,
+        image: req.body.image
+      }).then((p) => res.status(200).json(p))
+    })
+    .catch((error) => { res.status(400).json(error); })
 });
 //S20 : Crear ruta para Modificar Categoria
 // PUT /products/category/:id
 server.put("/category/:id", (req, res, next) => {
   console.log(req.body)
   Category.update({
-    name:req.body.name,
-    description:req.body.description},
-    {where: { id: req.params.id }})
-    .then((category) => {res.status(200).json({ category }); })
+    name: req.body.name,
+    description: req.body.description
+  },
+    { where: { id: req.params.id } })
+    .then((category) => { res.status(200).json({ category }); })
     .catch((error) => { res.status(400).json({ error }); });
-  });
+});
 
 // S17 : Crear ruta para sacar categorias de un producto.
 // DELETE /products/:idProducto/category/:idCategoria
