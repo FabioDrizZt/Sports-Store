@@ -63,7 +63,7 @@ export default function AsigCate() {
     <React.Fragment>     
       <FormCrud/>
       <FormCategory/>
-      <CatalogoCategories/>
+
           
         
       {/* <div className="all">
