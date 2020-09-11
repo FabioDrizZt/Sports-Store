@@ -29,6 +29,7 @@ export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const REMOVE_CATEGORY = "REMOVE_CATEGORY";
 export const REMOVE_PRODUCT_CATEGORY = "REMOVE_PRODUCT_CATEGORY";
 export const REMOVE_CART = "REMOVE_CART";
+export const REMOVE_USER = "REMOVE_USER";
 
 export function getProduct(id) {
   return function (dispatch) {
@@ -285,4 +286,16 @@ export function removeCart(idUsuario) {
       })
       .catch((error) => alert(error, "error"));
   };
+}
+
+export function removeUser(idUsuario){
+  return function(dispatch){
+    axios
+      .delete(`${SERVER_ADDRESS}/${idUsuario}`)
+      .then((res) => {
+        dispatch({type:REMOVE_USER, payload: res.data});
+      })
+      .catch((error) => alert(error, "error"));
+  }
+
 }
