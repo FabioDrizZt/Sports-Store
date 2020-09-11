@@ -1,40 +1,34 @@
 const server = require("express").Router();
-const { Order,Orderproduct } = require("../db");
-const { Op } = require("sequelize");
-
+const { Cart,Order } = require("../db");
 
 /**S44 S44 : Crear ruta que retorne todas las ordenes
 Esta ruta puede recibir el query string status y deberá devolver sólo las ordenes con ese status. */
 server.get("/",(req,res)=>{
     const status = req.query.status;
-    Order.findAll({
+    Cart.findAll({
         where:{state:status},
-        include: [{model: Orderproduct}]
+        include: [{model: Order}]
     })
-    .then(orders=>{res.send(orders)})
+    .then(carts=>{res.send(carts)})
     .catch(error=>res.send(error))
   })  
-
-
 //S46 : Crear Ruta que retorne una orden en particular. GET /orders/:id
 server.get ('/:id', (req, res) => {
-    Order.findOne({
+    Cart.findOne({
         where: {id: req.params.id},
-        include: [{model: Orderproduct}]
+        include: [{model: Order}]
     }) 
-    .then((orders) => res.send(orders))
+    .then((cart) => res.send(cart))
     .catch((e) => res.status(400).json(e))
 })
-
 //S47 : Crear Ruta para modificar una Orden
 // PUT /orders/:id
 server.put("/:id", (req,res) => {
     Order.update({ 
-      id: req.body.id,
-      cantidad: req.body.cantidad
+      amount: req.body.amount,
+      price: req.body.price
     }, { where: { id: req.params.id } })
-    .then( () => res.status(200)
-    .send("Orden id " + req.params.id + "actualizado satisfactoriamente"))
+    .then( (order) => res.status(200).send(order))
     .catch((err) => {
         res.status(400).json({ err });
     })

@@ -37,8 +37,8 @@ const initialState = {
     productCategories: [],
     product: [],
     cart: [],
-    users: [],
-    user:[]
+    users: [], // lista de usuarios para q vea el admin
+    user:[] // deberia guardar el usuario logueado
 }
 
 function rootReducer(state = initialState, action) {

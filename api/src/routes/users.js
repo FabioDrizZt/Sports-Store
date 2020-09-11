@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { User, Order, Orderproduct } = require("../db.js");
+const { User, Cart, Order } = require("../db.js");
 
 // -----> ***** GET ***** <-----
 // S36 : Crear Ruta que retorne todos los Usuarios
@@ -16,35 +16,30 @@ server.get("/", (req, res) => {
 // GET /users/:idUser/cart
 server.get("/:idUser/cart", (req, res) => {
   const id = req.params.idUser;
-  Order.findOrCreate({
+  Order.findOne({
     where: {
       userId: id, //Condición de Busqueda
       state: "open",
     },
-    defaults: {
-      userId: id,
-      state: "open",
-    },
-    include: {
-      model: Orderproduct,
-    },
+    include: [{
+      model: Order,
+    }],
   })
-    .then((orders) => res.send(orders))
+    .then((cart) => res.send(cart))
     .catch((e) => res.status(400).json(e));
 });
 
 // S45 : Crear Ruta que retorne todas las Ordenes de los usuarios GET /users/:id/orders
 server.get("/:id/orders", (req, res) => {
   const id = req.params.id;
-  Order.findAll({
+  Cart.findAll({
     where: {
       userId: id, //Condición de Busqueda
     },
     include: {
-      model: Orderproduct,
+      model: Order,
     },
-  })
-    .then((orders) => res.send(orders))
+  }).then((carts) => res.send(carts))
     .catch((e) => res.status(400).json(e));
 });
 
@@ -54,29 +49,26 @@ server.get("/:id/orders", (req, res) => {
 POST /users/:idUser/cart */
 server.post("/:idUser/cart", (req, res) => {
   const id = req.params.idUser;
-  Order.findOrCreate({
+  Cart.findOrCreate({
     where: { userId: id, state: "open" },
     defaults: { userId: id, state: "open" },
-  }).then((order) => {
-    Orderproduct.findOrCreate({
-      where: {
-        productId: req.body.id,
-        orderId: order[0].id,
-      },
-      defaults: {
-        productId: req.body.id,
-        orderId: order[0].id,
-        price: req.body.price,
-        amount: req.body.amount,
-      },
-    })
-      .then((resp) => {
-        res.send(resp[0]);
+  })
+    .then((cart) => {
+      Order.findOrCreate({
+        where: {
+          productId: req.body.productId,
+          cartId: cart[0].id,
+        },
+        defaults: {
+          productId: req.body.productId,
+          cartId: cart[0].id,
+          price: req.body.price,
+          amount: req.body.amount,
+        },
       })
-      .catch((error) => {
-        res.send(error);
-      });
-  });
+        .then((resp) => { res.send(resp[0]); })
+        .catch((error) => { res.send(error); });
+    });
 });
 
 //S34 ruta para crear usuario
@@ -122,18 +114,12 @@ server.put("/:id", (req, res) => {
 /*S41 : Crear Ruta para editar las cantidades del carrito
 PUT /users/:idUser/cart */
 server.put("/:idUser/cart", (req, res) => {
-  Order.update(
-    {
-      amount: req.body.amount,
-    },
+  Cart.update(
+    { amount: req.body.amount, },
     { where: { id: req.params.idUser, state: "open" } }
   )
-    .then(() =>
-      res
-        .status(201)
-        .send(
-          "Cantidad de la orden " + req.params.idUser + " aumentada con éxito"
-        )
+    .then((cart) =>
+      res.status(201).send(cart)
     )
     .catch((error) => {
       res.status(400).json(error);
@@ -153,7 +139,7 @@ server.delete("/:id", (req, res) => {
 /*S40 : Crear Ruta para vaciar el carrito
 DELETE /users/:idUser/cart/ */
 server.delete("/:idUser/cart/", (req, res) => {
-  Order.destroy({ where: { id: req.params.idUser, state: "open" } }).then(
+  Cart.destroy({ where: { id: req.params.idUser, state: "open" } }).then(
     (deletedRecord) => {
       if (deletedRecord === 1)
         res.status(200).json({ message: "Se eliminó el carrito" });
