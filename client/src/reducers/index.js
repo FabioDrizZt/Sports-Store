@@ -82,11 +82,16 @@ function rootReducer(state = initialState, action) {
             return { ...state, categories: state.categories.concat(action.payload) }
         } case CREATE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.concat(action.payload) }
+        } case ADD_TO_CART: {
+            return { ...state, cart: state.cart.concat(action.payload) }
         } case UPDATE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
         } case UPDATE_CATEGORY: {
             let categories = [...state.categories.filter(x => x.id !== action.payload.id)]
             return { ...state, categories: categories.concat(action.payload) }
+        } case UPDATE_ORDER_AMOUNT: {
+            let amount = [...state.amount.filter(x => x.amount !== action.payload.amount)]
+            return { ...state, amount: amount.concat(action.payload) }
         } case UPDATE_USER: {
             return { ...state, users: state.users.filter(user => user.id !== action.payload.id) }
         } case UPDATE_ORDER: {
@@ -99,11 +104,10 @@ function rootReducer(state = initialState, action) {
             return { ...state, categories: state.categories.filter(category => category.id !== action.payload) }
         } case REMOVE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.filter(productCategory => productCategory.name !== action.payload.name) }
-        }case REMOVE_USER:{
+        } case REMOVE_USER:{
             return {...state, users: state.user.filter(user =>user.name !== action.payload.name)}
         }case UPDATE_ORDER_AMOUNT: {
             let amount = [...state.amount.filter(x => x.amount !== action.payload.amount)]
-
             return { ...state, amount: amount.concat(action.payload) }
         } case ADD_TO_CART: {
             let productoId = action.payload.productId;
