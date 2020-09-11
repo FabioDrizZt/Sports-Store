@@ -14,7 +14,7 @@ function ProductCard({ id, titulo, descripcion, precio, cantidad, imagen,stock }
       }
     
     return (
-        <div className=" col-sm-4 cardStyle">
+        <div className=" col-sm-4 cardStyle p-4">
         
             <div className="text-left">
             
@@ -31,7 +31,7 @@ function ProductCard({ id, titulo, descripcion, precio, cantidad, imagen,stock }
            
                 <p className="price"><b>$ { precio }</b></p>
                 <Link to={`/products/${id}`}>
-                <button className="btn btn-warning ">Ver mas</button>
+                <button className="btn btn-warning">Ver mas</button>
                 </Link>
                 <Link to="/cart">
                 <button 

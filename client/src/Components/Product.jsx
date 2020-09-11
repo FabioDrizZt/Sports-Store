@@ -21,19 +21,27 @@ const Product = (props) => {
 
   return (
     products&&
+    <div class="container">
     <div className="row">
       <div id="description" className="description col-6">
         <img src={products.image} className="img-fluid"/>
         </div>
-        <div>
+        <div className="col-5" style={{borderLeft:"2px solid #F1F1F1"}}>
           <h2>{products.name}</h2>
           <p>{products.description}</p>
-          <span>
-            Precio: {products.price} / Stock: {products.stock}
-          </span>
+          <h4>
+            Precio: {products.price}
+          </h4>
+          <h4>
+            Stock: {products.stock}
+          </h4>
+          <h4>
+            Size: {products.size}
+          </h4>
           <div>      
             <Link to="/cart">
             <button
+            style={{margin:0}}
             onClick={()=>agregarAlCarrito(products)}
             className={products.stock===0?"btn btn-secondary":"btn btn-success"} 
             disabled={products.stock===0?true:false}>
@@ -41,8 +49,8 @@ const Product = (props) => {
             </button>
             </Link>  
           </div>
-        </div>
-        
+        </div>        
+      </div>
       </div>
    
   );

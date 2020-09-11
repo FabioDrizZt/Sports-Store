@@ -24,7 +24,7 @@ export default function NavBar() {
           <SearchBar />
           </div>
           <Link to="/cart">
-          <img src={cart} alt="cart" className="mr-4"/>
+          <img src={cart} alt="cart" className="mr-4 w-50"/>
           </Link>
         </header>
         <aside className="font sidebar">
