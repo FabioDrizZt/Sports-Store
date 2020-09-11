@@ -1,6 +1,6 @@
 import { Route, Link } from 'react-router-dom';
-import React, { useEffect } from "react";
-import { getCartUser, getUser } from "../actions"
+import React, { useDebugValue, useEffect } from "react";
+import { getCartUser, getUser} from "../actions"
 import { useSelector, useDispatch } from "react-redux";
 import s from "./Cart.css";
 import Checkout from "./Checkout";
@@ -9,6 +9,7 @@ import Order from './Order';
 let carrito={
   id:1,
   amount: 5,
+  price:400,
    product: {
     id : 2,
     name : "Zapa",
@@ -17,42 +18,42 @@ let carrito={
     price : 500,
     stock : 8,
     image : "https://static.mercadoshops.com/zapatilla-salomon-speedcross-hombre-trail-running-v_iZ878255024XsZ230467303XpZ1XfZ230467303-23380324018-5XvZdxIM.jpg",
-  }    ,
-  user:{
-    id:3
-  }
+  }   
 }
 const Cart = (carrito) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
 
-  useEffect(() => {
-    dispatch(getUser());
-    dispatch(getCartUser(user.id));
-  }, [getCartUser, getUser]);
 
-  var total = cart.reduce(function(prev, cur) {
-    return prev + (cur.product.price * cur.amount);
-  }, 0);
+  // useEffect(() => {
+  //   dispatch(getUser());
+  //   dispatch(getCartUser(1));
+  // }, [getCartUser, getUser]);
 
+
+  // var total = cart.reduce(function(prev, cur) {
+  //   return prev + (cur.product.price * cur.amount);
+  // }, 0);
+console.log(cart)
   return (
     <div className={s.container}>
       {cart &&
         cart.map((c) => (         
             <Order
               amount={c.amount}
-              name={c.product.name}
-              img={c.product.image}
-              price={c.product.price}
-              stock={c.product.stock}
-              size={c.product.size}
-              productId={c.productId}
+              name={c.name}
+              description={c.description}
+              img={c.image}
+              price={c.price}
+              stock={c.stock}
+              size={c.size}
+              productId={c.id}
               userId={user.id}
             />
         ))}
 
-      <div className={s.subtotal}>
+      {/* <div className={s.subtotal}>
         <h2>TOTAL DE LA COMPRA</h2>
         <h3 className={s.price}>${total}</h3>
       </div>
@@ -69,7 +70,7 @@ const Cart = (carrito) => {
           path="/cart/checkout"
           render={() => <Checkout total={total} />}
         />
-      </div> 
+      </div>  */}
     </div>
   );
 };
