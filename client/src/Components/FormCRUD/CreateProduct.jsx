@@ -188,6 +188,7 @@ function CreateProduct() {
               type="submit"
               disabled={noVacio(errors)}
               value="Crear"
+              style={{margin:0}}
             >
               ENVIAR
             </button>

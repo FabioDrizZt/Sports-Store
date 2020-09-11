@@ -102,7 +102,7 @@ function validate({ name, description}) {
                     disabled={noVacio(errors)}>
                       {editar ? "EDITAR" : "AGREGAR"}</button>
                       {editar&&
-                <button className="btn btn-secondary boton ml-1" onClick={()=>editarCategoria()}>
+                <button className="btn btn-secondary boton ml-1" style={{margin:0}} onClick={()=>editarCategoria()}>
                   CANCELAR
                 </button>}
             </div>            
