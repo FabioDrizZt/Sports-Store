@@ -9,6 +9,7 @@ import Order from './Order';
 let carrito={
   id:1,
   amount: 5,
+  price:400,
    product: {
     id : 2,
     name : "Zapa",
@@ -17,10 +18,7 @@ let carrito={
     price : 500,
     stock : 8,
     image : "https://static.mercadoshops.com/zapatilla-salomon-speedcross-hombre-trail-running-v_iZ878255024XsZ230467303XpZ1XfZ230467303-23380324018-5XvZdxIM.jpg",
-  }    ,
-  user:{
-    id:3
-  }
+  }   
 }
 const Cart = (carrito) => {
   const dispatch = useDispatch();
@@ -29,8 +27,8 @@ const Cart = (carrito) => {
 
   useEffect(() => {
     dispatch(getUser());
-    dispatch(getCartUser(user.id));
-  }, [getCartUser, getUser]);
+    //dispatch(getCartUser(user.id));
+  }, [getCartUser]);
 
   var total = cart.reduce(function(prev, cur) {
     return prev + (cur.product.price * cur.amount);
@@ -42,9 +40,9 @@ const Cart = (carrito) => {
         cart.map((c) => (         
             <Order
               amount={c.amount}
+              price={c.price}
               name={c.product.name}
-              img={c.product.image}
-              price={c.product.price}
+              image={c.product.image}
               stock={c.product.stock}
               size={c.product.size}
               productId={c.productId}
