@@ -12,7 +12,7 @@ function EliminarAsignacion (){
     
     function eliminar(e){             
         e.preventDefault();   
-        alert("producto"+idProducto+"categoria:"+idCategoria)    
+        alert("Eliminado producto "+idProducto+" de categoria:"+idCategoria)    
         dispatch(removeProductCategory(idProducto,idCategoria))
     }
 
@@ -24,14 +24,14 @@ function EliminarAsignacion (){
             <select onChange={(e) => setIdProducto(e.target.value)} className="m-2">
             <option disabled selected>Producto</option>
                 {productos&&productos.map(x=>{                 
-                    return <option key={x.id} value={x.id}>{x.name}</option>
+                    return <option key={x.id+0.2} value={x.id}>{x.name}</option>
                 })}
             </select>
             <label className="m-1">Categoria </label>
             <select onChange={(e) => setIdCategoria(e.target.value)} className="m-2">
             <option disabled selected>Categorias</option>
                 {categorias&&categorias.map(x=>{
-                    return <option key={x.id} value={x.id}>{x.name}</option>
+                    return <option key={x.id+0.1} value={x.id}>{x.name}</option>
                 })}
             </select>
             

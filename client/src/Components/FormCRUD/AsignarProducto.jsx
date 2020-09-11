@@ -12,6 +12,7 @@ function AsignarProducto (){
     
     function asignar(e){             
         e.preventDefault()
+        alert("Asignado producto "+idProducto+" a categoria "+idCategoria)
         dispatch(createProductCategory(idProducto,idCategoria))
     }
 
@@ -23,14 +24,14 @@ function AsignarProducto (){
             <select onChange={(e) => setIdProducto(e.target.value)} className="m-2">
             <option disabled seleted >Producto</option>
                 {productos&&productos.map(x=>{
-                    return <option key={x.id} value={x.id}>{x.name}</option>
+                    return <option key={x.id+1} value={x.id}>{x.name}</option>
                 })}
             </select>
             <label className="m-1">Categoria </label>
             <select onChange={(e) => setIdCategoria(e.target.value)} className="m-2">
             <option disabled seleted >Categorias</option>
                 {categorias&&categorias.map(x=>{
-                    return <option key={x.id} value={x.id}>{x.name}</option>
+                    return <option key={x.id+2} value={x.id}>{x.name}</option>
                 })}
             </select>
             

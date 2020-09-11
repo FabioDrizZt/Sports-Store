@@ -153,8 +153,7 @@ export function createUser(input) {
       .catch((error) => alert(error, "error"));
   };
 }
-export function createCategory(input) {
-  console.log(input);
+export function createCategory(input) {  
   return function (dispatch) {
     axios
       .post(`${SERVER_ADDRESS}/products/category`, input)
@@ -277,7 +276,6 @@ export function removeCategory(id) {
   };
 }
 export function removeProductCategory(idProducto, idCategoria) {
-  alert(idProducto,idCategoria)
   return function (dispatch) {
     return axios
       .delete(`${SERVER_ADDRESS}/products/${idProducto}/category/${idCategoria}`)
