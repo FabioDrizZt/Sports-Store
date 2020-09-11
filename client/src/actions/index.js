@@ -121,7 +121,6 @@ export function getUser() {
       .catch((error) => alert(error, "error"));
   };
 }
-
 export function getUsers(id) {
   return function (dispatch) {
     axios
@@ -132,7 +131,6 @@ export function getUsers(id) {
       .catch((error) => alert(error, "error"));
   };
 }
-
 export function createProduct(input) {
   return function (dispatch) {
     axios
@@ -175,6 +173,16 @@ export function createProductCategory(idProducto, idCategoria) {
       .catch((error) => alert(error, "error"));
   };
 }
+export function addtoCart(idUsuario,product) {
+  return function (dispatch) {
+    axios
+      .post(`${SERVER_ADDRESS}/users/${idUsuario}/cart`,product)
+      .then((res) => {
+        dispatch({ type: ADD_TO_CART, payload: res.data });
+      })
+      .catch((error) => alert(error, "error"));
+  };
+}
 export function updateProduct(id, input) {
   return function (dispatch) {
     axios
@@ -208,6 +216,19 @@ export function updateUser(id, input) {
         dispatch({ type: UPDATE_USER, payload: res.data });
       })
       .then(() => alert("Se modifico el usuario"))
+      .catch((error) => alert(error, "error"));
+  };
+}
+export function updateOrderAmount(idUser, input) {
+  return function (dispatch) {
+    axios
+      .put(`${SERVER_ADDRESS}/users/${idUser}/cart/`, input)
+      .then((res) => {
+        dispatch({
+          type: UPDATE_ORDER_AMOUNT,
+          payload: { amount: input.amount },
+        });
+      })
       .catch((error) => alert(error, "error"));
   };
 }
@@ -245,34 +266,9 @@ export function removeCategory(id) {
 export function removeProductCategory(idProducto, idCategoria) {
   return function (dispatch) {
     return axios
-      .delete(`${SERVER_ADDRESS}/${idProducto}/categories/${idCategoria}`)
+      .delete(`${SERVER_ADDRESS}/product/${idProducto}/categories/${idCategoria}`)
       .then((res) => {
         dispatch({ type: REMOVE_PRODUCT_CATEGORY, payload: res.data });
-      })
-      .catch((error) => alert(error, "error"));
-  };
-}
-
-export function updateOrderAmount(idUser, input) {
-  return function (dispatch) {
-    axios
-      .put(`${SERVER_ADDRESS}/${idUser}/cart/`, input)
-      .then((res) => {
-        dispatch({
-          type: UPDATE_ORDER_AMOUNT,
-          payload: { amount: input.amount },
-        });
-      })
-      .catch((error) => alert(error, "error"));
-  };
-}
-
-export function addtoCart(idUsuario,product) {
-  return function (dispatch) {
-    axios
-      .post(`${SERVER_ADDRESS}/${idUsuario}/cart`,product)
-      .then((res) => {
-        dispatch({ type: ADD_TO_CART, payload: res.data });
       })
       .catch((error) => alert(error, "error"));
   };
@@ -280,18 +276,17 @@ export function addtoCart(idUsuario,product) {
 export function removeCart(idUsuario) {
   return function (dispatch) {
     axios
-      .delete(`${SERVER_ADDRESS}/${idUsuario}/cart`)
+      .delete(`${SERVER_ADDRESS}/users/${idUsuario}/cart`)
       .then((res) => {
         dispatch({ type: REMOVE_CART, payload: res.data });
       })
       .catch((error) => alert(error, "error"));
   };
 }
-
 export function removeUser(idUsuario){
   return function(dispatch){
     axios
-      .delete(`${SERVER_ADDRESS}/${idUsuario}`)
+      .delete(`${SERVER_ADDRESS}/users/${idUsuario}`)
       .then((res) => {
         dispatch({type:REMOVE_USER, payload: res.data});
       })
