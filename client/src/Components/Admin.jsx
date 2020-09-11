@@ -62,7 +62,8 @@ export default function AsigCate() {
     //muestro los componentes para admin
     <React.Fragment>     
       <FormCrud/>
-        <FormCategory/>
+      <FormCategory/>
+      <CatalogoCategories/>
           
         
       {/* <div className="all">
