@@ -122,18 +122,20 @@ server.put("/:id", (req, res) => {
 /*S41 : Crear Ruta para editar las cantidades del carrito
 PUT /users/:idUser/cart */
 server.put("/:idUser/cart", (req, res) => {
-  Cart.update(
-    { amount: req.body.amount, },
-    { where: { id: req.params.idUser, state: "open" } }
-  )
+  Cart.findOne({
+    where: { userId: req.params.idUser, state: "open" },
+  })
     .then((cart) =>
-      res.status(201).send(cart)
+      Order.update(
+        { amount: req.body.amount },
+        { where: { cartId: cart.id, productId: req.body.productId } }
+      )
     )
+    .then(() => res.status(201).send("Cantidad modificada satisfactoriamente"))
     .catch((error) => {
       res.status(400).json(error);
     });
 });
-
 // -----> ***** DELETE ***** <-----
 // S37 : Crear Ruta para eliminar Usuario DELETE /users/:id
 server.delete("/:id", (req, res) => {
