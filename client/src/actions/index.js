@@ -224,12 +224,12 @@ export function updateOrder(id, input) {
       .catch((error) => alert(error, "error"));
   };
 }
-export function closeOrder(id) {
+export function closeCart(id) {
   return function (dispatch) {
     axios
       .patch(`${SERVER_ADDRESS}/orders/${id}`)
       .then((res) => {
-        dispatch({ type: CLOSE_ORDER, payload: id });
+        dispatch({ type: CLOSE_CART, payload: id });
       })
       .then(() => alert("Se cerro el carrito"))
       .catch((error) => alert(error, "error"));

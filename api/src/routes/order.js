@@ -41,10 +41,10 @@ server.put("/:id", (req, res) => {
             res.status(400).json({ err });
         })
 })
-//SXX : Crear Ruta para Cerrar una Orden
+//SXX : Crear Ruta para Cerrar un Carrito
 // PATCH /orders/:id
 server.patch("/:id", (req, res) => {
-    Order.patch({
+    Cart.update({
         state: "closed",
     }, { where: { id: req.params.id } })
         .then((order) => res.status(200).send(order))
