@@ -6,15 +6,15 @@ Esta ruta puede recibir el query string status y deberá devolver sólo las orde
 server.get("/",(req,res)=>{
     const status = req.query.status;
     if(status===undefined){
-        Cart.findAll({   
-        include: [{model: Order}] //no funciona el include
+        Order.findAll({   
+            include: [{ model: Cart, where: { cartId: Order.id } }],
+        // where:{id:Cart.cartId} //no funciona el include
         })
         .then(carts=>{res.send(carts)})
         .catch(error=>res.send(error))
     }else{
-    Cart.findAll({
-        where:{state:status},
-        include: [{model: Order}]
+    Order.findAll({
+        include: [{ model: Cart, where: { status: status } }]
     })
     .then(carts=>{res.send(carts)})
     .catch(error=>res.send(error))
