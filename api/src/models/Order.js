@@ -1,12 +1,17 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  // El modelo order
+  // defino el modelo order
   sequelize.define('order', {
-    state: {
-      type: DataTypes.ENUM({
-        values: ['open', 'closed', 'cancelled']
-      })
-    },
+    amount: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: { min: 0 }
+    },    
+    price: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+      validate: { min: 0 }
+    }
   })
 };

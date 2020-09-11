@@ -9,6 +9,7 @@ import {
 } from "../actions";
 import "./Admin.css";
 import FormCategory from "./FormCategory";
+import FormCrud from "./FormCRUD/FormCrud";
 import CreateProduct from "./FormCRUD/CreateProduct";
 import Catalogo from "./Catalogo";
 import CatalogoCategories from "./CatalogoCategories";
@@ -57,8 +58,14 @@ export default function AsigCate() {
   };
 
   return (
-    <React.Fragment>
-      <div className="all">
+    //porque hay que ir a catalogo para que aparezcan los productos?????
+    //muestro los componentes para admin
+    <React.Fragment>     
+      <FormCrud/>
+        <FormCategory/>
+          
+        
+      {/* <div className="all">
         <div className="forms">
           <div className="productForm">
             <CreateProduct />
@@ -68,11 +75,11 @@ export default function AsigCate() {
           </div>
         </div>
         <div className="asignacion">
-          <div className="productsColum">
-          <Catalogo />
-            {/* Agregue un key al map para poder colocar la funcionalidad de drag, onDragStar, draggable  */}
+          <div className="productsColum"> 
+          <Catalogo /> El catalogo es para mostar a los clientes, no deberia estar en admin
+            Agregue un key al map para poder colocar la funcionalidad de drag, onDragStar, draggable  
 
-            {/* {products &&
+             {products &&
               products.map((x, index) => (
                 <ProductCard
                   key={x.id}
@@ -86,13 +93,13 @@ export default function AsigCate() {
                   onDragEnd={handleDragEnd}
                   draggable
                 />
-              ))} */}
-          </div>
-          <div className="categoriesColum">
-            {/* Agregue un key al map para poder colocar la funcionalidad de drag, onDragStar, draggable  */}
-            <CatalogoCategories />
+              ))} 
+           </div> 
+           <div className="categoriesColum"> 
+             Agregue un key al map para poder colocar la funcionalidad de drag, onDragStar, draggable  
+             <CatalogoCategories /> 
 
-            {/* <h1>Listado de categorias</h1>
+            <h1>Listado de categorias</h1>
             {categories &&
               categories.map((x, index) => (
                 <p
@@ -104,10 +111,10 @@ export default function AsigCate() {
                 >
                   Nombre: {x.name} Descripcion: {x.description} <hr />
                 </p>
-              ))} */}
-          </div>
+              ))} 
+           </div>
         </div>
-      </div>
+      </div> */}
     </React.Fragment>
   );
 }

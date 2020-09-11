@@ -11,17 +11,19 @@ export const GET_ORDERS = "GET_ORDERS";
 export const GET_CARTUSER = "GET_CARTUSER";
 export const GET_USER = "GET_USER";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
+export const GET_USERS = "GET_USERS";
 // aca van los actions del POST/CREATE
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const CREATE_USER = "CREATE_USER";
 export const CREATE_CATEGORY = "CREATE_CATEGORY";
 export const CREATE_PRODUCT_CATEGORY = "CREATE_PRODUCT_CATEGORY";
 export const ADD_TO_CART = "ADD_TO_CART";
-// aca van los actions del UPDATE
+// aca van los actions del UPDATE/MODIFICAR
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
 export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_ORDER_AMOUNT = "UPDATE_ORDER_AMOUNT";
+export const UPDATE_ORDER = "UPDATE_ORDER";
 // aca van los actions del DELETE/REMOVE
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const REMOVE_CATEGORY = "REMOVE_CATEGORY";
@@ -119,6 +121,18 @@ export function getUser() {
       .catch((error) => alert(error, "error"));
   };
 }
+
+export function getUsers(id) {
+  return function (dispatch) {
+    axios
+      .get(`${SERVER_ADDRESS}/users`)
+      .then((res) => {
+        dispatch({ type: GET_USERS, payload: res.data });
+      })
+      .catch((error) => alert(error, "error"));
+  };
+}
+
 export function createProduct(input) {
   return function (dispatch) {
     axios
@@ -194,6 +208,17 @@ export function updateUser(id, input) {
         dispatch({ type: UPDATE_USER, payload: res.data });
       })
       .then(() => alert("Se modifico el usuario"))
+      .catch((error) => alert(error, "error"));
+  };
+}
+export function updateOrder(id, input) {
+  return function (dispatch) {
+    axios
+      .put(`${SERVER_ADDRESS}/orders/${id}`, input)
+      .then((res) => {
+        dispatch({ type: UPDATE_ORDER, payload: res.data });
+      })
+      .then(() => alert("Se modifico la orden"))
       .catch((error) => alert(error, "error"));
   };
 }

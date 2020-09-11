@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "../SearchBar.jsx";
 import {Link} from "react-router-dom";
 import "./NavBar.css";
+import cart from "../../cart.png"
 
 export default function NavBar() {
 
@@ -22,6 +23,9 @@ export default function NavBar() {
           <div>
           <SearchBar />
           </div>
+          <Link to="/cart">
+          <img src={cart} alt="cart" className="mr-4"/>
+          </Link>
         </header>
         <aside className="font sidebar">
           <button className="sidebar-close-button" onClick={closeMenu}>
@@ -34,14 +38,17 @@ export default function NavBar() {
             <li>
               <Link className="option" to="/">Inicio</Link>
             </li>
-            <li>
+            {/* <li>    -------> Estas opciones son solo para el Admin, no deberian estar en la nav
               <Link className="option" to="/formCrud">Productos</Link >
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link className="option" to="/category">Categorías</Link>
-            </li>
+            </li> */}
             <li>
               <Link className="option" to="/admin">Admin</Link>
+            </li>
+            <li>
+              <Link className="option" to="/admin/orders">Ordenes</Link>
             </li>
                         
       <li><Link className="option" to="/users">        Usuarios      </Link></li>
