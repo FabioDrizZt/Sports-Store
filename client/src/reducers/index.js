@@ -24,7 +24,8 @@ import {
     REMOVE_PRODUCT,
     REMOVE_CATEGORY,
     REMOVE_PRODUCT_CATEGORY,
-    REMOVE_CART
+    REMOVE_CART,
+    REMOVE_USER
 } from '../actions';
 
 const initialState = {
@@ -80,7 +81,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, categories: state.categories.filter(category => category.id !== action.payload) }
         } case REMOVE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.filter(productCategory => productCategory.name !== action.payload.name) }
-
+        }case REMOVE_USER:{
+            return {...state, users: state.user.filter(user =>user.name !== action.payload.name)}
         }case UPDATE_ORDER_AMOUNT: {
             let amount = [...state.amount.filter(x => x.amount !== action.payload.amount)]
 
