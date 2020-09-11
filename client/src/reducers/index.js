@@ -61,7 +61,15 @@ function rootReducer(state = initialState, action) {
         } case GET_CARTUSER: {
             return { ...state, cart: action.payload }
         } case GET_USER: {
-            return { ...state, cart: action.payload }
+            return { ...state, user: { // provisorio hasta q se cree el action con el payload
+                id:1,
+                name: "Joaquin",
+                lastName: "Musculoso",
+                DNI:"27432915",
+                email:"chao@ejemplo.com",
+                password:"blablabla",
+                role:"user"
+                } }
         } case GET_USERS: {
             return { ...state, cart: action.payload }
         } case CREATE_PRODUCT: {        
