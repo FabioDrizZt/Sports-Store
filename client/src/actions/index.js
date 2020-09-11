@@ -277,13 +277,14 @@ export function removeCategory(id) {
   };
 }
 export function removeProductCategory(idProducto, idCategoria) {
+  alert(idProducto,idCategoria)
   return function (dispatch) {
     return axios
-      .delete(`${SERVER_ADDRESS}/product/${idProducto}/categories/${idCategoria}`)
+      .delete(`${SERVER_ADDRESS}/products/${idProducto}/category/${idCategoria}`)
       .then((res) => {
         dispatch({ type: REMOVE_PRODUCT_CATEGORY, payload: res.data });
       })
-      .catch((error) => alert(error, "error"));
+      .catch((error) => alert(error));
   };
 }
 
