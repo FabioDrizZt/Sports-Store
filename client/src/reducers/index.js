@@ -85,7 +85,7 @@ function rootReducer(state = initialState, action) {
         } case UPDATE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
         } case UPDATE_CATEGORY: {
-            let categories = [...state.categories.filter(x => x.id !== action.payload.id)]
+            let categories = [...state.categories.filter(x=>x.id!==action.payload.id)]
             return { ...state, categories: categories.concat(action.payload) }
         } case UPDATE_ORDER_AMOUNT: {
             let amount = [...state.amount.filter(x => x.amount !== action.payload.amount)]

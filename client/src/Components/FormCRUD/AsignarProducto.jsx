@@ -19,17 +19,15 @@ function AsignarProducto (){
 
     return <div className="mt-2">
         <form onSubmit={(e)=>asignar(e)}>  
-            <legend>Asignar categoria a producto</legend>
-            <label className="m-1">Producto </label>
+            <legend>Asignar categoria a producto</legend>           
             <select onChange={(e) => setIdProducto(e.target.value)} className="m-2">
-            <option disabled seleted >Producto</option>
+            <option disabled selected >Producto</option>
                 {productos&&productos.map(x=>{
                     return <option key={x.id+1} value={x.id}>{x.name}</option>
                 })}
-            </select>
-            <label className="m-1">Categoria </label>
+            </select>          
             <select onChange={(e) => setIdCategoria(e.target.value)} className="m-2">
-            <option disabled seleted >Categorias</option>
+            <option disabled selected >Categorias</option>
                 {categorias&&categorias.map(x=>{
                     return <option key={x.id+2} value={x.id}>{x.name}</option>
                 })}

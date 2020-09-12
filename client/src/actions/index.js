@@ -179,15 +179,15 @@ export function updateProduct(product) {
       .catch((error) => alert(error, "error"));
   };
 }//S20 : Crear ruta para Modificar Categoria
-export function updateCategory(category) {
+export function updateCategory(id,input) {
   return function (dispatch) {
-    axios.put(`${SERVER_ADDRESS}/products/category/${category.id}`, category)
-      .then((res) => {
-        dispatch({ type: UPDATE_CATEGORY, payload: category });
-      }).then(() => alert("Se modifico la categoria"))
-      .catch((error) => alert(error, "error"));
-  };
-}// S35 : Crear Ruta para modificar Usuario
+      axios.put(`${SERVER_ADDRESS}/products/category/${id}`,input)
+          .then(res => {
+              dispatch({ type: UPDATE_CATEGORY, payload: {id:id,name:input.name,description:input.description} });
+          }).catch(error => alert(error, 'error'))
+  }
+}
+// S35 : Crear Ruta para modificar Usuario
 export function updateUser(user) {
   return function (dispatch) {
     axios.put(`${SERVER_ADDRESS}/users/${user.id}`, user)
@@ -238,7 +238,7 @@ export function removeCategory(categoryId) {
     axios.delete(`${SERVER_ADDRESS}/products/category/${categoryId}`)
       .then((res) => {
         dispatch({ type: REMOVE_CATEGORY, payload: categoryId });
-      }).then(() => alert("Se elimino la categoria"))
+      }).then(() => console.log("Se elimino la categoria"))
       .catch((error) => alert(error, "error"));
   };
 }// S17 : Crear ruta para sacar categorias de un producto.
