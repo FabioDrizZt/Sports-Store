@@ -77,9 +77,9 @@ export function getOrder(orderId) {
       .catch((error) => alert(error, "error"));
   };
 }
-export function getOrders(state) {
+export function getOrders(cartState) {
   return function (dispatch) {
-    axios.get(`${SERVER_ADDRESS}/orders/?status=${state}`)
+    axios.get(`${SERVER_ADDRESS}/orders/?status=${cartState}`)
       .then((res) => {
         dispatch({ type: GET_ORDERS, payload: res.data });
       })
