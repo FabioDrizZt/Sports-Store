@@ -5,12 +5,15 @@
   }
 /* Esta es la nav */
 .header {
+  position: fixed;
     background: linear-gradient(to top, #004e92, #000428);
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 80px;
+    width: 100%;
+    z-index: 1;
   }
 
 /* Nuestro LOGO Che */
@@ -42,7 +45,7 @@
   }
   .sidebar {
     position: fixed;
-    transition: all 1.2s;
+    transition: all 1.5s;
     width: 16.5rem;
     transform: translateX(-25rem);
     background-color: #161616;

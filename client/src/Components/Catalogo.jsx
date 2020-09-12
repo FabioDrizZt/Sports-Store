@@ -51,7 +51,7 @@ const style={
   </div>
 </div>
 <div style={{backgroundColor:"#F1F1F1"}}>
-      <h1 className="pt-3">Catálogo</h1>
+      <h1 className="pt-3">Encontrá lo que buscabas</h1>
       {products &&
         products.map((x) => (        
           <ProductCard
