@@ -4,6 +4,26 @@
     background-color: rgb(10, 50, 100);
     position: fixed;
     z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.NavbarAdmin a {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    border-right: 1px solid grey;
+    margin-left: 2rem;
+}
+.NavbarAdmin a {
+    padding-right:30px;
+
+}
+.NavbarAdmin a:hover {
+    color: yellow;
+    font-size: 18px;
+    font-weight: bold;
 }
 .containerNavAdmin {
     padding-bottom: 50px;

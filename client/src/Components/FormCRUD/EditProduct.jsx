@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import { updateProduct } from "../../actions/index";
 import { useDispatch } from "react-redux";
+import NavBarAdmin from '../NavBar/NavBarAdmin';
 
 function EditProduct (props){
     const dispatch = useDispatch();
@@ -40,7 +41,10 @@ function EditProduct (props){
     }
 
     return(
-        input&&<form onSubmit={(e)=>sendData(e)}>
+        input&&
+        <>
+        <NavBarAdmin/>
+        <form onSubmit={(e)=>sendData(e)}>
             <legend>Editar Producto</legend>           
             <div className="form-group">
                 <label for="name">Nombre</label> 
@@ -80,6 +84,7 @@ function EditProduct (props){
             </div>
             <input type="submit" value="Editar"/>
         </form>
+        </>
     )
 }
 

@@ -64,7 +64,6 @@ export default function AsigCate() {
     //muestro los componentes para admin
     <React.Fragment>  
       <NavBarAdmin />
-      <FormCategory/>
 
           
         

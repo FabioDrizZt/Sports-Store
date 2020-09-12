@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getOrders } from "../actions";
 import Cart from "./Cart";
+import NavBarAdmin from './NavBar/NavBarAdmin';
 
 
 
@@ -13,13 +14,7 @@ function OrdersTable() {
   }, []);
   return ( 
     <div>
-      {carts && carts.map((x) => {
-              
-              {/* <Cart
-              id = {x.id}
-              /> */}
-        
-      })}
+      <NavBarAdmin/>
     </div>
   );
 };
