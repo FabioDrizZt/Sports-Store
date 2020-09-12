@@ -33,11 +33,12 @@ export default function NavBar() {
           </button>
           <ul className="categories">
             <li>
-              <Link className="option" to="/products">Catálogo</Link>
+              <Link className="option" to="/" onClick={closeMenu}>Inicio</Link>
             </li>
             <li>
-              <Link className="option" to="/">Inicio</Link>
+              <Link className="option" to="/products" onClick={closeMenu}>Productos</Link>
             </li>
+
             {/* <li>    -------> Estas opciones son solo para el Admin, no deberian estar en la nav
               <Link className="option" to="/formCrud">Productos</Link >
             </li> */}
@@ -45,13 +46,14 @@ export default function NavBar() {
               <Link className="option" to="/category">Categorías</Link>
             </li> */}
             <li>
-              <Link className="option" to="/admin">Admin</Link>
+              <Link className="option" to="/admin" onClick={closeMenu}>Admin</Link>
             </li>
             <li>
-              <Link className="option" to="/admin/orders">Ordenes</Link>
+              <Link className="option" to="/admin/orders" onClick={closeMenu}>Ordenes</Link>
+            </li>           
+            <li>
+              <Link className="option" to="/users" onClick={closeMenu}>Usuarios</Link>
             </li>
-                        
-      <li><Link className="option" to="/users">        Usuarios      </Link></li>
           </ul>
         </aside>
       </div>
