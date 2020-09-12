@@ -2,7 +2,7 @@ import "./CreateProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from "../../actions/index";
 import React, { useState, useEffect } from "react";
-import { getCategories,getProducts } from "../../actions";
+import { getCategories, getProducts } from "../../actions";
 import AsignarProducto from "./AsignarProducto";
 import EliminarAsignacion from "./EliminarAsignacion";
 import NavBarAdmin from '../NavBar/NavBarAdmin';
@@ -10,58 +10,20 @@ import NavBarAdmin from '../NavBar/NavBarAdmin';
 
 function CreateProduct() {
   const dispatch = useDispatch();
-  // const categories = useSelector((state) => state.categories);
+  const categories = useSelector((state) => state.categories);
   useEffect(() => {
     dispatch(getCategories());
-  }, []);
-  useEffect(() => {
-    dispatch(getProducts());
-  }, []);
+  }, [getCategories]);
 
-  const [errors, setErrors] = useState({
-    name: "",
-    description: "",
-    price: "",
-    stock: "",
-    size: "",
-    image: "",
-  });
-  const [input, setInput] = useState({
-    name: "",
-    description: "",
-    price: "",
-    stock: "",
-    size: "",
-    image: "",
-  });
-  const handleInputChange = (e) => {
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const [input, setInput] = useState({});
+
   function submitProduct(e, input) {
     e.preventDefault();
     dispatch(createProduct(input));
-  }
-  function noVacio(obj) {
-    console.log(obj)
-    return Object.keys(obj).length !== 0;
-  }
-  function clearForm () {
     Array.from(document.querySelectorAll("input")).forEach(
-      input => (input.value = "")
+      (input) => (input.value = "")
     );
-    setInput({
-      values: [{}]
-    });
-  };
+  }
 
   return (
     <>
@@ -69,8 +31,6 @@ function CreateProduct() {
       <NavBarAdmin />
       </div>
     <div className="containerAll">
-
-
       <form className="containerPro" onSubmit={(e) => {submitProduct(e, input); clearForm()}}>
         <legend>Crear Producto</legend>
         <div className="form-group row">
@@ -80,15 +40,14 @@ function CreateProduct() {
           <div class="col-sm-10">
             <input
               className="form-control"
-              type="text reset"
-              defaultValue="reset"
+              type="text"
               id="name"
               name="name"
               placeholder="Articulo deportivo..."
               value={input.name}
-              onChange={handleInputChange}
+              onChange={(e) => setInput({ ...input, name: e.target.value })}
+              required
             />
-            {errors.name && <p className="danger">{errors.name}</p>}
           </div>
         </div>
 
@@ -104,11 +63,11 @@ function CreateProduct() {
               name="description"
               placeholder="¿Qué dirias de tu producto?"
               value={input.description}
-              onChange={handleInputChange}
+              onChange={(e) =>
+                setInput({ ...input, description: e.target.value })
+              }
+              required
             />
-            {errors.description && (
-              <p className="danger">{errors.description}</p>
-            )}
           </div>
         </div>
 
@@ -120,13 +79,14 @@ function CreateProduct() {
             <input
               className="form-control"
               type="number"
+              min="0"
               id="price"
               name="price"
-              placeholder=""
+              placeholder="Precio"
               value={input.price}
-              onChange={handleInputChange}
+              onChange={(e) => setInput({ ...input, price: e.target.value })}
+              required
             />
-            {errors.price && <p className="danger">{errors.price}</p>}
           </div>
         </div>
 
@@ -138,19 +98,20 @@ function CreateProduct() {
             <input
               className="form-control"
               type="number"
+              min="0"
               id="stock"
               name="stock"
-              placeholder=""
+              placeholder="Stock"
               value={input.stock}
-              onChange={handleInputChange}
+              onChange={(e) => setInput({ ...input, stock: e.target.value })}
+              required
             />
-            {errors.stock && <p className="danger">{errors.stock}</p>}
           </div>
         </div>
 
         <div className="form-group row">
           <label className="col-sm-2 col-form-label" for="size">
-            Size
+            Talle
           </label>
           <div class="col-sm-10">
             <input
@@ -158,11 +119,11 @@ function CreateProduct() {
               type="text"
               id="size"
               name="size"
-              placeholder=""
+              placeholder="Talle"
               value={input.size}
-              onChange={handleInputChange}
+              onChange={(e) => setInput({ ...input, size: e.target.value })}
+              required
             />
-            {errors.size && <p className="danger">{errors.size}</p>}
           </div>
         </div>
 
@@ -176,65 +137,29 @@ function CreateProduct() {
               type="text"
               id="image"
               name="image"
-              placeholder=""
+              placeholder="Imagen"
               value={input.image}
-              onChange={handleInputChange}
+              onChange={(e) => setInput({ ...input, image: e.target.value })}
             />
           </div>
         </div>
 
-{/*         
-          <div className="form-group">
-            <label for="category">Categoría</label>
-            <select>
-              <option disabled seleted value>
-                Filtrar por Categoría
-              </option>
-              {categories &&
-                categories.map((c) => {
-                  return <option key={c.name}> {c.name} </option>;
-                })}
-            </select> */}
-            <button
-              className="btn btn-primary"
-              type="submit"
-              disabled={noVacio(errors)}
-              value="Crear"
-              style={{margin:0}}
-            >
-              ENVIAR
-            </button>
-          {/* </div> */}
-        
-        <AsignarProducto/>
-        <EliminarAsignacion/>
+        <button
+          className="btn btn-primary"
+          type="submit"
+          value="Crear"
+          style={{ margin: 0 }}
+        >
+          ENVIAR
+        </button>
+
+        <AsignarProducto />
+
+        <EliminarAsignacion />
       </form>
     </div>
     </>
   );
-}
-
-export function validate({ name, description, price, stock, size, image }) {
-  //NOTA: Debemos respetar en mi opinion al modelo Product.
-  //Solamente tienen allowNull name - price - stock.
-  //En este momento solo saque image de aqui
-  let errors = {};
-  if (!name) {
-    errors.name = "Debe cargar el Nombre";
-  }
-  if (!description) {
-    errors.description = "Debe cargar Descripción";
-  }
-  if (!price) {
-    errors.price = "Debe cargar Precio";
-  }
-  if (!stock) {
-    errors.stock = "Debe cargar Stock";
-  }
-  if (!size) {
-    errors.size = "Debe cargar Talla";
-  }
-  return errors;
 }
 
 export default CreateProduct;

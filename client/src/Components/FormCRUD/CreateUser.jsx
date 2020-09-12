@@ -4,29 +4,16 @@ import { createUser } from "../../actions/index.js";
 
 const CreateUser = () => {
   const dispatch = useDispatch();
-
-  const [input, setInput] = useState({
-    name: "",
-    lastName: "",
-    DNI: "",
-    email: "",
-    password: "",
-    role: "user",
-  });
+  const [input, setInput] = useState({});
 
   function User(e, input) {
     e.preventDefault();
     dispatch(createUser(input));
-    setInput({
-      name: "",
-      lastName: "",
-      DNI: "",
-      email: "",
-      password: "",
-      role: "user",
-    });
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
   }
-
+  
   return (
     <div className="containerAll">
       <form className="containerPro" onSubmit={(e) => User(e, input)}>
