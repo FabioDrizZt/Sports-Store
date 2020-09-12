@@ -18,21 +18,17 @@ function Catalogo() {
     dispatch(getCategoryProducts(nombreCat));
   }
 const style={
-  height:"70vh",
-  // backgroundImage:"url('https://cdn.pixabay.com/photo/2019/12/06/21/42/lone-tree-4678305_960_720.jpg')",
-  backgroundSize:"cover",
-  // backgroundColor:"#0f0c29"
-  backgroundColor:"#2980b9"
-
-
+  height:"100vh",
+  backgroundImage:"url('https://cdn.pixabay.com/photo/2019/12/06/21/42/lone-tree-4678305_960_720.jpg')",
+  backgroundSize:"cover"
 }
 
 
   return (
     //props: titulo, descripcion, precio, cantidad, imagen
     <React.Fragment>
-<div style={style} className="">
-  <div className="containerCenter p-4">
+<div style={style} className="jumbotron jumbotron-fluid">
+  <div className="containerCenter container">
     <h1 className="display-4">Hacé realidad tus sueños</h1>
     <p className="lead">Date el gusto de tener lo que necesitas con Sports Store</p>
     <div className="container catalogContainer">
@@ -50,8 +46,8 @@ const style={
     </div>
   </div>
 </div>
-<div style={{backgroundColor:"#F1F1F1"}}>
-      <h1 className="pt-3">Encontrá lo que buscabas</h1>
+      <hr/>
+      <h1>Catálogo</h1>
       {products &&
         products.map((x) => (        
           <ProductCard
@@ -64,7 +60,6 @@ const style={
             categories={x.categories}
           />
         ))}
-        </div>
     </React.Fragment>
   );
 }
