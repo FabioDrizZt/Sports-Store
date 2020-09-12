@@ -1,26 +1,26 @@
-import React, { useState, useEffect, useRef } from "react";
-import ProductCard from "./ProductCard";
+import React, { useEffect, useRef } from "react";
+// import ProductCard from "./ProductCard";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getProducts,
-  getCategories,
-  getCategoryProducts,
-  createProduct,
+  // getProducts,
+  // getCategories,
+  getCategoryProducts
+  // createProduct,
 } from "../actions";
 import "./Admin.css";
 import FormCategory from "./FormCategory";
 import FormCrud from "./FormCRUD/FormCrud";
-import CreateProduct from "./FormCRUD/CreateProduct";
-import Catalogo from "./Catalogo";
-import CatalogoCategories from "./CatalogoCategories";
+// import CreateProduct from "./FormCRUD/CreateProduct";
+// import Catalogo from "./Catalogo";
+// import CatalogoCategories from "./CatalogoCategories";
 
 // Importe useRef de react, agregue la constante draggingItem y el handleDragStart
 
 export default function AsigCate() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
-  const categories = useSelector((state) => state.categories);
-  const users = useSelector((state) => state.users);
+  // const categories = useSelector((state) => state.categories);
+  // const users = useSelector((state) => state.users);
 
   const draggingItem = useRef();
   const dragOverItem = useRef();
@@ -32,30 +32,30 @@ export default function AsigCate() {
     window.addEventListener("dragend", onDragEnd);
   });
 
-  function filtrarCatalogo(nombreCat) {
-    dispatch(getCategoryProducts(nombreCat));
-  }
+  // function filtrarCatalogo(nombreCat) {
+  //   dispatch(getCategoryProducts(nombreCat));
+  // }
 
-  const handleDragStart = (e, position) => {
-    draggingItem.current = position;
-    console.log(e.target.innerHTML);
-  };
+  // const handleDragStart = (e, position) => {
+  //   draggingItem.current = position;
+  //   console.log(e.target.innerHTML);
+  // };
 
-  const handleDragEnter = (e, position) => {
-    dragOverItem.current = position;
-    console.log(e.target.innerHTML);
-  };
+  // const handleDragEnter = (e, position) => {
+  //   dragOverItem.current = position;
+  //   console.log(e.target.innerHTML);
+  // };
 
-  const handleDragEnd = (e) => {
-    const listCopy = [...products];
-    const draggingItemContent = listCopy[draggingItem.current];
-    listCopy.splice(draggingItem.current, 1);
-    listCopy.splice(dragOverItem.current, 0, draggingItemContent);
+  // const handleDragEnd = (e) => {
+  //   const listCopy = [...products];
+  //   const draggingItemContent = listCopy[draggingItem.current];
+  //   listCopy.splice(draggingItem.current, 1);
+  //   listCopy.splice(dragOverItem.current, 0, draggingItemContent);
 
-    draggingItem.current = null;
-    dragOverItem.current = null;
-    // setState(listCopy);
-  };
+  //   draggingItem.current = null;
+  //   dragOverItem.current = null;
+  //   // setState(listCopy);
+  // };
 
   return (
     //porque hay que ir a catalogo para que aparezcan los productos?????

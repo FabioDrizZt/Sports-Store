@@ -97,7 +97,7 @@ function rootReducer(state = initialState, action) {
         } case UPDATE_ORDER: {
             return { ...state, orders: state.orders.filter(order => order.id !== action.payload.id) }
         } case CLOSE_CART: {
-            return { ...state, carts: state.carts.map(c => {if (c.id == action.payload.id) {c.state="closed"}}) }
+            return { ...state, carts: state.carts.map(c => {if (c.id === action.payload.id) {c.state="closed"}}) }
         } case REMOVE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload) }
         } case REMOVE_CATEGORY: {

@@ -18,7 +18,7 @@ export default function SearchBar() {
       />
       <Link to="/Products">
         <button
-          class="btn btn-warning"
+          className="btn btn-warning"
           type="submit"
           onClick={(e) => dispatch(searchProducts(input))}
         >
