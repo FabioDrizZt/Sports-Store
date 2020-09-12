@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, getCategories, getCategoryProducts } from "../actions";
@@ -33,7 +33,7 @@ const style={
     <p className="lead">Date el gusto de tener lo que necesitas con Sports Store</p>
     <div className="container catalogContainer">
       <select className="custom-select" onChange={(e) => filtrarCatalogo(e.target.value)}>
-        <option disabled seleted value>FILTRAR POR CATEGORIA</option>
+        <option disabled seleted="true" value>FILTRAR POR CATEGORIA</option>
         <option selected>Elige una Categoria</option>
           {categories && categories.map((c) => {
             return <option key={c.name}> {c.name} </option>;
@@ -46,15 +46,10 @@ const style={
     </div>
   </div>
 </div>
-
-
-
-
       <hr/>
-
       <h1>Catálogo</h1>
       {products &&
-        products.map((x) => (
+        products.map((x) => (        
           <ProductCard
             id={x.id}
             titulo={x.name}
@@ -62,6 +57,7 @@ const style={
             precio={x.price}
             imagen={x.image}
             stock={x.stock}
+            categories={x.categories}
           />
         ))}
     </React.Fragment>

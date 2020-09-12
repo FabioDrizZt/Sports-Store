@@ -12,29 +12,30 @@ function AsignarProducto (){
     
     function asignar(e){             
         e.preventDefault()
+        alert("Asignado producto "+idProducto+" a categoria "+idCategoria)
         dispatch(createProductCategory(idProducto,idCategoria))
     }
 
 
-    return <div>
+    return <div className="mt-2">
         <form onSubmit={(e)=>asignar(e)}>  
             <legend>Asignar categoria a producto</legend>
-            <label>Producto </label>
-            <select onChange={(e) => setIdProducto(e.target.value)}>
+            <label className="m-1">Producto </label>
+            <select onChange={(e) => setIdProducto(e.target.value)} className="m-2">
             <option disabled seleted >Producto</option>
                 {productos&&productos.map(x=>{
-                    return <option key={x.id} value={x.id}>{x.name}</option>
+                    return <option key={x.id+1} value={x.id}>{x.name}</option>
                 })}
             </select>
-            <label>Categoria </label>
-            <select onChange={(e) => setIdCategoria(e.target.value)}>
+            <label className="m-1">Categoria </label>
+            <select onChange={(e) => setIdCategoria(e.target.value)} className="m-2">
             <option disabled seleted >Categorias</option>
                 {categorias&&categorias.map(x=>{
-                    return <option key={x.id} value={x.id}>{x.name}</option>
+                    return <option key={x.id+2} value={x.id}>{x.name}</option>
                 })}
             </select>
             
-            <button className="btn btn-primary">Asignar</button>
+            <button className="btn btn-primary" >Asignar</button>
         </form>        
 </div>
 }

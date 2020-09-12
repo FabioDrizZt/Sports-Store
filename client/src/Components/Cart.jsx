@@ -35,7 +35,7 @@ const Cart = (carrito) => {
   // var total = cart.reduce(function(prev, cur) {
   //   return prev + (cur.product.price * cur.amount);
   // }, 0);
-console.log(cart)
+
   return (
     <div className={s.container}>
       {cart &&

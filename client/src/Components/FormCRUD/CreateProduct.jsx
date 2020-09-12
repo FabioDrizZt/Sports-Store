@@ -2,14 +2,18 @@ import "./CreateProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from "../../actions/index";
 import React, { useState, useEffect } from "react";
-import { getCategories } from "../../actions";
-import AsignarProducto from "./AsignarProducto"
+import { getCategories,getProducts } from "../../actions";
+import AsignarProducto from "./AsignarProducto";
+import EliminarAsignacion from "./EliminarAsignacion"
 
 function CreateProduct() {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
+  // const categories = useSelector((state) => state.categories);
   useEffect(() => {
     dispatch(getCategories());
+  }, []);
+  useEffect(() => {
+    dispatch(getProducts());
   }, []);
 
   const [errors, setErrors] = useState({
@@ -45,6 +49,7 @@ function CreateProduct() {
     dispatch(createProduct(input));
   }
   function noVacio(obj) {
+    console.log(obj)
     return Object.keys(obj).length !== 0;
   }
   function clearForm () {
@@ -167,7 +172,6 @@ function CreateProduct() {
               value={input.image}
               onChange={handleInputChange}
             />
-            {errors.image && <p className="danger">{errors.image}</p>}
           </div>
         </div>
 
@@ -188,18 +192,23 @@ function CreateProduct() {
               type="submit"
               disabled={noVacio(errors)}
               value="Crear"
+              style={{margin:0}}
             >
               ENVIAR
             </button>
           {/* </div> */}
         
         <AsignarProducto/>
+        <EliminarAsignacion/>
       </form>
     </div>
   );
 }
 
 export function validate({ name, description, price, stock, size, image }) {
+  //NOTA: Debemos respetar en mi opinion al modelo Product.
+  //Solamente tienen allowNull name - price - stock.
+  //En este momento solo saque image de aqui
   let errors = {};
   if (!name) {
     errors.name = "Debe cargar el Nombre";
@@ -215,9 +224,6 @@ export function validate({ name, description, price, stock, size, image }) {
   }
   if (!size) {
     errors.size = "Debe cargar Talla";
-  }
-  if (!image) {
-    errors.image = "Debe cargar Imagen";
   }
   return errors;
 }
