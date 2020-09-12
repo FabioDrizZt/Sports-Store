@@ -18,10 +18,13 @@ function Catalogo() {
     dispatch(getCategoryProducts(nombreCat));
   }
 const style={
-  // height:"50vh",
+  height:"70vh",
   // backgroundImage:"url('https://cdn.pixabay.com/photo/2019/12/06/21/42/lone-tree-4678305_960_720.jpg')",
   backgroundSize:"cover",
-  backgroundColor:"#004C8F"
+  // backgroundColor:"#0f0c29"
+  backgroundColor:"#2980b9"
+
+
 }
 
 
