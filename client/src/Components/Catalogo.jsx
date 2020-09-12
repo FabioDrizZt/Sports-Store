@@ -53,7 +53,7 @@ const style={
 <div style={{backgroundColor:"#F1F1F1"}}>
       <h1 className="pt-3">Catálogo</h1>
       {products &&
-        products.map((x) => (
+        products.map((x) => (        
           <ProductCard
             id={x.id}
             titulo={x.name}
@@ -61,6 +61,7 @@ const style={
             precio={x.price}
             imagen={x.image}
             stock={x.stock}
+            categories={x.categories}
           />
         ))}
         </div>
