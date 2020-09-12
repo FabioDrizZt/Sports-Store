@@ -54,7 +54,7 @@ server.post("/:idUser/cart", (req, res) => {
           price: req.body.price,
           amount: req.body.amount,
         },
-      }).then((resp) => { res.send(resp[0]); })
+      }).then((resp) => {res.send(resp[0]); })
         .catch((error) => { res.send(error); });
     });
 });

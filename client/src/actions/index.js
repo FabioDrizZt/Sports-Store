@@ -164,8 +164,8 @@ export function createProductCategory(productId, categoryId) {
 export function addtoCart(userId, product) {
   return function (dispatch) {
     axios.post(`${SERVER_ADDRESS}/users/${userId}/cart`, product)
-      .then((res) => {
-        dispatch({ type: ADD_TO_CART, payload: res.data });
+      .then((res) => {      
+        dispatch({ type: ADD_TO_CART, payload: product });
       })
       .catch((error) => alert(error, "error"));
   };
