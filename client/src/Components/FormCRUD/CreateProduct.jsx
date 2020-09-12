@@ -49,6 +49,7 @@ function CreateProduct() {
     dispatch(createProduct(input));
   }
   function noVacio(obj) {
+    console.log(obj)
     return Object.keys(obj).length !== 0;
   }
   function clearForm () {
@@ -171,7 +172,6 @@ function CreateProduct() {
               value={input.image}
               onChange={handleInputChange}
             />
-            {errors.image && <p className="danger">{errors.image}</p>}
           </div>
         </div>
 
@@ -206,6 +206,9 @@ function CreateProduct() {
 }
 
 export function validate({ name, description, price, stock, size, image }) {
+  //NOTA: Debemos respetar en mi opinion al modelo Product.
+  //Solamente tienen allowNull name - price - stock.
+  //En este momento solo saque image de aqui
   let errors = {};
   if (!name) {
     errors.name = "Debe cargar el Nombre";
@@ -221,9 +224,6 @@ export function validate({ name, description, price, stock, size, image }) {
   }
   if (!size) {
     errors.size = "Debe cargar Talla";
-  }
-  if (!image) {
-    errors.image = "Debe cargar Imagen";
   }
   return errors;
 }
