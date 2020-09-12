@@ -120,7 +120,7 @@ server.put("/category/:id", (req, res, next) => {
 // DELETE /products/:idProducto/category/:idCategoria
 // Elimina la categoria al producto.
 server.delete("/:idProducto/category/:idCategoria", (req, res) => {
-  Product_category.destroy({
+  productcategory.destroy({
     where: {
       productId: req.params.idProducto,
       categoryId: req.params.idCategoria,
