@@ -32,6 +32,7 @@ export const REMOVE_PRODUCT_CATEGORY = "REMOVE_PRODUCT_CATEGORY";
 export const REMOVE_CART = "REMOVE_CART";
 export const REMOVE_USER = "REMOVE_USER";
 
+//S24 : Crear ruta de producto individual, pasado un ID que retorne un producto con sus detalles
 export function getProduct(productId) {
   return function (dispatch) {
     axios.get(`${SERVER_ADDRESS}/products/${productId}`)
@@ -40,7 +41,7 @@ export function getProduct(productId) {
       })
       .catch((error) => alert(error, "error"));
   };
-}
+}// S21 : Crear ruta que devuelva todos los productos
 export function getProducts() {
   return function (dispatch) {
     axios.get(`${SERVER_ADDRESS}/products`)
@@ -49,7 +50,7 @@ export function getProducts() {
       })
       .catch((error) => alert(error, "error"));
   };
-}
+}// S21 : Crear ruta que devuelva todas las categories
 export function getCategories() {
   return function (dispatch) {
     axios.get(`${SERVER_ADDRESS}/products/categories`)
@@ -58,7 +59,7 @@ export function getCategories() {
       })
       .catch((error) => alert(error, "error"));
   };
-}
+}//S22 : Crear Ruta que devuelva los productos de X categoria    *******Falla*********
 export function getCategoryProducts(categoryName) {
   return function (dispatch) {
     axios.get(`${SERVER_ADDRESS}/products/category/${categoryName}`)
@@ -67,25 +68,25 @@ export function getCategoryProducts(categoryName) {
       })
       .catch((error) => alert(error, "error"));
   };
-}
+}//S46 : Crear Ruta que retorne una orden en particular. GET /orders/:id
 export function getOrder(orderId) {
   return function (dispatch) {
-    axios.get(`${SERVER_ADDRESS}/order/${orderId}`)
+    axios.get(`${SERVER_ADDRESS}/orders/${orderId}`)
       .then((res) => {
         dispatch({ type: GET_ORDER, payload: res.data });
       })
       .catch((error) => alert(error, "error"));
   };
-}
+}// S44 : Crear ruta que retorne todas las ordenes
 export function getOrders(cartState) {
   return function (dispatch) {
     axios.get(`${SERVER_ADDRESS}/orders/?status=${cartState}`)
       .then((res) => {
         dispatch({ type: GET_ORDERS, payload: res.data });
-      })
-      .catch((error) => alert(error, "error"));
-  };
-}
+      }).catch((error) => alert(error, "error"));
+  }
+};
+//S23: Crear ruta que retorne productos segun el keyword de búsqueda
 export function searchProducts(value) {
   return function (dispatch) {
     axios.get(`${SERVER_ADDRESS}/products/search/?query=${value}`)
@@ -94,7 +95,7 @@ export function searchProducts(value) {
       })
       .catch((error) => alert(error, "error"));
   };
-}
+}//S39 : Crear Ruta que retorne todos los items del Carrito
 export function getCartUser(userId) {
   return function (dispatch) {
     axios.get(`${SERVER_ADDRESS}/users/${userId}/cart`)
@@ -114,16 +115,16 @@ export function getUser() {
     /* })
     .catch((error) => alert(error, "error")); */
   };
-}
+}// S36 : Crear Ruta que retorne todos los Usuarios
 export function getUsers() {
   return function (dispatch) {
-    axios.get(`${SERVER_ADDRESS}/users`)
+    axios.get(`${SERVER_ADDRESS}/users/`)
       .then((res) => {
         dispatch({ type: GET_USERS, payload: res.data });
       })
       .catch((error) => alert(error, "error"));
   };
-}
+}// S17 : Crear ruta para agregar categorias de un producto.
 export function createProduct(product) {
   return function (dispatch) {
     axios.post(`${SERVER_ADDRESS}/products/`, product)
@@ -132,7 +133,7 @@ export function createProduct(product) {
       })
       .catch((error) => alert(error, "error"));
   };
-}
+}//S34 ruta para crear usuario
 export function createUser(user) {
   return function (dispatch) {
     axios.post(`${SERVER_ADDRESS}/users/`, user)
@@ -141,7 +142,7 @@ export function createUser(user) {
       })
       .catch((error) => alert(error, "error"));
   };
-}
+}// S18 : Crear ruta para crear/agregar Categoria
 export function createCategory(category) {
   return function (dispatch) {
     axios.post(`${SERVER_ADDRESS}/products/category`, category)
@@ -150,7 +151,7 @@ export function createCategory(category) {
       })
       .catch((error) => alert(error, "error"));
   };
-}
+}// S17 : Crear ruta para agregar categorias de un producto.
 export function createProductCategory(productId, categoryId) {
   return function (dispatch) {
     axios.post(`${SERVER_ADDRESS}/products/${productId}/category/${categoryId}`)
@@ -159,7 +160,7 @@ export function createProductCategory(productId, categoryId) {
       })
       .catch((error) => alert(error, "error"));
   };
-}
+}// S38 : Crear Ruta para agregar Item al Carrito
 export function addtoCart(userId, product) {
   return function (dispatch) {
     axios.post(`${SERVER_ADDRESS}/users/${userId}/cart`, product)
@@ -168,7 +169,7 @@ export function addtoCart(userId, product) {
       })
       .catch((error) => alert(error, "error"));
   };
-}
+}//S26 : Crear ruta para Modificar Producto
 export function updateProduct(product) {
   return function (dispatch) {
     axios.put(`${SERVER_ADDRESS}/products/${product.id}`, product)
@@ -177,7 +178,7 @@ export function updateProduct(product) {
       }).then(() => alert("Se modifico el producto"))
       .catch((error) => alert(error, "error"));
   };
-}
+}//S20 : Crear ruta para Modificar Categoria
 export function updateCategory(category) {
   return function (dispatch) {
     axios.put(`${SERVER_ADDRESS}/products/category/${category.id}`, category)
@@ -186,7 +187,7 @@ export function updateCategory(category) {
       }).then(() => alert("Se modifico la categoria"))
       .catch((error) => alert(error, "error"));
   };
-}
+}// S35 : Crear Ruta para modificar Usuario
 export function updateUser(user) {
   return function (dispatch) {
     axios.put(`${SERVER_ADDRESS}/users/${user.id}`, user)
@@ -195,7 +196,7 @@ export function updateUser(user) {
       }).then(() => alert("Se modifico el usuario"))
       .catch((error) => alert(error, "error"));
   };
-}
+}// S41 : Crear Ruta para editar las cantidades del carrito
 export function updateOrderAmount(userId, order) {
   return function (dispatch) {
     axios.put(`${SERVER_ADDRESS}/users/${userId}/cart/`, order)
@@ -204,7 +205,7 @@ export function updateOrderAmount(userId, order) {
       }).then(() => alert("Se cambio la cantidad"))
       .catch((error) => alert(error, "error"));
   };
-}
+}//S47 : Crear Ruta para modificar una Orden
 export function updateOrder(order) {
   return function (dispatch) {
     axios.put(`${SERVER_ADDRESS}/orders/${order.id}`, order)
@@ -213,7 +214,7 @@ export function updateOrder(order) {
       }).then(() => alert("Se modifico la orden"))
       .catch((error) => alert(error, "error"));
   };
-}
+}//SXX : Crear Ruta para Cerrar un Carrito
 export function closeCart(cartId) {
   return function (dispatch) {
     axios.patch(`${SERVER_ADDRESS}/orders/${cartId}`)
@@ -222,7 +223,7 @@ export function closeCart(cartId) {
       }).then(() => alert("Se cerro el carrito"))
       .catch((error) => alert(error, "error"));
   };
-}
+}// S27 eliminar un producto DELETE /products/:id
 export function removeProduct(productId) {
   return function (dispatch) {
     axios.delete(`${SERVER_ADDRESS}/products/${productId}`)
@@ -231,7 +232,7 @@ export function removeProduct(productId) {
       }).then(() => alert("Se elimino el producto"))
       .catch((error) => alert(error, "error"));
   };
-}
+}//S19 : Crear Ruta para eliminar Categoria
 export function removeCategory(categoryId) {
   return function (dispatch) {
     axios.delete(`${SERVER_ADDRESS}/products/category/${categoryId}`)
@@ -240,7 +241,7 @@ export function removeCategory(categoryId) {
       }).then(() => alert("Se elimino la categoria"))
       .catch((error) => alert(error, "error"));
   };
-}
+}// S17 : Crear ruta para sacar categorias de un producto.
 export function removeProductCategory(productId, categoryId) {
   return function (dispatch) {
     axios.delete(`${SERVER_ADDRESS}/products/${productId}/category/${categoryId}`)
@@ -249,7 +250,7 @@ export function removeProductCategory(productId, categoryId) {
       }).then(() => alert("Se le elimino la categoria al producto"))
       .catch((error) => alert(error));
   };
-}
+}// S40 : Crear Ruta para vaciar el carrito
 export function removeCart(userId) {
   return function (dispatch) {
     axios.delete(`${SERVER_ADDRESS}/users/${userId}/cart`)
@@ -258,7 +259,7 @@ export function removeCart(userId) {
       }).then(() => alert("Se le elimino el carrito al usuario"))
       .catch((error) => alert(error, "error"));
   };
-}
+}// S37 : Crear Ruta para eliminar Usuario DELETE /users/:id
 export function removeUser(userId) {
   return function (dispatch) {
     axios.delete(`${SERVER_ADDRESS}/users/${userId}`)
