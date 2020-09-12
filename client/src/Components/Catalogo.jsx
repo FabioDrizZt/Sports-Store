@@ -37,7 +37,7 @@ const style={
     <p className="lead">Date el gusto de tener lo que necesitas con Sports Store</p>
     <div className="container catalogContainer">
       <select className="custom-select" onChange={(e) => filtrarCatalogo(e.target.value)}>
-        <option disabled seleted value>FILTRAR POR CATEGORIA</option>
+        <option disabled seleted="true" value>FILTRAR POR CATEGORIA</option>
         <option selected>Elige una Categoria</option>
           {categories && categories.map((c) => {
             return <option key={c.name}> {c.name} </option>;
