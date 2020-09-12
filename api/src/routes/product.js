@@ -6,19 +6,14 @@ const { Op } = require("sequelize");
 server.get("/", (req, res, next) => {
   Product.findAll({
     include: [{ model: Category }],
-  }).then(r => { res.send(r) })
-    .catch(e => { res.sendStatus(400) })
+  }).then(products => { res.send(products) })
+  .catch(error => { res.status(400).json({ error }) })
 })
-/*  Product_category.findAll({
-     include: [{ model: Category }, { model: Product }]
-   }).then((product_category) => { res.send(product_category); })
-     .catch(err => res.send(err)) */
 // S21 : Crear ruta que devuelva todas las categories
 server.get("/categories", (req, res, next) => {
   Category.findAll()
-    .then((categories) => {
-      res.send(categories);
-    }).catch(err => res.send(err))
+    .then((categories) => { res.send(categories); })
+    .catch(error => { res.status(400).json({ error }) })
 });
 //S22 : Crear Ruta que devuelva los productos de X categoria    *******Falla*********
 // "GET /products/categoria/:nombreCat
@@ -26,10 +21,9 @@ server.get("/categories", (req, res, next) => {
 server.get("/category/:nombreCat", (req, res) => {
   Product.findAll({
     include: [{ model: Category, where: { name: req.params.nombreCat } }],
-  }).then(r => { res.send(r) })
-    .catch(e => { res.sendStatus(400) })
+  }).then(products => { res.send(products) })
+    .catch(error => { res.status(400).json({ error }) })
 });
-
 //S23: Crear ruta que retorne productos segun el keyword de búsqueda
 // /search?query=valor
 server.get("/search", (req, res) => {
@@ -64,7 +58,7 @@ server.post("/", (req, res) => {
     stock: req.body.stock,
     image: req.body.image
   }).then(product => {
-    res.status(201).send(product); // hola victor
+    res.status(201).send(product);
   }).catch(err => res.send(err))
 });
 // S18 : Crear ruta para crear/agregar Categoria
@@ -78,9 +72,7 @@ server.post("/category", (req, res) => {
 // POST /products/:idProducto/category/:idCategoria
 // Agrega la categoria al producto.
 server.post("/:idProducto/category/:idCategoria", (req, res) => {
-  const id = req.params.idProducto;
-  const idCategoria = req.params.idCategoria;
-  productcategory.create({ productId: id, categoryId: idCategoria })
+  productcategory.create({ productId: req.params.idProducto, categoryId: req.params.idCategoria })
     .then((pc) => res.send(pc))
     .catch((err) => res.send(err));
 });
@@ -89,7 +81,6 @@ server.post("/:idProducto/category/:idCategoria", (req, res) => {
 // Modifica el producto con id: id. Retorna 400 si los campos enviados no son correctos.
 // Retorna 200 si se modificó con exito, y retorna los datos del producto modificado.
 server.put("/:id", (req, res) => {
-  console.log(req.body)
   Product.findOne({ where: { id: req.params.id } })
     .then(product => {
       product.update({
@@ -106,16 +97,13 @@ server.put("/:id", (req, res) => {
 //S20 : Crear ruta para Modificar Categoria
 // PUT /products/category/:id
 server.put("/category/:id", (req, res, next) => {
-  console.log(req.body)
   Category.update({
     name: req.body.name,
     description: req.body.description
-  },
-    { where: { id: req.params.id } })
+  }, { where: { id: req.params.id } })
     .then((category) => { res.status(200).json({ category }); })
     .catch((error) => { res.status(400).json({ error }); });
 });
-
 // S17 : Crear ruta para sacar categorias de un producto.
 // DELETE /products/:idProducto/category/:idCategoria
 // Elimina la categoria al producto.
@@ -128,7 +116,7 @@ server.delete("/:idProducto/category/:idCategoria", (req, res) => {
   }).then((deletedRecord) => {
     if (deletedRecord === 1) res.status(200).json({ message: "Se elimino la categoria al producto" });
     else res.status(404).json({ message: "Categoria no encontrada" });
-  });
+  }).catch((error) => { res.status(500).json(error); });
 });
 // S27 eliminar un producto DELETE /products/:id
 // Retorna 200 si se elimino con exito.
@@ -137,7 +125,7 @@ server.delete("/:id", (req, res) => {
     .then(deletedRecord => {
       if (deletedRecord === 1) res.status(200).json({ message: "Se elimino el producto" });
       else res.status(404).json({ message: "Producto no encontrado" });
-    })
+    }).catch((error) => { res.status(500).json(error); });
 })
 //S19 : Crear Ruta para eliminar Categoria
 // DELETE /products/category/:id
