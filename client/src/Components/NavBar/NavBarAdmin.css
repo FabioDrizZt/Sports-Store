@@ -1,0 +1,11 @@
+.NavbarAdmin {
+    width: 100%;
+    height: 2rem;
+    background-color: rgb(10, 50, 100);
+    position: fixed;
+    z-index: 1;
+}
+.containerNavAdmin {
+    padding-bottom: 50px;
+
+}

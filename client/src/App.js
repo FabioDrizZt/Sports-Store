@@ -17,6 +17,7 @@ import Cart from "./Components/Cart";
 import Order from "./Components/Order";
 import Admin from "./Components/Admin";
 import OrdersTable from "./Components/OrdersTable";
+import CreateProduct from './Components/FormCRUD/CreateProduct';
 
 function App() {
   // const products= useSelector(state => state.products)
@@ -62,8 +63,6 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      {/*<Route />*/}
-      {/* <NavBar /> */}
       <Route exact path="/products/:id" render={(match) => <Product match={match} />} />
       <Route exact path="/" render={() => <Home />} />
       {/* S14 : Crear Ruta para mostrar el componente Catalogo */}
@@ -77,12 +76,8 @@ function App() {
       <Route exact path="/edit/product/:id" render={(match) => <EditProduct match={match} />} />  
       <Route exact path='/order' render={() => <Order  />} />
       <Route exact path='/admin' render={() => <Admin />} />
-      {/* <Route
-        exact path='/catalogFilter'
-        render={() => <CatalogFilter />}
-      /> */}
-
-
+      <Route exact path='/admin/newProduct' component={CreateProduct}/>
+      <Route exact path='/admin/myProducts' component={FormCrud}/>
     </div>
   );
 }

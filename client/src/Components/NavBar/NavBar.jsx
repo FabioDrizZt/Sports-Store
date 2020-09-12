@@ -51,9 +51,6 @@ export default function NavBar() {
             </li> */}
             <li>
               <Link className="option" to="/admin" onClick={closeMenu}>Admin</Link>
-            </li>
-            <li>
-              <Link className="option" to="/admin/orders" onClick={closeMenu}>Ordenes</Link>
             </li>           
             <li>
               <Link className="option" to="/users" onClick={closeMenu}>Usuarios</Link>
