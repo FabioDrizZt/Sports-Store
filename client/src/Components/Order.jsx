@@ -31,35 +31,26 @@ const Order = ({
       : alert("no podes llevar mas de: " + stock);
   }
 
-  function deleteItem(e, user, producto) {
+  function deleteItem(user, producto) {
     //   dispatch(removeFromCart(user, prod));
     alert("Producto borra2");
   }
 
   return (
-    <div className={s.container}>
-      <div className={s.card}>
-        <div className={s.btn}>
-          <button
-            onClick={(e) => {
-              deleteItem(e, 1, id);//deleteItem(e, user.id, id);
-            }}
-            style={{ width: "30px" }}
-            className="btn btn-outline-danger btn-sm"
-          >
-            X
-          </button>
-        </div>
-        <div>
-          <img className={s.image} src={image} />
-        </div>
-        <div className={s.info}>
-          <h1 className={s.title}>{name}</h1>
-          <h4 className={s.title}>{description}</h4>
-          <h5 className={s.size}>Talle: {size}</h5>
-          <h6 className={s.uPrice}> Precio unitario: ${price}</h6>
-        </div>
-        <div className={s.amount}>
+    <React.Fragment>
+      <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+        <div class="media-body order-2 order-lg-1">
+          <h2 class="mt-0 font-weight-bold mb-2">
+            {name} id:{id}
+          </h2>
+          <p class="font-italic text-muted mb-0 large">{description}</p>
+          <div class="d-flex align-items-center justify-content-between mt-1">
+            <h3 class="font-weight-bold my-2">Precio: ${price}</h3>
+
+            <h5 class="font-weight-bold my-2">Stock: {stock}</h5>
+            <h5 class="font-weight-bold my-2">Talle: {size}</h5>
+            <span style={{ position: "-webkit-sticky", left: 0 }}>
+        <h3 class="font-weight-bold my-2">
           <button
             onClick={(e) => {
               minusClick(e);
@@ -69,7 +60,7 @@ const Order = ({
           >
             -
           </button>
-          <p className={s.number}>{cantidad}</p>
+          {"Cantidad:" + cantidad}
           <button
             onClick={(e) => {
               plusClick(e);
@@ -79,14 +70,26 @@ const Order = ({
           >
             +
           </button>
+          SubTotal: ${cantidad * price}
+          <button
+            className="btn btn-danger"
+            onClick={() => deleteItem(user.id, id)}
+          >
+            Eliminar
+          </button>
+        </h3>
+      </span>
+          </div>
         </div>
-        <div className={s.subtotal}>
-          <p>SUBTOTAL</p>
-          <h2 className={s.price}>${cantidad * price}</h2>
-          <p className={s.stock}> Quedan {stock} disponibles</p>
-        </div>
+        <img
+          src={image}
+          alt={name}
+          width="200"
+          class="ml-lg-5 order-1 order-lg-2"
+        />
       </div>
-    </div>
+      
+    </React.Fragment>
   );
 };
 
