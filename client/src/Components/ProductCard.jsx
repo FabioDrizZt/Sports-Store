@@ -20,7 +20,7 @@ function ProductCard({ id, titulo, descripcion, precio, cantidad, imagen,stock,c
                     <img className="card-img-top img" src={imagen} alt="Imagen Producto" />
                     <h3 className="card-title">{ titulo }</h3>     
                 </Link>    
-               {categories&&categories.map(x=><span class="badge badge-secondary mr-1">{x.name}</span>)}           
+               {categories&&categories.map(x=><span className="badge badge-secondary mr-1">{x.name}</span>)}           
                 <hr/>
                 <h5 className="card-text">Descripcion del producto</h5>
                 <p>{ descripcion }</p>
