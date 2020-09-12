@@ -2,7 +2,7 @@ import "./CreateProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from "../../actions/index";
 import React, { useState, useEffect } from "react";
-import { getCategories,getProducts } from "../../actions";
+import { getCategories, getProducts } from "../../actions";
 import AsignarProducto from "./AsignarProducto";
 import EliminarAsignacion from "./EliminarAsignacion"
 
@@ -52,7 +52,7 @@ function CreateProduct() {
     console.log(obj)
     return Object.keys(obj).length !== 0;
   }
-  function clearForm () {
+  function clearForm() {
     Array.from(document.querySelectorAll("input")).forEach(
       input => (input.value = "")
     );
@@ -63,13 +63,13 @@ function CreateProduct() {
 
   return (
     <div className="containerAll">
-      <form className="containerPro" onSubmit={(e) => {submitProduct(e, input); clearForm()}}>
+      <form className="containerPro" onSubmit={(e) => { submitProduct(e, input); clearForm() }}>
         <legend>Crear Producto</legend>
         <div className="form-group row">
           <label className="col-sm-2 col-form-label" for="name">
             Nombre
           </label>
-          <div class="col-sm-10">
+          <div className="col-sm-10">
             <input
               className="form-control"
               type="text reset"
@@ -88,7 +88,7 @@ function CreateProduct() {
           <label className="col-sm-2 col-form-label" for="description">
             Descripción
           </label>
-          <div class="col-sm-10">
+          <div className="col-sm-10">
             <input
               className="form-control"
               type="text"
@@ -105,10 +105,11 @@ function CreateProduct() {
         </div>
 
         <div className="form-group row">
-          <label className="col-sm-2 col-form-label" for="price">
+          <label
+            className="col-sm-2 col-form-label" for="price">
             Precio
           </label>
-          <div class="col-sm-10">
+          <div className="col-sm-2">
             <input
               className="form-control"
               type="number"
@@ -126,7 +127,7 @@ function CreateProduct() {
           <label className="col-sm-2 col-form-label" for="stock">
             Stock
           </label>
-          <div class="col-sm-10">
+          <div class="col-sm-2">
             <input
               className="form-control"
               type="number"
@@ -144,7 +145,7 @@ function CreateProduct() {
           <label className="col-sm-2 col-form-label" for="size">
             Size
           </label>
-          <div class="col-sm-10">
+          <div class="col-sm-2">
             <input
               className="form-control"
               type="text"
@@ -175,7 +176,7 @@ function CreateProduct() {
           </div>
         </div>
 
-{/*         
+        {/*         
           <div className="form-group">
             <label for="category">Categoría</label>
             <select>
@@ -187,19 +188,19 @@ function CreateProduct() {
                   return <option key={c.name}> {c.name} </option>;
                 })}
             </select> */}
-            <button
-              className="btn btn-primary"
-              type="submit"
-              disabled={noVacio(errors)}
-              value="Crear"
-              style={{margin:0}}
-            >
-              ENVIAR
+        <button
+          className="btn btn-primary"
+          type="submit"
+          disabled={noVacio(errors)}
+          value="Crear"
+          style={{ margin: 0 }}
+        >
+          ENVIAR
             </button>
-          {/* </div> */}
-        
-        <AsignarProducto/>
-        <EliminarAsignacion/>
+        {/* </div> */}
+
+        <AsignarProducto />
+        <EliminarAsignacion />
       </form>
     </div>
   );
