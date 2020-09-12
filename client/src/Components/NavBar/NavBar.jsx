@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchBar from "../SearchBar.jsx";
 import {Link} from "react-router-dom";
 import "./NavBar.css";
 import cart from "../../cart.png"
 
 export default function NavBar() {
+
+  useEffect(() => {
+    document.body.addEventListener('click', closeMenu );
+
+    return function cleanup() {
+        window.removeEventListener('click', closeMenu );
+    } 
+},[]);
 
   const openMenu = () => {
     document.querySelector('.sidebar').classList.add('open');
