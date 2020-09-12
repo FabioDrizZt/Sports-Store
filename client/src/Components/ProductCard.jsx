@@ -27,16 +27,15 @@ function ProductCard({ id, titulo, descripcion, precio, cantidad, imagen,stock,c
                 <p>{ cantidad }</p>           
                 <p className="price"><b>$ { precio }</b></p>
                 <Link to={`/products/${id}`}>
-                    <button className="btn btn-warning">Ver mas</button>
+                <button className="b btn">Ver mas</button>
                 </Link>
                 <Link to="/cart">
-                    <button 
-                    onClick={()=>agregarAlCarrito(id,precio,cantidad)}
-                    className={stock===0?"btn btn-secondary":"btn btn-success"} 
-                    disabled={stock===0?true:false}>
-                        {stock===0 ? "No disponible": "Agregar a Carrito"}
-                    </button>
-                </Link>           
+                <button 
+                onClick={()=>agregarAlCarrito(id,precio,cantidad)}
+                className={stock===0?"btn btn-secondary":"btn btn-success"} 
+                disabled={stock===0?true:false}>
+                    {stock===0 ? "No disponible": "Agregar a Carrito"}</button>
+                    </Link>
             </div>
         </div>
     )

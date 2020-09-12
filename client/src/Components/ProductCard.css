@@ -18,7 +18,8 @@ display: inline-block;
 }
 
 .img {
-    width: 13rem;
+    width: auto;
+    height: 9.5rem;
     border-radius: 1rem;
 
 }
@@ -32,13 +33,15 @@ display: inline-block;
 }
 
 .titleCard a {
-    color: black;
     text-decoration: none;
+    
 }
 
 .titleCard {
+    text-decoration: none;
+    color: black;
+
     margin-top: 1rem;
-    text-align: center;
 }
 
 .containerImgTitle {
