@@ -8,10 +8,6 @@ export default function NavBar() {
 
   useEffect(() => {
     document.body.addEventListener('click', closeMenu );
-
-    return function cleanup() {
-        window.removeEventListener('click', closeMenu );
-    } 
 },[]);
 
   const openMenu = () => {
