@@ -73,8 +73,9 @@ function validate({ name, description}) {
       }
 
     return (   
+      <div className="container">
       <div className="row">     
-        <div className="col-5">
+        <div className="col-6">
           <form onSubmit = {(e) => {submitCategory(e,input); clearForm()}} className="col formCateg">
               <h3>{editar ? "Editar" :" Crear"} Categorias</h3>
             <div className="form-group" >
@@ -101,29 +102,31 @@ function validate({ name, description}) {
                     disabled={noVacio(errors)}>
                       {editar ? "EDITAR" : "AGREGAR"}</button>
                       {editar&&
-                <button className="btn btn-secondary boton ml-1" onClick={()=>editarCategoria()}>
+                <button className="btn btn-secondary boton ml-1" style={{margin:0}} onClick={()=>editarCategoria()}>
                   CANCELAR
                 </button>}
-            </div>
-            <div className="col-7 formCateg">
+            </div>            
+        </form>           
+      </div> 
+      <div className="col-6 formCateg">
         <h3>Listado de categorias</h3>
         {categories&&categories.map(x=>
             <div className="row">
-                <p className="col"><b>Nombre: </b>{x.name}<hr/></p> 
-                <p className="col"><b>Descripcion: </b>{x.description}<hr/></p>
-                <p className="col"><b>ID: :</b> {x.id}<hr/></p>
+                <p className="col"><b>Nombre: </b>{x.name}</p> 
+                <p className="col"><b>Descripcion: </b>{x.description}</p>
+                <p className="col"><b>ID: :</b> {x.id}</p>
             <div className="col botonList">
-            <button type="button" className="btn btn-danger" onClick={()=>eliminarCategoria(x)}>ELIMINAR</button>
-            <button type="button" className="btn btn-warning" onClick={()=>{
+            <button type="button" style={{margin:0}}className="btn btn-danger" onClick={()=>eliminarCategoria(x)}>ELIMINAR</button>
+            <button type="button" style={{margin:0}}className="btn btn-warning" onClick={()=>{
                 editarCategoria(x.id)
                 setIdCategoria(x.id);  
                 }}>EDITAR</button>
-            </div>
-            </div>
+            </div>  
+            <hr/>         
+            </div>           
         )}
+    </div>    
     </div>
-        </form>           
-      </div>     
     </div>
     )
 }
