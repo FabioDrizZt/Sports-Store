@@ -1,43 +1,35 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { updateProduct } from "../../actions/index";
 import { useDispatch } from "react-redux";
 import NavBarAdmin from '../NavBar/NavBarAdmin';
 
-function EditProduct (props){
+function EditProduct(props) {
     const dispatch = useDispatch();
     const idProduct = props.match.match.params.id;
-    const [editProduct, setEditProduct] = useState(null); 
+    const [editProduct, setEditProduct] = useState(null);
 
-    const [input,setInput] = useState(null);
-        // name:editProduct.name,
-        // description: editProduct.description,
-        // size: editProduct.size,
-        // stock: editProduct.stock,
-        // price: editProduct.price,
-        // image: editProduct.image
-    
-      
+    const [input, setInput] = useState(null);
+
     function handleInputChange(e) {
         setInput({
             ...input,
             [e.target.name]: e.target.value
-          });
-      }
+        });
+    }
 
     useEffect(() => {
-        fetch("http://localhost:3001/products/"+idProduct)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            setInput(data);           
-        });
+        fetch("http://localhost:3001/products/" + idProduct)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                setInput(data);
+            });
     }, []);
 
-    
-    function sendData (e){       
+    function sendData(e) {
         e.preventDefault();
-        dispatch(updateProduct(idProduct,input))
+        dispatch(updateProduct(idProduct, input))
     }
 
     return(

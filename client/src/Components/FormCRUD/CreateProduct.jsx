@@ -36,7 +36,7 @@ function CreateProduct() {
           <label className="col-sm-2 col-form-label" for="name">
             Nombre
           </label>
-          <div class="col-sm-10">
+          <div className="col-sm-10">
             <input
               className="form-control"
               type="text"
@@ -54,7 +54,7 @@ function CreateProduct() {
           <label className="col-sm-2 col-form-label" for="description">
             Descripción
           </label>
-          <div class="col-sm-10">
+          <div className="col-sm-10">
             <input
               className="form-control"
               type="text"
@@ -71,10 +71,11 @@ function CreateProduct() {
         </div>
 
         <div className="form-group row">
-          <label className="col-sm-2 col-form-label" for="price">
+          <label
+            className="col-sm-2 col-form-label" for="price">
             Precio
           </label>
-          <div class="col-sm-10">
+          <div className="col-sm-2">
             <input
               className="form-control"
               type="number"
@@ -93,7 +94,7 @@ function CreateProduct() {
           <label className="col-sm-2 col-form-label" for="stock">
             Stock
           </label>
-          <div class="col-sm-10">
+          <div class="col-sm-2">
             <input
               className="form-control"
               type="number"
@@ -112,7 +113,7 @@ function CreateProduct() {
           <label className="col-sm-2 col-form-label" for="size">
             Talle
           </label>
-          <div class="col-sm-10">
+          <div class="col-sm-2">
             <input
               className="form-control"
               type="text"
