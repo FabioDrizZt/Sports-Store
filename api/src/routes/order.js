@@ -20,6 +20,15 @@ server.get('/:id', (req, res) => {
         .catch((e) => res.status(400).json(e))
 })
 
+// Traer una orden
+// GET /orders/:id
+server.get('/order/:id', (req, res) => {
+    Order.findOne({
+        where: { id: req.params.id }
+    }).then((order) => res.send(order))
+        .catch((e) => res.status(400).json(e))
+})
+
 //S47 : Crear Ruta para modificar una Orden
 // PUT /orders/:id
 server.put("/:id", (req, res) => {
