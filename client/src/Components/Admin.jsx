@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 // import ProductCard from "./ProductCard";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from 'react-router-dom';
+import NavBarAdmin from '../Components/NavBar/NavBarAdmin';
 import {
   // getProducts,
   // getCategories,
@@ -60,9 +62,8 @@ export default function AsigCate() {
   return (
     //porque hay que ir a catalogo para que aparezcan los productos?????
     //muestro los componentes para admin
-    <React.Fragment>     
-      <FormCrud/>
-      <FormCategory/>
+    <React.Fragment>  
+      <NavBarAdmin />
 
           
         

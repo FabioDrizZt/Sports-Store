@@ -17,6 +17,7 @@ import Cart from "./Components/Cart";
 import Order from "./Components/Order";
 import Admin from "./Components/Admin";
 import OrdersTable from "./Components/OrdersTable";
+import CreateProduct from './Components/FormCRUD/CreateProduct';
 
 function App() {
   // const products= useSelector(state => state.products)
@@ -62,27 +63,21 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      {/*<Route />*/}
-      {/* <NavBar /> */}
       <Route exact path="/products/:id" render={(match) => <Product match={match} />} />
       <Route exact path="/" render={() => <Home />} />
-      {/* S14 : Crear Ruta para mostrar el componente Catalogo */}
       <Route exact path="/products" render={() => <Catalogo />} />
-      {/* S15 : Crear Ruta para ver el detalle de un producto según el id. */} 
       <Route exact path="/category" render={() => <FormCategory />} />
       <Route exact path="/formcrud" component={FormCrud} />
       <Route exact path="/users" component={UserCrud} />
       <Route exact path="/cart" render={() => <Cart />} />    
-      <Route exact path="/admin/orders" render={() => <OrdersTable />} />
-      <Route exact path="/edit/product/:id" render={(match) => <EditProduct match={match} />} />  
       <Route exact path='/order' render={() => <Order  />} />
+                {/* RUTAS DEL ADMINISTRADOR */}
+      <Route exact path="/admin/orders" render={() => <OrdersTable />} />
+      <Route exact path="/admin/edit/product/:id" render={(match) => <EditProduct match={match} />} />  
       <Route exact path='/admin' render={() => <Admin />} />
-      {/* <Route
-        exact path='/catalogFilter'
-        render={() => <CatalogFilter />}
-      /> */}
-
-
+      <Route exact path='/admin/categories' component={FormCategory}/>
+      <Route exact path='/admin/newProduct' component={CreateProduct}/>
+      <Route exact path='/admin/myProducts' component={FormCrud}/>
     </div>
   );
 }
