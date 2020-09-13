@@ -1,6 +1,6 @@
 import {Link } from 'react-router-dom';
 import React, { useEffect } from "react";
-import { removeCart,getUser} from "../actions"
+import { removeCart,getUser,getCartUser} from "../actions"
 import { useSelector, useDispatch } from "react-redux";
 import s from "./Cart.css";
 // import Checkout from "./Checkout";
@@ -28,7 +28,7 @@ const Cart = (carrito) => {
 
   useEffect(() => {
     dispatch(getUser());
-    // dispatch(getCartUser(1));
+    dispatch(getCartUser(1));
   }, []);
 
 
@@ -79,7 +79,7 @@ const Cart = (carrito) => {
       <button className="btn btn-danger mt-4"
        onClick={()=>dispatch(removeCart(user.id))}>
          Vaciar Carrito
-      </button>
+      </button>      
     }
     </div>
   );
