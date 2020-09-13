@@ -1,4 +1,4 @@
-// import { Route, Link } from 'react-router-dom';
+import {Link } from 'react-router-dom';
 import React, { useEffect } from "react";
 import { removeCart,getUser} from "../actions"
 import { useSelector, useDispatch } from "react-redux";
@@ -71,7 +71,16 @@ const Cart = (carrito) => {
           render={() => <Checkout total={total} />}
         />
       </div>  */}
-      <button className="btn btn-danger mt-4" onClick={()=>dispatch(removeCart(user.id))}>Vaciar Carrito</button>
+      { cart&&cart.length===0 ? 
+      <div className="mt-4">
+        <h1>Tu carrito está vacio!</h1>
+        <h2><Link to="/products">Ir al cátalogo</Link></h2>
+      </div> :
+      <button className="btn btn-danger mt-4"
+       onClick={()=>dispatch(removeCart(user.id))}>
+         Vaciar Carrito
+      </button>
+    }
     </div>
   );
 };
