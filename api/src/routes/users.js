@@ -117,7 +117,7 @@ server.delete("/:id", (req, res) => {
 // DELETE /users/:idUser/cart/ 
 //eliminar del carrito y de orders
 server.delete("/:idUser/cart", (req, res) => {
-  Cart.FindOne({where: { userId: req.params.idUser, state: "open" }})     
+  Cart.findOne({where: { userId: req.params.idUser, state: "open" }})     
       .then((cart)=>{
         Order.destroy({where:{cartId:cart.id}})
           .then((deletedRecord) => {
