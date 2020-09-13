@@ -117,8 +117,8 @@ server.delete("/:id", (req, res) => {
 
 // S40 : Crear Ruta para vaciar el carrito
 // DELETE /users/:idUser/cart/ 
-server.delete("/:idUser/cart/", (req, res) => {
-  Cart.destroy({ where: { id: req.params.idUser, state: "open" } })
+server.delete("/:idUser/cart", (req, res) => {
+  Cart.destroy({ where: { userId: req.params.idUser, state: "open" } })
     .then((deletedRecord) => {
       if (deletedRecord === 1) res.status(200).json({ message: "Se eliminó el carrito" });
       else res.status(404).json({ message: "Carrito no encontrado" });
