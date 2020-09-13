@@ -19,6 +19,16 @@ server.get('/:id', (req, res) => {
     }).then((cart) => res.send(cart))
         .catch((e) => res.status(400).json(e))
 })
+
+// Traer una orden
+// GET /orders/:id
+server.get('/order/:id', (req, res) => {
+    Order.findOne({
+        where: { id: req.params.id }
+    }).then((order) => res.send(order))
+        .catch((e) => res.status(400).json(e))
+})
+
 //S47 : Crear Ruta para modificar una Orden
 // PUT /orders/:id
 server.put("/:id", (req, res) => {
@@ -38,5 +48,15 @@ server.patch("/:id", (req, res) => {
     ).then((order) => res.status(200).send(order))
         .catch((err) => { res.status(400).json({ err }); })
 })
+
+// Eliminar una orden del carrito
+// DELETE /orders/:id
+server.delete("/:id", (req, res) => {
+    Order.destroy({ where: { id: req.params.id } })
+      .then((deletedRecord) => {
+        if (deletedRecord === 1) res.status(200).json({ message: "Se eliminó su orden del carrito" });
+        else res.status(404).json({ message: "Orden no encontrada" });
+      });
+  });
 
 module.exports = server;
