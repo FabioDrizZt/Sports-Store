@@ -1,35 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getCartUser } from "../actions";
+import { getOrders } from "../actions";
 import Cart from "./Cart";
+import NavBarAdmin from './NavBar/NavBarAdmin';
 
 
 
 function OrdersTable() {
-    const dispatch = useDispatch();
-    const orders = useSelector((state) => state.orders);
-
-    useEffect(() => {
-      dispatch(getCartUser());
-    }, []);
-
-
-  return (
-    
+  const dispatch = useDispatch();
+  const carts = useSelector((state) => state.carts);
+  useEffect(() => {
+    dispatch(getOrders("closed"));
+  }, []);
+  return ( 
     <div>
-      
-      {orders && orders.map((x) => {
-           return <Cart
-              id = {x.id}
-              name = {x.name}
-              description = {x.description}
-              size = {x.size}
-              price = {x.price}
-              amount = {x.amount}
-              stock = {x.stock}
-              image = {x.image}
-          />
-      })}
+      <NavBarAdmin/>
     </div>
   );
 };

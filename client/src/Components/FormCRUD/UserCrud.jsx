@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import CreateUser from "./CreateUser";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const style = {
-  width: "50%",
-  margin: "2rem auto",
-  position: "relative",
-};
+// const style = {
+//   width: "50%",
+//   margin: "2rem auto",
+//   position: "relative",
+// };
 
 function UserCrud() {
   const users = useSelector((state) => state.users);

@@ -6,55 +6,36 @@ const { User, Cart, Order, Product } = require("../db.js");
 // GET /users
 server.get("/", (req, res) => {
   User.findAll({})
-    .then((users) => {
-      res.send(users);
-    })
+    .then((users) => { res.send(users); })
     .catch((err) => res.status(400).json({ err }));
 });
-
 //S39 : Crear Ruta que retorne todos los items del Carrito
 // GET /users/:idUser/cart
 server.get("/:idUser/cart", (req, res) => {
   const id = req.params.idUser;
   Cart.findOne({
-    where: {
-      userId: id, //Condición de Busqueda
-      state: "open",
-    },
-  })
-  .then((cart) => {
+    where: { userId: id, state: "open", },
+  }).then((cart) => {
     Order.findAll({
-      where: {
-        cartId: cart.id
-      },
-      include: [{
-        model: Product
-      }
-    ]
-    })
-    .then((orders) => res.send(orders))
-    .catch((e) => res.status(400).json(e));
+      where: { cartId: cart.id },
+      include: [{ model: Product }]
+    }).then((orders) => res.send(orders))
+      .catch((e) => res.status(400).json(e));
   })
 });
-
 // S45 : Crear Ruta que retorne todas las Ordenes de los usuarios GET /users/:id/orders
 server.get("/:id/orders", (req, res) => {
   const id = req.params.id;
   Cart.findAll({
-    where: {
-      userId: id, //Condición de Busqueda
-    },
-    include: {
-      model: Order,
-    },
+    where: { userId: id },
+    include: { model: Order },
   }).then((carts) => res.send(carts))
     .catch((e) => res.status(400).json(e));
 });
-
 // -----> ***** POST ***** <-----
 
-/*S38 : Crear Ruta para agregar Item al Carrito
-POST /users/:idUser/cart */
+// S38 : Crear Ruta para agregar Item al Carrito
+// POST /users/:idUser/cart 
 server.post("/:idUser/cart", (req, res) => {
   const id = req.params.idUser;
   Cart.findOrCreate({
@@ -73,12 +54,10 @@ server.post("/:idUser/cart", (req, res) => {
           price: req.body.price,
           amount: req.body.amount,
         },
-      })
-        .then((resp) => { res.send(resp[0]); })
+      }).then((resp) => {res.send(resp[0]); })
         .catch((error) => { res.send(error); });
     });
 });
-
 //S34 ruta para crear usuario
 server.post("/", (req, res) => {
   User.create({
@@ -88,10 +67,7 @@ server.post("/", (req, res) => {
     email: req.body.email,
     password: req.body.password,
     role: req.body.role,
-  })
-    .then((user) => {
-      res.status(200).send(user);
-    })
+  }).then((user) => { res.status(200).send(user); })
     .catch((err) => res.send(err));
 });
 
@@ -108,19 +84,12 @@ server.put("/:id", (req, res) => {
       role: req.body.role,
     },
     { where: { id: req.params.id } }
-  )
-    .then(() =>
-      res
-        .status(201)
-        .send(
-          "Usuario id: " + req.params.id + " actualizado satisfactoriamente"
-        )
-    )
-    .catch((err) => res.send(err));
+  ).then(() => res.status(201).send("Usuario id: " + req.params.id + " actualizado satisfactoriamente")
+  ).catch((err) => res.send(err));
 });
 
-/*S41 : Crear Ruta para editar las cantidades del carrito
-PUT /users/:idUser/cart */
+// S41 : Crear Ruta para editar las cantidades del carrito
+// PUT /users/:idUser/cart 
 server.put("/:idUser/cart", (req, res) => {
   Cart.findOne({
     where: { userId: req.params.idUser, state: "open" },
@@ -146,16 +115,14 @@ server.delete("/:id", (req, res) => {
   });
 });
 
-/*S40 : Crear Ruta para vaciar el carrito
-DELETE /users/:idUser/cart/ */
+// S40 : Crear Ruta para vaciar el carrito
+// DELETE /users/:idUser/cart/ 
 server.delete("/:idUser/cart/", (req, res) => {
-  Cart.destroy({ where: { id: req.params.idUser, state: "open" } }).then(
-    (deletedRecord) => {
-      if (deletedRecord === 1)
-        res.status(200).json({ message: "Se eliminó el carrito" });
+  Cart.destroy({ where: { id: req.params.idUser, state: "open" } })
+    .then((deletedRecord) => {
+      if (deletedRecord === 1) res.status(200).json({ message: "Se eliminó el carrito" });
       else res.status(404).json({ message: "Carrito no encontrado" });
-    }
-  );
+    });
 });
 
 module.exports = server;
