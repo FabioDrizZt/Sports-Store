@@ -5,7 +5,7 @@ import {addtoCart} from "../actions/index";
 import { useSelector,useDispatch } from "react-redux";
 
 // Estaria bueno que cada producto tenga un subtitulo
-function ProductCard({ id, titulo, descripcion, precio, cantidad, imagen,stock,categories }) {
+function ProductCard({ id, titulo, descripcion, precio, cantidad=1, imagen,stock,categories }) {
     const user = useSelector(state=>state.user);
     const dispatch = useDispatch();
     //NO HAY NADA EN EL STORE USER TODAVIA

@@ -9,7 +9,7 @@ const Order = ({
   description = "re piola",
   size = "43",
   price = 500,
-  amount = 5,
+  amount = 1,
   stock = 8,
   image = "https://static.mercadoshops.com/zapatilla-salomon-speedcross-hombre-trail-running-v_iZ878255024XsZ230467303XpZ1XfZ230467303-23380324018-5XvZdxIM.jpg",
 }) => {
@@ -38,19 +38,19 @@ const Order = ({
 
   return (
     <React.Fragment>
-      <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-        <div class="media-body order-2 order-lg-1">
-          <h2 class="mt-0 font-weight-bold mb-2">
+      <div className="media align-items-lg-center flex-column flex-lg-row p-3">
+        <div className="media-body order-2 order-lg-1">
+          <h2 className="mt-0 font-weight-bold mb-2">
             {name} id:{id}
           </h2>
-          <p class="font-italic text-muted mb-0 large">{description}</p>
-          <div class="d-flex align-items-center justify-content-between mt-1">
-            <h3 class="font-weight-bold my-2">Precio: ${price}</h3>
+          <p className="font-italic text-muted mb-0 large">{description}</p>
+          <div className="d-flex align-items-center justify-content-between mt-1">
+            <h3 className="font-weight-bold my-2">Precio: ${price}</h3>
 
-            <h5 class="font-weight-bold my-2">Stock: {stock}</h5>
-            <h5 class="font-weight-bold my-2">Talle: {size}</h5>
+            <h5 className="font-weight-bold my-2">Stock: {stock}</h5>
+            <h5 className="font-weight-bold my-2">Talle: {size}</h5>
             <span style={{ position: "-webkit-sticky", left: 0 }}>
-        <h3 class="font-weight-bold my-2">
+        <h3 className="font-weight-bold my-2">
           <button
             onClick={(e) => {
               minusClick(e);
