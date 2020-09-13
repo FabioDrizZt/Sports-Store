@@ -7,7 +7,6 @@ import {
 } from "../actions/index";
 import React, { useState, useEffect } from "react";
 import "./FormCategory.css";
-import NavBarAdmin from './NavBar/NavBarAdmin';
 
 function FormCategory() {
   const dispatch = useDispatch();
@@ -26,8 +25,6 @@ function FormCategory() {
   }
 
   return (
-    <>
-    <NavBarAdmin/>
     <div className="container">
       <div className="row">
         <div className="col-6">
@@ -120,7 +117,6 @@ function FormCategory() {
         </div>
       </div>
     </div>
-    </>
   );
 }
 export default FormCategory;
