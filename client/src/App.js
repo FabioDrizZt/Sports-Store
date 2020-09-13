@@ -16,7 +16,7 @@ import Home from "./Components/Home";
 import Cart from "./Components/Cart";
 import Order from "./Components/Order";
 import Admin from "./Components/Admin";
-import OrdersTable from "./Components/OrdersTable";
+import OrdersTable from "./Components/OrderTable/OrdersTable";
 import CreateProduct from './Components/FormCRUD/CreateProduct';
 
 function App() {
