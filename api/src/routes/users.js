@@ -54,7 +54,7 @@ server.post("/:idUser/cart", (req, res) => {
           price: req.body.price,
           amount: req.body.amount,
         },
-      }).then((resp) => {res.send(resp[0]); })
+      }).then((resp) => { res.send(resp[0]); })
         .catch((error) => { res.send(error); });
     });
 });
@@ -91,19 +91,16 @@ server.put("/:id", (req, res) => {
 // S41 : Crear Ruta para editar las cantidades del carrito
 // PUT /users/:idUser/cart 
 server.put("/:idUser/cart", (req, res) => {
-  Cart.findOne({
-    where: { userId: req.params.idUser, state: "open" },
-  })
-    .then((cart) =>
+  let cart = Cart.findOne({ where: { userId: req.params.idUser, state: "open" }, })
+  let product = Product.findByPk(req.body.productId)
+  Promise.all([cart, product])
+    .then(values =>
       Order.update(
-        { amount: req.body.amount },
-        { where: { cartId: cart.id, productId: req.body.productId } }
+        { amount: req.body.amount, price: values[1].price * req.body.amount },
+        { where: { cartId: values[0].id, productId: values[1].id } }
       )
-    )
-    .then(() => res.status(201).send("Cantidad modificada satisfactoriamente"))
-    .catch((error) => {
-      res.status(400).json(error);
-    });
+    ).then(() => res.status(201).send("Cantidad modificada satisfactoriamente"))
+    .catch((error) => { res.status(400).json(error); });
 });
 // -----> ***** DELETE ***** <-----
 // S37 : Crear Ruta para eliminar Usuario DELETE /users/:id
