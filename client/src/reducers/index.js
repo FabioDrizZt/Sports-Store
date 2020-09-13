@@ -118,7 +118,7 @@ function rootReducer(state = initialState, action) {
                 return { ...state, cart: state.cart.concat(product) }
             }           
         } case REMOVE_CART: {
-            return { ...state, cart: state.cart.filter(order => order.id !== action.payload.id) }
+            return { ...state, cart: [] }
         }
         default:
             return state;

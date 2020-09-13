@@ -256,7 +256,7 @@ export function removeCart(userId) {
     axios.delete(`${SERVER_ADDRESS}/users/${userId}/cart`)
       .then((res) => {
         dispatch({ type: REMOVE_CART, payload: res.data });
-      }).then(() => alert("Se le elimino el carrito al usuario"))
+      }).then(() => console.log("Se le elimino el carrito al usuario"))
       .catch((error) => alert(error, "error"));
   };
 }// S37 : Crear Ruta para eliminar Usuario DELETE /users/:id

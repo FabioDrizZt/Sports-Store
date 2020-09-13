@@ -1,35 +1,35 @@
-import { Route, Link } from 'react-router-dom';
-import React, { useDebugValue, useEffect } from "react";
-import { getCartUser, getUser} from "../actions"
+// import { Route, Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { removeCart,getUser} from "../actions"
 import { useSelector, useDispatch } from "react-redux";
 import s from "./Cart.css";
-import Checkout from "./Checkout";
+// import Checkout from "./Checkout";
 import Order from './Order';
 
-let carrito={
-  id:1,
-  amount: 5,
-  price:400,
-   product: {
-    id : 2,
-    name : "Zapa",
-    description : "re piola",
-    size : "43",
-    price : 500,
-    stock : 8,
-    image : "https://static.mercadoshops.com/zapatilla-salomon-speedcross-hombre-trail-running-v_iZ878255024XsZ230467303XpZ1XfZ230467303-23380324018-5XvZdxIM.jpg",
-  }   
-}
+// let carrito={
+//   id:1,
+//   amount: 5,
+//   price:400,
+//    product: {
+//     id : 2,
+//     name : "Zapa",
+//     description : "re piola",
+//     size : "43",
+//     price : 500,
+//     stock : 8,
+//     image : "https://static.mercadoshops.com/zapatilla-salomon-speedcross-hombre-trail-running-v_iZ878255024XsZ230467303XpZ1XfZ230467303-23380324018-5XvZdxIM.jpg",
+//   }   
+// }
 const Cart = (carrito) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
 
 
-  // useEffect(() => {
-  //   dispatch(getUser());
-  //   dispatch(getCartUser(1));
-  // }, [getCartUser, getUser]);
+  useEffect(() => {
+    dispatch(getUser());
+    // dispatch(getCartUser(1));
+  }, []);
 
 
   // var total = cart.reduce(function(prev, cur) {
@@ -71,6 +71,7 @@ const Cart = (carrito) => {
           render={() => <Checkout total={total} />}
         />
       </div>  */}
+      <button className="btn btn-danger mt-4" onClick={()=>dispatch(removeCart(user.id))}>Vaciar Carrito</button>
     </div>
   );
 };
