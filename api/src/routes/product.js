@@ -46,6 +46,15 @@ server.get("/:id", (req, res) => {
   }).then((products) => res.status(200).json(products))
     .catch((error) => res.status(400).json({ error }));
 });
+/*S57 : Crear Ruta para obtener todas las reviews de un producto.
+GET /product/:id/review/*/
+server.get("/:id/review/",(req,res)=>{
+  Review.findAll({
+    where: {id: req.params.id}
+  })
+  .then((reviews)=>res.send(reviews))
+  .catch((error)=>res.status(400).json({error}));
+})
 // S17 : Crear ruta para agregar categorias de un producto.
 // POST /products/:idProducto/category/:idCategoria
 // Agrega la categoria al producto.
