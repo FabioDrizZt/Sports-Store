@@ -25,11 +25,10 @@ const Cart = (carrito) => {
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
 
-
   useEffect(() => {
     dispatch(getUser());
-    dispatch(getCartUser(1));
-  }, []);
+    dispatch(getCartUser(user.id));
+  }, [getUser, getCartUser]);
 
 
   // var total = cart.reduce(function(prev, cur) {
@@ -38,20 +37,10 @@ const Cart = (carrito) => {
 
   return (
     <div className={s.container}>
-      {cart &&
-        cart.map((c) => (         
-            <Order
-              amount={c.amount}
-              name={c.name}
-              description={c.description}
-              img={c.image}
-              price={c.price}
-              stock={c.stock}
-              size={c.size}
-              productId={c.id}
-              userId={user.id}
+      {cart && cart.map((order) =>   
+            <Order id = {order.product.id}
             />
-        ))}
+        )}
 
       {/* <div className={s.subtotal}>
         <h2>TOTAL DE LA COMPRA</h2>
