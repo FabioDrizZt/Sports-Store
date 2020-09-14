@@ -121,7 +121,7 @@ function rootReducer(state = initialState, action) {
         } case REMOVE_CART: {
             return { ...state, cart: [] }
         } case REMOVE_ORDER: {
-            return { ...state, orders: state.orders.filter(order => order.id !== action.payload.id) }
+            return { ...state, cart: state.cart.filter(order => order.id !== action.payload.orderId) }
         }
         default:
             return state;
