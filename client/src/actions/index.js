@@ -24,6 +24,7 @@ export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
 export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_ORDER_AMOUNT = "UPDATE_ORDER_AMOUNT";
 export const UPDATE_ORDER = "UPDATE_ORDER";
+export const PROMOTE_USER = "PROMOTE_USER";
 export const CLOSE_CART = "CLOSE_CART"
 // aca van los actions del DELETE/REMOVE
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
@@ -218,6 +219,19 @@ export function updateOrder(orderId,state) {
       .catch((error) => alert(error, "error"));
   };
 }//SXX : Crear Ruta para Cerrar un Carrito
+
+
+//S67 : Crear ruta /promote
+// POST /auth/promote/:id
+// Promote convierte al usuario con ID: id a Admin.
+export function promoteUser(id){
+  return function (dispatch){
+    axios.put(`${SERVER_ADDRESS}/auth/promote/${id}`)
+    dispatch({type: PROMOTE_USER, payload: id})
+  }.then (() => alert ("Se cambio correctamente"))
+  .catch((error) => alert ("Falló la modificacioin"))
+}
+
 export function closeCart(cartId) {
   return function (dispatch) {
     axios.patch(`${SERVER_ADDRESS}/orders/${cartId}`)

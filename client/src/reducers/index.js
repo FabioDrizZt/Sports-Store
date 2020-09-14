@@ -22,6 +22,7 @@ import {
     UPDATE_USER,
     UPDATE_ORDER_AMOUNT,
     UPDATE_ORDER,
+    PROMOTE_USER,
     CLOSE_CART,
     // aca van los actions del DELETE/REMOVE
     REMOVE_PRODUCT,
@@ -41,7 +42,8 @@ const initialState = {
     product: [],
     cart: [],
     users: [], // lista de usuarios para q vea el admin
-    user: [] // deberia guardar el usuario logueado
+    user: [], // deberia guardar el usuario logueado
+    auth:[]
 }
 
 function rootReducer(state = initialState, action) {
@@ -85,7 +87,9 @@ function rootReducer(state = initialState, action) {
             else alert("Ya Existe DNI o Email ver")
         } case CREATE_CATEGORY: {
             return { ...state, categories: state.categories.concat(action.payload) }
-        } case CREATE_PRODUCT_CATEGORY: {
+        }case PROMOTE_USER:{
+            return { ...state, user: [...state.user.filter(x => x.id !== action.payload.id)].concat(action.payload)}
+        }case CREATE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.concat(action.payload) }
         } case UPDATE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
@@ -112,7 +116,7 @@ function rootReducer(state = initialState, action) {
         } case REMOVE_CART: {
             return { ...state, cart: [] }
         } case REMOVE_ORDER: {
-            return { ...state, cart: state.cart.filter(order => order.id !== action.payload.orderId) }
+            return { ...state, cart: state.cart.filter(order => order.id !== action.payload) }
         }
         default:
             return state;
