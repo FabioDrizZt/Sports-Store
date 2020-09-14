@@ -2,6 +2,8 @@
 margin: 2rem;
 box-shadow: 10px 4px 24px 0px rgba(204,204,204,1);
 border-radius: 8px;
+position: relative;
+text-align: left;
 }
 .order-table div{
     margin-top: 1rem;
@@ -9,4 +11,12 @@ border-radius: 8px;
 }
 .order-table div span{
     padding: 1rem;
+}
+.order-table .botones{
+    position:absolute;
+    top:0;
+    right: 0;
+    margin-top: 0rem;
+    padding-top:0rem;
+
 }

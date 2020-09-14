@@ -4,7 +4,7 @@ import { createUser } from "../../actions/index.js";
 
 const CreateUser = () => {
   const dispatch = useDispatch();
-  const [input, setInput] = useState({});
+  const [input, setInput] = useState([]);
 
   function User(e, input) {
     e.preventDefault();
@@ -48,7 +48,7 @@ const CreateUser = () => {
             <input
               type="email"
               class="form-control"
-              placeholder="Email"
+              placeholder="name@example.com"
               value={input.email}
               onChange={(e) => setInput({ ...input, email: e.target.value })}
               required
@@ -69,7 +69,7 @@ const CreateUser = () => {
           <div class="form-group col-md-6">
             <label>DNI</label>
             <input
-              type="text"
+              type="number"
               class="form-control"
               placeholder="DNI"
               value={input.DNI}

@@ -33,7 +33,6 @@ export const REMOVE_CART = "REMOVE_CART";
 export const REMOVE_USER = "REMOVE_USER";
 export const REMOVE_ORDER = "REMOVE_ORDER";
 
-
 //S24 : Crear ruta de producto individual, pasado un ID que retorne un producto con sus detalles
 export function getProduct(productId) {
   return function (dispatch) {
@@ -208,12 +207,13 @@ export function updateOrderAmount(userId, order) {
       .catch((error) => alert(error, "error"));
   };
 }//S47 : Crear Ruta para modificar una Orden
-export function updateOrder(order) {
+export function updateOrder(orderId,state) {
   return function (dispatch) {
-    axios.put(`${SERVER_ADDRESS}/orders/${order.id}`, order)
-      .then((res) => {
-        dispatch({ type: UPDATE_ORDER, payload: order });
-      }).then(() => alert("Se modifico la orden"))
+    axios.put(`${SERVER_ADDRESS}/orders/${orderId}`, {state:state})
+      .then((res) => {    
+        console.log(res.data)
+        dispatch({ type: UPDATE_ORDER, payload: orderId });
+      }).then(() => console.log("Se modifico la orden"))
       .catch((error) => alert(error, "error"));
   };
 }//SXX : Crear Ruta para Cerrar un Carrito
@@ -274,10 +274,8 @@ export function removeUser(userId) {
 }
 // Eliminar una orden del carrito
 export function removeOrder(orderId) {
-  console.log("orderId"+orderId)
-
   return function (dispatch) {
-  axios.delete(`${SERVER_ADDRESS}/orders/${orderId}`)
+    axios.delete(`${SERVER_ADDRESS}/orders/${orderId}`)
       .then((res) => {
         dispatch({ type: REMOVE_ORDER, payload: orderId });
       }).then(() => alert("Se elimino la orden del carrito satisfactoriamente"))

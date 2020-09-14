@@ -22,7 +22,7 @@ server.get('/:id', (req, res) => {
 
 // Traer una orden
 // GET /orders/:id
-server.get('/order/:id', (req, res) => {
+server.get('/:id', (req, res) => {
     Order.findOne({
         where: { id: req.params.id }
     }).then((order) => res.send(order))
@@ -32,12 +32,14 @@ server.get('/order/:id', (req, res) => {
 //S47 : Crear Ruta para modificar una Orden
 // PUT /orders/:id
 server.put("/:id", (req, res) => {
-    Order.update({
-        amount: req.body.amount,
-        price: req.body.price
-    }, { where: { id: req.params.id } }
-    ).then((order) => res.status(200).send(order))
-        .catch((err) => { res.status(400).json({ err }); })
+    console.log(req.body.state)
+    Cart.findOne({ where: { id: req.params.id } })
+    .then(cart => {
+      cart.update({
+       state:req.body.state
+      }).then((c) => res.status(200).json(c))
+    })
+    .catch((error) => { res.status(400).json(error); })
 })
 //SXX : Crear Ruta para Cerrar un Carrito
 // PATCH /orders/:id
