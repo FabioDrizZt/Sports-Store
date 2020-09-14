@@ -166,7 +166,8 @@ export function addtoCart(userId, product) {
   return function (dispatch) {
     axios.post(`${SERVER_ADDRESS}/users/${userId}/cart`, product)
       .then((res) => {
-        dispatch({ type: ADD_TO_CART, payload: res.data });
+        console.log(res.data);
+        (res.data) ? dispatch({ type: ADD_TO_CART, payload: res.data }) : (alert("Producto ya existente en el carrito"));
       })
       .catch((error) => alert(error, "error"));
   };
