@@ -13,7 +13,7 @@ router.use('/products', productRouter);
 router.use('/users', userRouter);
 router.use('/orders', orderRouter);
 
-server.put("/auth/promote/:id", (req, res) => {
+router.put("/auth/promote/:id", (req, res) => {
     User.update(
       {
         role: "admin",
