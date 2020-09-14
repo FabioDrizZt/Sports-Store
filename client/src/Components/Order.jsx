@@ -4,18 +4,17 @@ import { useSelector, useDispatch } from "react-redux";
 //import { removeFromCart } from "../actions"
 
 const Order = ({
-  id = 1,
-  name = "Zapa",
-  description = "re piola",
-  size = "43",
-  price = 500,
-  amount = 1,
-  stock = 8,
+  id = 888888,
+  name = "88888",
+  description = "888888",
+  size = "888888",
+  price = 88888,  
+  stock = 88888,
   image = "https://static.mercadoshops.com/zapatilla-salomon-speedcross-hombre-trail-running-v_iZ878255024XsZ230467303XpZ1XfZ230467303-23380324018-5XvZdxIM.jpg",
 }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const [cantidad, setCantidad] = useState(amount);
+  const [cantidad, setCantidad] = useState(1);
 
   function minusClick(e) {
     e.preventDefault();
