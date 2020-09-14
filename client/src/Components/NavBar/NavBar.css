@@ -88,3 +88,15 @@
     background-color: #e0434d;
     text-decoration: none;
   }
+
+  .logCart {
+    width: 17rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logCart {
+    width: 7.5rem;
+  }
