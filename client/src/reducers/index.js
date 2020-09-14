@@ -24,6 +24,7 @@ import {
     UPDATE_ORDER_AMOUNT,
     UPDATE_ORDER,
     CLOSE_CART,
+    UPDATE_REVIEW,
     // aca van los actions del DELETE/REMOVE
     REMOVE_PRODUCT,
     REMOVE_CATEGORY,
@@ -103,6 +104,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, orders: state.orders.filter(order => order.id !== action.payload.id) }
         } case CLOSE_CART: {
             return { ...state, carts: state.carts.map(c => { if (c.id === action.payload.id) { c.state = "closed" } }) }
+        } case UPDATE_REVIEW: {
+            return { ...state, reviews: state.reviews.filter(r => r.id !== action.payload.id) }
         } case REMOVE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload) }
         } case REMOVE_CATEGORY: {
