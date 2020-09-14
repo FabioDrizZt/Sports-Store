@@ -80,7 +80,12 @@ function rootReducer(state = initialState, action) {
         } case CREATE_PRODUCT: {
             return { ...state, products: state.products.concat(action.payload) }
         } case CREATE_USER: {
-            return { ...state, users: state.users.concat(action.payload) }
+                console.log(action.payload);
+                if (action.payload.name !== "SequelizeValidationError" && action.payload.name !== "SequelizeUniqueConstraintError") {
+                    return { ...state, users: state.users.concat(action.payload) }
+                }
+            else {
+                alert("Ya Existe DNI o Email ver")
         } case CREATE_CATEGORY: {
             return { ...state, categories: state.categories.concat(action.payload) }
         } case CREATE_PRODUCT_CATEGORY: {
