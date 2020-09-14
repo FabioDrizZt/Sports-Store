@@ -58,7 +58,7 @@ server.post("/", (req, res) => {
     stock: req.body.stock,
     image: req.body.image
   }).then(product => {
-    res.status(201).send(product);
+    res.status(200).send(product);
   }).catch(err => res.send(err))
 });
 // S18 : Crear ruta para crear/agregar Categoria
@@ -115,7 +115,7 @@ server.delete("/:idProducto/category/:idCategoria", (req, res) => {
     },
   }).then((deletedRecord) => {
     if (deletedRecord === 1) res.status(200).json({ message: "Se elimino la categoria al producto" });
-    else res.status(404).json({ message: "Categoria no encontrada" });
+    else res.status(400).json({ message: "Categoria no encontrada" });
   }).catch((error) => { res.status(500).json(error); });
 });
 // S27 eliminar un producto DELETE /products/:id
@@ -124,7 +124,7 @@ server.delete("/:id", (req, res) => {
   Product.destroy({ where: { id: req.params.id } })
     .then(deletedRecord => {
       if (deletedRecord === 1) res.status(200).json({ message: "Se elimino el producto" });
-      else res.status(404).json({ message: "Producto no encontrado" });
+      else res.status(400).json({ message: "Producto no encontrado" });
     }).catch((error) => { res.status(500).json(error); });
 })
 //S19 : Crear Ruta para eliminar Categoria
@@ -134,7 +134,7 @@ server.delete("/category/:id", (req, res, next) => {
     where: { id: req.params.id },
   }).then((deletedRecord) => {
     if (deletedRecord === 1) res.status(200).json({ message: "Su categoria fue eliminado satisfactoriamente." });
-    else res.status(404).json({ message: "categoria no encontrado." });
+    else res.status(400).json({ message: "categoria no encontrado." });
   }).catch((error) => { res.status(500).json(error); });
 });
 
