@@ -48,15 +48,21 @@ server.post("/:idUser/cart", (req, res) => {
           productId: req.body.productId,
           cartId: cart[0].id,
         },
-        include: { model: Product },
         defaults: {
-        productId: req.body.productId,
+          productId: req.body.productId,
           cartId: cart[0].id,
           price: req.body.price,
           amount: req.body.amount,
-        },
-      }).then((resp) => { res.send(resp[0]); })
-        .catch((error) => { res.send(error); });
+        }
+      }).then((order) => {
+        if (order[1]) {
+          Order.findOne({
+            where: { id: order[0].id },
+            include: [{ model: Product }]
+          }).then((order) => { res.send(order) })
+        }
+        else (res.send(false))
+      }).catch((error) => { res.send(error); });
     });
 });
 //S34 ruta para crear usuario
@@ -118,15 +124,15 @@ server.delete("/:id", (req, res) => {
 // DELETE /users/:idUser/cart/ 
 //eliminar del carrito y de orders
 server.delete("/:idUser/cart", (req, res) => {
-  Cart.findOne({where: { userId: req.params.idUser, state: "open" }})     
-      .then((cart)=>{
-        Order.destroy({where:{cartId:cart.id}})
-          .then((deletedRecord) => {
-  if (deletedRecord > 0) res.status(200).json({ message: "Se eliminaron las orders asociada al carrito" });
+  Cart.findOne({ where: { userId: req.params.idUser, state: "open" } })
+    .then((cart) => {
+      Order.destroy({ where: { cartId: cart.id } })
+        .then((deletedRecord) => {
+          if (deletedRecord > 0) res.status(200).json({ message: "Se eliminaron las orders asociada al carrito" });
           else res.status(400).json({ message: "orden no encontrada" });
         })
-      })
-      .catch(err=>res.send(err))
-  });
+    })
+    .catch(err => res.send(err))
+});
 
 module.exports = server;
