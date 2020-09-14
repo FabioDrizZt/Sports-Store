@@ -1,15 +1,14 @@
 import "./CreateProduct.css";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { createProduct } from "../../actions/index";
 import React, { useState, useEffect } from "react";
-import { getCategories, getProducts } from "../../actions";
+import { getCategories } from "../../actions";
 import AsignarProducto from "./AsignarProducto";
 import EliminarAsignacion from "./EliminarAsignacion";
 import NavBarAdmin from '../NavBar/NavBarAdmin';
 
 function CreateProduct() {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
   useEffect(() => {
     dispatch(getCategories());
   }, [getCategories]);

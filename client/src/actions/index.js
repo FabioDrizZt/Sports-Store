@@ -186,9 +186,9 @@ export function addtoCart(userId, product) {
     };
 }
 //S26 : Crear ruta para Modificar Producto
-export function updateProduct(product) {
+export function updateProduct(productId,product) {
   return function (dispatch) {
-    axios.put(`${SERVER_ADDRESS}/products/${product.id}`, product)
+    axios.put(`${SERVER_ADDRESS}/products/${productId}`, product)
       .then((res) => {
         dispatch({ type: UPDATE_PRODUCT, payload: product });
       }).then(() => alert("Se modifico el producto"))
