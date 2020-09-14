@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getOrders } from "../../actions";
+import { getOrders, updateOrder } from "../../actions";
 import NavBarAdmin from '../NavBar/NavBarAdmin';
 import "./OrdersTable.css"
 
 function OrdersTable() {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders);
+  const [state, setState] = useState("")
 
   // useEffect(() => {
     
@@ -14,6 +15,7 @@ function OrdersTable() {
 
   function mostrarOrdenes(state){
     dispatch(getOrders(state));
+    setState(state)
   }
  
   return ( 
@@ -27,11 +29,37 @@ function OrdersTable() {
         {
             orders&&orders.map(cart=>{
             return <div className="order-table col-6">
-              <div>
+              <div>             
+                {state==="closed" ? <div className="botones"> <button className="btn btn-success btn-sm"
+                style={{margin:0}}
+                onClick={()=>{dispatch(updateOrder(cart.id,"open"))}}>abrir orden</button>
+                <button className="btn btn-danger btn-sm"
+                style={{margin:0}}
+                onClick={()=>{dispatch(updateOrder(cart.id,"cancelled"))}}
+                >cancelar orden</button> </div>: <div></div>
+            }
+             {state==="cancelled" ? <div className="botones"> <button className="btn btn-success btn-sm"
+                style={{margin:0}}
+                onClick={()=>{dispatch(updateOrder(cart.id,"open"))}}>abrir orden</button>
+                <button className="btn btn-warning btn-sm"
+                style={{margin:0}}
+                onClick={()=>{dispatch(updateOrder(cart.id,"closed"))}}
+                >cerrar orden</button> </div>: <div></div>
+            }
+             {state==="open" ? <div className="botones"> <button className="btn btn-warning btn-sm"
+                style={{margin:0}}
+                onClick={()=>{dispatch(updateOrder(cart.id,"closed"))}}>cerrar orden</button>
+                <button className="btn btn-danger btn-sm"
+                style={{margin:0}}
+                onClick={()=>{dispatch(updateOrder(cart.id,"cancelled"))}}
+                >cancelar orden</button> </div>: <div></div>
+            }
+               
+            
 		            <span><b>Cart Id: </b>{cart.id}</span>
 		            <span><b>User Id: </b>{cart.userId}</span>
                 <span><b>Estado: </b>{cart.state}</span>
-                <p><b>Órdenes: </b>
+                <p><span><b>Órdenes: </b></span>
                 <span>		           
                   {cart.orders.map(order=>{
                   return <p>
