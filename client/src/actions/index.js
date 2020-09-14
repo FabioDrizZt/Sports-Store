@@ -18,6 +18,7 @@ export const CREATE_USER = "CREATE_USER";
 export const CREATE_CATEGORY = "CREATE_CATEGORY";
 export const CREATE_PRODUCT_CATEGORY = "CREATE_PRODUCT_CATEGORY";
 export const ADD_TO_CART = "ADD_TO_CART";
+export const CREATE_REVIEW = "CREATE_REVIEW";
 // aca van los actions del UPDATE/MODIFICAR
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
@@ -171,7 +172,18 @@ export function addtoCart(userId, product) {
       })
       .catch((error) => alert(error, "error"));
   };
-}//S26 : Crear ruta para Modificar Producto
+}
+  // S54 : Crear ruta para crear/agregar Review
+  export function createReview(productId) {
+    return function (dispatch) {
+      axios.post(`${SERVER_ADDRESS}/products/product/${productId}/review`)
+        .then((res) => {
+          dispatch({ type: CREATE_REVIEW , payload: res.data });
+        })
+        .catch((error) => alert(error, "error"));
+    };
+}
+//S26 : Crear ruta para Modificar Producto
 export function updateProduct(product) {
   return function (dispatch) {
     axios.put(`${SERVER_ADDRESS}/products/${product.id}`, product)
