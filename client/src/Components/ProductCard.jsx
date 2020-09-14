@@ -42,14 +42,13 @@ function ProductCard({
         <hr />
         <h5 className="card-text">Descripcion del producto</h5>
         <p>{descripcion}</p>
-        <p>{cantidad}</p>
+        <p>Stock: {stock}</p>
         <p className="price">
           <b>$ {precio}</b>
         </p>
         <Link to={`/products/${id}`}>
           <button className="b btn">Ver mas</button>
         </Link>
-        <Link to="/cart">
           <button
             onClick={() => agregarAlCarrito(id, precio, cantidad)}
             className={stock === 0 ? "btn btn-secondary" : "btn btn-success"}
@@ -57,7 +56,6 @@ function ProductCard({
           >
             {stock === 0 ? "No disponible" : "Agregar a Carrito"}
           </button>
-        </Link>
       </div>
     </div>
   );
