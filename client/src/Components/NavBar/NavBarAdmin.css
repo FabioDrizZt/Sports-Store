@@ -18,6 +18,7 @@
 }
 .NavbarAdmin a {
     padding-right:30px;
+    width: 163px;
 
 }
 .NavbarAdmin a:hover {
@@ -27,5 +28,4 @@
 }
 .containerNavAdmin {
     padding-bottom: 50px;
-
 }
