@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { Product, Category, productcategory } = require("../db.js");
+const { Product, Category, productcategory, Review} = require("../db.js");
 const { Op } = require("sequelize");
 
 // S21 : Crear ruta que devuelva todos los productos
@@ -76,6 +76,19 @@ server.post("/:idProducto/category/:idCategoria", (req, res) => {
     .then((pc) => res.send(pc))
     .catch((err) => res.send(err));
 });
+// S54 : Crear ruta para crear/agregar Review
+// POST /products/:id/review
+server.post("/:id/review", (req, res) => {
+  Review.create({
+    userId: req.body.userId,
+    productId: req.params.id,
+    description: req.body.description,
+    score: req.body.score
+  })
+    .then((review) => res.send(review))
+    .catch((error) => res.send(error));
+});
+
 //S26 : Crear ruta para Modificar Producto
 // PUT /products/:id
 // Modifica el producto con id: id. Retorna 400 si los campos enviados no son correctos.
@@ -129,13 +142,26 @@ server.delete("/:id", (req, res) => {
 })
 //S19 : Crear Ruta para eliminar Categoria
 // DELETE /products/category/:id
-server.delete("/category/:id", (req, res, next) => {
+server.delete("/category/:id", (req, res) => {
   Category.destroy({
     where: { id: req.params.id },
   }).then((deletedRecord) => {
     if (deletedRecord === 1) res.status(200).json({ message: "Su categoria fue eliminado satisfactoriamente." });
     else res.status(400).json({ message: "categoria no encontrado." });
   }).catch((error) => { res.status(500).json(error); });
+});
+
+server.delete("/:id/review/:idReview", (req, res) => {
+  Review.destroy({
+    where: {
+      productId: req.params.id,
+      id:req.params.idReview,
+      userId: req.body.userId 
+    }
+  }).then((deletedRecord) => {
+    if (deletedRecord === 1) res.status(200).json({ message: "Su review fue eliminado satisfactoriamente." });
+    else res.status(400).json({ message: "review no encontrado." });
+  }).catch((error) => { res.status(500).send(error); });
 });
 
 module.exports = server;

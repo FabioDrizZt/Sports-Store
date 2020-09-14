@@ -18,6 +18,7 @@ export const CREATE_USER = "CREATE_USER";
 export const CREATE_CATEGORY = "CREATE_CATEGORY";
 export const CREATE_PRODUCT_CATEGORY = "CREATE_PRODUCT_CATEGORY";
 export const ADD_TO_CART = "ADD_TO_CART";
+export const CREATE_REVIEW = "CREATE_REVIEW";
 // aca van los actions del UPDATE/MODIFICAR
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
@@ -33,6 +34,7 @@ export const REMOVE_PRODUCT_CATEGORY = "REMOVE_PRODUCT_CATEGORY";
 export const REMOVE_CART = "REMOVE_CART";
 export const REMOVE_USER = "REMOVE_USER";
 export const REMOVE_ORDER = "REMOVE_ORDER";
+export const REMOVE_REVIEW = "REMOVE_REVIEW";
 
 //S24 : Crear ruta de producto individual, pasado un ID que retorne un producto con sus detalles
 export function getProduct(productId) {
@@ -172,7 +174,18 @@ export function addtoCart(userId, product) {
       })
       .catch((error) => alert(error, "error"));
   };
-}//S26 : Crear ruta para Modificar Producto
+}
+  // S54 : Crear ruta para crear/agregar Review
+  export function createReview(productId) {
+    return function (dispatch) {
+      axios.post(`${SERVER_ADDRESS}/products/${productId}/review`)
+        .then((res) => {
+          dispatch({ type: CREATE_REVIEW , payload: res.data });
+        })
+        .catch((error) => alert(error, "error"));
+    };
+}
+//S26 : Crear ruta para Modificar Producto
 export function updateProduct(product) {
   return function (dispatch) {
     axios.put(`${SERVER_ADDRESS}/products/${product.id}`, product)
@@ -295,5 +308,16 @@ export function removeOrder(orderId) {
         dispatch({ type: REMOVE_ORDER, payload: orderId });
       }).then(() => alert("Se elimino la orden del carrito satisfactoriamente"))
       .catch((error) => alert(error, "error"));
+  }
+}
+// Eliminar una review
+export function removeReview(IdProduct,idReview) {
+  return function (dispatch) {
+    axios.delete(`${SERVER_ADDRESS}/products/${IdProduct}/review/${idReview}`)
+      .then((res) => {
+        dispatch({ type: REMOVE_ORDER, payload: idReview});
+        alert(res.message)
+      })
+      .catch((error) => alert(error));
   }
 }

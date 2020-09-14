@@ -16,6 +16,7 @@ import {
     CREATE_CATEGORY,
     CREATE_PRODUCT_CATEGORY,
     ADD_TO_CART,
+    CREATE_REVIEW,
     // aca van los actions del UPDATE/MODIFICAR
     UPDATE_PRODUCT,
     UPDATE_CATEGORY,
@@ -30,7 +31,8 @@ import {
     REMOVE_PRODUCT_CATEGORY,
     REMOVE_CART,
     REMOVE_USER,
-    REMOVE_ORDER
+    REMOVE_ORDER,
+    REMOVE_REVIEW
 } from '../actions';
 
 const initialState = {
@@ -43,7 +45,8 @@ const initialState = {
     cart: [],
     users: [], // lista de usuarios para q vea el admin
     user: [], // deberia guardar el usuario logueado
-    auth:[]
+    auth:[],
+    reviews: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -91,6 +94,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, user: [...state.user.filter(x => x.id !== action.payload.id)].concat(action.payload)}
         }case CREATE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.concat(action.payload) }
+        } case CREATE_REVIEW: {
+            return { ...state, reviews: state.reviews.concat(action.payload) }
         } case UPDATE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
         } case UPDATE_CATEGORY: {
@@ -116,7 +121,9 @@ function rootReducer(state = initialState, action) {
         } case REMOVE_CART: {
             return { ...state, cart: [] }
         } case REMOVE_ORDER: {
-            return { ...state, cart: state.cart.filter(order => order.id !== action.payload) }
+            return { ...state, cart: state.cart.filter(order => order.id !== action.payload) }   
+        } case REMOVE_REVIEW: {
+            return { ...state, reviews: state.reviews.filter(rev => rev.id !== action.payload) }
         }
         default:
             return state;
