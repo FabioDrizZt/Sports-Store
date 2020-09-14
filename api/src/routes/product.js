@@ -98,6 +98,21 @@ server.post("/:id/review", (req, res) => {
     .catch((error) => res.send(error));
 });
 
+// S55 : Crear ruta para Modificar Review
+// PUT /product/:id/review/:idReview
+
+server.put("/:id/review/:idReview", (req, res) => {
+  Product.findOne({ where: { id: req.params.id,  idReview: req.params.idReview} })
+    .then(review => {
+      review.update({
+        description: req.body.description,
+        score: req.body.score
+      }).then((r) => res.status(200).json(r))
+    })
+    .catch((error) => { res.status(400).json(error); })
+});
+
+
 //S26 : Crear ruta para Modificar Producto
 // PUT /products/:id
 // Modifica el producto con id: id. Retorna 400 si los campos enviados no son correctos.

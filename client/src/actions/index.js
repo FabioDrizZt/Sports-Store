@@ -28,6 +28,8 @@ export const UPDATE_ORDER_AMOUNT = "UPDATE_ORDER_AMOUNT";
 export const UPDATE_ORDER = "UPDATE_ORDER";
 export const PROMOTE_USER = "PROMOTE_USER";
 export const CLOSE_CART = "CLOSE_CART"
+export const UPDATE_REVIEW = "UPDATE_REVIEW"
+
 // aca van los actions del DELETE/REMOVE
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const REMOVE_CATEGORY = "REMOVE_CATEGORY";
@@ -262,6 +264,15 @@ export function closeCart(cartId) {
       .then((res) => {
         dispatch({ type: CLOSE_CART, payload: cartId });
       }).then(() => alert("Se cerro el carrito"))
+      .catch((error) => alert(error, "error"));
+  };
+}// S55 : Crear ruta para Modificar Review
+export function updateReview(productId, reviewId) {
+  return function (dispatch) {
+    axios.put(`${SERVER_ADDRESS}/product/${productId}/review/${reviewId}`)
+      .then((res) => {
+        dispatch({ type: UPDATE_REVIEW, payload: res.data });
+      })
       .catch((error) => alert(error, "error"));
   };
 }// S27 eliminar un producto DELETE /products/:id
