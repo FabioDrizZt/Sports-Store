@@ -1,25 +1,21 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link  } from "react-router-dom";
+// import { useDispatch } from "react-redux";
 // import { loginUser } from "../../actions/index";
 import "./Login.css";
 
 const Form = () => {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const [input, setInput] = useState({});
-  const history = useHistory();
 
   return (
     <div className="form">
       <div className="sesion">Iniciar Sesión</div>
+
       <form
         onSubmit={
-          (e) => alert("Hacemos de cuenta q se logueo el usuario")
-          /* dispatch(loginUser(input)).then(() => 
-          {
-            history.push("/");
-            window.location.reload();
-          }) */
+          (e) => {alert("Sesión Iniciada Correctamente !");window.history.back();}
+          // dispatch(loginUser(input)).
         }
       >
         <div>
@@ -32,6 +28,7 @@ const Form = () => {
             required
           />
         </div>
+
         <div>
           <input
             className="input"
@@ -43,12 +40,17 @@ const Form = () => {
           />
         </div>
 
+        <div className="boton">
+          <input className="submit" type="submit" value="Iniciar Sesión" />
+        </div>
+
         <div className="login">
           No tenes cuenta capo?
           <Link className="nav-link" to="/users">
             Registrate acá campeon
           </Link>
         </div>
+
       </form>
       <small>Sports Store ©</small>
     </div>
