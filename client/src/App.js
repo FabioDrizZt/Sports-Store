@@ -12,6 +12,7 @@ import Home from "./Components/Home";
 import Cart from "./Components/Cart";
 import Order from "./Components/Order";
 import Admin from "./Components/Admin";
+import Login from "./Components/Login";
 import OrdersTable from "./Components/OrderTable/OrdersTable";
 import CreateProduct from './Components/FormCRUD/CreateProduct';
 
@@ -35,21 +36,22 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <Route exact path="/" render={() => <Home />} />
-      <Route exact path="/cart" render={() => <Cart />} />
-      <Route exact path="/category" render={() => <FormCategory />} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/cart" component={Cart} />
+      <Route exact path="/category" component={FormCategory} />
       <Route exact path="/formcrud" component={FormCrud} />
-      <Route exact path='/order' render={() => <Order />} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/order" component={Order} />
       <Route exact path="/products/:id" render={(match) => <Product match={match} />} />
-      <Route exact path="/products" render={() => <Catalogo />} />
+      <Route exact path="/products" component={Catalogo} />
       <Route exact path="/users" component={UserCrud} />
       {/* RUTAS DEL ADMINISTRADOR */}
-      <Route exact path='/admin' render={() => <Admin />} />
-      <Route exact path='/admin/categories' component={FormCategory} />
+      <Route exact path="/admin" component={Admin} />
+      <Route exact path="/admin/categories" component={FormCategory} />
       <Route exact path="/admin/edit/product/:id" render={(match) => <EditProduct match={match} />} />
-      <Route exact path='/admin/myProducts' component={FormCrud} />
-      <Route exact path='/admin/newProduct' component={CreateProduct} />
-      <Route exact path="/admin/orders" render={() => <OrdersTable />} />
+      <Route exact path="/admin/myProducts" component={FormCrud} />
+      <Route exact path="/admin/newProduct" component={CreateProduct} />
+      <Route exact path="/admin/orders" component={OrdersTable} />
     </div>
   );
 }
