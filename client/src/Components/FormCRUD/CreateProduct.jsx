@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { getCategories, getProducts } from "../../actions";
 import AsignarProducto from "./AsignarProducto";
 import EliminarAsignacion from "./EliminarAsignacion";
+import NavBarAdmin from '../NavBar/NavBarAdmin';
 
 function CreateProduct() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function CreateProduct() {
 
   return (
     <div className="containerAll">
+      <NavBarAdmin />
       <form
         className="containerPro"
         onSubmit={(e) => {
