@@ -76,59 +76,57 @@ function rootReducer(state = initialState, action) {
                 }
             }
         } case GET_USERS: {
+            return { ...state, cart: action.payload }
         } case CREATE_PRODUCT: {
             return { ...state, products: state.products.concat(action.payload) }
-        }
-            case CREATE_USER: {
+        } case CREATE_USER: {
                 console.log(action.payload);
                 if (action.payload.name !== "SequelizeValidationError" && action.payload.name !== "SequelizeUniqueConstraintError") {
                     return { ...state, users: state.users.concat(action.payload) }
                 }
             else {
-                alert("Ya Existe DNI o Email ver")}
-            } case CREATE_CATEGORY: {
-                return { ...state, categories: state.categories.concat(action.payload) }
-            } case CREATE_PRODUCT_CATEGORY: {
-                return { ...state, productCategories: state.productCategories.concat(action.payload) }
-            } case UPDATE_PRODUCT: {
-                return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
-            } case UPDATE_CATEGORY: {
-                let categories = [...state.categories.filter(x => x.id !== action.payload.id)]
-                return { ...state, categories: categories.concat(action.payload) }
-            } case UPDATE_ORDER_AMOUNT: {
-                let amount = [...state.amount.filter(x => x.amount !== action.payload.amount)]
-                return { ...state, amount: amount.concat(action.payload) }
-            } case UPDATE_USER: {
-                return { ...state, users: state.users.filter(user => user.id !== action.payload.id) }
-            } case UPDATE_ORDER: {
-                return { ...state, orders: state.orders.filter(order => order.id !== action.payload.id) }
-            } case CLOSE_CART: {
-                return { ...state, carts: state.carts.map(c => { if (c.id === action.payload.id) { c.state = "closed" } }) }
-            } case REMOVE_PRODUCT: {
-                return { ...state, products: state.products.filter(product => product.id !== action.payload) }
-            } case REMOVE_CATEGORY: {
-                return { ...state, categories: state.categories.filter(category => category.id !== action.payload) }
-            } case REMOVE_PRODUCT_CATEGORY: {
-                return { ...state, productCategories: state.productCategories.filter(productCategory => productCategory.name !== action.payload.name) }
-            } case REMOVE_USER: {
-                return { ...state, users: state.user.filter(user => user.name !== action.payload.name) }
-            } case UPDATE_ORDER_AMOUNT: {
-                let amount = [...state.amount.filter(x => x.amount !== action.payload.amount)]
-                return { ...state, amount: amount.concat(action.payload) }
-            } case ADD_TO_CART: {
-                let productoId = action.payload.productId;
-                let product = state.products.filter(x => x.id === productoId);
-                let IsInCart = state.cart.find(x => x.id === productoId);
-                if (IsInCart !== undefined) {
-                    return { ...state }
-                } else {
-                    return { ...state, cart: state.cart.concat(product) }
-                }
-            } case REMOVE_CART: {
-                return { ...state, cart: [] }
-            } case REMOVE_ORDER: {
-                return { ...state, cart: state.cart.filter(order => order.id !== action.payload.orderId) }
+                alert("Ya Existe DNI o Email ver")
+        } case CREATE_CATEGORY: {
+            return { ...state, categories: state.categories.concat(action.payload) }
+        } case CREATE_PRODUCT_CATEGORY: {
+            return { ...state, productCategories: state.productCategories.concat(action.payload) }
+        } case UPDATE_PRODUCT: {
+            return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
+        } case UPDATE_CATEGORY: {
+            return { ...state, categories: [...state.categories.filter(x => x.id !== action.payload.id)].concat(action.payload) }
+        } case UPDATE_ORDER_AMOUNT: {
+            return { ...state, cart: [...state.cart.filter(x=>x.id!==action.payload.id)].concat(action.payload)}
+        } case UPDATE_USER: {
+            return { ...state, users: state.users.filter(user => user.id !== action.payload.id) }
+        } case UPDATE_ORDER: {
+            return { ...state, orders: state.orders.filter(order => order.id !== action.payload.id) }
+        } case CLOSE_CART: {
+            return { ...state, carts: state.carts.map(c => { if (c.id === action.payload.id) { c.state = "closed" } }) }
+        } case REMOVE_PRODUCT: {
+            return { ...state, products: state.products.filter(product => product.id !== action.payload) }
+        } case REMOVE_CATEGORY: {
+            return { ...state, categories: state.categories.filter(category => category.id !== action.payload) }
+        } case REMOVE_PRODUCT_CATEGORY: {
+            return { ...state, productCategories: state.productCategories.filter(productCategory => productCategory.name !== action.payload.name) }
+        } case REMOVE_USER: {
+            return { ...state, users: state.user.filter(user => user.name !== action.payload.name) }
+        } case UPDATE_ORDER_AMOUNT: {
+            let amount = [...state.amount.filter(x => x.amount !== action.payload.amount)]
+            return { ...state, amount: amount.concat(action.payload) }
+        } case ADD_TO_CART: {
+            let productoId = action.payload.productId;
+            let product = state.products.filter(x => x.id === productoId);
+            let IsInCart = state.cart.find(x => x.id === productoId);
+            if (IsInCart !== undefined) {
+                return { ...state }
+            } else {
+                return { ...state, cart: state.cart.concat(product) }
             }
+        } case REMOVE_CART: {
+            return { ...state, cart: [] }
+        } case REMOVE_ORDER: {
+            return { ...state, cart: state.cart.filter(order => order.id !== action.payload.orderId) }
+        }
         default:
             return state;
     }

@@ -22,7 +22,7 @@ server.get('/:id', (req, res) => {
 
 // Traer una orden
 // GET /orders/:id
-server.get('/order/:id', (req, res) => {
+server.get('/:id', (req, res) => {
     Order.findOne({
         where: { id: req.params.id }
     }).then((order) => res.send(order))
@@ -32,12 +32,14 @@ server.get('/order/:id', (req, res) => {
 //S47 : Crear Ruta para modificar una Orden
 // PUT /orders/:id
 server.put("/:id", (req, res) => {
-    Order.update({
-        amount: req.body.amount,
-        price: req.body.price
-    }, { where: { id: req.params.id } }
-    ).then((order) => res.status(200).send(order))
-        .catch((err) => { res.status(400).json({ err }); })
+    console.log(req.body.state)
+    Cart.findOne({ where: { id: req.params.id } })
+    .then(cart => {
+      cart.update({
+       state:req.body.state
+      }).then((c) => res.status(200).json(c))
+    })
+    .catch((error) => { res.status(400).json(error); })
 })
 //SXX : Crear Ruta para Cerrar un Carrito
 // PATCH /orders/:id
@@ -51,12 +53,13 @@ server.patch("/:id", (req, res) => {
 
 // Eliminar una orden del carrito
 // DELETE /orders/:id
-server.delete("/:id", (req, res) => {
-    Order.destroy({ where: { id: req.params.id } })
-      .then((deletedRecord) => {
+server.delete("/:orderId", (req, res) => {
+    Order.destroy({
+        where: { id: req.params.orderId }
+    }).then((deletedRecord) => {
         if (deletedRecord === 1) res.status(200).json({ message: "Se eliminó su orden del carrito" });
-        else res.status(404).json({ message: "Orden no encontrada" });
-      });
-  });
+        else res.status(400).json({ message: "Orden no encontrada" });
+    });
+});
 
 module.exports = server;
