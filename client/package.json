@@ -16,6 +16,13 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
+  "devDependencies": {
+    "eslint": "*",
+    "prettier": "*",
+    "babel-eslint": "*",
+    "eslint-config-prettier": "*",
+    "eslint-plugin-react": "*"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
