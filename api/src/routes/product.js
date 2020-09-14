@@ -80,7 +80,7 @@ server.post("/:idProducto/category/:idCategoria", (req, res) => {
 // POST /product/:id/review
 server.post("/product/:id/review", (req, res) => {
   Review.create({
-    //Gente hay algo que no estoy haciendo aqui que es meterle el id user pero la ruta no me da nada de eso asi que ...
+    userId: req.body.userId,
     productId: req.params.id,
     description: req.body.description,
     score: req.body.score
