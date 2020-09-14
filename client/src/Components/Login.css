@@ -1,14 +1,10 @@
 .login{
-
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border-radius: 7px;
-    background-color:#f9a825;
-    color: white;
-
-
+    background-color: linear-gradient(to top, #004e92, #000428);;
 }
 
 .form {
@@ -16,8 +12,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
- 
-
 }
 
 .input {
@@ -32,9 +26,9 @@
 .sesion {
     font-size:xx-large;
     margin-top: 10px;
-    margin-bottom: 10px;
-    
+    margin-bottom: 10px;    
 }
+
 .submit{
     margin-left:20px ;
     border-radius: 5px;

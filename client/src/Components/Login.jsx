@@ -13,7 +13,8 @@ const Form = () => {
     <div className="form">
       <div className="sesion">Iniciar Sesión</div>
       <form
-        onSubmit={(e) => alert('Hacemos de cuenta q se logueo el usuario')
+        onSubmit={
+          (e) => alert("Hacemos de cuenta q se logueo el usuario")
           /* dispatch(loginUser(input)).then(() => 
           {
             history.push("/");
@@ -24,10 +25,10 @@ const Form = () => {
         <div>
           <input
             className="input"
-            type="username"
-            placeholder="Username"
-            value={input.username}
-            onChange={(e) => setInput({ ...input, username: e.target.value })}
+            type="email"
+            placeholder="nombre@ejemplo.com"
+            value={input.email}
+            onChange={(e) => setInput({ ...input, email: e.target.value })}
             required
           />
         </div>
@@ -35,7 +36,7 @@ const Form = () => {
           <input
             className="input"
             type="password"
-            placeholder="Contraseña"
+            placeholder="contraseña"
             value={input.password}
             onChange={(e) => setInput({ ...input, password: e.target.value })}
             required
@@ -43,13 +44,13 @@ const Form = () => {
         </div>
 
         <div className="login">
-          No tenes cuenta?
-          <Link className="nav-link" to="/createuser">
-            Registrate
+          No tenes cuenta capo?
+          <Link className="nav-link" to="/users">
+            Registrate acá campeon
           </Link>
         </div>
       </form>
-      <small>SixBeer Company</small>
+      <small>Sports Store ©</small>
     </div>
   );
 };
