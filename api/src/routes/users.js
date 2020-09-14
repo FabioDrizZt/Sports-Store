@@ -48,8 +48,9 @@ server.post("/:idUser/cart", (req, res) => {
           productId: req.body.productId,
           cartId: cart[0].id,
         },
+        include: { model: Product },
         defaults: {
-          productId: req.body.productId,
+        productId: req.body.productId,
           cartId: cart[0].id,
           price: req.body.price,
           amount: req.body.amount,
