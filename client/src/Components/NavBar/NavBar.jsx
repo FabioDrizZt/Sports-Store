@@ -27,12 +27,15 @@ export default function NavBar() {
         <div>
           <SearchBar />
         </div>
-        <Link to="/cart">
-          <img src={cart} alt="cart" className="mr-4 w-50" />
-        </Link>
-        <Link to="/login">
-          <img src={login} alt="login" className="mr-4 w-50" />
-        </Link>
+
+        <div className="logCart">
+          <Link to="/cart">
+            <img src={cart} alt="cart" className="mr-4 w-50" />
+          </Link>
+          <Link to="/login">
+            <img src={login} alt="login" className="mr-4 w-50" />
+          </Link>
+        </div>
       </header>
       <aside className="font sidebar">
         <button className="sidebar-close-button" onClick={closeMenu}>
