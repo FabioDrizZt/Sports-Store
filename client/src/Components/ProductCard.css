@@ -4,6 +4,7 @@ border-radius: 15px;
 margin: 20px;
 width: 30%;
 display: inline-block;
+background-color: whitesmoke;
 }
 .button {
     display: flex;
