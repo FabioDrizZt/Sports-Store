@@ -15,7 +15,6 @@
     text-decoration: none;
     border-right: 1px solid grey;
     margin-left: 2rem;
-    width: 170px;  /*para que no se mueva todo cuando haces hover*/   
 }
 .NavbarAdmin a {
     padding-right:30px;

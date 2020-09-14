@@ -25,8 +25,9 @@ function CreateProduct() {
   }
 
   return (
+    <>
+    <NavBarAdmin/>
     <div className="containerAll">
-      <NavBarAdmin />
       <form
         className="containerPro"
         onSubmit={(e) => {
@@ -160,6 +161,7 @@ function CreateProduct() {
         <EliminarAsignacion />
       </form>
     </div>
+    </>
   );
 }
 

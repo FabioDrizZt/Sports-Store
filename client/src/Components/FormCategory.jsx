@@ -26,8 +26,9 @@ function FormCategory() {
   }
 
   return (
-    <div className="container">
+    <>
       <NavBarAdmin />
+    <div className="container">
       <div className="row">
         <div className="col-6">
           <form
@@ -119,6 +120,7 @@ function FormCategory() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 export default FormCategory;

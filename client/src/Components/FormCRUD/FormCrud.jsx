@@ -1,5 +1,5 @@
 import React from "react";
-import CreateProduct from "./CreateProduct";
+import NavBarAdmin from "../NavBar/NavBarAdmin";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {removeProduct} from "../../actions/index";
@@ -14,7 +14,7 @@ function FormCrud() {
   
   return (
     <React.Fragment>
-      <CreateProduct />
+      <NavBarAdmin />
       <div>
         {products &&
           products.map((p) => (
