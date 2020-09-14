@@ -33,6 +33,7 @@ export const REMOVE_PRODUCT_CATEGORY = "REMOVE_PRODUCT_CATEGORY";
 export const REMOVE_CART = "REMOVE_CART";
 export const REMOVE_USER = "REMOVE_USER";
 export const REMOVE_ORDER = "REMOVE_ORDER";
+export const REMOVE_REVIEW = "REMOVE_REVIEW";
 
 //S24 : Crear ruta de producto individual, pasado un ID que retorne un producto con sus detalles
 export function getProduct(productId) {
@@ -176,7 +177,7 @@ export function addtoCart(userId, product) {
   // S54 : Crear ruta para crear/agregar Review
   export function createReview(productId) {
     return function (dispatch) {
-      axios.post(`${SERVER_ADDRESS}/products/product/${productId}/review`)
+      axios.post(`${SERVER_ADDRESS}/products/${productId}/review`)
         .then((res) => {
           dispatch({ type: CREATE_REVIEW , payload: res.data });
         })
@@ -293,5 +294,16 @@ export function removeOrder(orderId) {
         dispatch({ type: REMOVE_ORDER, payload: orderId });
       }).then(() => alert("Se elimino la orden del carrito satisfactoriamente"))
       .catch((error) => alert(error, "error"));
+  }
+}
+// Eliminar una review
+export function removeReview(IdProduct,idReview) {
+  return function (dispatch) {
+    axios.delete(`${SERVER_ADDRESS}/products/${IdProduct}/review/${idReview}`)
+      .then((res) => {
+        dispatch({ type: REMOVE_ORDER, payload: idReview});
+        alert(res.message)
+      })
+      .catch((error) => alert(error));
   }
 }
