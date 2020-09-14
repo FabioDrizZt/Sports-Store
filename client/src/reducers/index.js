@@ -28,7 +28,8 @@ import {
     REMOVE_CATEGORY,
     REMOVE_PRODUCT_CATEGORY,
     REMOVE_CART,
-    REMOVE_USER
+    REMOVE_USER,
+    REMOVE_ORDER
 } from '../actions';
 
 const initialState = {
@@ -119,6 +120,8 @@ function rootReducer(state = initialState, action) {
             }           
         } case REMOVE_CART: {
             return { ...state, cart: [] }
+        } case REMOVE_ORDER: {
+            return { ...state, orders: state.orders.filter(order => order.id !== action.payload.id) }
         }
         default:
             return state;
