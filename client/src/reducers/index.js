@@ -80,12 +80,9 @@ function rootReducer(state = initialState, action) {
         } case CREATE_PRODUCT: {
             return { ...state, products: state.products.concat(action.payload) }
         } case CREATE_USER: {
-                console.log(action.payload);
-                if (action.payload.name !== "SequelizeValidationError" && action.payload.name !== "SequelizeUniqueConstraintError") {
-                    return { ...state, users: state.users.concat(action.payload) }
-                }
-            else {
-                alert("Ya Existe DNI o Email ver")
+            if (action.payload.name !== "SequelizeValidationError" && action.payload.name !== "SequelizeUniqueConstraintError")
+                return { ...state, users: state.users.concat(action.payload) }
+            else alert("Ya Existe DNI o Email ver")
         } case CREATE_CATEGORY: {
             return { ...state, categories: state.categories.concat(action.payload) }
         } case CREATE_PRODUCT_CATEGORY: {
@@ -95,7 +92,7 @@ function rootReducer(state = initialState, action) {
         } case UPDATE_CATEGORY: {
             return { ...state, categories: [...state.categories.filter(x => x.id !== action.payload.id)].concat(action.payload) }
         } case UPDATE_ORDER_AMOUNT: {
-            return { ...state, cart: [...state.cart.filter(x=>x.id!==action.payload.id)].concat(action.payload)}
+            return { ...state, cart: [...state.cart.filter(x => x.id !== action.payload.id)].concat(action.payload) }
         } case UPDATE_USER: {
             return { ...state, users: state.users.filter(user => user.id !== action.payload.id) }
         } case UPDATE_ORDER: {
@@ -110,18 +107,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, productCategories: state.productCategories.filter(productCategory => productCategory.name !== action.payload.name) }
         } case REMOVE_USER: {
             return { ...state, users: state.user.filter(user => user.name !== action.payload.name) }
-        } case UPDATE_ORDER_AMOUNT: {
-            let amount = [...state.amount.filter(x => x.amount !== action.payload.amount)]
-            return { ...state, amount: amount.concat(action.payload) }
         } case ADD_TO_CART: {
-            let productoId = action.payload.productId;
-            let product = state.products.filter(x => x.id === productoId);
-            let IsInCart = state.cart.find(x => x.id === productoId);
-            if (IsInCart !== undefined) {
-                return { ...state }
-            } else {
-                return { ...state, cart: state.cart.concat(product) }
-            }
+            return { ...state, cart: state.cart.concat(action.payload) }
         } case REMOVE_CART: {
             return { ...state, cart: [] }
         } case REMOVE_ORDER: {
