@@ -306,7 +306,7 @@ export function removeOrder(orderId) {
     axios.delete(`${SERVER_ADDRESS}/orders/${orderId}`)
       .then((res) => {
         dispatch({ type: REMOVE_ORDER, payload: orderId });
-      }).then(() => alert("Se elimino la orden del carrito satisfactoriamente"))
+      }).then(() => console.log("Se elimino la orden del carrito satisfactoriamente"))
       .catch((error) => alert(error, "error"));
   }
 }
