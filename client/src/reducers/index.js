@@ -16,6 +16,7 @@ import {
     CREATE_CATEGORY,
     CREATE_PRODUCT_CATEGORY,
     ADD_TO_CART,
+    CREATE_REVIEW,
     // aca van los actions del UPDATE/MODIFICAR
     UPDATE_PRODUCT,
     UPDATE_CATEGORY,
@@ -41,7 +42,8 @@ const initialState = {
     product: [],
     cart: [],
     users: [], // lista de usuarios para q vea el admin
-    user: [] // deberia guardar el usuario logueado
+    user: [], // deberia guardar el usuario logueado
+    reviews: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -87,6 +89,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, categories: state.categories.concat(action.payload) }
         } case CREATE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.concat(action.payload) }
+        } case CREATE_REVIEW: {
+            return { ...state, reviews: state.reviews.concat(action.payload) }
         } case UPDATE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
         } case UPDATE_CATEGORY: {

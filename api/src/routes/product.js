@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { Product, Category, productcategory } = require("../db.js");
+const { Product, Category, productcategory, Review } = require("../db.js");
 const { Op } = require("sequelize");
 
 // S21 : Crear ruta que devuelva todos los productos
@@ -76,6 +76,19 @@ server.post("/:idProducto/category/:idCategoria", (req, res) => {
     .then((pc) => res.send(pc))
     .catch((err) => res.send(err));
 });
+// S54 : Crear ruta para crear/agregar Review
+// POST /product/:id/review
+server.post("/product/:id/review", (req, res) => {
+  Review.create({
+    //Gente hay algo que no estoy haciendo aqui que es meterle el id user pero la ruta no me da nada de eso asi que ...
+    productId: req.params.id,
+    description: req.body.description,
+    score: req.body.score
+  })
+    .then((review) => res.send(review))
+    .catch((error) => res.send(error));
+});
+
 //S26 : Crear ruta para Modificar Producto
 // PUT /products/:id
 // Modifica el producto con id: id. Retorna 400 si los campos enviados no son correctos.
