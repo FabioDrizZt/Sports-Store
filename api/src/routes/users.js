@@ -48,8 +48,9 @@ server.post("/:idUser/cart", (req, res) => {
           productId: req.body.productId,
           cartId: cart[0].id,
         },
+        include: { model: Product },
         defaults: {
-          productId: req.body.productId,
+        productId: req.body.productId,
           cartId: cart[0].id,
           price: req.body.price,
           amount: req.body.amount,
@@ -84,7 +85,7 @@ server.put("/:id", (req, res) => {
       role: req.body.role,
     },
     { where: { id: req.params.id } }
-  ).then(() => res.status(201).send("Usuario id: " + req.params.id + " actualizado satisfactoriamente")
+  ).then(() => res.status(200).send("Usuario id: " + req.params.id + " actualizado satisfactoriamente")
   ).catch((err) => res.send(err));
 });
 
@@ -99,7 +100,7 @@ server.put("/:idUser/cart", (req, res) => {
         { amount: req.body.amount, price: values[1].price * req.body.amount },
         { where: { cartId: values[0].id, productId: values[1].id } }
       )
-    ).then(() => res.status(201).send("Cantidad modificada satisfactoriamente"))
+    ).then(() => res.status(200).send("Cantidad modificada satisfactoriamente"))
     .catch((error) => { res.status(400).json(error); });
 });
 // -----> ***** DELETE ***** <-----
@@ -108,7 +109,7 @@ server.delete("/:id", (req, res) => {
   User.destroy({ where: { id: req.params.id } }).then((deletedRecord) => {
     if (deletedRecord === 1)
       res.status(200).json({ message: "Se elimino el Usuario" });
-    else res.status(404).json({ message: "Usuario no encontrado" });
+    else res.status(400).json({ message: "Usuario no encontrado" });
   });
 });
 

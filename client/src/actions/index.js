@@ -82,7 +82,7 @@ export function getOrder(orderId) {
 export function getOrders(cartState) {
   return function (dispatch) {
     axios.get(`${SERVER_ADDRESS}/orders/?status=${cartState}`)
-      .then((res) => {       
+      .then((res) => {
         dispatch({ type: GET_ORDERS, payload: res.data });
       }).catch((error) => alert(error, "error"));
   }
@@ -165,7 +165,7 @@ export function createProductCategory(productId, categoryId) {
 export function addtoCart(userId, product) {
   return function (dispatch) {
     axios.post(`${SERVER_ADDRESS}/users/${userId}/cart`, product)
-      .then((res) => {          
+      .then((res) => {
         dispatch({ type: ADD_TO_CART, payload: res.data });
       })
       .catch((error) => alert(error, "error"));
@@ -180,12 +180,12 @@ export function updateProduct(product) {
       .catch((error) => alert(error, "error"));
   };
 }//S20 : Crear ruta para Modificar Categoria
-export function updateCategory(id,input) {
+export function updateCategory(id, input) {
   return function (dispatch) {
-      axios.put(`${SERVER_ADDRESS}/products/category/${id}`,input)
-          .then(res => {
-              dispatch({ type: UPDATE_CATEGORY, payload: {id:id,name:input.name,description:input.description} });
-          }).catch(error => alert(error, 'error'))
+    axios.put(`${SERVER_ADDRESS}/products/category/${id}`, input)
+      .then(res => {
+        dispatch({ type: UPDATE_CATEGORY, payload: { id: id, name: input.name, description: input.description } });
+      }).catch(error => alert(error, 'error'))
   }
 }
 // S35 : Crear Ruta para modificar Usuario
@@ -271,7 +271,6 @@ export function removeUser(userId) {
       }).then(() => alert("Se elimino el usuario"))
       .catch((error) => alert(error, "error"));
   }
-
 }
 // Eliminar una orden del carrito
 export function removeOrder(orderId) {
@@ -282,5 +281,4 @@ export function removeOrder(orderId) {
       }).then(() => alert("Se elimino la orden del carrito satisfactoriamente"))
       .catch((error) => alert(error, "error"));
   }
-
 }
