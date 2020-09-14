@@ -85,7 +85,7 @@ function rootReducer(state = initialState, action) {
                     return { ...state, users: state.users.concat(action.payload) }
                 }
             else {
-                alert("Ya Existe DNI o Email")}
+                alert("Ya Existe DNI o Email ver")}
             } case CREATE_CATEGORY: {
                 return { ...state, categories: state.categories.concat(action.payload) }
             } case CREATE_PRODUCT_CATEGORY: {

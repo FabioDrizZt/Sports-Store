@@ -12,8 +12,9 @@ module.exports = (sequelize) => {
       },
     DNI: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique:true
+        unique:true,
+        allowNull: false
+        
       },
     email: {
         type: DataTypes.STRING,
