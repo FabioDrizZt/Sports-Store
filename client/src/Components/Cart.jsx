@@ -1,48 +1,26 @@
-import {Link } from 'react-router-dom';
-import React, { useEffect } from "react";
-import { removeCart,getUser,getCartUser} from "../actions"
+import { Link, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { removeCart, getUser, getCartUser } from "../actions";
 import { useSelector, useDispatch } from "react-redux";
 import s from "./Cart.css";
-// import Checkout from "./Checkout";
-import Order from './Order';
+import Checkout from "./Checkout";
+import Order from "./Order";
 
-// let carrito={
-//   id:1,
-//   amount: 5,
-//   price:400,
-//    product: {
-//     id : 2,
-//     name : "Zapa",
-//     description : "re piola",
-//     size : "43",
-//     price : 500,
-//     stock : 8,
-//     image : "https://static.mercadoshops.com/zapatilla-salomon-speedcross-hombre-trail-running-v_iZ878255024XsZ230467303XpZ1XfZ230467303-23380324018-5XvZdxIM.jpg",
-//   }   
-// }
 const Cart = (carrito) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    dispatch(getUser());
-    dispatch(getCartUser(user.id));
-  }, [getUser, getCartUser]);
-
-
-  // var total = cart.reduce(function(prev, cur) {
-  //   return prev + (cur.product.price * cur.amount);
-  // }, 0);
+    dispatch(getCartUser(1));
+  }, []);
 
   return (
     <div className={s.container}>
-      {cart && cart.map((order) =>   
-            <Order id = {order.product.id}
-            />
-        )}
+      {cart && cart.map((ord) => <Order order={ord} />)}
 
-      {/* <div className={s.subtotal}>
+      <div className={s.subtotal}>
         <h2>TOTAL DE LA COMPRA</h2>
         <h3 className={s.price}>${total}</h3>
       </div>
@@ -53,23 +31,46 @@ const Cart = (carrito) => {
           </Link>
         </div>
       ) : null}
-       <div>
+      <div>
         <Route
           exact
           path="/cart/checkout"
           render={() => <Checkout total={total} />}
         />
-      </div>  */}
-      { cart&&cart.length===0 ? 
-      <div className="mt-4">
-        <h1>Tu carrito está vacio!</h1>
-        <h2><Link to="/products">Ir al cátalogo</Link></h2>
-      </div> :
-      <button className="btn btn-danger mt-4"
-       onClick={()=>dispatch(removeCart(user.id))}>
-         Vaciar Carrito
-      </button>      
-    }
+      </div>
+      <button
+        className="btn btn-success mt-4"
+        onClick={() => window.history.back()}
+      >
+        Volver
+      </button>
+      {cart && cart.length === 0 ? (
+        <div className="mt-4">
+          <h1>Tu carrito está vacio!</h1>
+          <h2>
+            <Link to="/products">Ir al cátalogo</Link>
+          </h2>
+        </div>
+      ) : (
+        <button
+          className="btn btn-danger mt-4"
+          onClick={() => dispatch(removeCart(user.id))}
+        >
+          Vaciar Carrito
+        </button>
+      )}
+      <button
+        className="btn btn-success mt-4"
+        onClick={() =>
+          setTotal(
+            cart.reduce(function (prev, cur) {
+              return prev + cur.product.price * cur.amount;
+            }, 0)
+          )
+        }
+      >
+        Calcular Total
+      </button>
     </div>
   );
 };
