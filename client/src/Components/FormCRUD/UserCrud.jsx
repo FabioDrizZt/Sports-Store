@@ -34,7 +34,7 @@ function UserCrud() {
                   <li class="list-group-item">
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                       <div class="media-body order-2 order-lg-1">
-                        <h2 class="mt-0 font-weight-bold mb-2">{u.name} " " {u.lastName}" "Id:{u.id}</h2>
+                        <h2 class="mt-0 font-weight-bold mb-2">{u.name} {u.lastName} Id:{u.id}</h2>
                         <p class="font-italic text-muted mb-0 large">
                           {u.description}
                         </p>
