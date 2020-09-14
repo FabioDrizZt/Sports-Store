@@ -51,12 +51,13 @@ server.patch("/:id", (req, res) => {
 
 // Eliminar una orden del carrito
 // DELETE /orders/:id
-server.delete("/:id", (req, res) => {
-    Order.destroy({ where: { id: req.params.id } })
-      .then((deletedRecord) => {
+server.delete("/:orderId", (req, res) => {
+    Order.destroy({
+        where: { id: req.params.orderId }
+    }).then((deletedRecord) => {
         if (deletedRecord === 1) res.status(200).json({ message: "Se eliminó su orden del carrito" });
-        else res.status(404).json({ message: "Orden no encontrada" });
-      });
-  });
+        else res.status(400).json({ message: "Orden no encontrada" });
+    });
+});
 
 module.exports = server;
