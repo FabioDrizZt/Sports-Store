@@ -81,7 +81,7 @@ export function getOrder(orderId) {
 export function getOrders(cartState) {
   return function (dispatch) {
     axios.get(`${SERVER_ADDRESS}/orders/?status=${cartState}`)
-      .then((res) => {
+      .then((res) => {       
         dispatch({ type: GET_ORDERS, payload: res.data });
       }).catch((error) => alert(error, "error"));
   }
@@ -164,8 +164,8 @@ export function createProductCategory(productId, categoryId) {
 export function addtoCart(userId, product) {
   return function (dispatch) {
     axios.post(`${SERVER_ADDRESS}/users/${userId}/cart`, product)
-      .then((res) => {      
-        dispatch({ type: ADD_TO_CART, payload: product });
+      .then((res) => {          
+        dispatch({ type: ADD_TO_CART, payload: res.data });
       })
       .catch((error) => alert(error, "error"));
   };
@@ -256,7 +256,8 @@ export function removeCart(userId) {
     axios.delete(`${SERVER_ADDRESS}/users/${userId}/cart`)
       .then((res) => {
         dispatch({ type: REMOVE_CART, payload: res.data });
-      }).then(() => console.log("Se le elimino el carrito al usuario"))
+        console.log(res.data.message)
+      })
       .catch((error) => alert(error, "error"));
   };
 }// S37 : Crear Ruta para eliminar Usuario DELETE /users/:id

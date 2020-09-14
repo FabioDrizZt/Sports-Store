@@ -108,8 +108,7 @@ function rootReducer(state = initialState, action) {
             let amount = [...state.amount.filter(x => x.amount !== action.payload.amount)]
             return { ...state, amount: amount.concat(action.payload) }
         } case ADD_TO_CART: {
-            let productoId = action.payload.productId;
-            console.log(action.payload)
+            let productoId = action.payload.productId;     
             let product = state.products.filter(x=>x.id===productoId);
             let IsInCart = state.cart.find(x=>x.id===productoId);           
             if(IsInCart!==undefined){

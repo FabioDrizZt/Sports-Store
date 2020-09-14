@@ -113,13 +113,19 @@ server.delete("/:id", (req, res) => {
 });
 
 // S40 : Crear Ruta para vaciar el carrito
+//
 // DELETE /users/:idUser/cart/ 
+//eliminar del carrito y de orders
 server.delete("/:idUser/cart", (req, res) => {
-  Cart.destroy({ where: { userId: req.params.idUser, state: "open" } })
-    .then((deletedRecord) => {
-      if (deletedRecord === 1) res.status(200).json({ message: "Se eliminó el carrito" });
-      else res.status(404).json({ message: "Carrito no encontrado" });
-    });
-});
+  Cart.findOne({where: { userId: req.params.idUser, state: "open" }})     
+      .then((cart)=>{
+        Order.destroy({where:{cartId:cart.id}})
+          .then((deletedRecord) => {
+  if (deletedRecord > 0) res.status(200).json({ message: "Se eliminaron las orders asociada al carrito" });
+          else res.status(400).json({ message: "orden no encontrada" });
+        })
+      })
+      .catch(err=>res.send(err))
+  });
 
 module.exports = server;
