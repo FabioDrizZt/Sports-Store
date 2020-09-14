@@ -12,6 +12,7 @@ export const GET_CARTUSER = "GET_CARTUSER";
 export const GET_USER = "GET_USER";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 export const GET_USERS = "GET_USERS";
+export const GET_REVIEWS = "GET_REVIEWS"
 // aca van los actions del POST/CREATE
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const CREATE_USER = "CREATE_USER";
@@ -126,7 +127,17 @@ export function getUsers() {
       })
       .catch((error) => alert(error, "error"));
   };
-}// S17 : Crear ruta para agregar categorias de un producto.
+}//S57 : Crear Ruta para obtener todas las reviews de un producto.
+export function getReviews(id){
+  return function (dispatch){
+    axios.get(`${SERVER_ADDRESS}/product/${id}/review/`)
+    .then((res)=>{
+      dispatch({type:GET_REVIEWS,payload:res.data});
+    })
+    .catch((error)=>alert(error,"error"));
+  }
+}
+// S17 : Crear ruta para agregar categorias de un producto.
 export function createProduct(product) {
   return function (dispatch) {
     axios.post(`${SERVER_ADDRESS}/products/`, product)

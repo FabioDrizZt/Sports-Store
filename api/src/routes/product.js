@@ -48,9 +48,9 @@ server.get("/:id", (req, res) => {
 });
 /*S57 : Crear Ruta para obtener todas las reviews de un producto.
 GET /product/:id/review/*/
-server.get(":id/review/",(req,res)=>{
+server.get("/:id/review/",(req,res)=>{
   Review.findAll({
-    where: {productId: req.params.id}
+    where: {id: req.params.id}
   })
   .then((reviews)=>res.send(reviews))
   .catch((error)=>res.status(400).json({error}));
