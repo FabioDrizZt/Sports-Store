@@ -6,6 +6,8 @@ import { getCategories } from "../../actions";
 import AsignarProducto from "./AsignarProducto";
 import EliminarAsignacion from "./EliminarAsignacion";
 import NavBarAdmin from '../NavBar/NavBarAdmin';
+import { Redirect } from "react-router";
+
 
 function CreateProduct() {
   const dispatch = useDispatch();
@@ -14,6 +16,8 @@ function CreateProduct() {
   }, [getCategories]);
 
   const [input, setInput] = useState({});
+  const [redirect, setRedirect] = useState(false);
+  const x =  Array.from(document.querySelectorAll("input"));
 
   function submitProduct(e, input) {
     e.preventDefault();
@@ -22,21 +26,27 @@ function CreateProduct() {
       (input) => (input.value = "")
     );
   }
-
+  if(redirect && x) {
+    return <Redirect to="/admin/productok"/>
+    
+  }
   return (
     <>
-      <NavBarAdmin />
-      <div className="containerAll">
-        <form
-          className="containerPro"
-          onSubmit={(e) => {
-            submitProduct(e, input);
-          }}
-        >
-          <legend>Crear Producto</legend>
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label" for="name">
-              Nombre
+    <NavBarAdmin/>
+    <div className="containerAll">
+      <form
+        className="containerPro"
+        onSubmit={(e) => {
+          submitProduct(e, input);
+          setTimeout(function() {
+            setRedirect(true);
+          },1000,);
+        }}
+      >
+        <legend>Crear Producto</legend>
+        <div className="form-group row">
+          <label className="col-sm-2 col-form-label" for="name">
+            Nombre
           </label>
             <div className="col-sm-10">
               <input

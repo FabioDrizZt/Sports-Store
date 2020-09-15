@@ -1,17 +1,13 @@
 .catalogContainer {
     width: 50%;
-    /* height: 15%; */
-    /* padding: 2rem; */
-    /* padding-top: 3rem; */
-    /* margin: 2rem; */
-}
-
-.catalogContainer button {
-    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-content: baseline;
 }
 
 .catalogContainer select {
-    margin-bottom: 3rem;
+    width: 20%;
+
 }
 .containerCenter {
     display: flex;

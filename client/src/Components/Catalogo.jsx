@@ -18,27 +18,15 @@ function Catalogo() {
   function filtrarCatalogo(nombreCat) {
     dispatch(getCategoryProducts(nombreCat));
   }
-  const style = {
-    height: "100vh",
-    backgroundImage:
-      "url('https://cdn.pixabay.com/photo/2019/12/06/21/42/lone-tree-4678305_960_720.jpg')",
-    backgroundSize: "cover",
-  };
 
   return (
     //props: titulo, descripcion, precio, cantidad, imagen
     <React.Fragment>
-      <div style={style} className="jumbotron jumbotron-fluid">
-        <div className="containerCenter container">
-          <h1 className="display-4">Hacé realidad tus sueños</h1>
-          <p className="lead">
-            Date el gusto de tener lo que necesitas con Sports Store
-          </p>
-          <div className="container catalogContainer">
-            <select
-              className="custom-select"
-              onChange={(e) => filtrarCatalogo(e.target.value)}
-            >
+      <div className="jumbotron jumbotron-fluid">
+        <div className="containerCenter">
+          <div className="catalogContainer">
+            <select className="custom-select"
+              onChange={(e) => filtrarCatalogo(e.target.value)}>
               <option disabled seleted="true" value>
                 FILTRAR POR CATEGORIA
               </option>
@@ -48,31 +36,30 @@ function Catalogo() {
                   return <option key={c.name}> {c.name} </option>;
                 })}
             </select>
-
             <button
               className="btn btn-danger"
-              type="button"
-              onClick={() => window.location.reload()}
-            >
+              onClick={() => window.location.reload()}>
               Todos los Productos
             </button>
           </div>
         </div>
-      </div>
-      <hr />
-      <h1>Catálogo</h1>
-      {products &&
-        products.map((x) => (
-          <ProductCard
-            id={x.id}
-            titulo={x.name}
-            descripcion={x.description}
-            precio={x.price}
-            imagen={x.image}
-            stock={x.stock}
-            categories={x.categories}
-          />
-        ))}
+        <div className="calatogo">
+          <hr />
+          <h1>Catálogo</h1>
+          {products &&
+            products.map((x) => (
+              <ProductCard
+                id={x.id}
+                titulo={x.name}
+                descripcion={x.description}
+                precio={x.price}
+                imagen={x.image}
+                stock={x.stock}
+                categories={x.categories}
+              />
+            ))}
+        </div>
+    </div>
     </React.Fragment>
   );
 }
