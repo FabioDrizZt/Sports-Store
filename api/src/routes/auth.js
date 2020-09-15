@@ -12,3 +12,11 @@ server.put("/promote/:id", (req, res) => {
   });
 
   module.exports = server;
+
+  /*S65 : Crear ruta /me
+  GET /auth/me 
+  Esta ruta tiene que devolver el usuario que está logeado, 
+  o 401 si no está logeado. */
+  server.get("/me",(req,res)=>{
+    return res.json(req.user);
+  });
