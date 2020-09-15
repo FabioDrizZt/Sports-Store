@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
+const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize) => {
-  sequelize.define('user', {
+    const usuario = sequelize.define('user', {
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -26,12 +27,31 @@ module.exports = (sequelize) => {
       },
     password: {
         type: DataTypes.STRING,
-        allowNull: false
-      },
+        allowNull: false      
+      },      
     role: {
         type: DataTypes.ENUM({
             values: ['admin', 'user']
         })
       },
-  })
-};
+    },    
+    {
+      hooks: {
+          beforeCreate: (user) => {
+            user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+          },
+          beforeUpdate: (user) => {
+            if(user.password.length < 10){
+              user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+            }
+          }
+        },
+  
+      });
+          usuario.prototype.validPassword = function (password) {
+            return bcrypt.compareSync(password, this.password);          
+          }
+          return usuario;
+        }
+  
+

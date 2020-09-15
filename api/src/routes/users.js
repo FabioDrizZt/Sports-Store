@@ -73,11 +73,11 @@ server.post("/", (req, res) => {
     DNI: req.body.DNI,
     email: req.body.email,
     password: req.body.password,
-    role: req.body.role,
-  }).then((user) => { res.status(200).send(user); })
-    .catch((err) => res.send(err));
+    role: req.body.role
+  }).then(user => { 
+    res.status(200).send(user) 
+  }).catch(err => res.send(err));
 });
-
 // -----> ***** PUT ***** <-----
 // S35 : Crear Ruta para modificar Usuario
 server.put("/:id", (req, res) => {
@@ -109,6 +109,21 @@ server.put("/:idUser/cart", (req, res) => {
     ).then(() => res.status(200).send("Cantidad modificada satisfactoriamente"))
     .catch((error) => { res.status(400).json(error); });
 });
+// S70 : Crear Ruta para password reset
+// POST /users/:id/passwordReset
+server.put("/:id/passwordReset", (req, res) => {
+  User.update(
+    {
+    password: req.body.password
+  },
+  { where: {id: req.params.id }}
+  ).then(() => {
+    res.send("Se ha cambiado la clave")
+  }).catch((error) => {
+    res.send(error);
+  })
+});
+
 // -----> ***** DELETE ***** <-----
 // S37 : Crear Ruta para eliminar Usuario DELETE /users/:id
 server.delete("/:id", (req, res) => {
