@@ -8,6 +8,7 @@ import EliminarAsignacion from "./EliminarAsignacion";
 import NavBarAdmin from '../NavBar/NavBarAdmin';
 import { Redirect } from "react-router";
 
+
 function CreateProduct() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -17,7 +18,7 @@ function CreateProduct() {
   const [input, setInput] = useState({});
   const [redirect, setRedirect] = useState(false);
   const x =  Array.from(document.querySelectorAll("input"));
-      console.log(!x)
+
   function submitProduct(e, input) {
     e.preventDefault();
     dispatch(createProduct(input));
@@ -26,7 +27,8 @@ function CreateProduct() {
     );
   }
   if(redirect && x) {
-    return <Redirect to="/admin/productok" />
+    return <Redirect to="/admin/productok"/>
+    
   }
   return (
     <>
@@ -38,7 +40,7 @@ function CreateProduct() {
           submitProduct(e, input);
           setTimeout(function() {
             setRedirect(true);
-          }, 1500);
+          },1000,);
         }}
       >
         <legend>Crear Producto</legend>
