@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 
+
 module.exports = (sequelize) => {
   sequelize.define('user', {
     name: {
@@ -26,7 +27,16 @@ module.exports = (sequelize) => {
       },
     password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        get() {
+          return () => this.getDataValue('password')
+      },
+      salt: {
+        type: DataTypes.STRING,
+        get() {
+            return() => this.getDataValue('salt')
+        }
+    }
       },
     role: {
         type: DataTypes.ENUM({
