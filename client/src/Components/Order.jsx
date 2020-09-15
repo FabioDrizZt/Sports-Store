@@ -1,22 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Order.css";
 import { useSelector, useDispatch } from "react-redux";
-import { removeOrder, updateOrderAmount } from "../actions";
+import { removeOrder, updateOrderAmount, getMyCart } from "../actions";
 
 const Order = ({order}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [cantidad, setCantidad] = useState(order.amount);  
+  // const myCart = useSelector((state) => state.myCart);
 
-  function minusClick(e) {
+  function minusClick(e, id) {
     e.preventDefault();
+    var myCart = JSON.parse(localStorage.getItem('myCart'));
+    var newOrder = myCart.find(producto => producto.id === id);
+    if(newOrder["amount"] > 1) {
+    } newOrder["amount"] = newOrder.amount - 1;
+    myCart = myCart.filter(orden => orden.id !== id);
+    var newCart = myCart.concat(newOrder);
+    localStorage.setItem('myCart', JSON.stringify(newCart));
     if (cantidad !== 1) {
       setCantidad(cantidad - 1);
       dispatch(updateOrderAmount(1, order));
     } else alert("no podes llevar menos de 1");
   }
 
-  function plusClick(e) {
+  function plusClick(e, id) {
+    var myCart = JSON.parse(localStorage.getItem('myCart'));
+    var newOrder = myCart.find(producto => producto.id === id);
+    newOrder["amount"] = newOrder.amount + 1;
+    myCart = myCart.filter(orden => orden.id !== id);
+    var newCart = myCart.concat(newOrder);
+    localStorage.setItem('myCart', JSON.stringify(newCart));
     e.preventDefault();
     if (cantidad !== order.product.stock) {
       setCantidad(cantidad + 1);
@@ -24,7 +38,10 @@ const Order = ({order}) => {
     } else alert("no podes llevar mas de: " + order.product.stock);
   }
 
-  function deleteItem() {
+  function deleteItem(id) {
+    var myCart = JSON.parse(localStorage.getItem('myCart'));
+    myCart = myCart.filter(orden => orden.id !== id);
+    localStorage.setItem('myCart', JSON.stringify(myCart));
     dispatch(removeOrder(order.id));
   }
 
@@ -45,7 +62,7 @@ const Order = ({order}) => {
               <h3 className="font-weight-bold my-2">
                 <button
                   onClick={(e) => {
-                    minusClick(e);
+                    minusClick(e, order.product.id);
                   }}
                   style={{ width: "30px" }}
                   className="btn btn-outline-success btn-sm"
@@ -55,7 +72,7 @@ const Order = ({order}) => {
                 {"Cantidad:" + cantidad}
                 <button
                   onClick={(e) => {
-                    plusClick(e);
+                    plusClick(e, order.product.id);
                   }}
                   style={{ width: "30px" }}
                   className="btn btn-outline-success btn-sm "
@@ -63,7 +80,7 @@ const Order = ({order}) => {
                   +
                 </button>
                 SubTotal: ${cantidad * order.product.price}
-                <button className="btn btn-danger" onClick={() => deleteItem()}>
+                <button className="btn btn-danger" onClick={() => deleteItem(order.product.id)}>
                   Eliminar
                 </button>
               </h3>
