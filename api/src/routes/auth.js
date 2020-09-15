@@ -1,7 +1,7 @@
 const server = require("express").Router();
 const { User} = require("../db");
 
-server.get("/promote/:id", (req, res) => {
+server.put("/promote/:id", (req, res) => {
     User.update(
       {
         role: "admin",
