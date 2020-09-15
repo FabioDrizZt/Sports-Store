@@ -1,0 +1,7 @@
+.ok {
+    height: 86.6vh;
+    background-color: rgb(230, 221, 221);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
