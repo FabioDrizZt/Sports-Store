@@ -17,7 +17,7 @@ server.put("/promote/:id", (req, res) => {
 
 // S64 : Crear ruta de logout
 // POST /auth/logout
-server.get("/auth/logout", (req, res) => {
+server.get("/logout", (req, res) => {
   req.logout();
   res.send("deslogueado");
 });
