@@ -15,6 +15,7 @@ import Admin from "./Components/Admin";
 import Login from "./Components/Login";
 import OrdersTable from "./Components/OrderTable/OrdersTable";
 import CreateProduct from './Components/FormCRUD/CreateProduct';
+import Productok from './Components/ProductOk/Productok'
 
 function App() {
   const scroll = document.documentElement.scrollTop;
@@ -52,6 +53,7 @@ function App() {
       <Route exact path="/admin/myProducts" component={FormCrud} />
       <Route exact path="/admin/newProduct" component={CreateProduct} />
       <Route exact path="/admin/orders" component={OrdersTable} />
+      <Route exact path="/admin/productok" component={Productok} />
     </div>
   );
 }

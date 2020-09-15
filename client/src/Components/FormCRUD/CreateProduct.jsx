@@ -6,6 +6,7 @@ import { getCategories, getProducts } from "../../actions";
 import AsignarProducto from "./AsignarProducto";
 import EliminarAsignacion from "./EliminarAsignacion";
 import NavBarAdmin from '../NavBar/NavBarAdmin';
+import { Redirect } from "react-router";
 
 function CreateProduct() {
   const dispatch = useDispatch();
@@ -15,7 +16,9 @@ function CreateProduct() {
   }, [getCategories]);
 
   const [input, setInput] = useState({});
-
+  const [redirect, setRedirect] = useState(false);
+  const x =  Array.from(document.querySelectorAll("input"));
+      console.log(!x)
   function submitProduct(e, input) {
     e.preventDefault();
     dispatch(createProduct(input));
@@ -23,7 +26,9 @@ function CreateProduct() {
       (input) => (input.value = "")
     );
   }
-
+  if(redirect && x) {
+    return <Redirect to="/admin/productok" />
+  }
   return (
     <>
     <NavBarAdmin/>
@@ -32,6 +37,9 @@ function CreateProduct() {
         className="containerPro"
         onSubmit={(e) => {
           submitProduct(e, input);
+          setTimeout(function() {
+            setRedirect(true);
+          }, 1500);
         }}
       >
         <legend>Crear Producto</legend>
