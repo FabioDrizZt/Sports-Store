@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
+const crypto = require('crypto')
 const fs = require('fs');
 const path = require('path');
 const {
@@ -55,6 +56,36 @@ User.hasMany(Review);
 Review.belongsTo(User);
 Product.hasMany(Review);
 Review.belongsTo(Product);
+
+//-------------------------------funciones de encriptacion de User
+
+User.generateSalt = function() {
+  return crypto.randomBytes(16).toString('base64')
+}
+User.encryptPassword = function(plainText, salt) {
+  return crypto
+      .createHash('RSA-SHA256')
+      .update(plainText)
+      .update(salt)
+      .digest('hex')
+}
+//salt es una clave unica de autenticacion
+const setSaltAndPassword = user => {
+  if (user.changed('password')) {
+      user.salt = User.generateSalt()
+      user.password = User.encryptPassword(user.password(), user.salt())
+  }
+}
+//cada vez que el usuario se crea o cambia su contraseña se genera un nuevo salt y automaticamente se encripta la contraseña
+User.beforeCreate(setSaltAndPassword)
+User.beforeUpdate(setSaltAndPassword)
+
+//chequear si la contraseña ingresada es la correcta, retorna true o false
+User.prototype.correctPassword = function(enteredPassword) {
+  return User.encryptPassword(enteredPassword, this.salt()) === this.password()
+}
+//----------------------------------------------
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
