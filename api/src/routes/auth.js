@@ -1,6 +1,10 @@
 const server = require("express").Router();
 const { User} = require("../db");
 
+
+// S67 : Crear ruta /promote
+// POST /auth/promote/:id
+// Promote convierte al usuario con ID: id a Admin.
 server.put("/promote/:id", (req, res) => {
     User.update(
       {
