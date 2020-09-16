@@ -146,9 +146,9 @@ export function getReviews(id){
   }
 }
 //S65 : Crear ruta /me
-export function userLogin(){
+export function userLogin(input){
   return function (dispatch){
-    axios.post(`${SERVER_ADDRESS}/auth/me`)
+    axios.post(`${SERVER_ADDRESS}/auth/me`,input)
     .then((res)=>{
       dispatch({type:USER_LOGIN, payload:res.data});
     })
