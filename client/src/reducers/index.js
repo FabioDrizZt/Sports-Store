@@ -87,7 +87,7 @@ function rootReducer(state = initialState, action) {
                 }
             }
         } case GET_USERS: {
-            return { ...state, cart: action.payload }
+            return { ...state, users: action.payload }
         } case GET_REVIEWS:{
             return {...state, reviews:action.payload}
         }case USER_LOGIN:{
@@ -133,7 +133,7 @@ function rootReducer(state = initialState, action) {
         } case REMOVE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.filter(productCategory => productCategory.name !== action.payload.name) }
         } case REMOVE_USER: {
-            return { ...state, users: state.user.filter(user => user.name !== action.payload.name) }
+            return { ...state, users: state.users.filter(user => user.id !== action.payload) }
         } case ADD_TO_CART: {
             return { ...state, cart: state.cart.concat(action.payload) }
         } case REMOVE_CART: {
