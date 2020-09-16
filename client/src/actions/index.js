@@ -214,7 +214,7 @@ export function createLogin(){
   return function (dispatch){
     axios.post(`${SERVER_ADDRESS}/auth/`)
     .then((res) => {
-      dispatch({ type: CREATE_REVIEW , payload: res.data });
+      dispatch({ type: CREATE_LOGIN , payload: res.data });
     })
     .catch((error) => alert(error, "error"));
   };
