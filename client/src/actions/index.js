@@ -13,7 +13,8 @@ export const GET_USER = "GET_USER";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 export const GET_USERS = "GET_USERS";
 export const GET_REVIEWS = "GET_REVIEWS"
-export const GET_LOGOUT = "GET_LOGOUT"
+export const USER_LOGIN = "USER_LOGIN";
+export const USER_LOGOUT = "USER_LOGOUT"
 // aca van los actions del POST/CREATE
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const CREATE_USER = "CREATE_USER";
@@ -21,6 +22,7 @@ export const CREATE_CATEGORY = "CREATE_CATEGORY";
 export const CREATE_PRODUCT_CATEGORY = "CREATE_PRODUCT_CATEGORY";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const CREATE_REVIEW = "CREATE_REVIEW";
+export const CREATE_LOGIN = "CREATE_LOGIN"
 // aca van los actions del UPDATE/MODIFICAR
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
@@ -28,8 +30,9 @@ export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_ORDER_AMOUNT = "UPDATE_ORDER_AMOUNT";
 export const UPDATE_ORDER = "UPDATE_ORDER";
 export const PROMOTE_USER = "PROMOTE_USER";
-export const CLOSE_CART = "CLOSE_CART"
-export const UPDATE_REVIEW = "UPDATE_REVIEW"
+export const CLOSE_CART = "CLOSE_CART";
+export const UPDATE_REVIEW = "UPDATE_REVIEW";
+export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 
 // aca van los actions del DELETE/REMOVE
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
@@ -135,19 +138,29 @@ export function getUsers() {
 }//S57 : Crear Ruta para obtener todas las reviews de un producto.
 export function getReviews(id){
   return function (dispatch){
-    axios.get(`${SERVER_ADDRESS}/product/${id}/review/`)
+    axios.get(`${SERVER_ADDRESS}/products/${id}/review/`)
     .then((res)=>{
       dispatch({type:GET_REVIEWS,payload:res.data});
     })
     .catch((error)=>alert(error,"error"));
   }
 }
+//S65 : Crear ruta /me
+export function userLogin(input){
+  return function (dispatch){
+    axios.post(`${SERVER_ADDRESS}/auth/me`,input)
+    .then((res)=>{
+      dispatch({type:USER_LOGIN, payload:res.data});
+    })
+    .catch((error)=>alert(error,"error"));
+  }
+}
 // S64 crear ruta de logout
-export const userLogout = () => {
+export function userLogout() {
   return function (dispatch) {
     axios.get(`${SERVER_ADDRESS}/auth/logout`)
       .then((payload) => {
-      dispatch({ type: GET_LOGOUT, payload: undefined });
+      dispatch({ type: USER_LOGOUT, payload: undefined });
     });
   };
 };
@@ -199,15 +212,26 @@ export function addtoCart(userId, product) {
   };
 }
   // S54 : Crear ruta para crear/agregar Review
-  export function createReview(productId) {
+  export function createReview(review) {
     return function (dispatch) {
-      axios.post(`${SERVER_ADDRESS}/products/${productId}/review`)
+      axios.post(`${SERVER_ADDRESS}/products/${review.productId}/review`, review)
         .then((res) => {
-          dispatch({ type: CREATE_REVIEW , payload: res.data });
+          dispatch({ type: CREATE_REVIEW , payload: review });
         })
         .catch((error) => alert(error, "error"));
     };
 }
+
+export function createLogin(){
+  return function (dispatch){
+    axios.post(`${SERVER_ADDRESS}/auth/`)
+    .then((res) => {
+      dispatch({ type: CREATE_LOGIN , payload: res.data });
+    })
+    .catch((error) => alert(error, "error"));
+  };
+}
+
 //S26 : Crear ruta para Modificar Producto
 export function updateProduct(productId,product) {
   return function (dispatch) {
@@ -241,7 +265,7 @@ export function updateOrderAmount(userId, order) {
     axios.put(`${SERVER_ADDRESS}/users/${userId}/cart/`, order)
       .then((res) => {
         dispatch({ type: UPDATE_ORDER_AMOUNT, payload: order });
-      }).then(() => alert("Se cambio la cantidad"))
+      }).then(() => console.log("Se cambio la cantidad"))
       .catch((error) => alert(error, "error"));
   };
 }//S47 : Crear Ruta para modificar una Orden
@@ -285,7 +309,19 @@ export function updateReview(productId, reviewId) {
       })
       .catch((error) => alert(error, "error"));
   };
-}// S27 eliminar un producto DELETE /products/:id
+}
+// S70 : Crear Ruta para password reset
+export function updatePassword(userId) {
+  return function (dispatch) {
+    axios.put(`${SERVER_ADDRESS}/users/${userId}/passwordReset`)
+      .then((res) => {
+        dispatch({ type: UPDATE_PASSWORD, payload: res.data });
+      })
+      .catch((error) => alert(error, "error"));
+  };
+}
+
+// S27 eliminar un producto DELETE /products/:id
 export function removeProduct(productId) {
   return function (dispatch) {
     axios.delete(`${SERVER_ADDRESS}/products/${productId}`)

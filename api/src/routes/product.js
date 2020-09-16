@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { Product, Category, productcategory, Review} = require("../db.js");
+const { Product, Category, productcategory, Review } = require("../db.js");
 const { Op } = require("sequelize");
 
 // S21 : Crear ruta que devuelva todos los productos
@@ -7,7 +7,7 @@ server.get("/", (req, res, next) => {
   Product.findAll({
     include: [{ model: Category }],
   }).then(products => { res.send(products) })
-  .catch(error => { res.status(400).json({ error }) })
+    .catch(error => { res.status(400).json({ error }) })
 })
 // S21 : Crear ruta que devuelva todas las categories
 server.get("/categories", (req, res, next) => {
@@ -48,12 +48,12 @@ server.get("/:id", (req, res) => {
 });
 /*S57 : Crear Ruta para obtener todas las reviews de un producto.
 GET /product/:id/review/*/
-server.get("/:id/review",(req,res)=>{
+server.get("/:productId/review", (req, res) => {
   Review.findAll({
-    where: {id: req.params.id}
+    where: { productId: req.params.productId }
   })
-  .then((reviews)=>res.send(reviews))
-  .catch((error)=>res.status(400).json({error}));
+    .then((reviews) => res.send(reviews))
+    .catch((error) => res.status(400).json({ error }));
 })
 // S17 : Crear ruta para agregar categorias de un producto.
 // POST /products/:idProducto/category/:idCategoria
@@ -88,21 +88,33 @@ server.post("/:idProducto/category/:idCategoria", (req, res) => {
 // S54 : Crear ruta para crear/agregar Review
 // POST /products/:id/review
 server.post("/:id/review", (req, res) => {
-  Review.create({
-    userId: req.body.userId,
-    productId: req.params.id,
-    description: req.body.description,
-    score: req.body.score
-  })
-    .then((review) => res.send(review))
-    .catch((error) => res.send(error));
-});
+  Review.findOrCreate({
+    where: {
+      userId: req.body.userId,
+      productId: req.params.id,
+    },
+    defaults: {
+      userId: req.body.userId,
+      productId: req.params.id,
+      description: req.body.description,
+      score: req.body.score
+    }
+  }).then((review) => {
+    if (review[1]===false) review[0].update(
+      {
+        description: req.body.description,
+        score: req.body.score
+      }, 
+    ).then(rev => res.send(rev))
+    else (res.send(review))
+  }).catch((error) => res.send(error))
+})
 
 // S55 : Crear ruta para Modificar Review
 // PUT /product/:id/review/:idReview
 
 server.put("/:id/review/:idReview", (req, res) => {
-  Review.findOne({ where: { id: req.params.idReview,  productId: req.params.id} })
+  Review.findOne({ where: { id: req.params.idReview, productId: req.params.id } })
     .then(review => {
       review.update({
         description: req.body.description,
@@ -177,11 +189,7 @@ server.delete("/category/:id", (req, res) => {
 
 server.delete("/:id/review/:idReview", (req, res) => {
   Review.destroy({
-    where: {
-      productId: req.params.id,
-      id:req.params.idReview,
-      userId: req.body.userId 
-    }
+    where: { id: req.params.idReview }
   }).then((deletedRecord) => {
     if (deletedRecord === 1) res.status(200).json({ message: "Su review fue eliminado satisfactoriamente." });
     else res.status(400).json({ message: "review no encontrado." });
