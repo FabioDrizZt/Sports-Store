@@ -132,7 +132,7 @@ const RegistrationForm = () => {
           },
           {
             required: true,
-            message: "Please input your E-mail!",
+            message: "Por favor introduzca un E-mail!",
           },
         ]}
       >
@@ -168,7 +168,7 @@ const RegistrationForm = () => {
         rules={[
           {
             required: true,
-            message: "Please input your password!",
+            message: "Ingresa tu contraseña",
           },
         ]}
         hasFeedback
@@ -187,7 +187,7 @@ const RegistrationForm = () => {
         rules={[
           {
             required: true,
-            message: "Please confirm your password!",
+            message: "Confirma tu contraseña",
           },
           ({ getFieldValue }) => ({
             validator(rule, value) {
@@ -196,7 +196,7 @@ const RegistrationForm = () => {
               }
 
               return Promise.reject(
-                "The two passwords that you entered do not match!"
+                "Las dos contraseñas no concuerdan"
               );
             },
           }),
