@@ -18,7 +18,13 @@ function ProductCard({
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+
   function agregarAlCarrito(id, precio, cantidad) {
+    var myCart = JSON.parse(localStorage.getItem('myCart'));
+    const producto = (element) => element["id"] === id;
+    if(!myCart.some(producto)){
+      localStorage.setItem('myCart', JSON.stringify(myCart.concat([{"id": id, "amount": 1}])));
+    }
     dispatch(
       addtoCart(user.id, { productId: id, price: precio, amount: cantidad })
     );
