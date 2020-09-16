@@ -22,6 +22,7 @@ export const CREATE_CATEGORY = "CREATE_CATEGORY";
 export const CREATE_PRODUCT_CATEGORY = "CREATE_PRODUCT_CATEGORY";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const CREATE_REVIEW = "CREATE_REVIEW";
+export const CREATE_LOGIN = "CREATE_LOGIN"
 // aca van los actions del UPDATE/MODIFICAR
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
@@ -29,8 +30,9 @@ export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_ORDER_AMOUNT = "UPDATE_ORDER_AMOUNT";
 export const UPDATE_ORDER = "UPDATE_ORDER";
 export const PROMOTE_USER = "PROMOTE_USER";
-export const CLOSE_CART = "CLOSE_CART"
-export const UPDATE_REVIEW = "UPDATE_REVIEW"
+export const CLOSE_CART = "CLOSE_CART";
+export const UPDATE_REVIEW = "UPDATE_REVIEW";
+export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 
 // aca van los actions del DELETE/REMOVE
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
@@ -219,6 +221,17 @@ export function addtoCart(userId, product) {
         .catch((error) => alert(error, "error"));
     };
 }
+
+export function createLogin(){
+  return function (dispatch){
+    axios.post(`${SERVER_ADDRESS}/auth/`)
+    .then((res) => {
+      dispatch({ type: CREATE_LOGIN , payload: res.data });
+    })
+    .catch((error) => alert(error, "error"));
+  };
+}
+
 //S26 : Crear ruta para Modificar Producto
 export function updateProduct(productId,product) {
   return function (dispatch) {
@@ -252,7 +265,7 @@ export function updateOrderAmount(userId, order) {
     axios.put(`${SERVER_ADDRESS}/users/${userId}/cart/`, order)
       .then((res) => {
         dispatch({ type: UPDATE_ORDER_AMOUNT, payload: order });
-      }).then(() => alert("Se cambio la cantidad"))
+      }).then(() => console.log("Se cambio la cantidad"))
       .catch((error) => alert(error, "error"));
   };
 }//S47 : Crear Ruta para modificar una Orden
@@ -296,7 +309,19 @@ export function updateReview(productId, reviewId) {
       })
       .catch((error) => alert(error, "error"));
   };
-}// S27 eliminar un producto DELETE /products/:id
+}
+// S70 : Crear Ruta para password reset
+export function updatePassword(userId) {
+  return function (dispatch) {
+    axios.put(`${SERVER_ADDRESS}/users/${userId}/passwordReset`)
+      .then((res) => {
+        dispatch({ type: UPDATE_PASSWORD, payload: res.data });
+      })
+      .catch((error) => alert(error, "error"));
+  };
+}
+
+// S27 eliminar un producto DELETE /products/:id
 export function removeProduct(productId) {
   return function (dispatch) {
     axios.delete(`${SERVER_ADDRESS}/products/${productId}`)

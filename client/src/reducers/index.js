@@ -18,6 +18,7 @@ import {
     CREATE_USER,
     CREATE_CATEGORY,
     CREATE_PRODUCT_CATEGORY,
+    CREATE_LOGIN,
     ADD_TO_CART,
     CREATE_REVIEW,
     // aca van los actions del UPDATE/MODIFICAR
@@ -29,6 +30,7 @@ import {
     PROMOTE_USER,
     CLOSE_CART,
     UPDATE_REVIEW,
+    UPDATE_PASSWORD,
     // aca van los actions del DELETE/REMOVE
     REMOVE_PRODUCT,
     REMOVE_CATEGORY,
@@ -50,7 +52,8 @@ const initialState = {
     users: [], // lista de usuarios para q vea el admin
     user: [], // deberia guardar el usuario logueado
     auth:[],
-    reviews: []
+    reviews: [],
+    password: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -105,6 +108,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, productCategories: state.productCategories.concat(action.payload) }
         } case CREATE_REVIEW: {
             return { ...state, reviews: [...state.reviews.filter(rev => rev.id !== action.payload)].concat(action.payload), review: action.payload }
+        } case CREATE_LOGIN: {
+            return {...state, login: state.login.concat(action.payload)}
         } case UPDATE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
         } case UPDATE_CATEGORY: {
@@ -119,6 +124,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, carts: state.carts.map(c => { if (c.id === action.payload.id) { c.state = "closed" } }) }
         } case UPDATE_REVIEW: {
             return { ...state, reviews: state.reviews.filter(r => r.id !== action.payload.id) }
+        } case UPDATE_PASSWORD: {
+            return { ...state, password: state.password.filter(res => res.id !== action.payload.id) }
         } case REMOVE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload) }
         } case REMOVE_CATEGORY: {

@@ -18,14 +18,14 @@ import CreateProduct from './Components/FormCRUD/CreateProduct';
 import Productok from './Components/ProductOk/Productok'
 
 function App() {
-  const scroll = document.documentElement.scrollTop;
   const buttonUp = document.getElementById("button-up");
   buttonUp.addEventListener("click", scrollUp);
 
   function scrollUp() {
+    const scroll = document.documentElement.scrollTop;
     if (scroll > 0) {
       window.requestAnimationFrame(scrollUp);
-      window.scrollTo(0, scroll - scroll / 10);
+      window.scrollTo(0, scroll - (scroll / 10));
       buttonUp.style.transform = "scale(0)";
     }
   }
