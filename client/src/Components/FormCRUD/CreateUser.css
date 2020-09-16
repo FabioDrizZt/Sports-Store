@@ -1,0 +1,13 @@
+.formularioOk {
+  width: 35%;
+  padding-right: 3rem;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.containerCenter {
+  display: flex;
+  justify-content: flex-end;
+}
