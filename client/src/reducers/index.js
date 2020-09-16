@@ -106,10 +106,10 @@ function rootReducer(state = initialState, action) {
             return { ...state, user: [...state.user.filter(x => x.id !== action.payload.id)].concat(action.payload)}
         }case CREATE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.concat(action.payload) }
+        } case CREATE_REVIEW: {
+            return { ...state, reviews: [...state.reviews.filter(rev => rev.id !== action.payload)].concat(action.payload), review: action.payload }
         } case CREATE_LOGIN: {
             return {...state, login: state.login.concat(action.payload)}
-        }case CREATE_REVIEW: {
-            return { ...state, reviews: state.reviews.concat(action.payload) }
         } case UPDATE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
         } case UPDATE_CATEGORY: {
