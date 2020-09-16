@@ -15,15 +15,14 @@ server.put("/promote/:id", (req, res) => {
     ).catch((err) => res.send(err));
   });
 
-  //S63 : Crear ruta de Login
-  //POST /auth/login
-  server.post('/login', (req,res) => {
-    User.create({
-      email: req.body.email,
-      password: req.body.password
-    }).then(() => res.status(200))
-    .catch((err) => res.send(err));
-  })
+//S63 : Crear ruta de Login
+//POST /auth/login
+server.post('/login',
+  passport.authenticate('local'),
+  function (req, res) {
+    res.json(req.user);
+  });
+
 // S64 : Crear ruta de logout
 // POST /auth/logout
 server.get("/logout", (req, res) => {
