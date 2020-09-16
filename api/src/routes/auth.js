@@ -14,9 +14,16 @@ server.put("/promote/:id", (req, res) => {
     ).then(() => res.status(200).send("Usuario id: " + req.params.id + " actualizado satisfactoriamente")
     ).catch((err) => res.send(err));
   });
+//S63 : Crear ruta de Login
+//POST /auth/login
+server.post('/login',
+  passport.authenticate('local'),
+  function (req, res) {
+    res.json(req.user);
+  });
 // S64 : Crear ruta de logout
 // POST /auth/logout
-server.get("/logout", (req, res) => {
+server.post("/logout", (req, res) => {
   req.logout();
   res.send("deslogueado");
 });
@@ -27,6 +34,5 @@ server.get("/logout", (req, res) => {
   server.get("/me",(req,res)=>{
     return res.json(req.user);
   });
-
 
   module.exports = server;
