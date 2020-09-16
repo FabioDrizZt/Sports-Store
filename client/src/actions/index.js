@@ -136,7 +136,7 @@ export function getUsers() {
 }//S57 : Crear Ruta para obtener todas las reviews de un producto.
 export function getReviews(id){
   return function (dispatch){
-    axios.get(`${SERVER_ADDRESS}/product/${id}/review/`)
+    axios.get(`${SERVER_ADDRESS}/products/${id}/review/`)
     .then((res)=>{
       dispatch({type:GET_REVIEWS,payload:res.data});
     })
@@ -210,11 +210,11 @@ export function addtoCart(userId, product) {
   };
 }
   // S54 : Crear ruta para crear/agregar Review
-  export function createReview(productId) {
+  export function createReview(review) {
     return function (dispatch) {
-      axios.post(`${SERVER_ADDRESS}/products/${productId}/review`)
+      axios.post(`${SERVER_ADDRESS}/products/${review.productId}/review`, review)
         .then((res) => {
-          dispatch({ type: CREATE_REVIEW , payload: res.data });
+          dispatch({ type: CREATE_REVIEW , payload: review });
         })
         .catch((error) => alert(error, "error"));
     };
