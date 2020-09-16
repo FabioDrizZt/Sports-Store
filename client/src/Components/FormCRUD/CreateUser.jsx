@@ -149,14 +149,16 @@ const RegistrationForm = () => {
         label="DNI"
         rules={[
           {
-            message: "DNI",
+            type:"string",
           },
           {
             required: true,
+            message: "Ingrese su DNI. Sólo números"
           },
         ]}
       >
         <Input 
+          type="number"
           // value={input.DNI}
           // onChange={(e) => setInput({ ...input, DNI: e.target.value })}
         />
