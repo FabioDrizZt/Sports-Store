@@ -11,7 +11,8 @@ import {
     SEARCH_PRODUCTS,
     GET_USERS,
     GET_REVIEWS,
-    GET_LOGGED_USER,
+    USER_LOGIN,
+    USER_LOGOUT,
     // aca van los actions del POST/CREATE
     CREATE_PRODUCT,
     CREATE_USER,
@@ -86,8 +87,10 @@ function rootReducer(state = initialState, action) {
             return { ...state, cart: action.payload }
         } case GET_REVIEWS:{
             return {...state, reviews:action.payload}
-        }case GET_LOGGED_USER:{
+        }case USER_LOGIN:{
             return {...state, user:action.payload}
+        } case USER_LOGOUT: {
+            return { ...state, user: undefined } 
         } case CREATE_PRODUCT: {
             return { ...state, products: state.products.concat(action.payload) }
         } case CREATE_USER: {

@@ -14,7 +14,8 @@ const Order = ({order}) => {
     var myCart = JSON.parse(localStorage.getItem('myCart'));
     var newOrder = myCart.find(producto => producto.id === id);
     if(newOrder["amount"] > 1) {
-    } newOrder["amount"] = newOrder.amount - 1;
+      newOrder["amount"] = newOrder.amount - 1;
+    }
     myCart = myCart.filter(orden => orden.id !== id);
     var newCart = myCart.concat(newOrder);
     localStorage.setItem('myCart', JSON.stringify(newCart));
