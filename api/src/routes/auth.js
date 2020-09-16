@@ -1,6 +1,6 @@
 const server = require("express").Router();
 const { User} = require("../db");
-
+const passport = require('passport');
 
 // S67 : Crear ruta /promote
 // POST /auth/promote/:id
