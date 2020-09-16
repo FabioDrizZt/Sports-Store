@@ -13,6 +13,7 @@ export const GET_USER = "GET_USER";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 export const GET_USERS = "GET_USERS";
 export const GET_REVIEWS = "GET_REVIEWS"
+export const GET_LOGOUT = "GET_LOGOUT"
 // aca van los actions del POST/CREATE
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const CREATE_USER = "CREATE_USER";
@@ -27,8 +28,9 @@ export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_ORDER_AMOUNT = "UPDATE_ORDER_AMOUNT";
 export const UPDATE_ORDER = "UPDATE_ORDER";
 export const PROMOTE_USER = "PROMOTE_USER";
-export const CLOSE_CART = "CLOSE_CART"
-export const UPDATE_REVIEW = "UPDATE_REVIEW"
+export const CLOSE_CART = "CLOSE_CART";
+export const UPDATE_REVIEW = "UPDATE_REVIEW";
+export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 
 // aca van los actions del DELETE/REMOVE
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
@@ -141,6 +143,15 @@ export function getReviews(id){
     .catch((error)=>alert(error,"error"));
   }
 }
+// S64 crear ruta de logout
+export const userLogout = () => {
+  return function (dispatch) {
+    axios.get(`${SERVER_ADDRESS}/auth/logout`)
+      .then((payload) => {
+      dispatch({ type: GET_LOGOUT, payload: undefined });
+    });
+  };
+};
 // S17 : Crear ruta para agregar categorias de un producto.
 export function createProduct(product) {
   return function (dispatch) {
@@ -275,7 +286,19 @@ export function updateReview(productId, reviewId) {
       })
       .catch((error) => alert(error, "error"));
   };
-}// S27 eliminar un producto DELETE /products/:id
+}
+// S70 : Crear Ruta para password reset
+export function updatePassword(userId) {
+  return function (dispatch) {
+    axios.put(`${SERVER_ADDRESS}/users/${userId}/passwordReset`)
+      .then((res) => {
+        dispatch({ type: UPDATE_PASSWORD, payload: res.data });
+      })
+      .catch((error) => alert(error, "error"));
+  };
+}
+
+// S27 eliminar un producto DELETE /products/:id
 export function removeProduct(productId) {
   return function (dispatch) {
     axios.delete(`${SERVER_ADDRESS}/products/${productId}`)
