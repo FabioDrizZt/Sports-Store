@@ -130,7 +130,7 @@ export function getUser() {
 export function getUsers() {
   return function (dispatch) {
     axios.get(`${SERVER_ADDRESS}/users/`)
-      .then((res) => {
+      .then((res) => {       
         dispatch({ type: GET_USERS, payload: res.data });
       })
       .catch((error) => alert(error, "error"));
@@ -286,11 +286,13 @@ export function updateOrder(orderId,state) {
 // Promote convierte al usuario con ID: id a Admin.
 export function promoteUser(id){
   return function (dispatch){
-    axios.put(`${SERVER_ADDRESS}/auth/promote/${id}`)
-    dispatch({type: PROMOTE_USER, payload: id})
-  }.then (() => alert ("Se cambio correctamente"))
-  .catch((error) => alert ("Falló la modificacioin"))
-}
+    axios.put(`${SERVER_ADDRESS}/auth/promote/${id}`,id)
+    .then(res=>{
+      dispatch({type: PROMOTE_USER, payload: id});
+      console.log(res.message)
+    }) 
+  .catch((error) => alert (error))
+}}
 
 export function closeCart(cartId) {
   return function (dispatch) {
@@ -364,7 +366,7 @@ export function removeUser(userId) {
     axios.delete(`${SERVER_ADDRESS}/users/${userId}`)
       .then((res) => {
         dispatch({ type: REMOVE_USER, payload: userId });
-      }).then(() => alert("Se elimino el usuario"))
+      }).then(() => console.log("Se elimino el usuario"))
       .catch((error) => alert(error, "error"));
   }
 }

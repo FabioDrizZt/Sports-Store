@@ -73,7 +73,7 @@ server.post("/", (req, res) => {
     DNI: req.body.DNI,
     email: req.body.email,
     password: req.body.password,
-    role: req.body.role
+    role: "user"
   }).then(user => {
     res.status(200).send(user)
   }).catch(err => res.send(err));
