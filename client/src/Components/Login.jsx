@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Link  } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-// import { loginUser } from "../../actions/index";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../actions"
 import "./Login.css";
 
 const Form = () => {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [input, setInput] = useState({});
 
   return (
@@ -13,10 +13,10 @@ const Form = () => {
       <div className="sesion">Iniciar Sesión</div>
 
       <form
-        onSubmit={
-          (e) => {alert("Sesión Iniciada Correctamente !");window.history.back();}
-          // dispatch(loginUser(input)).
-        }
+        onSubmit={(e) => {
+          alert("Sesión Iniciada Correctamente !")
+          dispatch(userLogin(input)).then(window.history.back())
+        }}
       >
         <div>
           <input
@@ -50,7 +50,6 @@ const Form = () => {
             Registrate acá campeon
           </Link>
         </div>
-
       </form>
       <small>Sports Store ©</small>
     </div>
