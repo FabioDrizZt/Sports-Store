@@ -14,16 +14,18 @@ const Review = () => {
   const review = useSelector((state) => state.review);
   const user = useSelector((state) => state.user);
   const product = useSelector((state) => state.product);
-  const [myreview, setMyreview] = useState(review ? review : { score: null });
-  const [total, setTotal] = useState(
-    reviews.reduce(function (prev, cur) {
-      return prev + cur.score;
-    }, 0) / reviews.length
+  const [myreview, setMyreview] = useState(
+    reviews.filter((rev) => rev.productId == rev.product.id && rev.userId)
   );
+  const total =
+    reviews.reduce((prev, cur) => {
+      return prev + cur.score;
+    }, 0) / reviews.length;
+
   const [editar, setEditar] = useState(!!myreview.score);
   return (
-    (product &&
-    reviews) && (
+    product &&
+    reviews && (
       <React.Fragment>
         <hr />
         <h5>Valoración promedio del producto</h5>
@@ -40,7 +42,7 @@ const Review = () => {
                 userId: user.id,
                 productId: product.id,
               });
-              dispatch(createReview(myreview))
+              dispatch(createReview(myreview));
             }}
           >
             {" "}

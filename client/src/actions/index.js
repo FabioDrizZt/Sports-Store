@@ -156,7 +156,7 @@ export function userLogin(input){
   }
 }
 // S64 crear ruta de logout
-export const userLogout = () => {
+export function userLogout() {
   return function (dispatch) {
     axios.get(`${SERVER_ADDRESS}/auth/logout`)
       .then((payload) => {
