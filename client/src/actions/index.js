@@ -20,6 +20,7 @@ export const CREATE_CATEGORY = "CREATE_CATEGORY";
 export const CREATE_PRODUCT_CATEGORY = "CREATE_PRODUCT_CATEGORY";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const CREATE_REVIEW = "CREATE_REVIEW";
+export const CREATE_LOGIN = "CREATE_LOGIN"
 // aca van los actions del UPDATE/MODIFICAR
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
@@ -198,6 +199,17 @@ export function addtoCart(userId, product) {
         .catch((error) => alert(error, "error"));
     };
 }
+
+export function createLogin(){
+  return function (dispatch){
+    axios.post(`${SERVER_ADDRESS}/auth/`)
+    .then((res) => {
+      dispatch({ type: CREATE_REVIEW , payload: res.data });
+    })
+    .catch((error) => alert(error, "error"));
+  };
+}
+
 //S26 : Crear ruta para Modificar Producto
 export function updateProduct(productId,product) {
   return function (dispatch) {
@@ -231,7 +243,7 @@ export function updateOrderAmount(userId, order) {
     axios.put(`${SERVER_ADDRESS}/users/${userId}/cart/`, order)
       .then((res) => {
         dispatch({ type: UPDATE_ORDER_AMOUNT, payload: order });
-      }).then(() => alert("Se cambio la cantidad"))
+      }).then(() => console.log("Se cambio la cantidad"))
       .catch((error) => alert(error, "error"));
   };
 }//S47 : Crear Ruta para modificar una Orden
