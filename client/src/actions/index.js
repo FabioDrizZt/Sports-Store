@@ -30,8 +30,9 @@ export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_ORDER_AMOUNT = "UPDATE_ORDER_AMOUNT";
 export const UPDATE_ORDER = "UPDATE_ORDER";
 export const PROMOTE_USER = "PROMOTE_USER";
-export const CLOSE_CART = "CLOSE_CART"
-export const UPDATE_REVIEW = "UPDATE_REVIEW"
+export const CLOSE_CART = "CLOSE_CART";
+export const UPDATE_REVIEW = "UPDATE_REVIEW";
+export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 
 // aca van los actions del DELETE/REMOVE
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
@@ -308,7 +309,19 @@ export function updateReview(productId, reviewId) {
       })
       .catch((error) => alert(error, "error"));
   };
-}// S27 eliminar un producto DELETE /products/:id
+}
+// S70 : Crear Ruta para password reset
+export function updatePassword(userId) {
+  return function (dispatch) {
+    axios.put(`${SERVER_ADDRESS}/users/${userId}/passwordReset`)
+      .then((res) => {
+        dispatch({ type: UPDATE_PASSWORD, payload: res.data });
+      })
+      .catch((error) => alert(error, "error"));
+  };
+}
+
+// S27 eliminar un producto DELETE /products/:id
 export function removeProduct(productId) {
   return function (dispatch) {
     axios.delete(`${SERVER_ADDRESS}/products/${productId}`)
