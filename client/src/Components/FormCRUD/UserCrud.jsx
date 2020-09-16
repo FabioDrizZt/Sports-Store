@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CreateUser from "./CreateUser";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {getUsers,promoteUser,removeUser} from "../../actions/index"
 
 // const style = {
 //   width: "50%",
@@ -10,17 +11,12 @@ import { useSelector } from "react-redux";
 // };
 
 function UserCrud() {
+  const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
 
-  function eliminar(id) {
-    return fetch("http://localhost:3001/users/" + id, { method: "DELETE" })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        alert("usuario eliminado");
-      });
-  }
+  useEffect(()=>{
+    dispatch(getUsers())
+  },[])
 
   return (
     <React.Fragment>
@@ -54,18 +50,21 @@ function UserCrud() {
                     <span style={{ position:"-webkit-sticky" , right: 0 }}>
                       <button
                         className="btn btn-danger"
-                        onClick={() => eliminar(u.id)}
+                        onClick={() => dispatch(removeUser(u.id))}
                       >
                         Eliminar
                       </button>
-                      <Link to={"edit/user/" + u.id}>
+                      {/* <Link to={"edit/user/" + u.id}>
                         <button className="btn btn-warning">Editar</button>
-                      </Link>
+                      </Link> */}
                     </span>
                     <span/>
+                    <button className="btn btn-primary"
+                    onClick={()=>dispatch(promoteUser(u.id))}
+                    >Hacerlo Admin</button>
                   </li>
-                </ul>
-              </div>
+                </ul>               
+              </div>             
             </div>
           ))}
       </div>
