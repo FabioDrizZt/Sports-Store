@@ -1,17 +1,20 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import {  userLogout } from "../actions"
+import {  userLogout,getMe } from "../actions";
+
 
 
 const LoggedUser = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
+  
 
-    
     return (
-        <React.Fragment>
-            <div class="dropdown">
+        <React.Fragment>           
+                {user.length===0 ?  <div class="dropdown"><Link to="/login">
+                        <button class="dropdown-item" type="button">Iniciar Sesión</button>
+                    </Link></div> : <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {user.name}
                 </button>
@@ -22,13 +25,15 @@ const LoggedUser = () => {
                     <Link to="/cart">
                         <button class="dropdown-item" type="button">Mi Carrito</button>
                     </Link>
-                    <button class="dropdown-item" type="button">Mi Perfil</button>
+                    <Link to ="/auth/me">
+                    <button class="dropdown-item" type="button" onClick={()=>dispatch(getMe())}>Mi Perfil</button>
+                    </Link>
                     <button class="dropdown-item" type="button">Ayuda</button>
                     <div className="card-footer">
                     <button onClick={() =>dispatch(userLogout())}> Cerrar sesion </button> 
                 </div>
                 </div>
-            </div>
+            </div>}
         </React.Fragment>
     );
   };

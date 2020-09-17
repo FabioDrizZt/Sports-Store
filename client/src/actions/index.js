@@ -13,6 +13,7 @@ export const GET_USER = "GET_USER";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 export const GET_USERS = "GET_USERS";
 export const GET_REVIEWS = "GET_REVIEWS"
+export const GET_ME = "GET_ME"
 export const USER_LOGIN = "USER_LOGIN";
 export const USER_LOGOUT = "USER_LOGOUT"
 // aca van los actions del POST/CREATE
@@ -145,7 +146,19 @@ export function getReviews(id){
     .catch((error)=>alert(error,"error"));
   }
 }
-//S65 : Crear ruta /me
+
+//S65 : Crear ruta auth/me
+export function getMe(){
+  return function (dispatch){
+    axios.get(`${SERVER_ADDRESS}/auth/me`)
+    .then((res)=>{
+      dispatch({type:GET_ME,payload:res.data});
+    })
+    .catch((error)=>alert(error,"error"));
+  }
+}
+
+
 export function userLogin(input){
   return function (dispatch){
     axios.post(`${SERVER_ADDRESS}/auth/login`,input)
