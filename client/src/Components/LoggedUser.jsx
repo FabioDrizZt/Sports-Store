@@ -1,17 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getUser, userLogout } from "../actions"
+import {  userLogout } from "../actions"
 
 
 const LoggedUser = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
 
-    function logOut (e) {
-        alert("Finalizo Sesión Correctamente!")
-        dispatch(userLogout(e))
-      }
+    
     return (
         <React.Fragment>
             <div class="dropdown">
@@ -28,7 +25,7 @@ const LoggedUser = () => {
                     <button class="dropdown-item" type="button">Mi Perfil</button>
                     <button class="dropdown-item" type="button">Ayuda</button>
                     <div className="card-footer">
-                    <button onClick={(e) => logOut(e)}> Cerrar sesion </button> 
+                    <button onClick={() =>dispatch(userLogout())}> Cerrar sesion </button> 
                 </div>
                 </div>
             </div>

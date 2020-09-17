@@ -148,8 +148,8 @@ export function getReviews(id){
 //S65 : Crear ruta /me
 export function userLogin(input){
   return function (dispatch){
-    axios.post(`${SERVER_ADDRESS}/auth/me`,input)
-    .then((res)=>{
+    axios.post(`${SERVER_ADDRESS}/auth/login`,input)
+    .then((res)=>{      
       dispatch({type:USER_LOGIN, payload:res.data});
     })
     .catch((error)=>alert(error,"error"));
@@ -158,9 +158,10 @@ export function userLogin(input){
 // S64 crear ruta de logout
 export function userLogout() {
   return function (dispatch) {
-    axios.get(`${SERVER_ADDRESS}/auth/logout`)
-      .then((payload) => {
-      dispatch({ type: USER_LOGOUT, payload: undefined });
+    axios.post(`${SERVER_ADDRESS}/auth/logout`)
+      .then((res) => {
+        alert(res.data)
+      dispatch({ type: USER_LOGOUT/*, payload: res.data*/});
     });
   };
 };

@@ -19,7 +19,7 @@ server.put("/promote/:id", (req, res) => {
 server.post('/login',
   passport.authenticate('local'),
   function (req, res) {
-    res.json(req.user);
+    res.send(req.user);
   });
 // S64 : Crear ruta de logout
 // POST /auth/logout
@@ -32,7 +32,8 @@ server.post("/logout", (req, res) => {
   Esta ruta tiene que devolver el usuario que está logeado, 
   o 401 si no está logeado. */
   server.get("/me",(req,res)=>{
-    return res.json(req.user);
+    User.findAll()
+    .then(user=>res.send(user))
   });
 
   module.exports = server;

@@ -74,18 +74,18 @@ function rootReducer(state = initialState, action) {
             return { ...state, products: action.payload }
         } case GET_CARTUSER: {
             return { ...state, cart: action.payload }
-        } case GET_USER: {
-            return {
-                ...state, user: { // provisorio hasta q se cree el action con el payload
-                    id: 1,
-                    name: "Joaquin",
-                    lastName: "Musculoso",
-                    DNI: "27432915",
-                    email: "chao@ejemplo.com",
-                    password: "blablabla",
-                    role: "user"
-                }
-            }
+        // } case GET_USER: {
+        //     return {
+        //         ...state, user: { // provisorio hasta q se cree el action con el payload
+        //             id: 1,
+        //             name: "Joaquin",
+        //             lastName: "Musculoso",
+        //             DNI: "27432915",
+        //             email: "chao@ejemplo.com",
+        //             password: "blablabla",
+        //             role: "user"
+        //         }
+        //     }
         } case GET_USERS: {
             return { ...state, users: action.payload }
         } case GET_REVIEWS:{
@@ -93,7 +93,7 @@ function rootReducer(state = initialState, action) {
         }case USER_LOGIN:{
             return {...state, user:action.payload}
         } case USER_LOGOUT: {
-            return { ...state, user: undefined } 
+            return { ...state, user:[] } 
         } case CREATE_PRODUCT: {
             return { ...state, products: state.products.concat(action.payload) }
         } case CREATE_USER: {
@@ -135,6 +135,7 @@ function rootReducer(state = initialState, action) {
         } case REMOVE_USER: {
             return { ...state, users: state.users.filter(user => user.id !== action.payload) }
         } case ADD_TO_CART: {
+            console.log(state.cart)
             return { ...state, cart: state.cart.concat(action.payload) }
         } case REMOVE_CART: {
             return { ...state, cart: [] }
