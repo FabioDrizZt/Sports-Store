@@ -11,13 +11,13 @@ const Order = ({order}) => {
 
   function minusClick(e, id) {
     e.preventDefault();
-    var myCart = JSON.parse(localStorage.getItem('myCart'));
-    var newOrder = myCart.find(producto => producto.id === id);
+    let myCart = JSON.parse(localStorage.getItem('myCart'));
+    let newOrder = myCart.find(producto => producto.id === id);
     if(newOrder["amount"] > 1) {
       newOrder["amount"] = newOrder.amount - 1;
     }
     myCart = myCart.filter(orden => orden.id !== id);
-    var newCart = myCart.concat(newOrder);
+    let newCart = myCart.concat(newOrder);
     localStorage.setItem('myCart', JSON.stringify(newCart));
     if (cantidad !== 1) {
       setCantidad(cantidad - 1);
@@ -26,11 +26,12 @@ const Order = ({order}) => {
   }
 
   function plusClick(e, id) {
-    var myCart = JSON.parse(localStorage.getItem('myCart'));
-    var newOrder = myCart.find(producto => producto.id === id);
+    // Carrito LocalStore 
+    let myCart = JSON.parse(localStorage.getItem('myCart'));
+    let newOrder = myCart.find(producto => producto.id === id);
     newOrder["amount"] = newOrder.amount + 1;
     myCart = myCart.filter(orden => orden.id !== id);
-    var newCart = myCart.concat(newOrder);
+    let newCart = myCart.concat(newOrder);
     localStorage.setItem('myCart', JSON.stringify(newCart));
     e.preventDefault();
     if (cantidad !== order.product.stock) {
