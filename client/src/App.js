@@ -15,7 +15,8 @@ import Admin from "./Components/Admin";
 import Login from "./Components/Login";
 import OrdersTable from "./Components/OrderTable/OrdersTable";
 import CreateProduct from './Components/FormCRUD/CreateProduct';
-import Productok from './Components/ProductOk/Productok'
+import Productok from './Components/ProductOk/Productok';
+import MiPerfil from './Components/MiPerfil'
 
 function App() {
   const buttonUp = document.getElementById("button-up");
@@ -54,6 +55,7 @@ function App() {
       <Route exact path="/admin/newProduct" component={CreateProduct} />
       <Route exact path="/admin/orders" component={OrdersTable} />
       <Route exact path="/admin/productok" component={Productok} />
+      <Route exact path="/auth/me" component={MiPerfil} />
     </div>
   );
 }

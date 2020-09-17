@@ -7,10 +7,11 @@ import {
     GET_ORDER,
     GET_ORDERS,
     GET_CARTUSER,
-    GET_USER,
+    // GET_USER,
     SEARCH_PRODUCTS,
     GET_USERS,
     GET_REVIEWS,
+    GET_ME,
     USER_LOGIN,
     USER_LOGOUT,
     // aca van los actions del POST/CREATE
@@ -53,7 +54,8 @@ const initialState = {
     user: [], // deberia guardar el usuario logueado
     auth:[],
     reviews: [],
-    password: []
+    password: [],
+    miPerfil:[]
 }
 
 function rootReducer(state = initialState, action) {
@@ -90,6 +92,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, users: action.payload }
         } case GET_REVIEWS:{
             return {...state, reviews:action.payload}
+        }case GET_ME:{
+            return {...state, miPerfil:action.payload}
         }case USER_LOGIN:{
             return {...state, user:action.payload}
         } case USER_LOGOUT: {

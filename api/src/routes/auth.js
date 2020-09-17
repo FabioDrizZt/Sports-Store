@@ -34,6 +34,7 @@ server.post("/logout", (req, res) => {
   server.get("/me",(req,res)=>{
     User.findAll()
     .then(user=>res.send(user))
+    .catch(err=>res.send(err))
   });
 
   module.exports = server;
