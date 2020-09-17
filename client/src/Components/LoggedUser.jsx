@@ -11,8 +11,10 @@ const LoggedUser = () => {
   
 
     return (
-        <React.Fragment>
-            <div class="dropdown">
+        <React.Fragment>           
+                {user.length===0 ?  <div class="dropdown"><Link to="/login">
+                        <button class="dropdown-item" type="button">Iniciar Sesión</button>
+                    </Link></div> : <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {user.name}
                 </button>
@@ -31,7 +33,7 @@ const LoggedUser = () => {
                     <button onClick={() =>dispatch(userLogout())}> Cerrar sesion </button> 
                 </div>
                 </div>
-            </div>
+            </div>}
         </React.Fragment>
     );
   };
