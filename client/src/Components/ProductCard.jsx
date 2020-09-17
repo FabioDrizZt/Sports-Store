@@ -20,14 +20,11 @@ function ProductCard({
 
 
   function agregarAlCarrito(id, precio, cantidad) {
-    var myCart = JSON.parse(localStorage.getItem('myCart'));
+    // Carrito LocalStore 
+    let myCart = JSON.parse(localStorage.getItem('myCart'));
     const producto = (element) => element["id"] === id;
-    if(!myCart.some(producto)){
-      localStorage.setItem('myCart', JSON.stringify(myCart.concat([{"id": id, "amount": 1}])));
-    }
-    dispatch(
-      addtoCart(user.id, { productId: id, price: precio, amount: cantidad })
-    );
+    if(!myCart.some(producto)) localStorage.setItem('myCart', JSON.stringify(myCart.concat([{"id": id, "amount": 1}])));
+    dispatch( addtoCart(user.id, { productId: id, price: precio, amount: cantidad }));
   }
 
   return (
