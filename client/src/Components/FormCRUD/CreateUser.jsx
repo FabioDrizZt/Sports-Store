@@ -177,7 +177,7 @@ const RegistrationForm = () => {
                 {/* PASSWORD */}
       <Form.Item
         name="password"
-        label="Password"
+        label="Constraseña"
         rules={[
           {
             type: "regexp",
@@ -212,7 +212,7 @@ const RegistrationForm = () => {
 
       <Form.Item
         name="confirm"
-        label="Confirm Password"
+        label="Confirmar Constraseña"
         dependencies={["password"]}
         hasFeedback
         rules={[

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./NavBar.css";
 import cart from "../../cart.png";
 import login from "../../login.png";
+import LoggedUser from "../LoggedUser"
 
 export default function NavBar() {
   useEffect(() => {
@@ -35,6 +36,7 @@ export default function NavBar() {
           <Link to="/login">
             <img src={login} alt="login" className="mr-4 w-50" />
           </Link>
+          <LoggedUser />
         </div>
       </header>
       <aside className="font sidebar">
