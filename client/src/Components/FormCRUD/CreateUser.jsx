@@ -51,7 +51,7 @@ const RegistrationForm = () => {
   const [form] = Form.useForm();
 
   const dispatch = useDispatch();
-  // const [input, setInput] = useState([]);
+  const [input, setInput] = useState([]);
 
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
@@ -65,6 +65,9 @@ const RegistrationForm = () => {
   //     (input) => (input.value = "")
   //   );
   // }
+        if(!/[a-zA-Z\d]+/.test(input.password)) {
+          console.log("No sirve")
+        }
 
   return (
     <div className="containerCenter form form-group">
@@ -149,7 +152,7 @@ const RegistrationForm = () => {
         label="DNI"
         rules={[
           {
-            type:"string",
+            type:"",
           },
           {
             required: true,
@@ -163,23 +166,44 @@ const RegistrationForm = () => {
           // onChange={(e) => setInput({ ...input, DNI: e.target.value })}
         />
       </Form.Item>
+
+
+
+
+
                 {/* PASSWORD */}
       <Form.Item
         name="password"
         label="Password"
         rules={[
           {
-            required: true,
+            type: "regexp",
+            pattern: new RegExp(/[a-zA-Z\d]+/),
             message: "Ingresa tu contraseña",
           },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              // /[a-zA-Z\d]+/.test(value)
+              if (!/^\w+$/.test((value))) {
+                return Promise.reject("Solamente numeros y letras");
+              }
+              // if(!/[a-zA-Z\d]+/.test(input.password))
+              return Promise.resolve();
+            },
+          }),
         ]}
         hasFeedback
       >
         <Input.Password 
-        // value={input.password}
-        // onChange={(e) => setInput({ ...input, password: e.target.value })}
+        value={input.password}
+        onChange={(e) => setInput({ ...input, password: e.target.value })}
         />
       </Form.Item>
+
+
+
+
+
 
       <Form.Item
         name="confirm"
