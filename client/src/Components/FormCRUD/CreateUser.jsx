@@ -184,7 +184,9 @@ const RegistrationForm = () => {
           ({ getFieldValue }) => ({
             validator(rule, value) {
               // /[a-zA-Z\d]+/.test(value)
-              if (!/^\w+$/.test((value))) {
+              if (!/^(?=.*\d)(?=.*[A-Za-z])[A-Za-z0-9]{1,20}$/.test((value))) {
+                // /^\w+$/
+                // ((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})
                 return Promise.reject("Solamente numeros y letras");
               }
               // if(!/[a-zA-Z\d]+/.test(input.password))
