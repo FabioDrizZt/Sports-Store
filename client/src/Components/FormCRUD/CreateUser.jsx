@@ -132,7 +132,7 @@ const RegistrationForm = () => {
           },
           {
             required: true,
-            message: "Please input your E-mail!",
+            message: "Por favor introduzca un E-mail!",
           },
         ]}
       >
@@ -149,14 +149,16 @@ const RegistrationForm = () => {
         label="DNI"
         rules={[
           {
-            message: "DNI",
+            type:"string",
           },
           {
             required: true,
+            message: "Ingrese su DNI. Sólo números"
           },
         ]}
       >
         <Input 
+          type="number"
           // value={input.DNI}
           // onChange={(e) => setInput({ ...input, DNI: e.target.value })}
         />
@@ -168,7 +170,7 @@ const RegistrationForm = () => {
         rules={[
           {
             required: true,
-            message: "Please input your password!",
+            message: "Ingresa tu contraseña",
           },
         ]}
         hasFeedback
@@ -187,7 +189,7 @@ const RegistrationForm = () => {
         rules={[
           {
             required: true,
-            message: "Please confirm your password!",
+            message: "Confirma tu contraseña",
           },
           ({ getFieldValue }) => ({
             validator(rule, value) {
@@ -196,7 +198,7 @@ const RegistrationForm = () => {
               }
 
               return Promise.reject(
-                "The two passwords that you entered do not match!"
+                "Las dos contraseñas no concuerdan"
               );
             },
           }),
