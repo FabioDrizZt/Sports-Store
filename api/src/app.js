@@ -12,15 +12,15 @@ const { db, User } = require('./db.js');
 const Strategy = require('passport-local').Strategy;
 // Definimos la estrategia para autenticar
 passport.use(new Strategy(
-  function(email, password, done) {
+  function(username, password, done) {
     User.findOne({
-      where: { email: email }
+      where: { email: username }
   }).then((user) => {
     if(!user){
       return done(null, false, { message: 'Incorrect email.' });
     }
     //Falta encriptar la contrase;a
-    if(!user.validPassword(password)) {
+    if(user.validPassword(password)===false) {
       return done(null, false, { message: 'Incorrect password.' });
     }
     return done(null, user);
@@ -44,6 +44,23 @@ passport.deserializeUser(function(id, done) {
     return done(err);
   })
 });
+// Hay que instalar express???
+server.use(require('express-session')({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false
+}));
+
+server.use(passport.initialize());
+server.use(passport.session());
+
+// Middleware para mostrar la sesion y para debuggear 
+server.use((req, res, next) => {
+  console.log(req.session);
+  console.log(req.user);
+  next();
+});
+
 
 server.name = 'API';
 server.use (cors ());
@@ -67,68 +84,53 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   res.status(status).send(message);
 });
 
-// Hay que instalar express???
-server.use(require('express-session')({
-  secret: 'secret',
-  resave: false,
-  saveUninitialized: false
-}));
 
-server.use(passport.initialize());
-server.use(passport.session());
 
-// Middleware para mostrar la sesion y para debuggear 
-server.use((req, res, next) => {
-  console.log(req.session);
-  console.log(req.user);
-  next();
-});
+// server.get('/',
+//   function(req, res) {
+//     res.render('home', { user: req.user });
+//   });
 
-server.get('/',
-  function(req, res) {
-    res.render('home', { user: req.user });
-  });
+// server.get('/login',
+//   function(req, res) {
+//     res.render('login');
+//   });
 
-server.get('/login',
-  function(req, res) {
-    res.render('login');
-  });
+// server.post('/login', 
+//   passport.authenticate('local', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     res.redirect('/');
+//   });
 
-server.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
+// server.get('/logout',
+//   function(req, res) {
+//     req.logout();
+//     res.redirect('/')
+//   });
 
-server.get('/logout',
-  function(req, res) {
-    req.logout();
-    res.redirect('/')
-  });
+// function isAuthenticated(req, res, next){
+//     if(req.isAuthenticated()){
+//         next();
+//     } else {
+//         res.redirect('/login');
+//     }
+// }
 
-function isAuthenticated(req, res, next){
-    if(req.isAuthenticated()){
-        next();
-    } else {
-        res.redirect('/login');
-    }
-}
+// function isAdmin(req, res, next) {
+//     if(req.user.role === "admin"){
+//       next();
+//     } else {
+//       res.send('Tiene que ser administrador para acceder a esta ruta')
+//       res.redirect('/login');
+//     }
+//   }
 
-function isAdmin(req, res, next) {
-    if(req.user.role === "admin"){
-      next();
-    } else {
-      res.send('Tiene que ser administrador para acceder a esta ruta')
-      res.redirect('/login');
-    }
-  }
-
-server.use('/admin',
-  isAuthenticated,
-  isAdmin,
-  function(req, res){
-    res.render('profile', { user: req.user });
-  });
+// server.use('/admin',
+//   isAuthenticated,
+//   isAdmin,
+//   function(req, res){
+//     res.render('profile', { user: req.user });
+//   });
 
 
 module.exports = server;

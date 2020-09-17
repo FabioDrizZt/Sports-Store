@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { userLogin } from "../actions"
+import { userLogin, userLogout } from "../actions"
 import "./Login.css";
 
 const Form = () => {
@@ -14,8 +14,8 @@ const Form = () => {
 
       <form
         onSubmit={(e) => {
-          alert("Sesión Iniciada Correctamente !")
-          dispatch(userLogin(input)).then(window.history.back())
+          e.preventDefault()         
+          dispatch(userLogin(input))
         }}
       >
         <div>
@@ -23,8 +23,8 @@ const Form = () => {
             className="input"
             type="email"
             placeholder="nombre@ejemplo.com"
-            value={input.email}
-            onChange={(e) => setInput({ ...input, email: e.target.value })}
+            value={input.username}
+            onChange={(e) => setInput({ ...input, username: e.target.value })}
             required
           />
         </div>
@@ -51,7 +51,7 @@ const Form = () => {
           </Link>
         </div>
       </form>
-      <small>Sports Store ©</small>
+      <small>Sports Store ©</small>    
     </div>
   );
 };

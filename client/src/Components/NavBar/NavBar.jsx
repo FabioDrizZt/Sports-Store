@@ -35,9 +35,9 @@ export default function NavBar() {
           </Link>
           <Link to="/login">
             <img src={login} alt="login" className="mr-4 w-50" />
-          </Link>
-          <LoggedUser />
+          </Link>        
         </div>
+        <LoggedUser />
       </header>
       <aside className="font sidebar">
         <button className="sidebar-close-button" onClick={closeMenu}>
