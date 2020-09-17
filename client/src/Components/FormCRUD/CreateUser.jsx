@@ -65,6 +65,9 @@ const RegistrationForm = () => {
   //     (input) => (input.value = "")
   //   );
   // }
+        // if(!/[a-zA-Z\d]+/.test(input.password)) {
+        //   console.log("No sirve")
+        // }
 
   return (
     <div className="containerCenter form form-group">
@@ -149,16 +152,24 @@ const RegistrationForm = () => {
         label="DNI"
         rules={[
           {
-            type:"string",
+            type:"",
           },
           {
             required: true,
             message: "Ingrese su DNI. Sólo números"
           },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              if (!/^(?=.*\d)[0-9]{8,10}$/.test((value))) {
+                return Promise.reject("Únicamente números. Máximo 10 caracteres");
+              }
+              // if(!/[a-zA-Z\d]+/.test(input.password))
+              return Promise.resolve();
+            },
+          }),
         ]}
       >
         <Input 
-          type="number"
           // value={input.DNI}
           // onChange={(e) => setInput({ ...input, DNI: e.target.value })}
         />
@@ -169,9 +180,22 @@ const RegistrationForm = () => {
         label="Password"
         rules={[
           {
-            required: true,
+            type: "regexp",
+            pattern: new RegExp(/[a-zA-Z\d]+/),
             message: "Ingresa tu contraseña",
           },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              // /[a-zA-Z\d]+/.test(value)
+              if (!/^(?=.*\d)(?=.*[A-Za-z])[A-Za-z0-9]{1,20}$/.test((value))) {
+                // /^\w+$/
+                // ((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})
+                return Promise.reject("Solamente numeros y letras");
+              }
+              // if(!/[a-zA-Z\d]+/.test(input.password))
+              return Promise.resolve();
+            },
+          }),
         ]}
         hasFeedback
       >
@@ -180,6 +204,11 @@ const RegistrationForm = () => {
         // onChange={(e) => setInput({ ...input, password: e.target.value })}
         />
       </Form.Item>
+
+
+
+
+
 
       <Form.Item
         name="confirm"
