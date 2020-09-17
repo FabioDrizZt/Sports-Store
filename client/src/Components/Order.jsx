@@ -20,6 +20,7 @@ const Order = ({order}) => {
     var newCart = myCart.concat(newOrder);
     localStorage.setItem('myCart', JSON.stringify(newCart));
     if (cantidad !== 1) {
+      order["amount"] = order["amount"] - 1;
       setCantidad(cantidad - 1);
       dispatch(updateOrderAmount(1, order));
     } else alert("no podes llevar menos de 1");
@@ -34,6 +35,7 @@ const Order = ({order}) => {
     localStorage.setItem('myCart', JSON.stringify(newCart));
     e.preventDefault();
     if (cantidad !== order.product.stock) {
+      order["amount"] = order["amount"] + 1;
       setCantidad(cantidad + 1);
       dispatch(updateOrderAmount(1, order));
     } else alert("no podes llevar mas de: " + order.product.stock);
