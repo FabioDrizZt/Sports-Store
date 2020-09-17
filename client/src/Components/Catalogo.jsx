@@ -8,16 +8,13 @@ function Catalogo() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   const categories = useSelector((state) => state.categories);
-  var myCart = JSON.parse(localStorage.getItem('myCart'));
+  // Carrito LocalStore 
+  JSON.parse(localStorage.getItem('myCart')) ?? localStorage.setItem('myCart', JSON.stringify([]))
 
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getCategories());
     dispatch(getUser());
-    if(!myCart) { 
-      myCart= [];
-      return localStorage.setItem('myCart', JSON.stringify(myCart))
-    }
   }, [getProducts, getCategories]);
 
   function filtrarCatalogo(nombreCat) {
