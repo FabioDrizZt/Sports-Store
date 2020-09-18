@@ -31,10 +31,12 @@ server.post("/logout", (req, res) => {
   GET /auth/me 
   Esta ruta tiene que devolver el usuario que está logeado, 
   o 401 si no está logeado. */
-  server.get("/me",(req,res)=>{
-    User.findAll()
-    .then(user=>res.send(user))
-    .catch(err=>res.send(err))
+  server.get('/me', isAuthenticated, function (req, res) {
+    User.findOne({
+       where: { id: req.user.id },
+      })
+    .then((usuario) => res.json(usuario))
+    .catch((err) => res.status(401).json({err}));
   });
-
+  
   module.exports = server;
