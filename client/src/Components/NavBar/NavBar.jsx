@@ -5,8 +5,10 @@ import "./NavBar.css";
 import cart from "../../cart.png";
 import login from "../../login.png";
 import LoggedUser from "../LoggedUser"
+import { useSelector } from "react-redux";
 
 export default function NavBar() {
+  const user =useSelector(state=>state.user)
   useEffect(() => {
     document.body.addEventListener("click", closeMenu);
   }, []);
@@ -33,9 +35,9 @@ export default function NavBar() {
           <Link to="/cart">
             <img src={cart} alt="cart" className="mr-4 w-50" />
           </Link>
-          <Link to="/login">
+          {user.length===0 ?   <Link to="/login">
             <img src={login} alt="login" className="mr-4 w-50" />
-          </Link>        
+          </Link> : null}     
         </div>
         <LoggedUser />
       </header>

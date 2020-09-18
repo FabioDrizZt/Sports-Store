@@ -13,7 +13,9 @@ const Cart = (carrito) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    dispatch(getCartUser(1));
+    // si no esta logeado se rompe porque el user.id de alguien no logeado con items es undefined
+    if(user.id){
+    dispatch(getCartUser(user.id))}
   }, []);
 
   return (
