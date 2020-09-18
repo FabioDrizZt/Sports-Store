@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import CreateUser from "./CreateUser";
 import { useDispatch, useSelector } from "react-redux";
 import {getUsers,promoteUser,removeUser} from "../../actions/index"
@@ -14,9 +14,12 @@ function UserCrud() {
   const users = useSelector((state) => state.users);
   const user = useSelector((state) => state.user);
 
+  const [userId,setUserId] = useState(null)
+  const userFind = users&&users.find(x=>x.id===userId);
+
   useEffect(()=>{
     dispatch(getUsers())
-  },[])
+  },[userFind&&userFind.role])
 
   return (
     <React.Fragment>
@@ -60,7 +63,9 @@ function UserCrud() {
                     </span>
                     <span/>
                     <button className="btn btn-primary"
-                    onClick={()=>dispatch(promoteUser(u.id))}
+                    onClick={()=>{    
+                      setUserId(u.id);               
+                      dispatch(promoteUser(u.id))}}
                     >Hacerlo Admin</button>
                   </li>
                 </ul>               
