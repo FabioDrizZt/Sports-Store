@@ -31,6 +31,13 @@ server.post("/logout", (req, res) => {
   GET /auth/me 
   Esta ruta tiene que devolver el usuario que está logeado, 
   o 401 si no está logeado. */
+  function isAuthenticated(req, res, next){
+    if(req.isAuthenticated()){
+        next();
+    } else {
+        res.redirect('/me');
+    }
+}
   server.get('/me', isAuthenticated, function (req, res) {
     User.findOne({
        where: { id: req.user.id },

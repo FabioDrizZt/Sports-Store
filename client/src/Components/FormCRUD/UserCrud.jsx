@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import CreateUser from "./CreateUser";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {getUsers,promoteUser,removeUser} from "../../actions/index"
 
@@ -13,6 +12,7 @@ import {getUsers,promoteUser,removeUser} from "../../actions/index"
 function UserCrud() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
+  const user = useSelector((state) => state.user);
 
   useEffect(()=>{
     dispatch(getUsers())
@@ -22,7 +22,7 @@ function UserCrud() {
     <React.Fragment>
       <CreateUser />
       <div>
-        {users &&
+        {users && user.role==="admin" &&
           users.map((u) => (
             <div class="row">
               <div class="col-lg-8 mx-auto">

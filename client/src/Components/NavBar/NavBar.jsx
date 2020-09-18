@@ -63,7 +63,7 @@ export default function NavBar() {
           {/* <li>
               <Link className="option" to="/category">Categorías</Link>
             </li> */}
-          <li>
+            {user&&user.role==="admin"?<React.Fragment> <li>
             <Link className="option" to="/admin" onClick={closeMenu}>
               Admin
             </Link>
@@ -72,7 +72,7 @@ export default function NavBar() {
             <Link className="option" to="/users" onClick={closeMenu}>
               Usuarios
             </Link>
-          </li>
+          </li></React.Fragment> : null}         
         </ul>
       </aside>
     </div>
