@@ -11,7 +11,7 @@ server.put("/promote/:id", (req, res) => {
         role: "admin",
       },
       { where: { id: req.params.id } }
-    ).then(() => res.status(200).send({message:"Usuario id: " + req.params.id + " actualizado satisfactoriamente"})
+    ).then((res) => res.status(200).send(res)
     ).catch((err) => res.send(err));
   });
 //S63 : Crear ruta de Login

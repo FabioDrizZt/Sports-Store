@@ -302,8 +302,7 @@ export function promoteUser(id){
   return function (dispatch){
     axios.put(`${SERVER_ADDRESS}/auth/promote/${id}`,id)
     .then(res=>{
-      dispatch({type: PROMOTE_USER, payload: id});
-      console.log(res.message)
+      dispatch({type: PROMOTE_USER, payload: id});      
     }) 
   .catch((error) => alert (error))
 }}
