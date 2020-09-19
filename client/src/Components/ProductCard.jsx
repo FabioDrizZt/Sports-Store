@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./ProductCard.css";
 import { Link } from "react-router-dom";
 import { addtoCart } from "../actions/index";

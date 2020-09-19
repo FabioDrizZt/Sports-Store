@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Link } from "react-router-dom";
-import ProductCard from "./ProductCard";
+import {Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProduct, addtoCart,getReviews } from "../actions";
 import './Product.css';
@@ -35,7 +34,7 @@ const Product = (props) => {
         </Link>
         <div className="row">
           <div id="description" className="col-6">
-            <img src={product.image} className="img-fluid" />
+            <img src={product.image} className="img-fluid" alt="img" />
           </div>
           <div className="col-6" 
           // style={{ borderLeft: "2px solid #F1F1F1" }}

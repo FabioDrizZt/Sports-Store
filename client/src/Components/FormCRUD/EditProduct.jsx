@@ -6,7 +6,7 @@ import '../FormCRUD/CreateProduct.css'
 function EditProduct(props) {
     const dispatch = useDispatch();
     const idProduct = props.match.match.params.id;
-    const [editProduct, setEditProduct] = useState(null);
+    
 
     const [input, setInput] = useState(null);
 
