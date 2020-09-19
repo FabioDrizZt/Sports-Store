@@ -1,17 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 // import ProductCard from "./ProductCard";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from 'react-router-dom';
 import NavBarAdmin from '../Components/NavBar/NavBarAdmin';
 import {
   // getProducts,
   // getCategories,
-  getCategoryProducts
+  //getCategoryProducts
   // createProduct,
 } from "../actions";
 import "./Admin.css";
-import FormCategory from "./FormCategory";
-import FormCrud from "./FormCRUD/FormCrud";
 // import CreateProduct from "./FormCRUD/CreateProduct";
 // import Catalogo from "./Catalogo";
 // import CatalogoCategories from "./CatalogoCategories";
@@ -19,13 +15,8 @@ import FormCrud from "./FormCRUD/FormCrud";
 // Importe useRef de react, agregue la constante draggingItem y el handleDragStart
 
 export default function AsigCate() {
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
   // const categories = useSelector((state) => state.categories);
   // const users = useSelector((state) => state.users);
-
-  const draggingItem = useRef();
-  const dragOverItem = useRef();
 
   useEffect(() => {
     function onDragEnd(evento) {
