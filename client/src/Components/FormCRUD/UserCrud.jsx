@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import CreateUser from "./CreateUser";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {getUsers,promoteUser,removeUser} from "../../actions/index"
 

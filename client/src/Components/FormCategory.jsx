@@ -3,9 +3,8 @@ import {
   createCategory,
   removeCategory,
   updateCategory,
-  getCategories,
 } from "../actions/index";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./FormCategory.css";
 import NavBarAdmin from '../Components/NavBar/NavBarAdmin';
 
