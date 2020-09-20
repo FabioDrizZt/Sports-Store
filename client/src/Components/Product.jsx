@@ -31,7 +31,7 @@ const Product = (props) => {
         </Link>
         <div className="row">
           <div id="description" className="col-6">
-            <img src={product.image} className="img-fluid" />
+            <img src={product.image} className="img-fluid" alt="img" />
           </div>
           <div className="col-6" 
           // style={{ borderLeft: "2px solid #F1F1F1" }}
