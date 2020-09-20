@@ -1,6 +1,6 @@
 import { Link, Route } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { removeCart, getUser, getCartUser } from "../actions";
+import { removeCart, getCartUser } from "../actions";
 import { useSelector, useDispatch } from "react-redux";
 import s from "./Cart.css";
 import Checkout from "./Checkout";

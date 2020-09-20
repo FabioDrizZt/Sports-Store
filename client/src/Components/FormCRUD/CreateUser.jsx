@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import {
   Form,
   Input,
   Tooltip,
-  Cascader,
-  Select,
-  Row,
-  Col,
-  Checkbox,
   Button,
-  AutoComplete,
 } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import './CreateUser.css';

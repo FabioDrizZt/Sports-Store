@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { userLogin, userLogout } from "../actions"
+import { userLogin } from "../actions"
 import "./Login.css";
 
 const Form = () => {

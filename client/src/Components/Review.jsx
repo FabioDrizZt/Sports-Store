@@ -1,28 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Avatar, Tooltip, Comment, Rate } from "antd";
+import {  Rate } from "antd";
 import "antd/dist/antd.css";
 import "../Components/FormCRUD/CreateProduct.css";
-import moment from "moment";
-import { createReview, getUser } from "../actions";
+import { createReview } from "../actions";
 
 const desc = ["Malo", "Regular", "Bueno", "Muy Bueno", "Excelente !!"];
 
 const Review = () => {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews);
-  const review = useSelector((state) => state.review);
   const user = useSelector((state) => state.user);
   const product = useSelector((state) => state.product);
   const [myreview, setMyreview] = useState(
-    reviews.filter((rev) => rev.productId == rev.product.id && rev.userId)
+    reviews.filter((rev) => rev.productId === rev.product.id && rev.userId)
   );
   const total =
     reviews.reduce((prev, cur) => {
       return prev + cur.score;
     }, 0) / reviews.length;
 
-  const [editar, setEditar] = useState(!!myreview.score);
+  const [editar] = useState(!!myreview.score);
   return (
     product &&
     reviews && (

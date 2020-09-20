@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import "./Order.css";
-import { useSelector, useDispatch } from "react-redux";
-import { removeOrder, updateOrderAmount, getMyCart } from "../actions";
+import { useDispatch } from "react-redux";
+import { removeOrder, updateOrderAmount } from "../actions";
 
 const Order = ({order}) => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
   const [cantidad, setCantidad] = useState(order.amount);  
   // const myCart = useSelector((state) => state.myCart);
 

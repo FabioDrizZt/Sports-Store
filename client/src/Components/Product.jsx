@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProduct, addtoCart,getReviews } from "../actions";
 import './Product.css';
@@ -20,9 +20,6 @@ const Product = (props) => {
     dispatch(
       addtoCart(1, { productId: product.id, price: product.price, amount: 1 })
     );
-  }
-  function alert() {
-    alert("SIRVE")
   }
 
   console.log(document.body.style.overflow)
