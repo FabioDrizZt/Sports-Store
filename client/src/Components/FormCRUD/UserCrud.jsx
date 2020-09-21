@@ -1,7 +1,6 @@
 import React, { useEffect,useState } from "react";
-import CreateUser from "./CreateUser";
 import { useDispatch, useSelector } from "react-redux";
-import {getUsers,promoteUser,removeUser} from "../../actions/index"
+import {getUsers,promoteUser,removeUser} from "../../redux/actions/index"
 import NavBarAdmin from '../NavBar/NavBarAdmin'
 
 // const style = {
