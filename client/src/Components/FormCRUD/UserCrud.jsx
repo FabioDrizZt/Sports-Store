@@ -3,6 +3,7 @@ import CreateUser from "./CreateUser";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {getUsers,promoteUser,removeUser} from "../../actions/index"
+import NavBarAdmin from '../NavBar/NavBarAdmin'
 
 // const style = {
 //   width: "50%",
@@ -20,7 +21,7 @@ function UserCrud() {
 
   return (
     <React.Fragment>
-      <CreateUser />
+      <NavBarAdmin />
       <div>
         {users &&
           users.map((u) => (

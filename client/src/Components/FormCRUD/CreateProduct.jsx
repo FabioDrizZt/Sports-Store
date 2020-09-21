@@ -74,7 +74,7 @@ const CreateProduct = () => {
     <>
     <NavBarAdmin/>
     <h3>Nuevo Producto</h3>
-      <div className="containerppp form-control-lg col-4">
+      <div className=" containerppp form-control-lg col-4">
       <Form
       {...formItemLayout}
       form={form}
@@ -143,10 +143,20 @@ const CreateProduct = () => {
         }
         rules={[
           {
-            required: true,
-            message: "¿Cuánto cuesta este producto?",
-            whitespace: true
+            type:"",
           },
+          {
+            required: true,
+            message: "¿Cuánto cuesta este producto?"
+          },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              if (!/^(?=.*\d)[0-9]{1,20}$/.test((value))) {
+                return Promise.reject("Solamente números");
+              }
+              return Promise.resolve();
+            },
+          }),
         ]}
       >
         <Input
@@ -165,9 +175,20 @@ const CreateProduct = () => {
         }
         rules={[
           {
-            required: true,
-            message: "¿Cuantos productos tienes?",
+            type:"",
           },
+          {
+            required: true,
+            message: "¿Cuántos productos de este tipo tienes?"
+          },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              if (!/^(?=.*\d)[0-9]{1,20}$/.test((value))) {
+                return Promise.reject("Solamente números");
+              }
+              return Promise.resolve();
+            },
+          }),
         ]}
       >
         <Input 

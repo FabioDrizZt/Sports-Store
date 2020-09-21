@@ -21,6 +21,9 @@ function NavBarAdmin() {
       <Link className="option" to="/admin/categories">
         Mis Categorias
       </Link>
+      <Link className="option" to="/admin/users">
+        Usuarios
+      </Link>
     </div>
     </div>
   )
