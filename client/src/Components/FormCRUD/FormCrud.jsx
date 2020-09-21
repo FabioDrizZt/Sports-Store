@@ -2,7 +2,7 @@ import React from "react";
 import NavBarAdmin from "../NavBar/NavBarAdmin";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {removeProduct} from "../../actions/index";
+import {removeProduct} from "../../redux/actions/index";
 
 function FormCrud() {
   const products = useSelector((state) => state.products);

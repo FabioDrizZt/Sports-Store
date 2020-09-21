@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { userLogin,gmailValidation } from "../actions";
+import { userLogin, gmailValidation } from "../redux/actions";
 import "./Login.css";
-import GoogleLogin from 'react-google-login'
+import GoogleLogin from "react-google-login";
 const clientIdGoogle =
   "972982669881-i7vnmbj3lr104khogicl46opq520fkes.apps.googleusercontent.com";
 

@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./ProductCard.css";
-import { Link, Redirect } from "react-router-dom";
-import { addtoCart, getUser } from "../actions/index";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getProduct, getReviews, getMe } from "../actions";
+import { addtoCart, getReviews } from "../redux/actions";
 
 // Estaria bueno que cada producto tenga un subtitulo
 function ProductCard({
@@ -49,14 +48,9 @@ function ProductCard({
         <p className="price">
           <b>$ {precio}</b>
         </p>
-        
+
         <Link to={`/products/${id}`}>
-          <button
-            className="b btn"
-            onClick={
-              dispatch(getReviews(id))
-            }
-          >
+          <button className="b btn" onClick={dispatch(getReviews(id))}>
             Ver mas
           </button>
         </Link>

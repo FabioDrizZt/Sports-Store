@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getOrders, updateOrder } from "../../actions";
+import { getOrders, updateOrder } from "../../redux/* /actions */";
 import NavBarAdmin from '../NavBar/NavBarAdmin';
 import "./OrdersTable.css"
 

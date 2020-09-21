@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { useSelector, useDispatch } from "react-redux";
-import { getUser,getProducts, getCategories, getCategoryProducts } from "../actions";
+import {
+  getUser,
+  getProducts,
+  getCategories,
+  getCategoryProducts,
+} from "../redux/actions";
 import "./Catalogo.css";
 
 function Catalogo() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   const categories = useSelector((state) => state.categories);
-  // Carrito LocalStore 
-  JSON.parse(localStorage.getItem('myCart')) ?? localStorage.setItem('myCart', JSON.stringify([]))
+  // Carrito LocalStore
+  JSON.parse(localStorage.getItem("myCart")) ??
+    localStorage.setItem("myCart", JSON.stringify([]));
 
   useEffect(() => {
     dispatch(getProducts());
@@ -27,8 +33,10 @@ function Catalogo() {
       <div className="jumbotron jumbotron-fluid">
         <div className="containerCenter">
           <div className="catalogContainer">
-            <select className="custom-select"
-              onChange={(e) => filtrarCatalogo(e.target.value)}>
+            <select
+              className="custom-select"
+              onChange={(e) => filtrarCatalogo(e.target.value)}
+            >
               <option disabled seleted="true" value>
                 FILTRAR POR CATEGORIA
               </option>
@@ -40,7 +48,8 @@ function Catalogo() {
             </select>
             <button
               className="btn btn-danger"
-              onClick={() => window.location.reload()}>
+              onClick={() => window.location.reload()}
+            >
               Todos los Productos
             </button>
           </div>
@@ -61,7 +70,7 @@ function Catalogo() {
               />
             ))}
         </div>
-    </div>
+      </div>
     </React.Fragment>
   );
 }
