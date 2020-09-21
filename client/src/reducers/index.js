@@ -55,7 +55,8 @@ const initialState = {
     auth: [],
     reviews: [],
     password: [],
-    miPerfil: []
+    miPerfil: [],
+    address: []
 }
 
 function rootReducer(state = initialState, action) {
