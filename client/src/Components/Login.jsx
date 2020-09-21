@@ -1,12 +1,40 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { userLogin } from "../actions";
+import { userLogin,gmailValidation } from "../actions";
 import "./Login.css";
+import GoogleLogin from 'react-google-login'
+const clientIdGoogle =
+  "972982669881-i7vnmbj3lr104khogicl46opq520fkes.apps.googleusercontent.com";
 
 const Form = () => {
   const dispatch = useDispatch();
   const [input, setInput] = useState({});
+
+  const responseGoogle = (response) => {
+    const {
+      email,
+      familyName,
+      givenName,
+      imageUrl,
+      googleId,
+    } = response.profileObj;
+
+    //guestCart
+    var myCart = JSON.parse(localStorage.getItem("myCart"));
+
+    const gmail = {
+      access: "User",
+      name: givenName, //obtenemos el nombre de las respuesta
+      surname: familyName, //obtenemos el apellido de las respuesta
+      email: email, //obtenemos el email de las respuesta
+      password: googleId, //seteamos una password
+      img: imageUrl,
+      guest: myCart,
+    };
+    dispatch(gmailValidation(gmail));
+    localStorage.clear();
+  };
 
   return (
     <div className="form">
@@ -15,8 +43,7 @@ const Form = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          Promise.all([dispatch(userLogin(input))])
-          .then(window.history.back());
+          Promise.all([dispatch(userLogin(input))]).then(window.history.back());
         }}
       >
         <div>
@@ -50,6 +77,17 @@ const Form = () => {
           <Link className="nav-link" to="/users">
             Registrate acá campeon
           </Link>
+        </div>
+
+        <div className="contenedor-google">
+          <GoogleLogin
+            className="boton-google"
+            clientId={clientIdGoogle}
+            buttonText="Ingresar con Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
         </div>
       </form>
       <small>Sports Store ©</small>

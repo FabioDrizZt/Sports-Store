@@ -23,7 +23,8 @@ export const CREATE_CATEGORY = "CREATE_CATEGORY";
 export const CREATE_PRODUCT_CATEGORY = "CREATE_PRODUCT_CATEGORY";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const CREATE_REVIEW = "CREATE_REVIEW";
-export const CREATE_LOGIN = "CREATE_LOGIN"
+export const CREATE_LOGIN = "CREATE_LOGIN";
+export const GMAIL_VALIDATION = "GMAIL_VALIDATION";
 // aca van los actions del UPDATE/MODIFICAR
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
@@ -318,6 +319,18 @@ export function removeReview(IdProduct, idReview) {
   return function (dispatch) {
     axios.delete(`${SERVER_ADDRESS}/products/${IdProduct}/review/${idReview}`)
       .then((res) => { dispatch({ type: REMOVE_ORDER, payload: idReview }) })
+      .catch((error) => alert(error));
+  }
+}
+
+// ------------------------------------------------------------------------------------
+// --------------------------- GOOGLE VALIDATION --------------------------------------
+// ------------------------------------------------------------------------------------
+
+export const gmailValidation = (value) => {
+  return function (dispatch) {
+    axios.post("auth/login/google", value)
+      .then((res) => { dispatch({ type: GMAIL_VALIDATION, payload: res.data }) })
       .catch((error) => alert(error));
   }
 }
