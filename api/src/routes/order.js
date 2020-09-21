@@ -45,7 +45,7 @@ server.put("/:id", (req, res) => {
 // PATCH /orders/:id
 server.patch("/:id", (req, res) => {
     Cart.update({
-        state: "closed",
+        state: "completa",
     }, { where: { id: req.params.id } }
     ).then((order) => res.status(200).send(order))
         .catch((err) => { res.status(400).json({ err }); })
