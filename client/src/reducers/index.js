@@ -22,6 +22,7 @@ import {
     CREATE_LOGIN,
     ADD_TO_CART,
     CREATE_REVIEW,
+    GMAIL_VALIDATION,
     // aca van los actions del UPDATE/MODIFICAR
     UPDATE_PRODUCT,
     UPDATE_CATEGORY,
@@ -76,18 +77,6 @@ function rootReducer(state = initialState, action) {
             return { ...state, products: action.payload }
         } case GET_CARTUSER: {
             return { ...state, cart: action.payload }
-            // } case GET_USER: {
-            //     return {
-            //         ...state, user: { // provisorio hasta q se cree el action con el payload
-            //             id: 1,
-            //             name: "Joaquin",
-            //             lastName: "Musculoso",
-            //             DNI: "27432915",
-            //             email: "chao@ejemplo.com",
-            //             password: "blablabla",
-            //             role: "user"
-            //         }
-            //     }
         } case GET_USERS: {
             return { ...state, users: action.payload }
         } case GET_REVIEWS: {
@@ -114,17 +103,14 @@ function rootReducer(state = initialState, action) {
             return { ...state, reviews: [...state.reviews.filter(rev => rev.id !== action.payload)].concat(action.payload), review: action.payload }
         } case CREATE_LOGIN: {
             return { ...state, login: state.login.concat(action.payload) }
+        } case GMAIL_VALIDATION: {
+            return { ...state, user: action.payload, }
         } case UPDATE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
         } case UPDATE_CATEGORY: {
             return { ...state, categories: [...state.categories.filter(x => x.id !== action.payload.id)].concat(action.payload) }
         } case UPDATE_ORDER_AMOUNT: {
-            return {
-                ...state, cart: state.cart.map(function (x) {
-                    if (x.id === action.payload.id) return action.payload
-                    else return x
-                })
-            }
+            return { ...state, cart: state.cart.map(function (x) { if (x.id === action.payload.id) return action.payload; else return x }) }
         } case UPDATE_USER: {
             return { ...state, users: state.users.filter(user => user.id !== action.payload.id) }
         } case UPDATE_ORDER: {
@@ -144,7 +130,6 @@ function rootReducer(state = initialState, action) {
         } case REMOVE_USER: {
             return { ...state, users: state.users.filter(user => user.id !== action.payload) }
         } case ADD_TO_CART: {
-            console.log(state.cart)
             return { ...state, cart: state.cart.concat(action.payload) }
         } case REMOVE_CART: {
             return { ...state, cart: [] }
@@ -152,9 +137,7 @@ function rootReducer(state = initialState, action) {
             return { ...state, cart: state.cart.filter(order => order.id !== action.payload) }
         } case REMOVE_REVIEW: {
             return { ...state, reviews: state.reviews.filter(rev => rev.id !== action.payload) }
-        }
-        default:
-            return state;
+        } default: return state;
     }
 }
 
