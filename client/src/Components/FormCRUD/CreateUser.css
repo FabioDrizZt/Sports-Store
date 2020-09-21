@@ -1,13 +1,20 @@
-.formularioOk {
-  width: 35%;
-  padding-right: 3rem;
-  padding-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+body {
+  background-color: rgb(245, 237, 237);
+}
+.containerUser {
+  position: relative;
+  left: 30%;
+  margin-top: 1rem;
 }
 
-.containerCenter {
-  display: flex;
-  justify-content: flex-end;
+h3 {
+  margin-top: 2rem;
 }
+
+.containerUser input.password {
+  border-color: grey;
+} 
+.containerUser ::-webkit-input-placeholder {
+  color: rgb(87, 82, 82);
+}
+
