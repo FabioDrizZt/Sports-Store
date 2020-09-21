@@ -18,6 +18,10 @@ const Product = (props) => {
 
   //FALTA EL ID DEL USER, no hay nada en el store User
   function agregarAlCarrito(product) {
+    // Carrito LocalStore 
+    let myCart = JSON.parse(localStorage.getItem('myCart'));
+    const producto = (element) => element["id"] === product.id;
+    if(!myCart.some(producto)) localStorage.setItem('myCart', JSON.stringify(myCart.concat([{"id": product.id, "amount": 1}])));
     dispatch(
       addtoCart(1, { productId: product.id, price: product.price, amount: 1 })
     );
