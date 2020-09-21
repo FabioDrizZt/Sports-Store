@@ -70,7 +70,7 @@ const RegistrationForm = () => {
         // }
 
   return (
-    <div className="containerCenter form form-group">
+    <div className="containerPro containerCenter form form-group">
       <Form
       //  onSubmit={(e) => User(e, input)}
       className="formularioOk"

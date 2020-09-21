@@ -73,7 +73,8 @@ const CreateProduct = () => {
   return (
     <>
     <NavBarAdmin/>
-      <div className="containerCenter form form-group">
+    <h3>Nuevo Producto</h3>
+      <div className="containerppp form-control-lg col-4">
       <Form
       {...formItemLayout}
       form={form}

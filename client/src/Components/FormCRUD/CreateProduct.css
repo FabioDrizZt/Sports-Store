@@ -1,9 +1,17 @@
-.containerAll {
-    display: flex;
-    justify-content: center;
+.containerppp {
+    position: relative;
+    left: 30%;
 }
 
-.containerPro {
+.containerppp input {
+    border-color: grey;
+}
+.containerppp ::-webkit-input-placeholder {
+    color: rgb(87, 82, 82);
+}
+
+
+/* .containerPro {
     width: 60%;
     height: 80%;
     margin-top: 20px;
@@ -17,4 +25,4 @@
     margin-top: '7px';
     color: red;
     font-size: '13px';
-}
+} */
