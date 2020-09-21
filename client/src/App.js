@@ -16,6 +16,8 @@ import Login from "./Components/Login";
 import OrdersTable from "./Components/OrderTable/OrdersTable";
 import CreateProduct from './Components/FormCRUD/CreateProduct';
 import Productok from './Components/ProductOk/Productok';
+import RegistrationForm from './Components/FormCRUD/CreateUser';
+import Userok from './Components/UserOk/UserOk';
 import MiPerfil from './Components/MiPerfil'
 
 function App() {
@@ -46,9 +48,12 @@ function App() {
       <Route exact path="/order" component={Order} />
       <Route exact path="/products/:id" render={(match) => <Product match={match} />} />
       <Route exact path="/products" component={Catalogo} />
-      <Route exact path="/users" component={UserCrud} />
+      <Route exact path="/users" component={RegistrationForm} />
+      <Route exact path="/users/userok" component={Userok} />
+
       {/* RUTAS DEL ADMINISTRADOR */}
       <Route exact path="/admin" component={Admin} />
+      <Route exact path="/admin/users" component={UserCrud} />
       <Route exact path="/admin/categories" component={FormCategory} />
       <Route exact path="/admin/edit/product/:id" render={(match) => <EditProduct match={match} />} />
       <Route exact path="/admin/myProducts" component={FormCrud} />

@@ -2,6 +2,7 @@ import React, { useEffect,useState } from "react";
 import CreateUser from "./CreateUser";
 import { useDispatch, useSelector } from "react-redux";
 import {getUsers,promoteUser,removeUser} from "../../actions/index"
+import NavBarAdmin from '../NavBar/NavBarAdmin'
 
 // const style = {
 //   width: "50%",
@@ -23,7 +24,7 @@ function UserCrud() {
 
   return (
     <React.Fragment>
-      <CreateUser />
+      <NavBarAdmin />
       <div>
         {users && user.role==="admin" &&
           users.map((u) => (

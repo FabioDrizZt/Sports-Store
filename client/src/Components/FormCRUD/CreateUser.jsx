@@ -9,6 +9,7 @@ import {
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import './CreateUser.css';
 import { createUser } from "../../actions/index";
+import { Redirect } from "react-router";
 
 const formItemLayout = {
   labelCol: {
@@ -45,12 +46,16 @@ const RegistrationForm = () => {
   const [form] = Form.useForm();
 
   const dispatch = useDispatch();
-  // const [input, setInput] = useState([]);
+  const [redirect, setRedirect] = useState(false);
 
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
     dispatch(createUser(values));
   };
+
+  if(redirect) {
+    return <Redirect to="/users/userok"/>
+  }
 
   // function User(e, input) {
   //   e.preventDefault();
@@ -64,14 +69,22 @@ const RegistrationForm = () => {
         // }
 
   return (
-    <div className="containerCenter form form-group">
+    <>
+    <h3>Unete a Sports Store</h3>
+    <div className="col-4 form-group containerUser">
       <Form
       //  onSubmit={(e) => User(e, input)}
-      className="formularioOk"
+      className=""
       {...formItemLayout}
       form={form}
       name="register"
-      onFinish={(values) => onFinish(values)}
+      onFinish={(values) => {
+        onFinish(values)
+        setTimeout(function() {
+          setRedirect(true);
+          
+        },1000,);
+      }}
       scrollToFirstError
     >
       {/* Nombre */}
@@ -79,7 +92,6 @@ const RegistrationForm = () => {
         name="name"
         label={
           <span>
-            Nombre&nbsp;
             <Tooltip title="¿Cómo quieres que otros te llamen?">
               <QuestionCircleOutlined />
             </Tooltip>
@@ -94,6 +106,7 @@ const RegistrationForm = () => {
         ]}
       >
         <Input
+          placeholder="Nombre"
         //  value={input.name}
         //  onChange={(e) => setInput({ ...input, name: e.target.value })}
         />
@@ -102,7 +115,7 @@ const RegistrationForm = () => {
 
       <Form.Item
         name="lastName"
-        label={<span>Apellido&nbsp;</span>}
+        label={<span>&nbsp;</span>}
         rules={[
           {
             required: true,
@@ -112,6 +125,7 @@ const RegistrationForm = () => {
         ]}
       >
         <Input
+          placeholder="Apellido"
         // value={input.lastName}
         // onChange={(e) => setInput({ ...input, lastName: e.target.value })}
         />
@@ -121,7 +135,11 @@ const RegistrationForm = () => {
 
       <Form.Item
         name="email"
-        label="E-mail"
+        label= {
+          <label>
+
+          </label>
+        }
         rules={[
           {
             type: "email",
@@ -134,6 +152,8 @@ const RegistrationForm = () => {
         ]}
       >
         <Input 
+          placeholder="E-mail"
+
         // value={input.email}
         // onChange={(e) => setInput({ ...input, email: e.target.value })}
         />
@@ -143,7 +163,11 @@ const RegistrationForm = () => {
 
       <Form.Item
         name="DNI"
-        label="DNI"
+        label= {
+          <label>
+
+          </label>
+        }
         rules={[
           {
             type:"",
@@ -164,6 +188,8 @@ const RegistrationForm = () => {
         ]}
       >
         <Input 
+          placeholder="DNI"
+
           // value={input.DNI}
           // onChange={(e) => setInput({ ...input, DNI: e.target.value })}
         />
@@ -171,7 +197,11 @@ const RegistrationForm = () => {
                 {/* PASSWORD */}
       <Form.Item
         name="password"
-        label="Constraseña"
+        label= {
+          <label>
+
+          </label>
+        }
         rules={[
           {
             type: "regexp",
@@ -194,19 +224,20 @@ const RegistrationForm = () => {
         hasFeedback
       >
         <Input.Password 
+          placeholder="Constraseña"
+
         // value={input.password}
         // onChange={(e) => setInput({ ...input, password: e.target.value })}
         />
       </Form.Item>
 
-
-
-
-
-
       <Form.Item
         name="confirm"
-        label="Confirmar Constraseña"
+        label= {
+          <label>
+
+          </label>
+        }
         dependencies={["password"]}
         hasFeedback
         rules={[
@@ -228,6 +259,7 @@ const RegistrationForm = () => {
         ]}
       >
         <Input.Password 
+          placeholder="Confirmar Constraseña"
         // value={input.confirm}
         // onChange={(e) => setInput({ ...input, confirm: e.target.value })}
         />
@@ -241,6 +273,7 @@ const RegistrationForm = () => {
       </Form.Item>
     </Form>
     </div>
+    </>
   );
 };
 
