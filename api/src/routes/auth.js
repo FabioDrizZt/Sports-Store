@@ -1,49 +1,43 @@
 const server = require("express").Router();
-const { User} = require("../db");
+const { User } = require("../db");
 const passport = require('passport');
 
 // S67 : Crear ruta /promote
 // POST /auth/promote/:id
 // Promote convierte al usuario con ID: id a Admin.
 server.put("/promote/:id", (req, res) => {
-    User.update(
-      {
-        role: "admin",
-      },
-      { where: { id: req.params.id } }
-    ).then((res) => res.status(200).send(res)
-    ).catch((err) => res.send(err));
-  });
+  User.update(
+    {
+      role: "admin",
+    },
+    { where: { id: req.params.id } }
+  ).then((res) => res.status(200).send(res)
+  ).catch((err) => res.send(err));
+});
 //S63 : Crear ruta de Login
 //POST /auth/login
-server.post('/login',
-  passport.authenticate('local'),
-  function (req, res) {
-    res.send(req.user);
-  });
+server.post('/login', passport.authenticate('local'), function (req, res) {
+  res.send(req.user)
+});
 // S64 : Crear ruta de logout
 // POST /auth/logout
 server.post("/logout", (req, res) => {
   req.logout();
   res.send("deslogueado");
 });
-  /*S65 : Crear ruta /me
-  GET /auth/me 
-  Esta ruta tiene que devolver el usuario que está logeado, 
-  o 401 si no está logeado. */
-  function isAuthenticated(req, res, next){
-    if(req.isAuthenticated()){
-        next();
-    } else {
-        res.redirect('/me');
-    }
+/*S65 : Crear ruta /me
+GET /auth/me 
+Esta ruta tiene que devolver el usuario que está logeado, 
+o 401 si no está logeado. */
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) next()
+  else res.redirect('/me')
 }
-  server.get('/me', isAuthenticated, function (req, res) {
-    User.findOne({
-       where: { id: req.user.id },
-      })
-    .then((usuario) => res.json(usuario))
-    .catch((err) => res.status(401).json({err}));
-  });
-  
-  module.exports = server;
+server.get('/me', isAuthenticated, function (req, res) {
+  User.findOne({
+    where: { id: req.user.id },
+  }).then((usuario) => res.json(usuario))
+    .catch((err) => res.status(401).json({ err }));
+});
+
+module.exports = server;

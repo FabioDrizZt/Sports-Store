@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { userLogin } from "../actions"
+import { userLogin } from "../actions";
 import "./Login.css";
 
 const Form = () => {
@@ -14,8 +14,9 @@ const Form = () => {
 
       <form
         onSubmit={(e) => {
-          e.preventDefault()         
-          dispatch(userLogin(input))
+          e.preventDefault();
+          Promise.all([dispatch(userLogin(input))])
+          .then(window.history.back());
         }}
       >
         <div>
@@ -51,7 +52,7 @@ const Form = () => {
           </Link>
         </div>
       </form>
-      <small>Sports Store ©</small>    
+      <small>Sports Store ©</small>
     </div>
   );
 };
