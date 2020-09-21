@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getProduct, addtoCart,getReviews } from "../actions";
+import { addtoCart,getProduct } from "../actions";
 import './Product.css';
 import Review from "./Review";
 
@@ -10,21 +10,16 @@ import Review from "./Review";
 const Product = (props) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product);
-  useEffect(() => {
-    dispatch(getProduct(props.match.match.params.id));
-    dispatch(getReviews(props.match.match.params.id));
-  }, []);
 
   //FALTA EL ID DEL USER, no hay nada en el store User
   function agregarAlCarrito(product) {
-    // Carrito LocalStore 
-    let myCart = JSON.parse(localStorage.getItem('myCart'));
-    const producto = (element) => element["id"] === product.id;
-    if(!myCart.some(producto)) localStorage.setItem('myCart', JSON.stringify(myCart.concat([{"id": product.id, "amount": 1}])));
     dispatch(
       addtoCart(1, { productId: product.id, price: product.price, amount: 1 })
     );
   }
+  useEffect(() => {
+    dispatch(getProduct(props.match.match.params.id))
+  },[])
 
   console.log(document.body.style.overflow)
   return (
@@ -35,7 +30,7 @@ const Product = (props) => {
         </Link>
         <div className="row">
           <div id="description" className="col-6">
-            <img src={product.image} className="img-fluid" alt="img" />
+            <img src={product.image} className="img-fluid" />
           </div>
           <div className="col-6" 
           // style={{ borderLeft: "2px solid #F1F1F1" }}
@@ -61,7 +56,7 @@ const Product = (props) => {
                 </button>
               </Link>
             </div>
-            <Review />
+            <Review id={props.match.match.params.id}/>
           </div>
         </div>
       </div>

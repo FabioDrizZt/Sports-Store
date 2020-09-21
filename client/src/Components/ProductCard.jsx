@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ProductCard.css";
-import { Link } from "react-router-dom";
-import { addtoCart } from "../actions/index";
+import { Link, Redirect } from "react-router-dom";
+import { addtoCart, getUser } from "../actions/index";
 import { useSelector, useDispatch } from "react-redux";
+import { getProduct, getReviews, getMe } from "../actions";
 
 // Estaria bueno que cada producto tenga un subtitulo
 function ProductCard({
@@ -18,26 +19,25 @@ function ProductCard({
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-
   function agregarAlCarrito(id, precio, cantidad) {
-    // Carrito LocalStore 
-    let myCart = JSON.parse(localStorage.getItem('myCart'));
+    // Carrito LocalStore
+    let myCart = JSON.parse(localStorage.getItem("myCart"));
     const producto = (element) => element["id"] === id;
-    if(!myCart.some(producto)) localStorage.setItem('myCart', JSON.stringify(myCart.concat([{"id": id, "amount": 1}])));
-    dispatch( addtoCart(user.id, { productId: id, price: precio, amount: cantidad }));
+    if (!myCart.some(producto))
+      localStorage.setItem(
+        "myCart",
+        JSON.stringify(myCart.concat([{ id: id, amount: 1 }]))
+      );
+    dispatch(
+      addtoCart(user.id, { productId: id, price: precio, amount: cantidad })
+    );
   }
 
   return (
     <div className=" col-sm-4 cardStyle p-4">
       <div className="text-left">
-        <Link to={`/products/${id}`}>
-          <img
-            className="card-img-top img"
-            src={imagen}
-            alt="Imagen Producto"
-          />
-          <h3 className="card-title">{titulo}</h3>
-        </Link>
+        <img className="card-img-top img" src={imagen} alt="Imagen Producto" />
+        <h3 className="card-title">{titulo}</h3>
         {categories &&
           categories.map((x) => (
             <span className="badge badge-secondary mr-1">{x.name}</span>
@@ -49,16 +49,25 @@ function ProductCard({
         <p className="price">
           <b>$ {precio}</b>
         </p>
+        
         <Link to={`/products/${id}`}>
-          <button className="b btn">Ver mas</button>
-        </Link>
           <button
-            onClick={() => agregarAlCarrito(id, precio, cantidad)}
-            className={stock === 0 ? "btn btn-secondary" : "btn btn-success"}
-            disabled={stock === 0 ? true : false}
+            className="b btn"
+            onClick={
+              dispatch(getReviews(id))
+            }
           >
-            {stock === 0 ? "No disponible" : "Agregar a Carrito"}
+            Ver mas
           </button>
+        </Link>
+
+        <button
+          onClick={() => agregarAlCarrito(id, precio, cantidad)}
+          className={stock === 0 ? "btn btn-secondary" : "btn btn-success"}
+          disabled={stock === 0 ? true : false}
+        >
+          {stock === 0 ? "No disponible" : "Agregar a Carrito"}
+        </button>
       </div>
     </div>
   );
