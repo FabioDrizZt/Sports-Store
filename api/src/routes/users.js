@@ -14,7 +14,7 @@ server.get("/", (req, res) => {
 server.get("/:idUser/cart", (req, res) => {
   const id = req.params.idUser;
   Cart.findOne({
-    where: { userId: id, state: "creada", },
+    where: { userId: id, state: "abierta", },
   }).then((cart) => {
     Order.findAll({
       where: { cartId: cart.id },
@@ -39,8 +39,8 @@ server.get("/:id/orders", (req, res) => {
 server.post("/:idUser/cart", (req, res) => {
   const id = req.params.idUser;
   Cart.findOrCreate({
-    where: { userId: id, state: "creada" },
-    defaults: { userId: id, state: "creada" },
+    where: { userId: id, state: "abierta" },
+    defaults: { userId: id, state: "abierta" },
   })
     .then((cart) => {
       Order.findOrCreate({
@@ -98,7 +98,7 @@ server.put("/:id", (req, res) => {
 // S41 : Crear Ruta para editar las cantidades del carrito
 // PUT /users/:idUser/cart 
 server.put("/:idUser/cart", (req, res) => {
-  let cart = Cart.findOne({ where: { userId: req.params.idUser, state: "creada" }, })
+  let cart = Cart.findOne({ where: { userId: req.params.idUser, state: "abierta" }, })
   let product = Product.findByPk(req.body.productId)
   Promise.all([cart, product])
     .then(values =>
@@ -134,7 +134,7 @@ server.delete("/:id", (req, res) => {
 // DELETE /users/:idUser/cart/ 
 //eliminar del carrito y de orders
 server.delete("/:idUser/cart", (req, res) => {
-  Cart.findOne({ where: { userId: req.params.idUser, state: "creada" } })
+  Cart.findOne({ where: { userId: req.params.idUser, state: "abierta" } })
     .then((cart) => {
       Order.destroy({ where: { cartId: cart.id } })
         .then((deletedRecord) => {
