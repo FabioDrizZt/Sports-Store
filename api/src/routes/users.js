@@ -1,17 +1,18 @@
 const server = require("express").Router();
 const { User, Cart, Order, Product } = require("../db.js");
+const check = require("./check.js");
 
 // -----> ***** GET ***** <-----
 // S36 : Crear Ruta que retorne todos los Usuarios
 // GET /users
-server.get("/", (req, res) => {
+server.get("/", check.isAuth, check.isAdmin, (req, res) => {
   User.findAll({})
     .then((users) => { res.send(users); })
     .catch((err) => res.status(400).json({ err }));
 });
 //S39 : Crear Ruta que retorne todos los items del Carrito
 // GET /users/:idUser/cart
-server.get("/:idUser/cart", (req, res) => {
+server.get("/:idUser/cart", check.isAuth, (req, res) => {
   const id = req.params.idUser;
   Cart.findOne({
     where: { userId: id, state: "abierta", },
@@ -24,7 +25,7 @@ server.get("/:idUser/cart", (req, res) => {
   })
 });
 // S45 : Crear Ruta que retorne todas las Ordenes de los usuarios GET /users/:id/orders
-server.get("/:id/orders", (req, res) => {
+server.get("/:id/orders", check.isAuth, (req, res) => {
   const id = req.params.id;
   Cart.findAll({
     where: { userId: id },
@@ -36,7 +37,7 @@ server.get("/:id/orders", (req, res) => {
 
 // S38 : Crear Ruta para agregar Item al Carrito
 // POST /users/:idUser/cart 
-server.post("/:idUser/cart", (req, res) => {
+server.post("/:idUser/cart", check.isAuth, (req, res) => {
   const id = req.params.idUser;
   Cart.findOrCreate({
     where: { userId: id, state: "abierta" },
@@ -80,7 +81,7 @@ server.post("/", (req, res) => {
 });
 // -----> ***** PUT ***** <-----
 // S35 : Crear Ruta para modificar Usuario
-server.put("/:id", (req, res) => {
+server.put("/:id", check.isAuth, (req, res) => {
   User.update(
     {
       name: req.body.name,
@@ -97,7 +98,8 @@ server.put("/:id", (req, res) => {
 
 // S41 : Crear Ruta para editar las cantidades del carrito
 // PUT /users/:idUser/cart 
-server.put("/:idUser/cart", (req, res) => {
+
+server.put("/:idUser/cart",check.isAuth, (req, res) => {
   let cart = Cart.findOne({ where: { userId: req.params.idUser, state: "abierta" }, })
   let product = Product.findByPk(req.body.productId)
   Promise.all([cart, product])
@@ -111,7 +113,7 @@ server.put("/:idUser/cart", (req, res) => {
 });
 // S70 : Crear Ruta para password reset
 // POST /users/:id/passwordReset
-server.put("/:id/passwordReset", (req, res) => {
+server.put("/:id/passwordReset", check.isAuth, (req, res) => {
   User.findByPk(req.params.id)
     .then(user =>
       user.update(
@@ -121,7 +123,7 @@ server.put("/:id/passwordReset", (req, res) => {
 });
 // -----> ***** DELETE ***** <-----
 // S37 : Crear Ruta para eliminar Usuario DELETE /users/:id
-server.delete("/:id", (req, res) => {
+server.delete("/:id", check.isAuth, check.isAdmin, (req, res) => {
   User.destroy({ where: { id: req.params.id } }).then((deletedRecord) => {
     if (deletedRecord === 1)
       res.status(200).json({ message: "Se elimino el Usuario" });
@@ -133,7 +135,8 @@ server.delete("/:id", (req, res) => {
 //
 // DELETE /users/:idUser/cart/ 
 //eliminar del carrito y de orders
-server.delete("/:idUser/cart", (req, res) => {
+
+server.delete("/:idUser/cart",check.isAuth, (req, res) => {
   Cart.findOne({ where: { userId: req.params.idUser, state: "abierta" } })
     .then((cart) => {
       Order.destroy({ where: { cartId: cart.id } })

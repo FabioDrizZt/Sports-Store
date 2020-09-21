@@ -1,11 +1,12 @@
 const server = require("express").Router();
 const { User } = require("../db");
 const passport = require('passport');
+const check = require("./check.js");
 
 // S67 : Crear ruta /promote
 // POST /auth/promote/:id
 // Promote convierte al usuario con ID: id a Admin.
-server.put("/promote/:id", (req, res) => {
+server.put("/promote/:id", check.isAuth, check.isAdmin, (req, res) => {
   User.update(
     {
       role: "admin",
@@ -29,11 +30,8 @@ server.post("/logout", (req, res) => {
 GET /auth/me 
 Esta ruta tiene que devolver el usuario que está logeado, 
 o 401 si no está logeado. */
-function isAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) next()
-  else res.redirect('/me')
-}
-server.get('/me', isAuthenticated, function (req, res) {
+
+server.get('/me', check.isAuth, function (req, res) {
   User.findOne({
     where: { id: req.user.id },
   }).then((usuario) => res.json(usuario))
