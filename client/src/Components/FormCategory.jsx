@@ -3,7 +3,7 @@ import {
   createCategory,
   removeCategory,
   updateCategory,
-} from "../redux/actions/index";
+} from "../redux/actions";
 import React, { useState } from "react";
 import "./FormCategory.css";
 import NavBarAdmin from "../Components/NavBar/NavBarAdmin";

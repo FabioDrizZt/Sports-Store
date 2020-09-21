@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Form, Input, Tooltip, Button } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import "./CreateUser.css";
-import { createUser } from "../../redux/actions/index";
+import { createUser } from "../../redux/actions";
 import { Redirect } from "react-router";
 
 const formItemLayout = {
