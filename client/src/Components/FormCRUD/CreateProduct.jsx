@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createProduct } from "../../redux/actions/index";
+import { createProduct } from "../../redux/actions";
 import NavBarAdmin from "../NavBar/NavBarAdmin";
 import { Redirect } from "react-router";
 

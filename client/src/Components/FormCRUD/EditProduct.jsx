@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { updateProduct } from "../../redux/actions/index";
+import { updateProduct } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import NavBarAdmin from "../NavBar/NavBarAdmin";
 import "../FormCRUD/CreateProduct.css";
