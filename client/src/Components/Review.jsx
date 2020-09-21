@@ -1,26 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {  Rate } from "antd";
+import { Rate } from "antd";
 import "antd/dist/antd.css";
 import "../Components/FormCRUD/CreateProduct.css";
-import { createReview } from "../actions";
+import { createReview, getReviews } from "../actions";
 
 const desc = ["Malo", "Regular", "Bueno", "Muy Bueno", "Excelente !!"];
 
-const Review = () => {
+const Review = (props) => {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews);
   const user = useSelector((state) => state.user);
   const product = useSelector((state) => state.product);
   const [myreview, setMyreview] = useState(
-    reviews.filter((rev) => rev.productId === rev.product.id && rev.userId)
+    reviews.filter((rev) => (rev.productId == props.id) && rev.userId) ?? {
+      score: null,
+      description: null,
+      productId: 1,
+    }
   );
+
   const total =
     reviews.reduce((prev, cur) => {
       return prev + cur.score;
     }, 0) / reviews.length;
 
-  const [editar] = useState(!!myreview.score);
+    useEffect(() => {
+      dispatch(getReviews(props.id))
+    },[])
+
   return (
     product &&
     reviews && (
@@ -30,7 +39,7 @@ const Review = () => {
         <Rate disabled value={total} />
         {total ? <span className="ant-rate-text">{desc[total - 1]}</span> : ""}
         <hr />
-
+        {user.length>0 ? (
         <div className="containerAll">
           <form
             className="containerPro"
@@ -43,7 +52,6 @@ const Review = () => {
               dispatch(createReview(myreview));
             }}
           >
-            {" "}
             <h5>Tu valoración sobre el producto</h5>
             <Rate
               allowClear={false}
@@ -70,18 +78,23 @@ const Review = () => {
                 setMyreview({ ...myreview, description: e.target.value })
               }
               required
-              readonly={!!editar}
             />
             <button
               className="btn btn-primary"
               type="submit"
               value="Crear"
               style={{ margin: 0 }}
-            >
-              {!!editar ? "Editar" : "Enviar"}
-            </button>
+            >Valorar Producto</button>
           </form>
         </div>
+        ):(
+        <div className="login">
+          No tenes cuenta capo?
+          <Link className="nav-link" to="/users">
+            Registrate acá campeon
+          </Link>
+        </div>
+        )}
       </React.Fragment>
     )
   );

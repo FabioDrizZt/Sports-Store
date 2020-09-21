@@ -52,10 +52,10 @@ const initialState = {
     cart: [],
     users: [], // lista de usuarios para q vea el admin
     user: [], // deberia guardar el usuario logueado
-    auth:[],
+    auth: [],
     reviews: [],
     password: [],
-    miPerfil:[]
+    miPerfil: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -72,32 +72,32 @@ function rootReducer(state = initialState, action) {
             return { ...state, order: action.payload }
         } case GET_ORDERS: {
             return { ...state, orders: action.payload }
-        }case SEARCH_PRODUCTS: {
+        } case SEARCH_PRODUCTS: {
             return { ...state, products: action.payload }
         } case GET_CARTUSER: {
             return { ...state, cart: action.payload }
-        // } case GET_USER: {
-        //     return {
-        //         ...state, user: { // provisorio hasta q se cree el action con el payload
-        //             id: 1,
-        //             name: "Joaquin",
-        //             lastName: "Musculoso",
-        //             DNI: "27432915",
-        //             email: "chao@ejemplo.com",
-        //             password: "blablabla",
-        //             role: "user"
-        //         }
-        //     }
+            // } case GET_USER: {
+            //     return {
+            //         ...state, user: { // provisorio hasta q se cree el action con el payload
+            //             id: 1,
+            //             name: "Joaquin",
+            //             lastName: "Musculoso",
+            //             DNI: "27432915",
+            //             email: "chao@ejemplo.com",
+            //             password: "blablabla",
+            //             role: "user"
+            //         }
+            //     }
         } case GET_USERS: {
             return { ...state, users: action.payload }
-        } case GET_REVIEWS:{
-            return {...state, reviews:action.payload}
-        }case GET_ME:{
-            return {...state, miPerfil:action.payload}
-        }case USER_LOGIN:{
-            return {...state, user:action.payload}
+        } case GET_REVIEWS: {
+            return { ...state, reviews: action.payload }
+        } case GET_ME: {
+            return { ...state, miPerfil: action.payload }
+        } case USER_LOGIN: {
+            return { ...state, user: action.payload }
         } case USER_LOGOUT: {
-            return { ...state, user:[] } 
+            return { ...state, user: [] }
         } case CREATE_PRODUCT: {
             return { ...state, products: state.products.concat(action.payload) }
         } case CREATE_USER: {
@@ -106,20 +106,25 @@ function rootReducer(state = initialState, action) {
             else alert("Ya Existe DNI o Email ver")
         } case CREATE_CATEGORY: {
             return { ...state, categories: state.categories.concat(action.payload) }
-        }case PROMOTE_USER:{
-            return { ...state}
-        }case CREATE_PRODUCT_CATEGORY: {
+        } case PROMOTE_USER: {
+            return { ...state }
+        } case CREATE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.concat(action.payload) }
         } case CREATE_REVIEW: {
             return { ...state, reviews: [...state.reviews.filter(rev => rev.id !== action.payload)].concat(action.payload), review: action.payload }
         } case CREATE_LOGIN: {
-            return {...state, login: state.login.concat(action.payload)}
+            return { ...state, login: state.login.concat(action.payload) }
         } case UPDATE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
         } case UPDATE_CATEGORY: {
             return { ...state, categories: [...state.categories.filter(x => x.id !== action.payload.id)].concat(action.payload) }
         } case UPDATE_ORDER_AMOUNT: {
-            return { ...state, cart: [...state.cart.filter(x => x.id !== action.payload.id)].concat(action.payload) }
+            return {
+                ...state, cart: state.cart.map(function (x) {
+                    if (x.id === action.payload.id) return action.payload
+                    else return x
+                })
+            }
         } case UPDATE_USER: {
             return { ...state, users: state.users.filter(user => user.id !== action.payload.id) }
         } case UPDATE_ORDER: {
@@ -144,7 +149,7 @@ function rootReducer(state = initialState, action) {
         } case REMOVE_CART: {
             return { ...state, cart: [] }
         } case REMOVE_ORDER: {
-            return { ...state, cart: state.cart.filter(order => order.id !== action.payload) }   
+            return { ...state, cart: state.cart.filter(order => order.id !== action.payload) }
         } case REMOVE_REVIEW: {
             return { ...state, reviews: state.reviews.filter(rev => rev.id !== action.payload) }
         }
