@@ -1,5 +1,4 @@
-
-
+//Middleware para autenticar si el usuario esta logeado
 const isAuth = function (req, res, next){
     if(req.isAuthenticated()){
         next();
@@ -8,6 +7,7 @@ const isAuth = function (req, res, next){
         res.redirect('/login');
     }
 }
+//Middleware para autenticar si el usuario es Administrador
 const isAdmin = function (req, res, next) {
     if(req.user.role === "admin"){
       next();
