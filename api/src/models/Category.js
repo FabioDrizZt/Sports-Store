@@ -1,16 +1,16 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
+//S5: Crear modelo de categorias
 module.exports = (sequelize) => {
-  // defino el modelo
-  sequelize.define('category', {
+  sequelize.define("category", {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
-    },    
+      unique: true,
+    },
     description: {
       type: DataTypes.TEXT,
-      defaultValue: "Este producto no tiene descripción."
-    }
-  })
+      defaultValue: "Este producto no tiene descripción.",
+    },
+  });
 };
