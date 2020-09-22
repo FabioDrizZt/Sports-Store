@@ -8,14 +8,13 @@ const isAuth = function (req, res, next){
     }
 }
 //Middleware para autenticar si el usuario es Administrador
-=======
-const isAuth = function (req, res, next) {
-  if (req.isAuthenticated()) {
+function isAdmin(req, res, next) {
+  if(req.user.role === "admin"){
     next();
   } else {
-    res.send("Tiene que iniciar sesion para acceder a esta ruta");
-    res.redirect("/login");
+    res.send('Tiene que ser administrador para acceder a esta ruta')
+    res.redirect('/login');
   }
-};
+}
 
 module.exports = { isAdmin, isAuth };
