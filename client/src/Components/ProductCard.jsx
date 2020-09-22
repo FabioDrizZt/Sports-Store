@@ -18,16 +18,17 @@ function ProductCard({
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  function agregarAlCarrito(id, precio, cantidad) {
+  function agregarAlCarrito(id, name, precio, cantidad, imagen, descripcion, stock ) {
 
     // Carrito LocalStore 
     if (!user.id) {
       let myCart = JSON.parse(localStorage.getItem('myCart'));
-      const producto = (element) => element["id"] === id;
-          if (!myCart.some(producto))
+      const order = (element) => element["id"] === id;
+          if (!myCart.some(order))
+          let producto = {id, name, precio, cantidad, imagen, descripcion, stock  }
       localStorage.setItem(
         "myCart",
-        JSON.stringify(myCart.concat([{ id: id, amount: 1 }]))
+        JSON.stringify(myCart.concat([{ id: id, price: precio, amount: 1, producto }]))
       );
     } else {
       dispatch(addtoCart(user.id, { productId: id, price: precio, amount: cantidad }));
@@ -57,7 +58,7 @@ function ProductCard({
           </button>
         </Link>
         <button
-          onClick={() => agregarAlCarrito(id, precio, cantidad)}
+          onClick={() => agregarAlCarrito(id, name, precio, cantidad, imagen, descripcion, stock )}
           className={stock === 0 ? "btn btn-secondary" : "btn btn-success"}
           disabled={stock === 0 ? true : false}
         >
