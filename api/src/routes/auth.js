@@ -18,8 +18,8 @@ server.post("/login", passport.authenticate("local"), function (req, res) {
   res.send(req.user);
 });
 
-// S64 : Crear ruta de logout
-// POST /auth/logout
+/* S64 : Crear ruta de logout
+ POST /auth/logout*/
 server.post("/logout", (req, res) => {
   req.logout();
   res.send("deslogueado");
