@@ -21,10 +21,13 @@ function ProductCard({
 
   function agregarAlCarrito(id, precio, cantidad) {
     // Carrito LocalStore 
-    let myCart = JSON.parse(localStorage.getItem('myCart'));
-    const producto = (element) => element["id"] === id;
-    if(!myCart.some(producto)) localStorage.setItem('myCart', JSON.stringify(myCart.concat([{"id": id, "amount": 1}])));
-    dispatch( addtoCart(user.id, { productId: id, price: precio, amount: cantidad }));
+    if (!user.id) {
+      let myCart = JSON.parse(localStorage.getItem('myCart'));
+      const producto = (element) => element["id"] === id;
+      if (!myCart.some(producto)) localStorage.setItem('myCart', JSON.stringify(myCart.concat([{ "id": id, "amount": 1 }])));
+    } else {
+      dispatch(addtoCart(user.id, { productId: id, price: precio, amount: cantidad }));
+    }
   }
 
   return (
@@ -52,13 +55,13 @@ function ProductCard({
         <Link to={`/products/${id}`}>
           <button className="b btn">Ver mas</button>
         </Link>
-          <button
-            onClick={() => agregarAlCarrito(id, precio, cantidad)}
-            className={stock === 0 ? "btn btn-secondary" : "btn btn-success"}
-            disabled={stock === 0 ? true : false}
-          >
-            {stock === 0 ? "No disponible" : "Agregar a Carrito"}
-          </button>
+        <button
+          onClick={() => agregarAlCarrito(id, precio, cantidad)}
+          className={stock === 0 ? "btn btn-secondary" : "btn btn-success"}
+          disabled={stock === 0 ? true : false}
+        >
+          {stock === 0 ? "No disponible" : "Agregar a Carrito"}
+        </button>
       </div>
     </div>
   );

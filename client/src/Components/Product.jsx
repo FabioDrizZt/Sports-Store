@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getProduct, addtoCart,getReviews } from "../actions";
+import { getProduct, addtoCart, getReviews, userLogin } from "../actions";
 import './Product.css';
 import Review from "./Review";
 
@@ -15,15 +15,17 @@ const Product = (props) => {
     dispatch(getReviews(props.match.match.params.id));
   }, []);
 
-  //FALTA EL ID DEL USER, no hay nada en el store User
   function agregarAlCarrito(product) {
     // Carrito LocalStore 
-    let myCart = JSON.parse(localStorage.getItem('myCart'));
-    const producto = (element) => element["id"] === product.id;
-    if(!myCart.some(producto)) localStorage.setItem('myCart', JSON.stringify(myCart.concat([{"id": product.id, "amount": 1}])));
-    dispatch(
-      addtoCart(1, { productId: product.id, price: product.price, amount: 1 })
-    );
+    if (!user.id) {
+      let myCart = JSON.parse(localStorage.getItem('myCart'));
+      const producto = (element) => element["id"] === product.id;
+      if (!myCart.some(producto)) localStorage.setItem('myCart', JSON.stringify(myCart.concat([{ "id": product.id, "amount": 1 }])));
+    } else {
+      dispatch(
+        addtoCart(1, { productId: product.id, price: product.price, amount: 1 })
+      );
+    }
   }
 
   console.log(document.body.style.overflow)
@@ -37,7 +39,7 @@ const Product = (props) => {
           <div id="description" className="col-6">
             <img src={product.image} className="img-fluid" alt="img" />
           </div>
-          <div className="col-6" 
+          <div className="col-6"
           // style={{ borderLeft: "2px solid #F1F1F1" }}
           >
             <h2>{product.name}</h2>
