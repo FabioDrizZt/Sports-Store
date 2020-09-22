@@ -10,6 +10,8 @@ import Review from "./Review";
 const Product = (props) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product);
+  const user = useSelector((state) => state.user);
+  
   useEffect(() => {
     dispatch(getProduct(props.match.match.params.id));
     dispatch(getReviews(props.match.match.params.id));
