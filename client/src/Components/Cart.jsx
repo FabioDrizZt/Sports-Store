@@ -11,8 +11,8 @@ const Cart = (carrito) => {
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
 
-  const getStorage = window.localStorage
-  const getProducts = getStorage.getItem('myCart')
+
+  const getProducts = window.localStorage.getItem('myCart')
   const [productCards, setProductsCards] = useState([])
 
   const [changeCart, setChangeCart] = useState("");
