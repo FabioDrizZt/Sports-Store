@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as C from './constants'
+axios.defaults.withCredentials = true;
 
 //S24 : Crear ruta de producto individual, pasado un ID que retorne un producto con sus detalles
 export function getProduct(productId) {

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getProduct, addtoCart, getReviews, userLogin } from "../actions";
+import { getProduct, addtoCart, getReviews, userLogin } from "../redux/actions";
 import './Product.css';
 
 import Review from "./Review";

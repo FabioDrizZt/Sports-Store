@@ -1,12 +1,12 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
+//Modelo de Carrito
 module.exports = (sequelize) => {
-  // El modelo cart
-  sequelize.define('cart', {
+  sequelize.define("cart", {
     state: {
       type: DataTypes.ENUM({
-        values: ['abierta', 'procesando', 'cancelada','completa']
-      })
+        values: ["abierta", "procesando", "cancelada", "completa"],
+      }),
     },
-  })
+  });
 };
