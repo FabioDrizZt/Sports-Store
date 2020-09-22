@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
 import { getProduct, addtoCart, getReviews, userLogin } from "../actions";
 import './Product.css';
+
 import Review from "./Review";
 
 // Este componente envia informacion al ProductCard que le dará una maquetacion de tarjeta...
@@ -10,6 +12,7 @@ import Review from "./Review";
 const Product = (props) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product);
+
   const user = useSelector((state) => state.user);
   
   useEffect(() => {
@@ -17,7 +20,9 @@ const Product = (props) => {
     dispatch(getReviews(props.match.match.params.id));
   }, []);
 
+
   function agregarAlCarrito(product) {
+
     // Carrito LocalStore 
     if (!user.id) {
       let myCart = JSON.parse(localStorage.getItem('myCart'));
@@ -28,9 +33,13 @@ const Product = (props) => {
         addtoCart(1, { productId: product.id, price: product.price, amount: 1 })
       );
     }
-  }
 
-  console.log(document.body.style.overflow)
+  }
+  useEffect(() => {
+    dispatch(getProduct(props.match.match.params.id));
+  }, []);
+
+  console.log(document.body.style.overflow);
   return (
     product && (
       <div className="container">
@@ -39,10 +48,13 @@ const Product = (props) => {
         </Link>
         <div className="row">
           <div id="description" className="col-6">
-            <img src={product.image} className="img-fluid" alt="img" />
+            <img src={product.image} className="img-fluid" />
           </div>
-          <div className="col-6"
-          // style={{ borderLeft: "2px solid #F1F1F1" }}
+
+          <div
+            className="col-6"
+            // style={{ borderLeft: "2px solid #F1F1F1" }}
+
           >
             <h2>{product.name}</h2>
             <p>{product.description}</p>
@@ -65,7 +77,7 @@ const Product = (props) => {
                 </button>
               </Link>
             </div>
-            <Review />
+            <Review id={props.match.match.params.id} />
           </div>
         </div>
       </div>

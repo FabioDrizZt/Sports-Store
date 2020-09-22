@@ -1,7 +1,7 @@
 const server = require("express").Router();
 const { Product, Category, productcategory, Review } = require("../db.js");
 const { Op } = require("sequelize");
-
+const check = require("./check.js");
 // S21 : Crear ruta que devuelva todos los productos
 server.get("/", (req, res, next) => {
   Product.findAll({
@@ -58,7 +58,7 @@ server.get("/:productId/review", (req, res) => {
 // S17 : Crear ruta para agregar categorias de un producto.
 // POST /products/:idProducto/category/:idCategoria
 // Agrega la categoria al producto.
-server.post("/", (req, res) => {
+server.post("/", check.isAuth, check.isAdmin, (req, res) => {
   Product.create({
     name: req.body.name,
     size: req.body.size,
@@ -72,7 +72,7 @@ server.post("/", (req, res) => {
 });
 // S18 : Crear ruta para crear/agregar Categoria
 // POST /products/category/
-server.post("/category", (req, res) => {
+server.post("/category", check.isAuth, check.isAdmin, (req, res) => {
   Category.create({ name: req.body.name, description: req.body.description })
     .then((category) => res.send(category))
     .catch((err) => res.send(err));
@@ -80,14 +80,14 @@ server.post("/category", (req, res) => {
 // S17 : Crear ruta para agregar categorias de un producto.
 // POST /products/:idProducto/category/:idCategoria
 // Agrega la categoria al producto.
-server.post("/:idProducto/category/:idCategoria", (req, res) => {
+server.post("/:idProducto/category/:idCategoria", check.isAuth, check.isAdmin, (req, res) => {
   productcategory.create({ productId: req.params.idProducto, categoryId: req.params.idCategoria })
     .then((pc) => res.send(pc))
     .catch((err) => res.send(err));
 });
 // S54 : Crear ruta para crear/agregar Review
 // POST /products/:id/review
-server.post("/:id/review", (req, res) => {
+server.post("/:id/review", check.isAuth, (req, res) => {
   Review.findOrCreate({
     where: {
       userId: req.body.userId,
@@ -113,7 +113,7 @@ server.post("/:id/review", (req, res) => {
 // S55 : Crear ruta para Modificar Review
 // PUT /product/:id/review/:idReview
 
-server.put("/:id/review/:idReview", (req, res) => {
+server.put("/:id/review/:idReview", check.isAuth, (req, res) => {
   Review.findOne({ where: { id: req.params.idReview, productId: req.params.id } })
     .then(review => {
       review.update({
@@ -129,7 +129,7 @@ server.put("/:id/review/:idReview", (req, res) => {
 // PUT /products/:id
 // Modifica el producto con id: id. Retorna 400 si los campos enviados no son correctos.
 // Retorna 200 si se modificó con exito, y retorna los datos del producto modificado.
-server.put("/:id", (req, res) => {
+server.put("/:id", check.isAuth, check.isAdmin, (req, res) => {
   Product.findOne({ where: { id: req.params.id } })
     .then(product => {
       product.update({
@@ -145,7 +145,7 @@ server.put("/:id", (req, res) => {
 });
 //S20 : Crear ruta para Modificar Categoria
 // PUT /products/category/:id
-server.put("/category/:id", (req, res, next) => {
+server.put("/category/:id", check.isAuth, check.isAdmin, (req, res, next) => {
   Category.update({
     name: req.body.name,
     description: req.body.description
@@ -156,7 +156,7 @@ server.put("/category/:id", (req, res, next) => {
 // S17 : Crear ruta para sacar categorias de un producto.
 // DELETE /products/:idProducto/category/:idCategoria
 // Elimina la categoria al producto.
-server.delete("/:idProducto/category/:idCategoria", (req, res) => {
+server.delete("/:idProducto/category/:idCategoria", check.isAuth, check.isAdmin, (req, res) => {
   productcategory.destroy({
     where: {
       productId: req.params.idProducto,
@@ -169,7 +169,7 @@ server.delete("/:idProducto/category/:idCategoria", (req, res) => {
 });
 // S27 eliminar un producto DELETE /products/:id
 // Retorna 200 si se elimino con exito.
-server.delete("/:id", (req, res) => {
+server.delete("/:id", check.isAuth, check.isAdmin, (req, res) => {
   Product.destroy({ where: { id: req.params.id } })
     .then(deletedRecord => {
       if (deletedRecord === 1) res.status(200).json({ message: "Se elimino el producto" });
@@ -178,7 +178,7 @@ server.delete("/:id", (req, res) => {
 })
 //S19 : Crear Ruta para eliminar Categoria
 // DELETE /products/category/:id
-server.delete("/category/:id", (req, res) => {
+server.delete("/category/:id", check.isAuth, check.isAdmin, (req, res) => {
   Category.destroy({
     where: { id: req.params.id },
   }).then((deletedRecord) => {
@@ -187,7 +187,7 @@ server.delete("/category/:id", (req, res) => {
   }).catch((error) => { res.status(500).json(error); });
 });
 
-server.delete("/:id/review/:idReview", (req, res) => {
+server.delete("/:id/review/:idReview", check.isAuth, (req, res) => {
   Review.destroy({
     where: { id: req.params.idReview }
   }).then((deletedRecord) => {

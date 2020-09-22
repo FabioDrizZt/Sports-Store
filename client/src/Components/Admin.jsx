@@ -1,12 +1,6 @@
 import React, { useEffect } from "react";
 // import ProductCard from "./ProductCard";
-import NavBarAdmin from '../Components/NavBar/NavBarAdmin';
-import {
-  // getProducts,
-  // getCategories,
-  //getCategoryProducts
-  // createProduct,
-} from "../actions";
+import NavBarAdmin from "../Components/NavBar/NavBarAdmin";
 import "./Admin.css";
 // import CreateProduct from "./FormCRUD/CreateProduct";
 // import Catalogo from "./Catalogo";
@@ -53,11 +47,9 @@ export default function AsigCate() {
   return (
     //porque hay que ir a catalogo para que aparezcan los productos?????
     //muestro los componentes para admin
-    <React.Fragment>  
+    <React.Fragment>
       <NavBarAdmin />
 
-          
-        
       {/* <div className="all">
         <div className="forms">
           <div className="productForm">
