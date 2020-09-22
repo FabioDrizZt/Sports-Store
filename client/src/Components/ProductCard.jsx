@@ -14,59 +14,61 @@ function ProductCard({
   imagen,
   stock,
   categories,
+  size
 }) {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  function agregarAlCarrito(id, name, precio, cantidad, imagen, descripcion, stock ) {
+  function agregarAlCarrito(id, name, precio, cantidad, imagen, descripcion, stock, size) {
 
     // Carrito LocalStore 
     if (!user.id) {
       let myCart = JSON.parse(localStorage.getItem('myCart'));
+      let producto = { "id": id, "name": name, "price": precio, "amount": cantidad, "image": imagen, "description": descripcion, "stock": stock, "size":size }
       const order = (element) => element["id"] === id;
-          if (!myCart.some(order))
-          let producto = {id, name, precio, cantidad, imagen, descripcion, stock  }
-      localStorage.setItem(
-        "myCart",
-        JSON.stringify(myCart.concat([{ id: id, price: precio, amount: 1, producto }]))
-      );
-    } else {
-      dispatch(addtoCart(user.id, { productId: id, price: precio, amount: cantidad }));
+      if (!myCart.some(order)) {
+        localStorage.setItem(
+          "myCart",
+          JSON.stringify(myCart.concat([{ id: id, price: precio, amount: 1, "product":producto }]))
+        );
+      } else {
+        dispatch(addtoCart(user.id, { productId: id, price: precio, amount: cantidad }));
+      }
     }
   }
-  return (
-    <div className=" col-sm-4 cardStyle p-4">
-      <div className="text-left">
-        <img className="card-img-top img" src={imagen} alt="Imagen Producto" />
-        <h3 className="card-title">{titulo}</h3>
-        {categories &&
-          categories.map((x) => (
-            <span className="badge badge-secondary mr-1">{x.name}</span>
-          ))}
-        <hr />
-        <h5 className="card-text">Descripcion del producto</h5>
-        <p>{descripcion}</p>
-        <p>Stock: {stock}</p>
-        <p className="price">
-          <b>$ {precio}</b>
-        </p>
+    return (
+      <div className=" col-sm-4 cardStyle p-4">
+        <div className="text-left">
+          <img className="card-img-top img" src={imagen} alt="Imagen Producto" />
+          <h3 className="card-title">{titulo}</h3>
+          {categories &&
+            categories.map((x) => (
+              <span className="badge badge-secondary mr-1">{x.name}</span>
+            ))}
+          <hr />
+          <h5 className="card-text">Descripcion del producto</h5>
+          <p>{descripcion}</p>
+          <p>Stock: {stock}</p>
+          <p className="price">
+            <b>$ {precio}</b>
+          </p>
 
-        <Link to={`/products/${id}`}>
+          <Link to={`/products/${id}`}>
 
-          <button className="b btn" onClick={dispatch(getReviews(id))}>
-            Ver mas
+            <button className="b btn" onClick={dispatch(getReviews(id))}>
+              Ver mas
           </button>
-        </Link>
-        <button
-          onClick={() => agregarAlCarrito(id, name, precio, cantidad, imagen, descripcion, stock )}
-          className={stock === 0 ? "btn btn-secondary" : "btn btn-success"}
-          disabled={stock === 0 ? true : false}
-        >
-          {stock === 0 ? "No disponible" : "Agregar a Carrito"}
-        </button>
+          </Link>
+          <button
+            onClick={() => agregarAlCarrito(id, precio, cantidad)}
+            className={stock === 0 ? "btn btn-secondary" : "btn btn-success"}
+            disabled={stock === 0 ? true : false}
+          >
+            {stock === 0 ? "No disponible" : "Agregar a Carrito"}
+          </button>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
-export default ProductCard;
+  export default ProductCard;
