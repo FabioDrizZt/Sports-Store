@@ -12,8 +12,7 @@ const initialState = {
     user: [], // deberia guardar el usuario logueado
     auth: [],
     reviews: [],
-    password: [],
-    miPerfil: []
+    password: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -38,8 +37,6 @@ function rootReducer(state = initialState, action) {
             return { ...state, users: action.payload }
         } case C.GET_REVIEWS: {
             return { ...state, reviews: action.payload }
-        } case C.GET_ME: {
-            return { ...state, miPerfil: action.payload }
         } case C.USER_LOGIN: {
             return { ...state, user: action.payload }
         } case C.USER_LOGOUT: {
@@ -78,6 +75,8 @@ function rootReducer(state = initialState, action) {
             return { ...state, reviews: state.reviews.filter(r => r.id !== action.payload.id) }
         } case C.UPDATE_PASSWORD: {
             return { ...state, password: state.password.filter(res => res.id !== action.payload.id) }
+        } case C.ADD_TO_CART: {
+            return { ...state, cart: state.cart.concat(action.payload) }
         } case C.REMOVE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload) }
         } case C.REMOVE_CATEGORY: {
@@ -86,8 +85,6 @@ function rootReducer(state = initialState, action) {
             return { ...state, productCategories: state.productCategories.filter(productCategory => productCategory.name !== action.payload.name) }
         } case C.REMOVE_USER: {
             return { ...state, users: state.users.filter(user => user.id !== action.payload) }
-        } case C.ADD_TO_CART: {
-            return { ...state, cart: state.cart.concat(action.payload) }
         } case C.REMOVE_CART: {
             return { ...state, cart: [] }
         } case C.REMOVE_ORDER: {
