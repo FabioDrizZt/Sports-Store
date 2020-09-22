@@ -1,6 +1,6 @@
 import { Link, Route } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { removeCart, getCartUser } from "../actions";
+import { removeCart, getCartUser } from "../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import s from "./Cart.css";
 import Checkout from "./Checkout";
@@ -30,6 +30,7 @@ const Cart = (carrito) => {
   useEffect(() => {
     // si no esta logeado se rompe porque el user.id de alguien no logeado con items es undefined
     if (user.id) {
+
       dispatch(getCartUser(user.id))
     }
     else {
@@ -41,6 +42,7 @@ const Cart = (carrito) => {
 
   console.log("Carrito: " + cart);
   console.log("Carrito Guest: "+ productCards);
+
 
   return (
     <div className={s.container}>

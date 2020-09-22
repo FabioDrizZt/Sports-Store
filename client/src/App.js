@@ -18,7 +18,8 @@ import CreateProduct from './Components/FormCRUD/CreateProduct';
 import Productok from './Components/ProductOk/Productok';
 import RegistrationForm from './Components/FormCRUD/CreateUser';
 import Userok from './Components/UserOk/UserOk';
-import MiPerfil from './Components/MiPerfil'
+import MiPerfil from './Components/MiPerfil';
+import Checkout from './Components/Checkout'
 
 function App() {
   const buttonUp = document.getElementById("button-up");
@@ -41,7 +42,12 @@ function App() {
     <div className="App">
       <NavBar />
       <Route exact path="/" component={Home} />
+
+      {/* /CART */}
       <Route exact path="/cart" component={Cart} />
+      <Route exact path="/cart/checkout" component={Checkout} />
+
+      
       <Route exact path="/category" component={FormCategory} />
       <Route exact path="/formcrud" component={FormCrud} />
       <Route exact path="/login" component={Login} />
@@ -50,6 +56,7 @@ function App() {
       <Route exact path="/products" component={Catalogo} />
       <Route exact path="/users" component={RegistrationForm} />
       <Route exact path="/users/userok" component={Userok} />
+
 
       {/* RUTAS DEL ADMINISTRADOR */}
       <Route exact path="/admin" component={Admin} />

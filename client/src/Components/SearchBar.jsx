@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { searchProducts } from "../actions";
+import { searchProducts } from "../redux/actions";
 import { Link } from "react-router-dom";
 import "./SearchBar.css";
 
@@ -11,7 +11,7 @@ export default function SearchBar() {
   return (
     <form className="form-inline my-2 my-lg-0">
       <input
-       className="form-control mb-0"
+        className="form-control mb-0"
         type="search"
         placeholder="Articulo..."
         onChange={(e) => setInput(e.target.value)}
