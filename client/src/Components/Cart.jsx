@@ -10,18 +10,45 @@ const Cart = (carrito) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
+
+  const getStorage = window.localStorage
+  const getProducts = getStorage.getItem('myCart')
+  const [productCards, setProductsCards] = useState([])
+
+  const [changeCart, setChangeCart] = useState("");
+
   const [total, setTotal] = useState(0);
+
+  const getGuestProductsOfCart = () => {
+    var prods
+    if (getProducts) {
+      prods = JSON.parse(getProducts)
+      setProductsCards(prods)
+    } else setProductsCards([])
+  }
 
   useEffect(() => {
     // si no esta logeado se rompe porque el user.id de alguien no logeado con items es undefined
-    if(user.id){
-    dispatch(getCartUser(user.id))}
-  }, []);
+    if (user.id) {
+      dispatch(getCartUser(user.id))
+    }
+    else {
+      console.log("No esta logeado");
+      getGuestProductsOfCart()
+      setChangeCart("")
+    }
+  }, [changeCart]);
+
+  console.log("Carrito: " + cart);
+  console.log("Carrito Guest: "+ productCards);
 
   return (
     <div className={s.container}>
       {cart && cart.map((ord) => <Order order={ord} />)}
-
+      <div className='contenedor-del-contenedor'>
+        {/* {productCards.map((ord) => <Order order={ord} /> )} */}
+        
+      </div>
       <div className={s.subtotal}>
         <h2>TOTAL DE LA COMPRA</h2>
         <h3 className={s.price}>${total}</h3>
@@ -54,13 +81,13 @@ const Cart = (carrito) => {
           </h2>
         </div>
       ) : (
-        <button
-          className="btn btn-danger mt-4"
-          onClick={() => dispatch(removeCart(user.id))}
-        >
-          Vaciar Carrito
-        </button>
-      )}
+          <button
+            className="btn btn-danger mt-4"
+            onClick={() => dispatch(removeCart(user.id))}
+          >
+            Vaciar Carrito
+          </button>
+        )}
       <button
         className="btn btn-success mt-4"
         onClick={() =>
