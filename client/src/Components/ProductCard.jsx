@@ -19,19 +19,20 @@ function ProductCard({
   const dispatch = useDispatch();
 
   function agregarAlCarrito(id, precio, cantidad) {
-    // Carrito LocalStore
-    let myCart = JSON.parse(localStorage.getItem("myCart"));
-    const producto = (element) => element["id"] === id;
-    if (!myCart.some(producto))
+
+    // Carrito LocalStore 
+    if (!user.id) {
+      let myCart = JSON.parse(localStorage.getItem('myCart'));
+      const producto = (element) => element["id"] === id;
+          if (!myCart.some(producto))
       localStorage.setItem(
         "myCart",
         JSON.stringify(myCart.concat([{ id: id, amount: 1 }]))
       );
-    dispatch(
-      addtoCart(user.id, { productId: id, price: precio, amount: cantidad })
-    );
+    } else {
+      dispatch(addtoCart(user.id, { productId: id, price: precio, amount: cantidad }));
+    }
   }
-
   return (
     <div className=" col-sm-4 cardStyle p-4">
       <div className="text-left">
@@ -50,11 +51,11 @@ function ProductCard({
         </p>
 
         <Link to={`/products/${id}`}>
+
           <button className="b btn" onClick={dispatch(getReviews(id))}>
             Ver mas
           </button>
         </Link>
-
         <button
           onClick={() => agregarAlCarrito(id, precio, cantidad)}
           className={stock === 0 ? "btn btn-secondary" : "btn btn-success"}

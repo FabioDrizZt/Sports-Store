@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addtoCart, getProduct } from "../redux/actions";
-import "./Product.css";
+
+import { getProduct, addtoCart, getReviews, userLogin } from "../actions";
+import './Product.css';
+
 import Review from "./Review";
 
 // Este componente envia informacion al ProductCard que le dará una maquetacion de tarjeta...
@@ -11,11 +13,27 @@ const Product = (props) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product);
 
-  //FALTA EL ID DEL USER, no hay nada en el store User
+  const user = useSelector((state) => state.user);
+  
+  useEffect(() => {
+    dispatch(getProduct(props.match.match.params.id));
+    dispatch(getReviews(props.match.match.params.id));
+  }, []);
+
+
   function agregarAlCarrito(product) {
-    dispatch(
-      addtoCart(1, { productId: product.id, price: product.price, amount: 1 })
-    );
+
+    // Carrito LocalStore 
+    if (!user.id) {
+      let myCart = JSON.parse(localStorage.getItem('myCart'));
+      const producto = (element) => element["id"] === product.id;
+      if (!myCart.some(producto)) localStorage.setItem('myCart', JSON.stringify(myCart.concat([{ "id": product.id, "amount": 1 }])));
+    } else {
+      dispatch(
+        addtoCart(1, { productId: product.id, price: product.price, amount: 1 })
+      );
+    }
+
   }
   useEffect(() => {
     dispatch(getProduct(props.match.match.params.id));
@@ -32,9 +50,11 @@ const Product = (props) => {
           <div id="description" className="col-6">
             <img src={product.image} className="img-fluid" />
           </div>
+
           <div
             className="col-6"
             // style={{ borderLeft: "2px solid #F1F1F1" }}
+
           >
             <h2>{product.name}</h2>
             <p>{product.description}</p>
