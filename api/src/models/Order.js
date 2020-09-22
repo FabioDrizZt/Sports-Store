@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 
-//S32: Crear modelo de linea de orden
+//Modelo de linea de orden
 module.exports = (sequelize) => {
   sequelize.define("order", {
     amount: {

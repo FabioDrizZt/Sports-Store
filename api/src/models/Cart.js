@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 
-//S31: Crear modelo de Carrito
+//Modelo de Carrito
 module.exports = (sequelize) => {
   sequelize.define("cart", {
     state: {

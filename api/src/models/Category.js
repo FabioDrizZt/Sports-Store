@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 
-//S5: Crear modelo de categorias
+//Modelo de categorias
 module.exports = (sequelize) => {
   sequelize.define("category", {
     name: {

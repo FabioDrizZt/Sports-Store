@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const bcrypt = require("bcryptjs");
 
-//S30: Crear modelo de usuario
+//Modelo de usuario
 module.exports = (sequelize) => {
   const usuario = sequelize.define(
     "user",

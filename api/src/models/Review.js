@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 
-//S53: Crear Modelo de Reviews
+//Modelo de Reviews
 module.exports = (sequelize) => {
   sequelize.define("review", {
     description: {

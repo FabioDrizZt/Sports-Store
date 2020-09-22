@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 
-//S4: Crear modelo de productos
+//Modelo de productos
 module.exports = (sequelize) => {
   sequelize.define("product", {
     name: {
