@@ -12,8 +12,7 @@ const initialState = {
     user: [], // deberia guardar el usuario logueado
     auth: [],
     reviews: [],
-    password: [],
-    miPerfil: []
+    password: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -38,8 +37,6 @@ function rootReducer(state = initialState, action) {
             return { ...state, users: action.payload }
         } case C.GET_REVIEWS: {
             return { ...state, reviews: action.payload }
-        } case C.GET_ME: {
-            return { ...state, miPerfil: action.payload }
         } case C.USER_LOGIN: {
             return { ...state, user: action.payload }
         } case C.USER_LOGOUT: {
