@@ -1,102 +1,100 @@
 .grid-container {
-    display: grid;
-    grid-template-areas: 'header';
-    grid-template-rows: 5rem;
-  }
+  display: grid;
+  grid-template-areas: "header";
+  grid-template-rows: 5rem;
+}
 /* Esta es la nav */
 .header {
   position: fixed;
-    background: linear-gradient(to top, #004e92, #000428);
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-    width: 100%;
-    z-index: 10;
-  }
+  background: linear-gradient(to top, #004e92, #000428);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  z-index: 10;
+}
 
 /* Nuestro LOGO Che */
 .brand a {
-    color: white;
-    font-size: 2.2rem;
-    text-decoration: none;
-    padding: 3rem
-  }
+  color: white;
+  font-size: 2.2rem;
+  text-decoration: none;
+  padding: 3rem;
+}
 
 /* Efecto LINKS */
-  a {
-    text-decoration: none;
-  }
-  a:hover {
-    color:#f7b733;
-    
-  }
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: #f7b733;
+}
 
-  /* Sidebar */
-  
-  .brand button {
-    font-size: 3rem;
-    padding: 0.5rem;
-    background: none;
-    border: none;
-    color: #ffffff;
-    cursor: pointer;
-  }
-  .sidebar {
-    position: fixed;
-    transition: all 1.5s;
-    width: 16.5rem;
-    transform: translateX(-25rem);
-    background-color: #161616;
-    opacity: 0.98;
-    z-index: 5000;
-    height: 100%;
-  }
-  .sidebar.open {
-    transform: translateX(0);
-  }
-  
-  .sidebar-close-button {
-    color: white;
-    background: none;
-    border: none;
-    padding: 4rem;
-    padding-top: 0rem;
-    right: 0rem;
-    font-size: 2.8rem;
-    cursor: pointer;
-    position: absolute;
-  }
+/* Sidebar */
 
-  /*  */
-  .categories {
-    font-size: 1.3rem;
-    position: relative;
-    top: 5rem;
-    padding: 0;
-    list-style-type: none;
-  }
-  .categories a {
+.brand button {
+  font-size: 3rem;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.sidebar {
+  position: fixed;
+  transition: all 1.5s;
+  width: 16.5rem;
+  transform: translateX(-25rem);
+  background-color: #161616;
+  opacity: 0.98;
+  z-index: 5000;
+  height: 100%;
+}
+.sidebar.open {
+  transform: translateX(0);
+}
 
-    color: white;
-    display: flex;
-    padding: 1.5rem;
-  }
-  
-  .categories a:hover {
-    background-color: #e0434d;
-    text-decoration: none;
-  }
+.sidebar-close-button {
+  color: white;
+  background: none;
+  border: none;
+  padding: 4rem;
+  padding-top: 0rem;
+  right: 0rem;
+  font-size: 2.8rem;
+  cursor: pointer;
+  position: absolute;
+}
 
-  .logCart {
-    width: 17rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-content: space-between;
-  }
+/*  */
+.categories {
+  font-size: 1.3rem;
+  position: relative;
+  top: 5rem;
+  padding: 0;
+  list-style-type: none;
+}
+.categories a {
+  color: white;
+  display: flex;
+  padding: 1.5rem;
+}
 
-  .logCart {
-    width: 7.5rem;
-  }
+.categories a:hover {
+  background-color: #e0434d;
+  text-decoration: none;
+}
+
+.logCart {
+  width: 17rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logCart {
+  width: 7.5rem;
+}

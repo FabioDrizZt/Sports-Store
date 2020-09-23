@@ -14,7 +14,7 @@ const Review = (props) => {
   const user = useSelector((state) => state.user);
   const product = useSelector((state) => state.product);
   const [myreview, setMyreview] = useState(
-    reviews.filter((rev) => rev.productId == props.id && rev.userId) ?? {
+    reviews.filter((rev) => rev.productId === props.id && rev.userId) ?? {
       score: null,
       description: null,
       productId: 1,

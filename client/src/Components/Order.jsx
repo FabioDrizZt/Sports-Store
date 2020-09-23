@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Order.css";
 import { useDispatch, useSelector } from "react-redux";
 import { removeOrder, updateOrderAmount } from "../redux/actions";

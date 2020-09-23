@@ -4,16 +4,26 @@ const productRouter = require("./product.js");
 const userRouter = require("./users.js");
 const orderRouter = require("./order.js");
 const authRouter = require("./auth.js");
-const userSession = require("./userSession")
+const userSession = require("./userSession");
 const router = Router();
+const mailgun = require("./mailgun");
 
 // load each router on a route
 // i.e: router.use('/auth', authRouter);
 // router.use('/auth', authRouter);
-router.use("/",userSession)
+router.use("/", userSession);
 router.use("/products", productRouter);
 router.use("/users", userRouter);
 router.use("/orders", orderRouter);
 router.use("/auth", authRouter);
 
+router.post("/sendEmail", async (req, res, next) => {
+  try {
+    await mailgun.sendEmail(req.body.email, req.body.name, req.body.address);
+    res.send("Email enviado");
+  } catch (e) {
+    console.log(e);
+    res.status(500);
+  }
+});
 module.exports = router;
