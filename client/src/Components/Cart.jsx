@@ -37,10 +37,10 @@ const Cart = (carrito) => {
     }
   }, [changeCart]);
 
-  console.log("Carrito: " + cart.map((e)=> e.id));
-  console.log("Carrito: " + cart.map((e)=> e.product.id));
+  /* console.log("Carrito: " + cart.map((e)=> e.id));
+  console.log("Carrito: " + cart.map((e)=> e.product.id)); */
 
-  console.log("Carrito Guest: " + productCards);
+  // console.log("Carrito Guest: " + productCards);
 
   if (user.id) {
     return (

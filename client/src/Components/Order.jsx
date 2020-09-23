@@ -1,44 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Order.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeOrder, updateOrderAmount } from "../redux/actions";
 
 const Order = ({ order }) => {
   const dispatch = useDispatch();
   const [cantidad, setCantidad] = useState(order.amount);
+  const user = useSelector((state) => state.user);
   // const myCart = useSelector((state) => state.myCart);
+
+  // useEffect(() => {
+  //   setCantidad(order.amount)
+  // }, [cantidad])
 
   function minusClick(e, id) {
     e.preventDefault();
-    let myCart = JSON.parse(localStorage.getItem("myCart"));
-    let newOrder = myCart.find((producto) => producto.id === id);
-    if (newOrder["amount"] > 1) {
-      newOrder["amount"] = newOrder.amount - 1;
+    if (!user.id) {
+      let myCart = JSON.parse(localStorage.getItem("myCart"));
+      let newOrder = myCart.find((producto) => producto.id === id);
+      if (newOrder["amount"] > 1) {
+        newOrder["amount"] = newOrder.amount - 1;
+      }
+      myCart = myCart.filter((orden) => orden.id !== id);
+      let newCart = myCart.concat(newOrder);
+      localStorage.setItem("myCart", JSON.stringify(newCart));
+    } else {
+      if (cantidad !== 1) {
+        setCantidad(cantidad - 1);
+        if (!user.id) {
+          order["amount"] = order["amount"] - 1;
+        } else {
+          dispatch(updateOrderAmount(1, order));
+        }
+      } else alert("no podes llevar menos de 1");
     }
-    myCart = myCart.filter((orden) => orden.id !== id);
-    let newCart = myCart.concat(newOrder);
-    localStorage.setItem("myCart", JSON.stringify(newCart));
-    if (cantidad !== 1) {
-      order["amount"] = order["amount"] - 1;
-      setCantidad(cantidad - 1);
-      dispatch(updateOrderAmount(1, order));
-    } else alert("no podes llevar menos de 1");
   }
 
   function plusClick(e, id) {
     // Carrito LocalStore
-    let myCart = JSON.parse(localStorage.getItem("myCart"));
-    let newOrder = myCart.find((producto) => producto.id === id);
-    newOrder["amount"] = newOrder.amount + 1;
-    myCart = myCart.filter((orden) => orden.id !== id);
-    let newCart = myCart.concat(newOrder);
-    localStorage.setItem("myCart", JSON.stringify(newCart));
     e.preventDefault();
-    if (cantidad !== order.product.stock) {
-      order["amount"] = order["amount"] + 1;
-      setCantidad(cantidad + 1);
-      dispatch(updateOrderAmount(1, order));
-    } else alert("no podes llevar mas de: " + order.product.stock);
+    if (!user.id) {
+      let myCart = JSON.parse(localStorage.getItem("myCart"));
+      let newOrder = myCart.find((producto) => producto.id === id);
+      if (newOrder["amount"] < order.product.stock) {
+        newOrder["amount"] = newOrder.amount + 1;
+      }
+      myCart = myCart.filter((orden) => orden.id !== id);
+      let newCart = myCart.concat(newOrder);
+      localStorage.setItem("myCart", JSON.stringify(newCart));
+    } else {
+      if (cantidad < order.product.stock) {
+        setCantidad(cantidad + 1);
+        if (!user.id) {
+          order["amount"] = order["amount"] + 1;
+        } else {
+          dispatch(updateOrderAmount(1, order));
+        }
+      } else alert("no podes llevar mas del Stock");
+    }
   }
 
   function deleteItem(id) {

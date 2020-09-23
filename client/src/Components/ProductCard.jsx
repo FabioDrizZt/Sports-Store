@@ -13,18 +13,19 @@ function ProductCard({
   cantidad = 1,
   imagen,
   stock,
-  categories
+  categories,
+  size
 }) {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  function agregarAlCarrito(id, name, descripcion, precio, cantidad, imagen, stock, size,categories) {
-
+  function agregarAlCarrito() {
     // Carrito LocalStore 
     if (!user.id) {
       let myCart = JSON.parse(localStorage.getItem('myCart'));
-      let producto = { "id": id, "name": name, "price": precio, "amount": cantidad, "image": imagen, "description": descripcion, "stock": stock, "size": size, "categories":categories }
+      let producto = { "id": id, "name": name, "price": precio, "amount": cantidad, "image": imagen, "description": descripcion, "stock": stock, "size": size, "categories": categories }
       const order = (element) => element["id"] === id;
+      console.log(producto);
       if (!myCart.some(order)) {
         localStorage.setItem(
           "myCart",
@@ -59,7 +60,7 @@ function ProductCard({
           </button>
         </Link>
         <button
-          onClick={() => agregarAlCarrito(id, precio, cantidad)}
+          onClick={() => agregarAlCarrito()}
           className={stock === 0 ? "btn btn-secondary" : "btn btn-success"}
           disabled={stock === 0 ? true : false}
         >
