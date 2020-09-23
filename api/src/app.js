@@ -8,9 +8,8 @@ const server = express();
 // const cors = require ('cors');
 // Importamos passport para autenticar
 const passport = require('passport');
-const { User } = require('./db.js');
+const { db, User } = require('./db.js');
 const Strategy = require('passport-local').Strategy;
-const session = require('express-session');
 // Definimos la estrategia para autenticar
 passport.use(new Strategy(
   function(username, password, done) {
@@ -20,6 +19,7 @@ passport.use(new Strategy(
     if(!user){
       return done(null, false, { message: 'Incorrect email.' });
     }
+    //Falta encriptar la contrase;a
     if(user.validPassword(password)===false) {
       return done(null, false, { message: 'Incorrect password.' });
     }
@@ -44,13 +44,11 @@ passport.deserializeUser(function(id, done) {
     return done(err);
   })
 });
-
-// La cookie con una semana de duración 
-server.use(session({
+// Hay que instalar express???
+server.use(require('express-session')({
   secret: 'secret',
   resave: false,
-  saveUninitialized: false,
-  cookie: { secure: true, maxAge: 7 * 24 * 60 * 60 * 1000 }
+  saveUninitialized: false
 }));
 
 server.use(passport.initialize());
@@ -59,7 +57,7 @@ server.use(passport.session());
 // Middleware para mostrar la sesion y para debuggear 
 server.use((req, res, next) => {
   console.log(req.session);
-  console.log(req.sessionStore.sessions);
+  console.log(req.user);
   next();
 });
 
@@ -74,7 +72,7 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header("Access-Control-Allow-Methods", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
 server.use('/', routes);
@@ -85,6 +83,5 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.error(err);
   res.status(status).send(message);
 });
-
 
 module.exports = server;
