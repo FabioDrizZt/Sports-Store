@@ -8,8 +8,9 @@ const server = express();
 // const cors = require ('cors');
 // Importamos passport para autenticar
 const passport = require('passport');
-const { db, User } = require('./db.js');
+const { User } = require('./db.js');
 const Strategy = require('passport-local').Strategy;
+const session = require('express-session');
 // Definimos la estrategia para autenticar
 passport.use(new Strategy(
   function(username, password, done) {
@@ -19,7 +20,6 @@ passport.use(new Strategy(
     if(!user){
       return done(null, false, { message: 'Incorrect email.' });
     }
-    //Falta encriptar la contrase;a
     if(user.validPassword(password)===false) {
       return done(null, false, { message: 'Incorrect password.' });
     }
@@ -44,11 +44,13 @@ passport.deserializeUser(function(id, done) {
     return done(err);
   })
 });
-// Hay que instalar express???
-server.use(require('express-session')({
+
+// La cookie con una semana de duración 
+server.use(session({
   secret: 'secret',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { secure: true, maxAge: 7 * 24 * 60 * 60 * 1000 }
 }));
 
 server.use(passport.initialize());
@@ -83,54 +85,6 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.error(err);
   res.status(status).send(message);
 });
-
-
-
-// server.get('/',
-//   function(req, res) {
-//     res.render('home', { user: req.user });
-//   });
-
-// server.get('/login',
-//   function(req, res) {
-//     res.render('login');
-//   });
-
-// server.post('/login', 
-//   passport.authenticate('local', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     res.redirect('/');
-//   });
-
-// server.get('/logout',
-//   function(req, res) {
-//     req.logout();
-//     res.redirect('/')
-//   });
-
-// function isAuthenticated(req, res, next){
-//     if(req.isAuthenticated()){
-//         next();
-//     } else {
-//         res.redirect('/login');
-//     }
-// }
-
-// function isAdmin(req, res, next) {
-//     if(req.user.role === "admin"){
-//       next();
-//     } else {
-//       res.send('Tiene que ser administrador para acceder a esta ruta')
-//       res.redirect('/login');
-//     }
-//   }
-
-// server.use('/admin',
-//   isAuthenticated,
-//   isAdmin,
-//   function(req, res){
-//     res.render('profile', { user: req.user });
-//   });
 
 
 module.exports = server;
