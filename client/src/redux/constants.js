@@ -15,6 +15,7 @@ export const GET_REVIEWS = "GET_REVIEWS"
 export const GET_ME = "GET_ME"
 export const USER_LOGIN = "USER_LOGIN";
 export const USER_LOGOUT = "USER_LOGOUT"
+export const USER_SESSION = "USER_SESSION"
 // aca van los actions del POST/CREATE
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const CREATE_USER = "CREATE_USER";

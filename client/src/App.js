@@ -1,5 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {getUserSession} from "../src/redux/actions";
 import "./App.css";
 import Catalogo from "./Components/Catalogo";
 import Product from "./Components/Product.jsx";
@@ -22,6 +24,7 @@ import MiPerfil from './Components/MiPerfil';
 import Checkout from './Components/Checkout'
 
 function App() {
+  const dispatch = useDispatch()
   const buttonUp = document.getElementById("button-up");
   buttonUp.addEventListener("click", scrollUp);
 
@@ -37,7 +40,7 @@ function App() {
   window.onscroll = () => {
     (document.documentElement.scrollTop > 500) ? buttonUp.style.transform = "scale(1)" : buttonUp.style.transform = "scale(0)";
   };
-
+  dispatch(getUserSession());
   return (
     <div className="App">
       <NavBar />

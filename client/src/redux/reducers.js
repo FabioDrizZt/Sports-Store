@@ -19,8 +19,8 @@ function rootReducer(state = initialState, action) {
     switch (action.type) {
         case C.GET_PRODUCT: {
             return { ...state, product: action.payload }
-        } case C.GET_PRODUCTS: {
-            return { ...state, products: action.payload }
+        } case C.GET_PRODUCTS: {        
+            return { ...state,products: action.payload.products }
         } case C.GET_CATEGORIES: {
             return { ...state, categories: action.payload }
         } case C.GET_CATEGORY_PRODUCTS: {
@@ -41,7 +41,9 @@ function rootReducer(state = initialState, action) {
             return { ...state, user: action.payload }
         } case C.USER_LOGOUT: {
             return { ...state, user: [] }
-        } case C.CREATE_PRODUCT: {
+        } case C.USER_SESSION:{          
+            return { ...state, user: action.payload }} 
+        case C.CREATE_PRODUCT: {
             return { ...state, products: state.products.concat(action.payload) }
         } case C.CREATE_USER: {
             if (action.payload.name !== "SequelizeValidationError" && action.payload.name !== "SequelizeUniqueConstraintError")
