@@ -6,7 +6,7 @@ const orderRouter = require("./order.js");
 const authRouter = require("./auth.js");
 const userSession = require("./userSession");
 const router = Router();
-const mailgun = require("./mailgun");
+const mailgun = require("../mailgun");
 
 // load each router on a route
 // i.e: router.use('/auth', authRouter);
