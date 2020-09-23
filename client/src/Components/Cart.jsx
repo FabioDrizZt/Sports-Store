@@ -10,6 +10,7 @@ const Cart = (carrito) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
+  console.log(user)
 
 
   const getProducts = JSON.parse(localStorage.getItem("myCart"));
@@ -27,7 +28,7 @@ const Cart = (carrito) => {
 
   useEffect(() => {
     // si no esta logeado se rompe porque el user.id de alguien no logeado con items es undefined
-    if (user.id) {
+    if (user.length!==0) {
       dispatch(getCartUser(user.id))
     }
     else {

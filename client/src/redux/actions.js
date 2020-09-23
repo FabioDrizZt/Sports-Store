@@ -3,6 +3,16 @@ import * as C from './constants'
 axios.defaults.withCredentials = true;
 
 //S24 : Crear ruta de producto individual, pasado un ID que retorne un producto con sus detalles
+
+  export function getUserSession (){
+    return function (dispatch) {
+  axios.get(`${C.SERVER_ADDRESS}`)
+      .then((res) => { dispatch({ type: C.USER_SESSION, payload: res.data }) })
+      .catch((error) => alert(error, "error"))
+  }
+  }
+  
+
 export function getProduct(productId) {
   return function (dispatch) {
     axios.get(`${C.SERVER_ADDRESS}/products/${productId}`)

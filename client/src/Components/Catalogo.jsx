@@ -6,6 +6,7 @@ import {
   getProducts,
   getCategories,
   getCategoryProducts,
+  getUserSession
 } from "../redux/actions";
 import "./Catalogo.css";
 
@@ -25,8 +26,9 @@ function Catalogo() {
 
   function filtrarCatalogo(nombreCat) {
     dispatch(getCategoryProducts(nombreCat));
+   
   }
-
+ 
   return (
     //props: titulo, descripcion, precio, cantidad, imagen
     <React.Fragment>
