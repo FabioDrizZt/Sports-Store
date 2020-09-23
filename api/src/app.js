@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 
 const server = express();
-// const cors = require ('cors');
+const cors = require ('cors');
 // Importamos passport para autenticar
 const passport = require('passport');
 const { db, User } = require('./db.js');
