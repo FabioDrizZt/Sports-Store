@@ -14,9 +14,9 @@ const Cart = (carrito) => {
 
 
   const getProducts = JSON.parse(localStorage.getItem("myCart"));
-  const [productCards, setProductsCards] = useState([])
+  const [setProductsCards] = useState([])
 
-  const [changeCart, setChangeCart] = useState("");
+  const [changCart, setChangeCart] = useState("");
 
   const [total, setTotal] = useState(0);
 

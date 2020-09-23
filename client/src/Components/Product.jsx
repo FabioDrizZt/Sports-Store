@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getProduct, addtoCart, getReviews, userLogin } from "../redux/actions";
-import './Product.css';
+import { getProduct, addtoCart, getReviews } from "../redux/actions";
+import "./Product.css";
 
 import Review from "./Review";
 
@@ -14,26 +14,27 @@ const Product = (props) => {
   const product = useSelector((state) => state.product);
 
   const user = useSelector((state) => state.user);
-  
+
   useEffect(() => {
     dispatch(getProduct(props.match.match.params.id));
     dispatch(getReviews(props.match.match.params.id));
   }, []);
 
-
   function agregarAlCarrito(product) {
-
-    // Carrito LocalStore 
+    // Carrito LocalStore
     if (!user.id) {
-      let myCart = JSON.parse(localStorage.getItem('myCart'));
+      let myCart = JSON.parse(localStorage.getItem("myCart"));
       const producto = (element) => element["id"] === product.id;
-      if (!myCart.some(producto)) localStorage.setItem('myCart', JSON.stringify(myCart.concat([{ "id": product.id, "amount": 1 }])));
+      if (!myCart.some(producto))
+        localStorage.setItem(
+          "myCart",
+          JSON.stringify(myCart.concat([{ id: product.id, amount: 1 }]))
+        );
     } else {
       dispatch(
         addtoCart(1, { productId: product.id, price: product.price, amount: 1 })
       );
     }
-
   }
   useEffect(() => {
     dispatch(getProduct(props.match.match.params.id));
@@ -54,7 +55,6 @@ const Product = (props) => {
           <div
             className="col-6"
             // style={{ borderLeft: "2px solid #F1F1F1" }}
-
           >
             <h2>{product.name}</h2>
             <p>{product.description}</p>

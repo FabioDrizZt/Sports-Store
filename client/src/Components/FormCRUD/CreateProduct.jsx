@@ -4,16 +4,7 @@ import { createProduct } from "../../redux/actions";
 import NavBarAdmin from "../NavBar/NavBarAdmin";
 import { Redirect } from "react-router";
 
-import {
-  Form,
-  Input,
-  Tooltip,
-  Cascader,
-  Select,
-  Row,
-  Button,
-  AutoComplete,
-} from "antd";
+import { Form, Input, Tooltip, Button } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import "./CreateUser.css";
 
