@@ -63,18 +63,20 @@ function FormCategory() {
                   }
                   required
                 />
-                <button type="submit" className="btn btn-primary boton">
+               
+                <button type="submit" className="btn btn-primary mr-1"  style={{ margin: 0 }}>
                   {editar ? "EDITAR" : "AGREGAR"}
                 </button>
                 {editar && (
                   <button
-                    className="btn btn-secondary boton ml-1"
+                    className="btn btn-secondary "
                     style={{ margin: 0 }}
                     onClick={() => setEditar(!editar)}
                   >
                     CANCELAR
                   </button>
                 )}
+              
               </div>
             </form>
           </div>
