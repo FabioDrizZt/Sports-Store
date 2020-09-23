@@ -20,7 +20,7 @@ function rootReducer(state = initialState, action) {
         case C.GET_PRODUCT: {
             return { ...state, product: action.payload }
         } case C.GET_PRODUCTS: {        
-            return { ...state,products: action.payload.products }
+            return { ...state,products: action.payload }
         } case C.GET_CATEGORIES: {
             return { ...state, categories: action.payload }
         } case C.GET_CATEGORY_PRODUCTS: {
