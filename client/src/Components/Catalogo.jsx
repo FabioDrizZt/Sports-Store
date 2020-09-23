@@ -61,11 +61,12 @@ function Catalogo() {
             products.map((x) => (
               <ProductCard
                 id={x.id}
-                titulo={x.name}
+                name={x.name}
                 descripcion={x.description}
                 precio={x.price}
                 imagen={x.image}
                 stock={x.stock}
+                size={x.size}
                 categories={x.categories}
               />
             ))}
