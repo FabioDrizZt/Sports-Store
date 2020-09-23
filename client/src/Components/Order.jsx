@@ -30,7 +30,7 @@ const Order = ({ order }) => {
         if (!user.id) {
           order["amount"] = order["amount"] - 1;
         } else {
-          dispatch(updateOrderAmount(1, order));
+          dispatch(updateOrderAmount(user.id, order));
         }
       } else alert("no podes llevar menos de 1");
     }
@@ -54,7 +54,7 @@ const Order = ({ order }) => {
         if (!user.id) {
           order["amount"] = order["amount"] + 1;
         } else {
-          dispatch(updateOrderAmount(1, order));
+          dispatch(updateOrderAmount(user.id, order));
         }
       } else alert("no podes llevar mas del Stock");
     }
