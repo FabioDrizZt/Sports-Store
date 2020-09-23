@@ -31,11 +31,11 @@ const Cart = (carrito) => {
       dispatch(getCartUser(user.id))
     }
     else {
-      console.log("No esta logeado");
-      getGuestProductsOfCart()
-      setChangeCart("")
+      // console.log("No esta logeado");
+      // getGuestProductsOfCart()
+      // setChangeCart("")
     }
-  }, [changeCart]);
+  }, []);
 
   /* console.log("Carrito: " + cart.map((e)=> e.id));
   console.log("Carrito: " + cart.map((e)=> e.product.id)); */
@@ -127,21 +127,15 @@ const Cart = (carrito) => {
         >
           Volver
         </button>
-        {cart && cart.length === 0 ? (
-          <div className="mt-4">
-            <h1>Tu carrito está vacio!</h1>
-            <h2>
-              <Link to="/products">Ir al cátalogo</Link>
-            </h2>
-          </div>
-        ) : (
+    
+         
             <button
               className="btn btn-danger mt-4"
               onClick={() => dispatch(removeCart(user.id))}
             >
               Vaciar Carrito
             </button>
-          )}
+       
         <button
           className="btn btn-success mt-4"
           onClick={() =>
