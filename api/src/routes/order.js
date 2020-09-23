@@ -5,7 +5,7 @@ const check = require("./check.js");
 /* S44: Crear ruta que retorne todas las ordenes
 Esta ruta puede recibir el query string status y deberá devolver sólo las ordenes con ese status.
 GET /orders*/
-server.get("/", check.isAuth, check.isAdmin, (req, res) => {
+server.get("/",(req, res) => {
   const status = req.query.status;
   Cart.findAll({
     where: { state: status },
@@ -19,7 +19,7 @@ server.get("/", check.isAuth, check.isAdmin, (req, res) => {
 
 /*S46 : Crear Ruta que retorne una orden en particular. 
 GET /orders/:id*/
-server.get("/:id", check.isAuth, (req, res) => {
+server.get("/:id",(req, res) => {
   Cart.findOne({
     where: { id: req.params.id },
     include: [{ model: Order }],
@@ -30,7 +30,7 @@ server.get("/:id", check.isAuth, (req, res) => {
 
 // Traer una orden
 // GET /orders/:id
-server.get("/:id", check.isAuth, (req, res) => {
+server.get("/:id", (req, res) => {
   Order.findOne({
     where: { id: req.params.id },
   })
@@ -40,7 +40,7 @@ server.get("/:id", check.isAuth, (req, res) => {
 
 /*S47 : Crear Ruta para modificar una Orden
  PUT /orders/:id*/
-server.put("/:id", check.isAuth, check.isAdmin, (req, res) => {
+server.put("/:id", check.isAdmin, (req, res) => {
   console.log(req.body.state);
   Cart.findOne({ where: { id: req.params.id } })
     .then((cart) => {
@@ -57,7 +57,7 @@ server.put("/:id", check.isAuth, check.isAdmin, (req, res) => {
 
 //SXX : Crear Ruta para Cerrar un Carrito
 // PATCH /orders/:id
-server.patch("/:id", check.isAuth, (req, res) => {
+server.patch("/:id", (req, res) => {
   Cart.update(
     {
       state: "completa",
@@ -72,7 +72,7 @@ server.patch("/:id", check.isAuth, (req, res) => {
 
 // Eliminar una orden del carrito
 // DELETE /orders/:id
-server.delete("/:orderId", check.isAuth, (req, res) => {
+server.delete("/:orderId", (req, res) => {
   Order.destroy({
     where: { id: req.params.orderId },
   }).then((deletedRecord) => {
