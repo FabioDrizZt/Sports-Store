@@ -8,7 +8,7 @@ const DOMAIN = 'sandboxbe92ef464470402f8a33075243995715.mailgun.org'
 const mg = mailgun({apiKey: MAILGUN_APIKEY, domain: DOMAIN});
 
 const sendEmail = async (email, name, addres) => {
-	console.log(email)
+	console.log(addres)
 	const payload = {
 	  from: 'Sport Store <notificaciones@sportstore.site>',
 	  to: email,

@@ -26,31 +26,18 @@ const Cart = (carrito) => {
   if (user.id) {
     return (
       <div className={s.container}>
-        { cart.length !== 0 && cart.map((ord) => <Order order={ord} />)}
+        {cart && cart.map((ord) => <Order order={ord} />)}
         <div className={s.subtotal}>
           <h2>TOTAL DE LA COMPRA</h2>
           <h3 className={s.price}>${total}</h3>
         </div>
-        {total > 0 ? (
-          <div className={s.flex}>
-            <Link to={`/cart/checkout`}>
-              <button className="btn btn-outline-success">REALIZAR COMPRA</button>
-            </Link>
-          </div>
-        ) : null}
-        <div>
-          <Route
-            exact
-            path="/cart/checkout"
-            render={() => <Checkout total={total} />}
-          />
-        </div>
+
         <button
           className="btn btn-success mt-4"
           onClick={() => window.history.back()}
         >
           Volver
-      </button>
+        </button>
         {cart && cart.length === 0 ? (
           <div className="mt-4">
             <h1>Tu carrito está vacio!</h1>
@@ -59,13 +46,13 @@ const Cart = (carrito) => {
             </h2>
           </div>
         ) : (
-            <button
-              className="btn btn-danger mt-4"
-              onClick={() => dispatch(removeCart(user.id))}
-            >
-              Vaciar Carrito
-            </button>
-          )}
+          <button
+            className="btn btn-danger mt-4"
+            onClick={() => dispatch(removeCart(user.id))}
+          >
+            Vaciar Carrito
+          </button>
+        )}
         <button
           className="btn btn-success mt-4"
           onClick={() =>
@@ -77,7 +64,12 @@ const Cart = (carrito) => {
           }
         >
           Calcular Total
-      </button>
+        </button>
+        {total > 0 ? (
+          <div className={s.flex}>
+            <Checkout cart={cart[0]} />
+          </div>
+        ) : null}
       </div>
     );
   } else {
@@ -94,19 +86,17 @@ const Cart = (carrito) => {
           <h2>TOTAL DE LA COMPRA</h2>
           <h3 className={s.price}>${total}</h3>
         </div>
-        {total > 0 ? (
+        {/* {total > 0 ? (
           <div className={s.flex}>
-            <Link to={`/cart/checkout`}>
-              <button className="btn btn-outline-success">REALIZAR COMPRA</button>
-            </Link>
+            <Checkout />
           </div>
-        ) : null}
+        ) : null} */}
         <div>
-          <Route
+          {/* <Route
             exact
             path="/cart/checkout"
             render={() => <Checkout total={total} />}
-          />
+          /> */}
         </div>
         <button
           className="btn btn-success mt-4"
@@ -129,7 +119,6 @@ const Cart = (carrito) => {
         </button>
       </div>
     );
-
   }
 };
 

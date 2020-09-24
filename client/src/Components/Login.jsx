@@ -5,7 +5,7 @@ import { userLogin, gmailValidation } from "../redux/actions";
 import "./Login.css";
 import GoogleLogin from "react-google-login";
 const clientIdGoogle =
-  "972982669881-i7vnmbj3lr104khogicl46opq520fkes.apps.googleusercontent.com";
+  "383625474548-egt3upsk655amhkill9nvbilk6rp6l59.apps.googleusercontent.com";
 
 const Form = () => {
   const dispatch = useDispatch();

@@ -255,7 +255,7 @@ export function removeProductCategory(productId, categoryId) {
   return function (dispatch) {
     axios.delete(`${C.SERVER_ADDRESS}/products/${productId}/category/${categoryId}`)
       .then((res) => { dispatch({ type: C.REMOVE_PRODUCT_CATEGORY, payload: res.data }) })
-      .then(() => alert("Se le elimino la categoria al producto"))
+      .then(() => console.log("Se le elimino la categoria al producto"))
       .catch((error) => alert(error));
   }
 }// S40 : Crear Ruta para vaciar el carrito

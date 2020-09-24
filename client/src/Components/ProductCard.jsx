@@ -35,6 +35,9 @@ function ProductCard({
         dispatch(addtoCart(user.id, { productId: id, price: price, amount: 1 }));
       }
     }
+    else {
+      dispatch(addtoCart(user.id, { productId: id, price: precio, amount: cantidad }));
+    }
   }
   return (
     <div className=" col-sm-4 cardStyle p-4">

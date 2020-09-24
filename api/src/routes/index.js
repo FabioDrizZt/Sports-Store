@@ -19,7 +19,7 @@ router.use("/auth", authRouter);
 
 router.post("/sendEmail", async (req, res, next) => {
   try {
-    await mailgun.sendEmail(req.body.email, req.body.name, req.body.address);
+    await mailgun.sendEmail(req.body.email, req.body.name, req.body.addres);
     res.send("Email enviado");
   } catch (e) {
     console.log(e);

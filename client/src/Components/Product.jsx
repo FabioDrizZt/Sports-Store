@@ -27,12 +27,12 @@ const Product = (props) => {
           "myCart",
           JSON.stringify(myCart.concat([{ id: product.id, amount: 1, "product": producto }]))
         );
-      } else
+      }
+     } else
       // Carrito de Usuario (Base de datos)
       {
         dispatch(addtoCart(user.id, { productId: product.id, price: product.price, amount: 1 }));
       }
-    }
   }
   useEffect(() => {
     dispatch(getProduct(props.match.match.params.id));
