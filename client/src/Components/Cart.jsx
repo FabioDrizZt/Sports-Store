@@ -38,21 +38,18 @@ const Cart = (carrito) => {
 
   /* console.log("Carrito: " + cart.map((e)=> e.id));
   console.log("Carrito: " + cart.map((e)=> e.product.id)); */
+
   // console.log("Carrito Guest: " + productCards);
 
   if (user.id) {
     return (
       <div className={s.container}>
-        {cart.length !== 0 && cart.map((ord) => <Order order={ord} />)}
+        {cart && cart.map((ord) => <Order order={ord} />)}
         <div className={s.subtotal}>
           <h2>TOTAL DE LA COMPRA</h2>
           <h3 className={s.price}>${total}</h3>
         </div>
-        {total > 0 ? (
-          <div className={s.flex}>
-            <Checkout />
-          </div>
-        ) : null}
+
         <button
           className="btn btn-success mt-4"
           onClick={() => window.history.back()}
@@ -86,6 +83,11 @@ const Cart = (carrito) => {
         >
           Calcular Total
         </button>
+        {total > 0 ? (
+          <div className={s.flex}>
+            <Checkout />
+          </div>
+        ) : null}
       </div>
     );
   } else {
@@ -96,11 +98,11 @@ const Cart = (carrito) => {
           <h2>TOTAL DE LA COMPRA</h2>
           <h3 className={s.price}>${total}</h3>
         </div>
-        {total > 0 ? (
+        {/* {total > 0 ? (
           <div className={s.flex}>
             <Checkout />
           </div>
-        ) : null}
+        ) : null} */}
         <div>
           <Route
             exact
@@ -114,10 +116,11 @@ const Cart = (carrito) => {
         >
           Volver
         </button>
-        <button 
+
+        <button
           className="btn btn-danger mt-4"
           onClick={() => dispatch(removeCart(user.id))}
-          >
+        >
           Vaciar Carrito
         </button>
         <button
