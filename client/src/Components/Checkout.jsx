@@ -10,7 +10,9 @@ const Checkout = (cart) => {
   const dispatch = useDispatch();
 
   const active = useSelector((state) => state.user);
-
+  const cs = useSelector((state) => state.cart);
+  var miCarritoDelStore = cs[0].cartId
+  console.log(miCarritoDelStore)
   const [input, setInput] = useState([]);
   console.log(input.ciudad);
 
@@ -129,7 +131,7 @@ const Checkout = (cart) => {
         </div>
         <button
         onClick={() => {
-          dispatch(updateOrder(cart.cart.cartId, "procesando"));
+          dispatch(updateOrder(miCarritoDelStore, "procesando"));
         }}
         className="btn btn-primary">
           Confirmar
