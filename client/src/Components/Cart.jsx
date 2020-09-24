@@ -53,18 +53,9 @@ const Cart = (carrito) => {
         </div>
         {total > 0 ? (
           <div className={s.flex}>
-            <Link to={`/cart/checkout`}>
-              <button className="btn btn-outline-success">REALIZAR COMPRA</button>
-            </Link>
+            <Checkout/>
           </div>
         ) : null}
-        <div>
-          <Route
-            exact
-            path="/cart/checkout"
-            render={() => <Checkout total={total} />}
-          />
-        </div>
         <button
           className="btn btn-success mt-4"
           onClick={() => window.history.back()}
@@ -110,9 +101,7 @@ const Cart = (carrito) => {
         </div>
         {total > 0 ? (
           <div className={s.flex}>
-            <Link to={`/cart/checkout`}>
-              <button className="btn btn-outline-success">REALIZAR COMPRA</button>
-            </Link>
+            <Checkout/>
           </div>
         ) : null}
         <div>
