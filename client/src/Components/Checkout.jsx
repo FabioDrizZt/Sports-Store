@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateOrder } from "../redux/actions";
 
 import * as C from '../redux/constants'
 
 // S72 : Crear Componente de Checkout, donde se ingrese
 // la direccion de envio y se confirme la compra.
-const Checkout = () => {
+const Checkout = (cart) => {
+  console.log(cart.cart)
+  console.log(cart.cart.amount + " el amount")
+  console.log(cart.cart.cartId + " el cartID")
+  console.log(cart.cart.id + " el id")
+  console.log(cart.cart.price + " price")
+
+  const dispatch = useDispatch();
+
   const active = useSelector((state) => state.user);
 
   const [input, setInput] = useState([]);
@@ -124,7 +133,13 @@ const Checkout = () => {
             placeholder="¿Quién recibe el pedido?"
           ></input> */}
         </div>
-        <button className="btn btn-primary">Confirmar</button>
+        <button
+        onClick={() => {
+          dispatch(updateOrder(cart.cart.cartId, "procesando"));
+        }}
+        className="btn btn-primary">
+          Confirmar
+        </button>
       </form>
     </>
   );
