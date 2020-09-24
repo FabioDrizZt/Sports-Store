@@ -14,11 +14,12 @@ server.get("/", check.isAuth, check.isAdmin, (req, res) => {
 // GET /users/:idUser/cart
 server.get("/:idUser/cart", check.isAuth, (req, res) => {
   const id = req.params.idUser;
-  Cart.findOne({
-    where: { userId: id, state: "abierta", },
+  Cart.findOrCreate({
+    where: { userId: id, state: "abierta" },
+    defaults: { userId: id, state: "abierta" },
   }).then((cart) => {
     Order.findAll({
-      where: { cartId: cart.id },
+      where: { cartId: cart[0].id },
       include: [{ model: Product }]
     }).then((orders) => res.send(orders))
       .catch((e) => res.status(400).json(e));
@@ -88,8 +89,7 @@ server.put("/:id", check.isAuth, (req, res) => {
       lastName: req.body.lastName,
       DNI: req.body.DNI,
       email: req.body.email,
-      password: req.body.password,
-      role: req.body.role,
+      password: req.body.password
     },
     { where: { id: req.params.id } }
   ).then(() => res.status(200).send("Usuario id: " + req.params.id + " actualizado satisfactoriamente")
@@ -99,7 +99,7 @@ server.put("/:id", check.isAuth, (req, res) => {
 // S41 : Crear Ruta para editar las cantidades del carrito
 // PUT /users/:idUser/cart 
 
-server.put("/:idUser/cart",check.isAuth, (req, res) => {
+server.put("/:idUser/cart", check.isAuth, (req, res) => {
   let cart = Cart.findOne({ where: { userId: req.params.idUser, state: "abierta" }, })
   let product = Product.findByPk(req.body.productId)
   Promise.all([cart, product])
@@ -136,7 +136,7 @@ server.delete("/:id", check.isAuth, check.isAdmin, (req, res) => {
 // DELETE /users/:idUser/cart/ 
 //eliminar del carrito y de orders
 
-server.delete("/:idUser/cart",check.isAuth, (req, res) => {
+server.delete("/:idUser/cart", check.isAuth, check.isAdmin, (req, res) => {
   Cart.findOne({ where: { userId: req.params.idUser, state: "abierta" } })
     .then((cart) => {
       Order.destroy({ where: { cartId: cart.id } })

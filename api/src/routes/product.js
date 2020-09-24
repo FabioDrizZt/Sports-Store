@@ -108,13 +108,8 @@ server.post("/category", check.isAuth, check.isAdmin, (req, res) => {
 // S17 : Crear ruta para agregar categorias de un producto.
 // POST /products/:idProducto/category/:idCategoria
 // Agrega la categoria al producto.
-server.post(
-  "/:idProducto/category/:idCategoria",
-  check.isAuth,
-  check.isAdmin,
-  (req, res) => {
-    productcategory
-      .create({
+server.post("/:idProducto/category/:idCategoria", check.isAuth, check.isAdmin, (req, res) => {
+    productcategory.create({
         productId: req.params.idProducto,
         categoryId: req.params.idCategoria,
       })
@@ -201,8 +196,8 @@ server.put("/category/:id", check.isAuth, check.isAdmin, (req, res, next) => {
       name: req.body.name,
       description: req.body.description,
     },
-    { where: { id: req.params.id } }
-  )
+    { where: { id: req.params.id } 
+    })
     .then((category) => {
       res.status(200).json({ category });
     })
@@ -214,13 +209,8 @@ server.put("/category/:id", check.isAuth, check.isAdmin, (req, res, next) => {
 // S17 : Crear ruta para sacar categorias de un producto.
 // DELETE /products/:idProducto/category/:idCategoria
 // Elimina la categoria al producto.
-server.delete(
-  "/:idProducto/category/:idCategoria",
-  check.isAuth,
-  check.isAdmin,
-  (req, res) => {
-    productcategory
-      .destroy({
+server.delete("/:idProducto/category/:idCategoria", check.isAuth, check.isAdmin, (req, res) => {
+    productcategory.destroy({
         where: {
           productId: req.params.idProducto,
           categoryId: req.params.idCategoria,
