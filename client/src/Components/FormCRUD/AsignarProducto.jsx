@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { createProductCategory } from "../../redux/actions";
+import React, { useState, useEffect} from "react";
+import { createProductCategory, getCategories } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 function AsignarProducto() {
@@ -9,17 +9,22 @@ function AsignarProducto() {
   const [idProducto, setIdProducto] = useState();
   const [idCategoria, setIdCategoria] = useState();
 
+
   function asignar(e) {
     e.preventDefault();
     alert("Asignado producto " + idProducto + " a categoria " + idCategoria);
     dispatch(createProductCategory(idProducto, idCategoria));
   }
 
+  useEffect(()=>{
+    dispatch(getCategories())
+  },[])
+
   return (
     <div className="mt-2">
       <form onSubmit={(e) => asignar(e)}>
         <legend>Asignar categoria a producto</legend>
-        <select onChange={(e) => setIdProducto(e.target.value)} className="m-2">
+        <select onChange={(e) => {setIdProducto(e.target.value);}} className="m-2">
           <option disabled selected>
             Producto
           </option>

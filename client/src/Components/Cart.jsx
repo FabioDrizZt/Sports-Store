@@ -10,7 +10,6 @@ const Cart = (carrito) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
-  console.log(user);
 
   const getProducts = JSON.parse(localStorage.getItem("myCart"));
   const [setProductsCards] = useState([]);
@@ -85,7 +84,7 @@ const Cart = (carrito) => {
         </button>
         {total > 0 ? (
           <div className={s.flex}>
-            <Checkout />
+            <Checkout cart={cart[0]} />
           </div>
         ) : null}
       </div>
@@ -104,11 +103,11 @@ const Cart = (carrito) => {
           </div>
         ) : null} */}
         <div>
-          <Route
+          {/* <Route
             exact
             path="/cart/checkout"
             render={() => <Checkout total={total} />}
-          />
+          /> */}
         </div>
         <button
           className="btn btn-success mt-4"

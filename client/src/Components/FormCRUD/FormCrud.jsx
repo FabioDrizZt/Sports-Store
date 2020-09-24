@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBarAdmin from "../NavBar/NavBarAdmin";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { removeProduct } from "../../redux/actions";
+import { removeProduct,getProducts } from "../../redux/actions";
+import AsignarProducto from "./AsignarProducto"
+import EliminarAsignacion from "./EliminarAsignacion"
 
 function FormCrud() {
   const products = useSelector((state) => state.products);
@@ -11,7 +13,9 @@ function FormCrud() {
   function eliminar(id) {
     dispatch(removeProduct(id));
   }
-
+  useEffect(()=>{
+    dispatch(getProducts())
+  },[])
   return (
     <React.Fragment>
       <NavBarAdmin />
@@ -81,6 +85,8 @@ function FormCrud() {
             </div>
           ))}
       </div>
+      <AsignarProducto/>
+      <EliminarAsignacion/>
     </React.Fragment>
   );
 }
