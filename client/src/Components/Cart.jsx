@@ -10,38 +10,18 @@ const Cart = (carrito) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
-  console.log(user)
-
-
-  const getProducts = JSON.parse(localStorage.getItem("myCart"));
+  
   const [setProductsCards] = useState([])
-
   const [changCart, setChangeCart] = useState("");
 
   const [total, setTotal] = useState(0);
-
-  const getGuestProductsOfCart = () => {
-    if (getProducts) {
-      setProductsCards(getProducts)
-    } else setProductsCards([])
-  }
-
+    
   useEffect(() => {
     // si no esta logeado se rompe porque el user.id de alguien no logeado con items es undefined
     if (user.length!==0) {
       dispatch(getCartUser(user.id))
     }
-    else {
-      // console.log("No esta logeado");
-      // getGuestProductsOfCart()
-      // setChangeCart("")
-    }
   }, []);
-
-  /* console.log("Carrito: " + cart.map((e)=> e.id));
-  console.log("Carrito: " + cart.map((e)=> e.product.id)); */
-
-  // console.log("Carrito Guest: " + productCards);
 
   if (user.id) {
     return (
@@ -101,9 +81,15 @@ const Cart = (carrito) => {
       </div>
     );
   } else {
+    // Carrito Invitado (LocalStore)
+    // Si no existe lo crea vacio
+    JSON.parse(localStorage.getItem("myCart")) ??
+    localStorage.setItem("myCart", JSON.stringify([]));
+    // Guardamos los valores de las ordenes en la variable myCart como un arreglo
+    const myCart = JSON.parse(localStorage.getItem("myCart"));
     return (
       <div className={s.container}>
-        {getProducts && getProducts.map ((e) => <Order order = {e} />)} 
+        {myCart && myCart.map ((e) => <Order order = {e} />)} 
         <div className={s.subtotal}>
           <h2>TOTAL DE LA COMPRA</h2>
           <h3 className={s.price}>${total}</h3>
@@ -124,29 +110,21 @@ const Cart = (carrito) => {
         </div>
         <button
           className="btn btn-success mt-4"
-          onClick={() => window.history.back()}
-        >
+          onClick={() => window.history.back()}>
           Volver
         </button>
-    
-         
             <button
               className="btn btn-danger mt-4"
-              onClick={() => dispatch(removeCart(user.id))}
-            >
+              onClick={() => localStorage.setItem("myCart", JSON.stringify([]))}>
               Vaciar Carrito
             </button>
-       
         <button
           className="btn btn-success mt-4"
           onClick={() =>
             setTotal(
-              cart.reduce(function (prev, cur) {
+              myCart.reduce(function (prev, cur) {
                 return prev + cur.product.price * cur.amount;
-              }, 0)
-            )
-          }
-        >
+              }, 0))}>
           Calcular Total
         </button>
       </div>
