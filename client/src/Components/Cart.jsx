@@ -10,8 +10,6 @@ const Cart = (carrito) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
-  console.log(user);
-  console.log(cart);
 
   const getProducts = JSON.parse(localStorage.getItem("myCart"));
   const [setProductsCards] = useState([]);
