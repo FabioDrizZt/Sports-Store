@@ -23,6 +23,7 @@ import Userok from './Components/UserOk/UserOk';
 import MiPerfil from './Components/MiPerfil';
 import Checkout from './Components/Checkout';
 import Buyok from "./Components/BuyOk/Buyok";
+import EditProductOk from "./Components/EditProductOk/EditProductOk";
 
 function App() {
   const dispatch = useDispatch()
@@ -73,6 +74,8 @@ function App() {
       <Route exact path="/admin/orders" component={OrdersTable} />
       <Route exact path="/admin/productok" component={Productok} />
       <Route exact path="/auth/me" component={MiPerfil} />
+      <Route exact path="/admin/myProducts/editProductsOk" component={EditProductOk} />
+      
     </div>
   );
 }
