@@ -14,6 +14,7 @@ function Catalogo() {
   const products = useSelector((state) => state.products);
   const categories = useSelector((state) => state.categories);
   // Carrito LocalStore
+  // Si no existe lo crea vacio
   JSON.parse(localStorage.getItem("myCart")) ??
     localStorage.setItem("myCart", JSON.stringify([]));
 
@@ -28,7 +29,6 @@ function Catalogo() {
   }
 
   return (
-    //props: titulo, descripcion, precio, cantidad, imagen
     <React.Fragment>
       <div className="jumbotron jumbotron-fluid">
         <div className="containerCenter">
@@ -63,7 +63,7 @@ function Catalogo() {
                 id={x.id}
                 name={x.name}
                 descripcion={x.description}
-                precio={x.price}
+                price={x.price}
                 imagen={x.image}
                 stock={x.stock}
                 size={x.size}

@@ -9,8 +9,7 @@ function ProductCard({
   id,
   name,
   descripcion,
-  precio,
-  cantidad = 1,
+  price,
   imagen,
   stock,
   categories,
@@ -23,16 +22,17 @@ function ProductCard({
     // Carrito LocalStore 
     if (!user.id) {
       let myCart = JSON.parse(localStorage.getItem('myCart'));
-      let producto = { "id": id, "name": name, "price": precio, "amount": cantidad, "image": imagen, "description": descripcion, "stock": stock, "size": size, "categories": categories }
+      let producto = { "id": id, "name": name, "price": price, "image": imagen, "description": descripcion, "stock": stock, "size": size, "categories": categories }
       const order = (element) => element["id"] === id;
-      console.log(producto);
       if (!myCart.some(order)) {
         localStorage.setItem(
           "myCart",
-          JSON.stringify(myCart.concat([{ id: id, price: precio, amount: 1, "product": producto }]))
+          JSON.stringify(myCart.concat([{ id: id, amount: 1, "product": producto }]))
         );
-      } else {
-        dispatch(addtoCart(user.id, { productId: id, price: precio, amount: cantidad }));
+      } else 
+      // Carrito de Usuario (Base de datos)
+      {
+        dispatch(addtoCart(user.id, { productId: id, price: price, amount: 1 }));
       }
     }
     else {
@@ -53,7 +53,7 @@ function ProductCard({
         <p>{descripcion}</p>
         <p>Stock: {stock}</p>
         <p className="price">
-          <b>$ {precio}</b>
+          <b>$ {price}</b>
         </p>
 
         <Link to={`/products/${id}`}>

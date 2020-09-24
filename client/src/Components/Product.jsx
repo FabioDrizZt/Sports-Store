@@ -1,13 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
 import { getProduct, addtoCart, getReviews } from "../redux/actions";
 import "./Product.css";
-
 import Review from "./Review";
-
-// Este componente envia informacion al ProductCard que le dará una maquetacion de tarjeta...
 
 const Product = (props) => {
   const dispatch = useDispatch();
@@ -20,27 +16,28 @@ const Product = (props) => {
     dispatch(getReviews(props.match.match.params.id));
   }, []);
 
-  function agregarAlCarrito(product) {
-    // Carrito LocalStore
+  function agregarAlCarrito() {
+    // Carrito Invitado (LocalStore)
     if (!user.id) {
-      let myCart = JSON.parse(localStorage.getItem("myCart"));
-      const producto = (element) => element["id"] === product.id;
-      if (!myCart.some(producto))
+      let myCart = JSON.parse(localStorage.getItem('myCart'));
+      let producto = { "id": product.id, "name": product.name, "price": product.price, "image": product.imagen, "description": product.description, "stock": product.stock, "size": product.size, "categories": product.categories }
+      const order = (element) => element["id"] === product.id;
+      if (!myCart.some(order)) {
         localStorage.setItem(
           "myCart",
-          JSON.stringify(myCart.concat([{ id: product.id, amount: 1 }]))
+          JSON.stringify(myCart.concat([{ id: product.id, amount: 1, "product": producto }]))
         );
-    } else {
-      dispatch(
-        addtoCart(user.id, { productId: product.id, price: product.price, amount: 1 })
-      );
-    }
+      }
+     } else
+      // Carrito de Usuario (Base de datos)
+      {
+        dispatch(addtoCart(user.id, { productId: product.id, price: product.price, amount: 1 }));
+      }
   }
   useEffect(() => {
     dispatch(getProduct(props.match.match.params.id));
   }, []);
 
-  console.log(document.body.style.overflow);
   return (
     product && (
       <div className="container">
