@@ -50,7 +50,8 @@ function App() {
       {/* /CART */}
       <Route exact path="/cart" component={Cart} />
       <Route exact path="/cart/checkout" component={Checkout} />
-
+      <Route exact path="/cart/buyok" component={Buyok} />
+      
       
       <Route exact path="/category" component={FormCategory} />
       <Route exact path="/formcrud" component={FormCrud} />
