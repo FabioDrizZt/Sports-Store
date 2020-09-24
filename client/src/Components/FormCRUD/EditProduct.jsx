@@ -3,11 +3,15 @@ import { updateProduct } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import NavBarAdmin from "../NavBar/NavBarAdmin";
 import "../FormCRUD/CreateProduct.css";
+import { Redirect } from "react-router";
+
 function EditProduct(props) {
   const dispatch = useDispatch();
   const idProduct = props.match.match.params.id;
 
   const [input, setInput] = useState(null);
+
+  const [redirect, setRedirect] = useState(false);
 
   function handleInputChange(e) {
     setInput({
@@ -30,13 +34,24 @@ function EditProduct(props) {
     e.preventDefault();
     dispatch(updateProduct(idProduct, input));
   }
+  if (redirect) {
+    return <Redirect to="/admin/myProducts/editProductsOk" />;
+  }
 
   return (
     input && (
       <>
         <NavBarAdmin />
         <div className="containerAll">
-          <form className="containerPro" onSubmit={(e) => sendData(e)}>
+          <form
+            className="containerPro"
+            onSubmit={(e) => {
+              sendData(e);
+              setTimeout(function () {
+                setRedirect(true);
+              }, 1000);
+            }}
+          >
             <legend>Editar Producto</legend>
             <div className="form-group row">
               <label className="col-sm-2 col-form-label" for="name">
@@ -69,7 +84,6 @@ function EditProduct(props) {
                 />
               </div>
             </div>
-
             <div className="form-group row">
               <label className="col-sm-2 col-form-label" for="precio">
                 Precio
@@ -120,7 +134,6 @@ function EditProduct(props) {
                 />
               </div>
             </div>
-
             <div className="form-group row">
               <label className="col-sm-2 col-form-label" for="imagen">
                 Imagen
@@ -136,7 +149,6 @@ function EditProduct(props) {
                 />
               </div>
             </div>
-
             <button
               className="btn btn-primary"
               type="submit"

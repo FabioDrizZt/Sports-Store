@@ -169,7 +169,7 @@ export function updateProduct(productId, product) {
   return function (dispatch) {
     axios.put(`${C.SERVER_ADDRESS}/products/${productId}`, product)
       .then((res) => { dispatch({ type: C.UPDATE_PRODUCT, payload: product }) })
-      .then(() => alert("Se modifico el producto"))
+      .then(() => console.log("Se modifico el producto"))
       .catch((error) => alert(error, "error"));
   }
 }//S20 : Crear ruta para Modificar Categoria
