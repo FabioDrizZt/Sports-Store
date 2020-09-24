@@ -29,15 +29,12 @@ function ProductCard({
           "myCart",
           JSON.stringify(myCart.concat([{ id: id, amount: 1, "product": producto }]))
         );
-      } else 
+      }
+    } else 
       // Carrito de Usuario (Base de datos)
       {
         dispatch(addtoCart(user.id, { productId: id, price: price, amount: 1 }));
       }
-    }
-    else {
-      dispatch(addtoCart(user.id, { productId: id, price: precio, amount: cantidad }));
-    }
   }
   return (
     <div className=" col-sm-4 cardStyle p-4">
