@@ -46,7 +46,7 @@ const Cart = (carrito) => {
   if (user.id) {
     return (
       <div className={s.container}>
-        { cart && cart.map((ord) => <Order order={ord} />)}
+        { cart.length !== 0 && cart.map((ord) => <Order order={ord} />)}
         <div className={s.subtotal}>
           <h2>TOTAL DE LA COMPRA</h2>
           <h3 className={s.price}>${total}</h3>
