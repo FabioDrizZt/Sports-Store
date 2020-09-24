@@ -9,12 +9,12 @@ const Checkout = () => {
   const active = useSelector((state) => state.user);
 
   const [input, setInput] = useState([]);
-  console.log(input.city);
+  console.log(input.ciudad);
 
   const data = {
     email: active.email,
     name: active.name,
-    addres: input.city
+    addres: input.ciudad
   }
 
   const submit = async (e) => {
@@ -43,8 +43,8 @@ const Checkout = () => {
           <label for="labelAddress">¿A dónde enviamos tu orden?</label>
           <input
             required
-            value={input.city}
-            onChange={(e) => setInput({ ...input, city: e.target.value })}
+            value={input.ciudad}
+            onChange={(e) => setInput({ ...input, ciudad: e.target.value })}
             name="ciudad"
             type="text"
             className="form-control"
