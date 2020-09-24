@@ -32,7 +32,7 @@ const Product = (props) => {
         );
     } else {
       dispatch(
-        addtoCart(1, { productId: product.id, price: product.price, amount: 1 })
+        addtoCart(user.id, { productId: product.id, price: product.price, amount: 1 })
       );
     }
   }

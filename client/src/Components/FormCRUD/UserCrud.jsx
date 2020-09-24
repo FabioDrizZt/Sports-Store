@@ -15,11 +15,10 @@ function UserCrud() {
   const user = useSelector((state) => state.user);
 
   const [userId, setUserId] = useState(null);
-  const userFind = users && users.find((x) => x.id === userId);
 
   useEffect(() => {
     dispatch(getUsers());
-  }, [userFind && userFind.role]);
+  }, [userId]);
 
   return (
     <React.Fragment>
