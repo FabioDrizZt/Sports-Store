@@ -1,13 +1,19 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateOrder } from "../redux/actions";
+import { Redirect } from "react-router";
 
 import * as C from '../redux/constants'
 
 // S72 : Crear Componente de Checkout, donde se ingrese
 // la direccion de envio y se confirme la compra.
-const Checkout = () => {
-  const active = useSelector((state) => state.user);
+const Checkout = (cart) => {
 
+  const dispatch = useDispatch();
+
+  const active = useSelector((state) => state.user);
+  const cs = useSelector((state) => state.cart);
+  var miCarritoDelStore = cs[0].cartId
+  // console.log(miCarritoDelStore)
   const [input, setInput] = useState([]);
   console.log(input.ciudad);
 
@@ -15,6 +21,12 @@ const Checkout = () => {
     email: active.email,
     name: active.name,
     addres: input.ciudad
+  }
+
+  const [redirect, setRedirect] = useState(false);
+
+  if (redirect) {
+    return <Redirect to="/cart/buyok" />;
   }
 
   const submit = async (e) => {
@@ -36,6 +48,9 @@ const Checkout = () => {
       <form
         onSubmit={e => {
           submit(e);
+          setTimeout(function () {
+            setRedirect(true);
+          }, 1000);
         }}
       >
         <h3>Estamos a punto de finalizar tu orden</h3>
@@ -51,80 +66,14 @@ const Checkout = () => {
             id="ciudad"
             placeholder="Provincia - Ciudad - Calle - Altura..."
           ></input>
-          {/* <input
-            required
-            value={input.provincia}
-            onChange={(e) => setInput({ ...input, provincia: e.target.value })}
-            name="provincia"
-            type="text"
-            className="form-control"
-            id="provincia"
-            placeholder="Provincia..."
-          ></input>
-          <input
-            required
-            value={input.localidad}
-            onChange={(e) => setInput({ ...input, localidad: e.target.value })}
-            name="localidad"
-            type="text"
-            className="form-control"
-            id="localidad"
-            placeholder="Localidad..."
-          ></input>
-          <input
-            required
-            value={input.cp}
-            onChange={(e) => setInput({ ...input, cp: e.target.value })}
-            name="cp"
-            type="text"
-            className="form-control"
-            id="cp"
-            placeholder="Código Postal..."
-          ></input>
-          <input
-            required
-            value={input.calle}
-            onChange={(e) => setInput({ ...input, calle: e.target.value })}
-            name="calle"
-            type="text"
-            className="form-control"
-            id="calle"
-            placeholder="Calle..."
-          ></input>
-          <input
-            required
-            value={input.altura}
-            onChange={(e) => setInput({ ...input, altura: e.target.value })}
-            name="altura"
-            type="text"
-            className="form-control"
-            id="altura"
-            placeholder="Altura..."
-          ></input>
-          <input
-            required
-            value={input.departamento}
-            onChange={(e) =>
-              setInput({ ...input, departamento: e.target.value })
-            }
-            name="departamento"
-            type="text"
-            className="form-control"
-            id="departamento"
-            placeholder="Departamento..."
-          ></input>
-          <input
-            required
-            value={input.receptor}
-            onChange={(e) => setInput({ ...input, receptor: e.target.value })}
-            name="receptor"
-            type="text"
-            className="form-control"
-            id="receptor"
-            placeholder="¿Quién recibe el pedido?"
-          ></input> */}
         </div>
-        <button className="btn btn-primary">Confirmar</button>
+          <button
+          onClick={() => {
+            dispatch(updateOrder(miCarritoDelStore, "procesando"));
+          }}
+          className="btn btn-primary">
+            Confirmar
+          </button>
       </form>
     </>
   );
