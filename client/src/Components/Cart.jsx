@@ -10,11 +10,10 @@ const Cart = (carrito) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
-  console.log(user)
-
+  console.log(user);
 
   const getProducts = JSON.parse(localStorage.getItem("myCart"));
-  const [setProductsCards] = useState([])
+  const [setProductsCards] = useState([]);
 
   const [changCart, setChangeCart] = useState("");
 
@@ -22,16 +21,15 @@ const Cart = (carrito) => {
 
   const getGuestProductsOfCart = () => {
     if (getProducts) {
-      setProductsCards(getProducts)
-    } else setProductsCards([])
-  }
+      setProductsCards(getProducts);
+    } else setProductsCards([]);
+  };
 
   useEffect(() => {
     // si no esta logeado se rompe porque el user.id de alguien no logeado con items es undefined
-    if (user.length!==0) {
-      dispatch(getCartUser(user.id))
-    }
-    else {
+    if (user.length !== 0) {
+      dispatch(getCartUser(user.id));
+    } else {
       // console.log("No esta logeado");
       // getGuestProductsOfCart()
       // setChangeCart("")
@@ -40,20 +38,19 @@ const Cart = (carrito) => {
 
   /* console.log("Carrito: " + cart.map((e)=> e.id));
   console.log("Carrito: " + cart.map((e)=> e.product.id)); */
-
   // console.log("Carrito Guest: " + productCards);
 
   if (user.id) {
     return (
       <div className={s.container}>
-        { cart.length !== 0 && cart.map((ord) => <Order order={ord} />)}
+        {cart.length !== 0 && cart.map((ord) => <Order order={ord} />)}
         <div className={s.subtotal}>
           <h2>TOTAL DE LA COMPRA</h2>
           <h3 className={s.price}>${total}</h3>
         </div>
         {total > 0 ? (
           <div className={s.flex}>
-            <Checkout/>
+            <Checkout />
           </div>
         ) : null}
         <button
@@ -61,7 +58,7 @@ const Cart = (carrito) => {
           onClick={() => window.history.back()}
         >
           Volver
-      </button>
+        </button>
         {cart && cart.length === 0 ? (
           <div className="mt-4">
             <h1>Tu carrito está vacio!</h1>
@@ -70,13 +67,13 @@ const Cart = (carrito) => {
             </h2>
           </div>
         ) : (
-            <button
-              className="btn btn-danger mt-4"
-              onClick={() => dispatch(removeCart(user.id))}
-            >
-              Vaciar Carrito
-            </button>
-          )}
+          <button
+            className="btn btn-danger mt-4"
+            onClick={() => dispatch(removeCart(user.id))}
+          >
+            Vaciar Carrito
+          </button>
+        )}
         <button
           className="btn btn-success mt-4"
           onClick={() =>
@@ -88,20 +85,20 @@ const Cart = (carrito) => {
           }
         >
           Calcular Total
-      </button>
+        </button>
       </div>
     );
   } else {
     return (
       <div className={s.container}>
-        {getProducts && getProducts.map ((e) => <Order order = {e} />)} 
+        {getProducts && getProducts.map((e) => <Order order={e} />)}
         <div className={s.subtotal}>
           <h2>TOTAL DE LA COMPRA</h2>
           <h3 className={s.price}>${total}</h3>
         </div>
         {total > 0 ? (
           <div className={s.flex}>
-            <Checkout/>
+            <Checkout />
           </div>
         ) : null}
         <div>
@@ -117,15 +114,12 @@ const Cart = (carrito) => {
         >
           Volver
         </button>
-    
-         
-            <button
-              className="btn btn-danger mt-4"
-              onClick={() => dispatch(removeCart(user.id))}
-            >
-              Vaciar Carrito
-            </button>
-       
+        <button 
+          className="btn btn-danger mt-4"
+          onClick={() => dispatch(removeCart(user.id))}
+          >
+          Vaciar Carrito
+        </button>
         <button
           className="btn btn-success mt-4"
           onClick={() =>
@@ -140,7 +134,6 @@ const Cart = (carrito) => {
         </button>
       </div>
     );
-
   }
 };
 
