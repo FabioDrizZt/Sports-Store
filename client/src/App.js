@@ -21,7 +21,8 @@ import Productok from './Components/ProductOk/Productok';
 import RegistrationForm from './Components/FormCRUD/CreateUser';
 import Userok from './Components/UserOk/UserOk';
 import MiPerfil from './Components/MiPerfil';
-import Checkout from './Components/Checkout'
+import Checkout from './Components/Checkout';
+import Buyok from "./Components/BuyOk/Buyok";
 
 function App() {
   const dispatch = useDispatch()
