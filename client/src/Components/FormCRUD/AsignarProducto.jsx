@@ -7,19 +7,22 @@ function AsignarProducto() {
   const productos = useSelector((state) => state.products);
   const categorias = useSelector((state) => state.categories);
   const [nameProducto, setnameProducto] = useState();
-  const [idCategoria, setIdCategoria] = useState();
+  const [nameCategoria, setNameCategoria] = useState();
   console.log(productos);
-
-
-  function asignar(e) {
-    e.preventDefault();
-    var str = nameProducto;
+  
+  function toMayus(palabra) {
+    var str = palabra;
     str = str.toLowerCase().replace(/\b[a-z]/g, function (letter) {
       return letter.toUpperCase();
     }); //Convierte la primera letra de cada palabra en Mayuscula
+    return str
+  }
 
-    alert("Asignado producto " + "'" + str + "'" + " a categoria " + idCategoria);
-    dispatch(createProductCategory(nameProducto, idCategoria));
+  function asignar(e) {
+    e.preventDefault();
+    
+    alert("Asignado PRODUCTO " + "'" + toMayus(nameProducto) + "'" + " a CATEGORIA " + "'"+toMayus (nameCategoria)+"'");
+    dispatch(createProductCategory(nameProducto, nameCategoria));
   }
 
   useEffect(() => {
@@ -38,13 +41,13 @@ function AsignarProducto() {
             productos.map((x) => {
               return (
                 <option key={x.name + 1} value={x.name}>
-                  {x.name}
+                  {toMayus(x.name)}
                 </option>
               );
             })}
         </select>
         <select
-          onChange={(e) => setIdCategoria(e.target.value)}
+          onChange={(e) => setNameCategoria(e.target.value)}
           className="m-2"
         >
           <option disabled selected>
@@ -54,7 +57,7 @@ function AsignarProducto() {
             categorias.map((x) => {
               return (
                 <option key={x.name + 2} value={x.name}>
-                  {x.name}
+                  {toMayus(x.name)}
                 </option>
               );
             })}
