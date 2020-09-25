@@ -52,23 +52,11 @@ const RegistrationForm = () => {
     return <Redirect to="/users/userok" />;
   }
 
-  // function User(e, input) {
-  //   e.preventDefault();
-  //   dispatch(createUser(input));
-  //   Array.from(document.querySelectorAll("input")).forEach(
-  //     (input) => (input.value = "")
-  //   );
-  // }
-  // if(!/[a-zA-Z\d]+/.test(input.password)) {
-  //   console.log("No sirve")
-  // }
-
   return (
     <>
       <h3>Unete a Sports Store</h3>
       <div className="col-4 form-group containerUser">
         <Form
-          //  onSubmit={(e) => User(e, input)}
           className=""
           {...formItemLayout}
           form={form}
@@ -81,7 +69,6 @@ const RegistrationForm = () => {
           }}
           scrollToFirstError
         >
-          {/* Nombre */}
           <Form.Item
             name="name"
             label={
@@ -101,12 +88,8 @@ const RegistrationForm = () => {
           >
             <Input
               placeholder="Nombre"
-              //  value={input.name}
-              //  onChange={(e) => setInput({ ...input, name: e.target.value })}
             />
           </Form.Item>
-          {/* APELLIDO */}
-
           <Form.Item
             name="lastName"
             label={<span>&nbsp;</span>}
@@ -120,13 +103,8 @@ const RegistrationForm = () => {
           >
             <Input
               placeholder="Apellido"
-              // value={input.lastName}
-              // onChange={(e) => setInput({ ...input, lastName: e.target.value })}
             />
           </Form.Item>
-
-          {/* EMAIL */}
-
           <Form.Item
             name="email"
             label={<label></label>}
@@ -143,13 +121,8 @@ const RegistrationForm = () => {
           >
             <Input
               placeholder="E-mail"
-
-              // value={input.email}
-              // onChange={(e) => setInput({ ...input, email: e.target.value })}
             />
           </Form.Item>
-
-          {/* DNI */}
 
           <Form.Item
             name="DNI"
@@ -211,9 +184,6 @@ const RegistrationForm = () => {
           >
             <Input.Password
               placeholder="Constraseña"
-
-              // value={input.password}
-              // onChange={(e) => setInput({ ...input, password: e.target.value })}
             />
           </Form.Item>
 
@@ -240,8 +210,6 @@ const RegistrationForm = () => {
           >
             <Input.Password
               placeholder="Confirmar Constraseña"
-              // value={input.confirm}
-              // onChange={(e) => setInput({ ...input, confirm: e.target.value })}
             />
           </Form.Item>
 
