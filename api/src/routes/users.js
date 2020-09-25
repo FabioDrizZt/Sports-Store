@@ -136,7 +136,7 @@ server.delete("/:id", check.isAuth, check.isAdmin, (req, res) => {
 // DELETE /users/:idUser/cart/ 
 //eliminar del carrito y de orders
 
-server.delete("/:idUser/cart", check.isAuth, check.isAdmin, (req, res) => {
+server.delete("/:idUser/cart", check.isAuth, (req, res) => {
   Cart.findOne({ where: { userId: req.params.idUser, state: "abierta" } })
     .then((cart) => {
       Order.destroy({ where: { cartId: cart.id } })
