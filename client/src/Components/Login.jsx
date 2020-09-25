@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogin, gmailValidation } from "../redux/actions";
 import "./Login.css";
@@ -36,6 +36,9 @@ const Form = () => {
     localStorage.clear();
   };
 
+  const [redirect, setRedirect] = useState(false);
+  if (redirect) return <Redirect to="/products" />;
+
   return (
     <div className="form">
       <div className="sesion">Iniciar Sesión</div>
@@ -43,7 +46,8 @@ const Form = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          Promise.all([dispatch(userLogin(input))]).then(window.history.back());
+          dispatch(userLogin(input));
+          setRedirect(true);
         }}
       >
         <div>
@@ -56,7 +60,6 @@ const Form = () => {
             required
           />
         </div>
-
         <div>
           <input
             className="input"
@@ -67,18 +70,15 @@ const Form = () => {
             required
           />
         </div>
-
         <div className="boton">
           <input className="submit" type="submit" value="Iniciar Sesión" />
-        </div>
-
+        </div>{" "}
         <div className="login">
           No tienes Cuenta
           <Link className="nav-link" to="/users">
             Registrate acá
           </Link>
         </div>
-
         <div className="contenedor-google">
           <GoogleLogin
             className="boton-google"
