@@ -137,6 +137,7 @@ export function createCategory(category) {
   }
 }// S17 : Crear ruta para agregar categorias de un producto.
 export function createProductCategory(productId, categoryId) {
+  console.log(productId,categoryId)
   return function (dispatch) {
     axios.post(`${C.SERVER_ADDRESS}/products/${productId}/category/${categoryId}`)
       .then((res) => { dispatch({ type: C.CREATE_PRODUCT_CATEGORY, payload: res.data }) })
