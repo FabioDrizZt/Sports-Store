@@ -210,7 +210,7 @@ function OrdersTable() {
                   {cart.id}
                 </span>
                 <span>
-                  <b>User Id: </b>
+                  <b>User: </b>
                   {users&&buscarUser(cart.userId)}
                 </span>
                 <span style={colorEstado(cart.state)}>

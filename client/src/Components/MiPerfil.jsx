@@ -77,7 +77,7 @@ function MiPerfil (){
         <div>
             <h3>Historial de compras</h3>   
             <section className = "historial">
-                <h5>{procesadas.length===0 ? "Sin ordenes en proceso" : "En proceso"}</h5>
+                <h5>{procesadas.length===0 ? "Sin órdenes en proceso" : "En proceso"}</h5>
                 {procesadas&&procesadas.map(x=>{     
                    return x.map(xx=>{
                         return <p key={xx.id+3}>
