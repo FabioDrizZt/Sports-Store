@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { createProductCategory, getCategories } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,32 +6,38 @@ function AsignarProducto() {
   const dispatch = useDispatch();
   const productos = useSelector((state) => state.products);
   const categorias = useSelector((state) => state.categories);
-  const [idProducto, setIdProducto] = useState();
+  const [nameProducto, setnameProducto] = useState();
   const [idCategoria, setIdCategoria] = useState();
+  console.log(productos);
 
 
   function asignar(e) {
     e.preventDefault();
-    alert("Asignado producto " + idProducto + " a categoria " + idCategoria);
-    dispatch(createProductCategory(idProducto, idCategoria));
+    var str = nameProducto;
+    str = str.toLowerCase().replace(/\b[a-z]/g, function (letter) {
+      return letter.toUpperCase();
+    }); //Convierte la primera letra de cada palabra en Mayuscula
+
+    alert("Asignado producto " + "'" + str + "'" + " a categoria " + idCategoria);
+    dispatch(createProductCategory(nameProducto, idCategoria));
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getCategories())
-  },[])
+  }, [])
 
   return (
     <div className="mt-2">
       <form onSubmit={(e) => asignar(e)}>
         <legend>Asignar categoria a producto</legend>
-        <select onChange={(e) => {setIdProducto(e.target.value);}} className="m-2">
+        <select onChange={(e) => { setnameProducto(e.target.value); }} className="m-2">
           <option disabled selected>
             Producto
           </option>
           {productos &&
             productos.map((x) => {
               return (
-                <option key={x.id + 1} value={x.id}>
+                <option key={x.name + 1} value={x.name}>
                   {x.name}
                 </option>
               );
@@ -47,7 +53,7 @@ function AsignarProducto() {
           {categorias &&
             categorias.map((x) => {
               return (
-                <option key={x.id + 2} value={x.id}>
+                <option key={x.name + 2} value={x.name}>
                   {x.name}
                 </option>
               );
