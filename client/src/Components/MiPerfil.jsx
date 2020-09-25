@@ -92,7 +92,7 @@ function MiPerfil (){
                    
                 })}
                 <hr/>
-                    <h5 style={canceladas.length===0?{color:"inherit"}:{color:"red"}}>{canceladas.length===0 ? "Sin ordenes canceladas" : "Órdenes canceladas"} </h5>
+                    <h5 style={canceladas.length===0?{color:"inherit"}:{color:"red"}}>{canceladas.length===0 ? "Sin órdenes canceladas" : "Órdenes canceladas"} </h5>
                 {canceladas&&canceladas.map(x=>{     
                    return x.map(xx=>{
                         return <p key={xx.id+3}>
