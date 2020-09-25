@@ -55,11 +55,11 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 // Middleware para mostrar la sesion y para debuggear 
-server.use((req, res, next) => {
+/* server.use((req, res, next) => {
   console.log(req.session);
   console.log(req.user);
   next();
-});
+}); */
 
 
 server.name = 'API';
