@@ -1,4 +1,4 @@
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { removeCart, getCartUser } from "../redux/actions";
 import { useSelector, useDispatch } from "react-redux";

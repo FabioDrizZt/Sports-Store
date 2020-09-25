@@ -4,14 +4,14 @@ axios.defaults.withCredentials = true;
 
 //S24 : Crear ruta de producto individual, pasado un ID que retorne un producto con sus detalles
 
-  export function getUserSession (){
-    return function (dispatch) {
-  axios.get(`${C.SERVER_ADDRESS}`)
+export function getUserSession() {
+  return function (dispatch) {
+    axios.get(`${C.SERVER_ADDRESS}`)
       .then((res) => { dispatch({ type: C.USER_SESSION, payload: res.data }) })
       .catch((error) => alert(error, "error"))
   }
-  }
-  
+}
+
 
 export function getProduct(productId) {
   return function (dispatch) {
@@ -105,7 +105,8 @@ export function getMe() {
         dispatch({ type: C.USER_LOGIN, payload: res.data });
         alert('Bienvenido: ' + res.data.name)
       })
-      .catch((error) => alert(error, "error"));
+      .catch((error) => alert("Usuario o Contraseña Incorrecta"));
+      
   }
 }// S64 crear ruta de logout
 export function userLogout() {
