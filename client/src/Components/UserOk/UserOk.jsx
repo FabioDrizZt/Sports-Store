@@ -11,7 +11,7 @@ function Userok() {
                 <Result
                     icon={<UserOutlined />}
                     title="Hemos creado tu cuenta"
-                    extra={<Link to={"/products"}><Button type="danger">OK</Button></Link>}
+                    extra={<Link to={"/login"}><Button type="danger">OK</Button></Link>}
                 />
             </div>
         </div>
