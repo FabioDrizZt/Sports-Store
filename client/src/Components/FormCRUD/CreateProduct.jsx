@@ -69,7 +69,7 @@ const CreateProduct = () => {
             onFinish(values);
             setTimeout(function () {
               setRedirect(true);
-            }, 1000);
+            }, 500);
           }}
           scrollToFirstError
         >

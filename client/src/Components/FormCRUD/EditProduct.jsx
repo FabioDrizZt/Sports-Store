@@ -49,10 +49,10 @@ function EditProduct(props) {
               sendData(e);
               setTimeout(function () {
                 setRedirect(true);
-              }, 1000);
+              }, 500);
             }}
           >
-            <legend>Editar Producto</legend>
+            <h3>Editar Producto</h3>
             <div className="form-group row">
               <label className="col-sm-2 col-form-label" for="name">
                 Nombre
