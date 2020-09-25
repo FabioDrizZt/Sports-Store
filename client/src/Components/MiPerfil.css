@@ -1,0 +1,33 @@
+.mi-perfil div {
+    width:60%;
+    margin:4rem auto;
+    box-shadow: 10px 10px 5px 0px rgba(201,199,201,1)
+}
+.mi-perfil div h3 {
+    text-align:left;   
+}
+.mi-perfil div section {
+    width:70%;
+    margin:2rem auto;
+    text-align:left;
+    padding-bottom:2rem
+}
+.mi-perfil div section.historial {
+    width:100%;
+    margin:2rem auto;
+    text-align:left;
+    padding-bottom:2rem
+}
+.compra {
+    position: relative;
+}
+.fecha{
+    position: absolute;
+    right: 5%;
+    top:42%
+}
+.spinner-border{
+    position: absolute;
+    right: 5%;
+    top:30%
+}

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import {getProducts} from "../redux/actions";
+import "./MiPerfil.css"
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
 function MiPerfil (){
     const me = useSelector(state=>state.user);
     const [historial,setHistorial] = useState([]);
-    const productos = useSelector(state=>state.products)
+    const [procesadas,setProcesadas] = useState([]);
+    const [canceladas,setCanceladas] = useState([]);
+    const productos = useSelector(state=>state.products)  
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -22,44 +25,108 @@ function MiPerfil (){
            })
           return ordenesUsuario
         })
-        .then(ordenes=>{
-            console.log(ordenes)
+        .then(ordenes=>{           
             return ordenes.map(x=>x.orders);            
         })
         .then(historial=>{setHistorial(historial)})
         .catch((error) => alert(error));
+    },[me.id]);
+
+    useEffect(()=>{
+        axios.get(`http://localhost:3001/orders/?status=procesando`)
+        .then((res) => { 
+           let ordenesUsuario = res.data.filter(x=>{
+              return x.userId===me.id
+           })
+          return ordenesUsuario
+        })
+        .then(ordenes=>{           
+            return ordenes.map(x=>x.orders);            
+        })
+        .then(procesadas=>{setProcesadas(procesadas)})
+        .catch((error) => alert(error));
+    },[me.id])
+
+    useEffect(()=>{
+        axios.get(`http://localhost:3001/orders/?status=cancelada`)
+        .then((res) => { 
+           let ordenesUsuario = res.data.filter(x=>{
+              return x.userId===me.id
+           })
+          return ordenesUsuario
+        })
+        .then(ordenes=>{           
+            return ordenes.map(x=>x.orders);            
+        })
+        .then(canceladas=>{setCanceladas(canceladas)})
+        .catch((error) => alert(error));
     },[me.id])
   
-console.log(historial)
 
     return(
-        <React.Fragment>
-        <div style={{width:"60%",margin:"4rem auto",boxShadow: "10px 10px 5px 0px rgba(201,199,201,1)"}}>
-            <h3 style={{textAlign:"left",marginLeft:"1rem"}}>Datos personales</h3>   
-            <div style={{width:"70%",margin:"2rem auto",textAlign:"left",paddingBottom:"2rem"}}>
+        <div className="mi-perfil">
+        <div>
+            <h3>Datos personales</h3>   
+            <section style={{}}>
                 <h5>Nombre: {me.name}</h5>
                 <h5>Apellido: {me.lastName} </h5>
                 <h5>E-mail: {me.email} </h5>
                 <h5>DNI: {me.DNI} </h5>  
-            </div>   
+            </section>   
         </div>
-        <div style={{width:"60%",margin:"4rem auto",boxShadow: "10px 10px 5px 0px rgba(201,199,201,1)"}}>
-            <h3 style={{textAlign:"left",marginLeft:"1rem"}}>Historial de compras</h3>   
-            <div style={{width:"100%",margin:"2rem auto",textAlign:"left",paddingBottom:"2rem"}}>
-                {historial&&historial.map(x=>{     
+        <div>
+            <h3>Historial de compras</h3>   
+            <section className = "historial">
+                <h5>{procesadas.length===0 ? "Sin ordenes en proceso" : "En proceso"}</h5>
+                {procesadas&&procesadas.map(x=>{     
                    return x.map(xx=>{
-                        return <div key={xx.id+3}> {productos.filter(y=>y.id===xx.productId).map(z=>{
-                            return <h6 key={x.id+4}>
-                                <img src={z.image}alt={z.name} width="40%"/>
+                        return <p key={xx.id+3}>
+                         {productos.filter(y=>y.id===xx.productId).map(z=>{
+                            return <h6 key={x.id+4} className="compra">
+                                <img src={z.image}alt={z.name} width="200px"/>                               
                                 <span style={{padding:"0 1rem"}}>{z.name} </span>Cantidad: {xx.amount} Precio: ${z.price} 
+                                <span class="spinner-border" role="status"></span>
                                 </h6> 
-                         })}</div>
+                         })}</p>
                     })            
                    
                 })}
-            </div>   
+                <hr/>
+                    <h5 style={canceladas.length===0?{color:"inherit"}:{color:"red"}}>{canceladas.length===0 ? "Sin ordenes canceladas" : "Órdenes canceladas"} </h5>
+                {canceladas&&canceladas.map(x=>{     
+                   return x.map(xx=>{
+                        return <p key={xx.id+3}>
+                         {productos.filter(y=>y.id===xx.productId).map(z=>{
+                            return <h6 key={x.id+4}>
+                                <img src={z.image}alt={z.name} width="200px"/>                                
+                                <span style={{padding:"0 1rem"}}>{z.name} </span>Cantidad: {xx.amount} Precio: ${z.price} 
+                                </h6> 
+                         })}</p>
+                    })            
+                   
+                })}
+                  <hr/>
+                    <h5>Órdenes anteriores</h5>
+                {historial&&historial.map(x=>{     
+                   return x.map(xx=>{
+                       let fecha = xx.updatedAt;                 
+                        let fecha2 = fecha.split("T")                      
+                        return <p key={xx.id+3}>
+                         {productos.filter(y=>y.id===xx.productId).map(z=>{
+                            return <h6 key={x.id+4} className="compra">
+                                <img src={z.image}alt={z.name} width="200px"/>
+                                <span className="fecha text-muted">
+                                    { fecha2[0] }
+                                </span>
+                                <span style={{padding:"0 1rem"}}>{z.name} </span>Cantidad: {xx.amount} Precio: ${z.price} 
+                                </h6> 
+                         })}</p>
+                    })            
+                   
+                })}
+            </section>   
         </div>
-        </React.Fragment>
+        </div>
     )
 }
 export default MiPerfil
