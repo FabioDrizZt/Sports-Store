@@ -37,7 +37,7 @@ const Form = () => {
   };
 
   const [redirect, setRedirect] = useState(false);
-  if (redirect) return <Redirect to="/products" />;
+  if (redirect) return <Redirect to="/" />;
 
   return (
     <div className="form">
