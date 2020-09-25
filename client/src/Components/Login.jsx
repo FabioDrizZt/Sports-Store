@@ -73,9 +73,9 @@ const Form = () => {
         </div>
 
         <div className="login">
-          No tenes cuenta capo?
+          No tienes Cuenta
           <Link className="nav-link" to="/users">
-            Registrate acá campeon
+            Registrate acá
           </Link>
         </div>
 
