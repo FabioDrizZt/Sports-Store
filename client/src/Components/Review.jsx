@@ -17,7 +17,7 @@ const Review = (props) => {
     reviews.filter((rev) => rev.productId === props.id && rev.userId) ?? {
       score: null,
       description: null,
-      productId: 1,
+      productId: props.id,
     }
   );
 
@@ -39,7 +39,7 @@ const Review = (props) => {
         <Rate disabled value={total} />
         {total ? <span className="ant-rate-text">{desc[total - 1]}</span> : ""}
         <hr />
-        {user.length > 0 ? (
+        {user.id ? (
           <div className="containerAll">
             <form
               className="containerPro"
@@ -47,7 +47,7 @@ const Review = (props) => {
                 setMyreview({
                   ...myreview,
                   userId: user.id,
-                  productId: product.id,
+                  productId: props.id,
                 });
                 dispatch(createReview(myreview));
               }}
@@ -93,9 +93,9 @@ const Review = (props) => {
           </div>
         ) : (
           <div className="login">
-            No tenes cuenta capo?
+            No tenes cuenta ?
             <Link className="nav-link" to="/users">
-              Registrate acá campeon
+              Registrate acá 
             </Link>
           </div>
         )}

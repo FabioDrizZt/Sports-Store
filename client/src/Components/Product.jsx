@@ -13,7 +13,6 @@ const Product = (props) => {
 
   useEffect(() => {
     dispatch(getProduct(props.match.match.params.id));
-    dispatch(getReviews(props.match.match.params.id));
   }, []);
 
   function agregarAlCarrito() {

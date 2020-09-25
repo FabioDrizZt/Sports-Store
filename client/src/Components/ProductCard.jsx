@@ -55,7 +55,7 @@ function ProductCard({
 
         <Link to={`/products/${id}`}>
 
-          <button className="b btn" onClick={dispatch(getReviews(id))}>
+          <button className="b btn">
             Ver mas
           </button>
         </Link>
