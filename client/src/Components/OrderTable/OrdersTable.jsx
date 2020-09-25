@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getOrders, updateOrder } from "../../redux/actions";
+import { getOrders, updateOrder,getUsers } from "../../redux/actions";
 import NavBarAdmin from "../NavBar/NavBarAdmin";
 import "./OrdersTable.css";
 
@@ -8,14 +8,20 @@ function OrdersTable() {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders);
   const [state, setState] = useState("");
+  const users = useSelector(state=>state.users)
 
-  // useEffect(() => {
-
-  // }, []);
+  useEffect(() => {
+    dispatch(getUsers())
+  }, []);
 
   function mostrarOrdenes(state) {
     dispatch(getOrders(state));
     setState(state);
+  }
+
+  function buscarUser(id){  
+    let user = users.filter(x=>x.id===id)
+    return user[0].email
   }
   // funcion para que cambie el color de la letra dependiendo del estado
   function colorEstado(estado) {
@@ -205,7 +211,7 @@ function OrdersTable() {
                 </span>
                 <span>
                   <b>User Id: </b>
-                  {cart.userId}
+                  {users&&buscarUser(cart.userId)}
                 </span>
                 <span style={colorEstado(cart.state)}>
                   <b style={{ color: "black", fontWeight: "normal" }}>
