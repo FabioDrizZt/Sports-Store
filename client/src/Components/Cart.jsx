@@ -12,28 +12,32 @@ const Cart = (carrito) => {
   const cart = useSelector((state) => state.cart);
   // Carrito Invitado (LocalStore)
   // Si no existe lo crea vacio
-  JSON.parse(localStorage.getItem("myCart")) ??
-  localStorage.setItem("myCart", JSON.stringify([]));
+  // JSON.parse(localStorage.getItem("myCart")) ??
+  // localStorage.setItem("myCart", JSON.stringify([]));
   // Guardamos los valores de las ordenes en la variable myCart como un arreglo
   const myCart = JSON.parse(localStorage.getItem("myCart"));
 
-if (myCart.length >=1 && cart.length === 0) {
-  myCart.map((order) => {
-    dispatch(addtoCart(user.id, { productId: order.id, price: order.product.price, amount: order.amount }))
-  })
-  localStorage.setItem("myCart", JSON.stringify([]));
-}
-  
+  if (myCart.length >= 1 && cart.length === 0) {
+    myCart.map((order) => {
+      dispatch(
+        addtoCart(user.id, {
+          productId: order.id,
+          price: order.product.price,
+          amount: order.amount,
+        })
+      );
+    });
+    // localStorage.setItem("myCart", JSON.stringify([]));
+  }
+
   var carrito;
-  user.id ? carrito = cart : carrito = myCart;
+  user.id ? (carrito = cart) : (carrito = myCart);
   useEffect(() => {
     user.id && dispatch(getCartUser(user.id));
-    user.id ? carrito = cart : carrito = myCart;
+    user.id ? (carrito = cart) : (carrito = myCart);
   }, [user]);
-   
-  const [setProductsCards] = useState([]);
+
   const [total, setTotal] = useState(0);
-    
 
   return (
     <div className={s.container}>
@@ -75,7 +79,7 @@ if (myCart.length >=1 && cart.length === 0) {
       >
         Calcular Total
       </button>
-      {total > 0 ? (
+      {(user.id) && (total > 0) ? (
         <div className={s.flex}>
           <Checkout carrito={carrito[0]} />
         </div>

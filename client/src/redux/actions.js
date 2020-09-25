@@ -106,7 +106,7 @@ export function getMe() {
         alert('Bienvenido: ' + res.data.name)
       })
       .catch((error) => alert("Usuario o Contraseña Incorrecta"));
-      
+
   }
 }// S64 crear ruta de logout
 export function userLogout() {
@@ -146,10 +146,7 @@ export function createProductCategory(productId, categoryId) {
 export function addtoCart(userId, product) {
   return function (dispatch) {
     axios.post(`${C.SERVER_ADDRESS}/users/${userId}/cart`, product)
-      .then((res) => {
-        (res.data) ? dispatch({ type: C.ADD_TO_CART, payload: res.data })
-          : (alert("Producto ya existente en el carrito"));
-      })
+      .then((res) => { (res.data) && dispatch({ type: C.ADD_TO_CART, payload: res.data }) })
       .catch((error) => alert(error, "error"));
   }
 }// S54 : Crear ruta para crear/agregar Review
