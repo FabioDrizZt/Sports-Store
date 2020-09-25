@@ -12,7 +12,6 @@ export function getUserSession() {
   }
 }
 
-
 export function getProduct(productId) {
   return function (dispatch) {
     axios.get(`${C.SERVER_ADDRESS}/products/${productId}`)
@@ -103,7 +102,6 @@ export function getMe() {
     axios.post(`${C.SERVER_ADDRESS}/auth/login`, input)
       .then((res) => {
         dispatch({ type: C.USER_LOGIN, payload: res.data });
-        alert('Bienvenido: ' + res.data.name)
       })
       .catch((error) => alert("Usuario o Contraseña Incorrecta"));
       
