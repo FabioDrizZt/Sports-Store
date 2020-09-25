@@ -12,23 +12,10 @@ const Cart = (carrito) => {
   const cart = useSelector((state) => state.cart);
   // Carrito Invitado (LocalStore)
   // Si no existe lo crea vacio
-  // JSON.parse(localStorage.getItem("myCart")) ??
-  // localStorage.setItem("myCart", JSON.stringify([]));
+  JSON.parse(localStorage.getItem("myCart")) ??
+  localStorage.setItem("myCart", JSON.stringify([]));
   // Guardamos los valores de las ordenes en la variable myCart como un arreglo
   const myCart = JSON.parse(localStorage.getItem("myCart"));
-
-  if (myCart.length >= 1 && cart.length === 0) {
-    myCart.map((order) => {
-      dispatch(
-        addtoCart(user.id, {
-          productId: order.id,
-          price: order.product.price,
-          amount: order.amount,
-        })
-      );
-    });
-    // localStorage.setItem("myCart", JSON.stringify([]));
-  }
 
   var carrito;
   user.id ? (carrito = cart) : (carrito = myCart);
@@ -37,7 +24,12 @@ const Cart = (carrito) => {
     user.id ? (carrito = cart) : (carrito = myCart);
   }, [user]);
 
+  function deleteCart () {
+  user.id ?  dispatch(removeCart(user.id)) : localStorage.setItem("myCart", JSON.stringify([]))
+  }
+
   const [total, setTotal] = useState(0);
+  console.log(carrito)
 
   return (
     <div className={s.container}>
@@ -62,7 +54,7 @@ const Cart = (carrito) => {
       ) : (
         <button
           className="btn btn-danger mt-4"
-          onClick={() => dispatch(removeCart(user.id))}
+          onClick={() => deleteCart()}
         >
           Vaciar Carrito
         </button>

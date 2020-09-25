@@ -1,21 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Order.css";
 import { useDispatch, useSelector } from "react-redux";
 import { removeOrder, updateOrderAmount } from "../redux/actions";
 
 const Order = ({ order }) => {
   const dispatch = useDispatch();
-  const [cantidad, setCantidad] = useState(order.amount);
   const user = useSelector((state) => state.user);
-  // const myCart = useSelector((state) => state.myCart);
 
-  // useEffect(() => {
-  //   setCantidad(order.amount)
-  // }, [cantidad])
 
   function minusClick(e, id) {
     e.preventDefault();
     if (!user.id) {
+      // Carrito Invitado (LocalStore)
       let myCart = JSON.parse(localStorage.getItem("myCart"));
       let newOrder = myCart.find((producto) => producto.id === id);
       if (newOrder["amount"] > 1) {
@@ -25,21 +21,20 @@ const Order = ({ order }) => {
       let newCart = myCart.concat(newOrder);
       localStorage.setItem("myCart", JSON.stringify(newCart));
     } else {
-      if (cantidad !== 1) {
-        setCantidad(cantidad - 1);
-        if (!user.id) {
-          order["amount"] = order["amount"] - 1;
-        } else {
-          dispatch(updateOrderAmount(user.id, order));
-        }
-      } else alert("no podes llevar menos de 1");
+      // Carrito de Usuario (Base de datos)
+      if (order.amount > 1) {
+        order["amount"] = order["amount"] - 1;
+        dispatch(updateOrderAmount(user.id, order));
+      } else {
+        alert("No puedes llevar menos de un producto");
+      }
     }
   }
 
   function plusClick(e, id) {
-    // Carrito LocalStore
     e.preventDefault();
     if (!user.id) {
+      // Carrito Invitado (LocalStore)
       let myCart = JSON.parse(localStorage.getItem("myCart"));
       let newOrder = myCart.find((producto) => producto.id === id);
       if (newOrder["amount"] < order.product.stock) {
@@ -49,23 +44,25 @@ const Order = ({ order }) => {
       let newCart = myCart.concat(newOrder);
       localStorage.setItem("myCart", JSON.stringify(newCart));
     } else {
-      if (cantidad < order.product.stock) {
-        setCantidad(cantidad + 1);
-        if (!user.id) {
-          order["amount"] = order["amount"] + 1;
-        } else {
-          dispatch(updateOrderAmount(user.id, order));
-        }
-      } else alert("no podes llevar mas del Stock");
+      // Carrito de Usuario (Base de datos)
+      if (order.amount < order.product.stock) {
+        order["amount"] = order["amount"] + 1;
+        dispatch(updateOrderAmount(user.id, order));
+      } else {
+        alert("No puedes llevar más del inventario");
+      }
     }
-  }
+  };
 
   function deleteItem(id) {
-    var myCart = JSON.parse(localStorage.getItem("myCart"));
-    myCart = myCart.filter((orden) => orden.id !== id);
-    localStorage.setItem("myCart", JSON.stringify(myCart));
-    dispatch(removeOrder(order.id));
-  }
+    if(user.id) {
+      dispatch(removeOrder(order.id));
+    } else {
+      var myCart = JSON.parse(localStorage.getItem("myCart"));
+      myCart = myCart.filter((orden) => orden.id !== id);
+      localStorage.setItem("myCart", JSON.stringify(myCart));
+    }
+  };
 
   return (
     <React.Fragment>
@@ -83,7 +80,7 @@ const Order = ({ order }) => {
             </h3>
 
             <h5 className="font-weight-bold my-2">
-              Stock: {order.product.stock}
+              Inventario: {order.product.stock}
             </h5>
             <h5 className="font-weight-bold my-2">
               Talle: {order.product.size}
@@ -99,7 +96,7 @@ const Order = ({ order }) => {
                 >
                   -
                 </button>
-                {"Cantidad:" + cantidad}
+                {"Cantidad:" + order.amount}
                 <button
                   onClick={(e) => {
                     plusClick(e, order.product.id);
@@ -109,7 +106,7 @@ const Order = ({ order }) => {
                 >
                   +
                 </button>
-                SubTotal: ${cantidad * order.product.price}
+                SubTotal: ${order.amount * order.product.price}
                 <button
                   className="btn btn-danger"
                   onClick={() => deleteItem(order.product.id)}
