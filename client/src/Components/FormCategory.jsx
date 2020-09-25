@@ -15,6 +15,7 @@ function FormCategory() {
   const [idCategoria, setIdCategoria] = useState(null);
   const [input, setInput] = useState({});
   const categories = useSelector((state) => state.categories);
+  const user = useSelector((state) => state.user);
 
   function submitCategory(e, input) {
     e.preventDefault();
@@ -29,6 +30,7 @@ function FormCategory() {
     dispatch(getCategories())
   },[])
 
+  if(user&&user.role==="admin"){
   return (
     <>
       <NavBarAdmin />
@@ -129,6 +131,9 @@ function FormCategory() {
         </div>
       </div>
     </>
-  );
+  )}
+  else{
+    return <h2 className="mt-4">Tienes que ser administrador para ver el contenido de esta página</h2>
+  }
 }
 export default FormCategory;

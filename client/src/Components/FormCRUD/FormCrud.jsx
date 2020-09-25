@@ -8,6 +8,7 @@ import EliminarAsignacion from "./EliminarAsignacion"
 
 function FormCrud() {
   const products = useSelector((state) => state.products);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   function eliminar(id) {
@@ -16,6 +17,8 @@ function FormCrud() {
   useEffect(()=>{
     dispatch(getProducts())
   },[])
+
+  if(user&&user.role==="admin"){
   return (
     <React.Fragment>
       <NavBarAdmin />
@@ -88,7 +91,10 @@ function FormCrud() {
       <AsignarProducto/>
       <EliminarAsignacion/>
     </React.Fragment>
-  );
+  );}
+  else {
+    return <h2 className="mt-4">Tienes que ser administrador para ver el contenido de esta página</h2>
+  }
 }
 
 export default FormCrud;
