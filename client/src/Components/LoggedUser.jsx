@@ -10,7 +10,7 @@ const LoggedUser = () => {
   return (
     <React.Fragment>
       {user.length === 0 ? null : (
-        <div class="dropdown" style={{ zIndex: 40 }}>
+        <div className="dropdown LoggedUserContainer">
           <button
             class="btn btn-secondary dropdown-toggle"
             type="button"
