@@ -8,13 +8,8 @@ import * as C from '../redux/constants'
 // S72 : Crear Componente de Checkout, donde se ingrese
 // la direccion de envio y se confirme la compra.
 const Checkout = (cart) => {
-
   const dispatch = useDispatch();
-
   const active = useSelector((state) => state.user);
-  const cs = useSelector((state) => state.cart);
-  var miCarritoDelStore = cs[0].cartId
-  // console.log(miCarritoDelStore)
   const [input, setInput] = useState([]);
   console.log(input.ciudad);
 
@@ -70,7 +65,7 @@ const Checkout = (cart) => {
         </div>
           <button
           onClick={() => {
-            dispatch(updateOrder(miCarritoDelStore, "procesando"));
+            dispatch(updateOrder(cart, "procesando"));
           }}
           className="btn btn-primary">
             Confirmar
