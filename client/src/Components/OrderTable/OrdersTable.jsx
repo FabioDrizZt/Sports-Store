@@ -24,6 +24,8 @@ function OrdersTable() {
     let user = users.filter(x=>x.id===id)
     return user[0].email
   }
+  console.log(orders)
+  console.log(users)
   // funcion para que cambie el color de la letra dependiendo del estado
   function colorEstado(estado) {
     let style = { color: "", fontWeight: "bold" };
@@ -75,7 +77,7 @@ function OrdersTable() {
           Completas
         </button>
       </div>
-      {orders &&
+      {orders.length!==0 &&
         orders.map((cart) => {
           return (
             <div className="order-table col-6">
@@ -212,7 +214,7 @@ function OrdersTable() {
                 </span>
                 <span>
                   <b>User: </b>
-                  {users&&buscarUser(cart.userId)}
+                  {users&&cart.userId&&buscarUser(cart.userId)}
                 </span>
                 <span style={colorEstado(cart.state)}>
                   <b style={{ color: "black", fontWeight: "normal" }}>
