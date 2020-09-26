@@ -111,7 +111,7 @@ const CreateProduct = () => {
 
           <Form.Item
             name="price"
-            label={<span></span>}
+            label={<span>Precio</span>}
             rules={[
               {
                 type: "",
