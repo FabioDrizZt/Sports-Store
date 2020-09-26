@@ -8,7 +8,6 @@ import Review from "./Review";
 const Product = (props) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product);
-
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -19,7 +18,7 @@ const Product = (props) => {
     // Carrito Invitado (LocalStore)
     if (!user.id) {
       let myCart = JSON.parse(localStorage.getItem('myCart'));
-      let producto = { "id": product.id, "name": product.name, "price": product.price, "image": product.imagen, "description": product.description, "stock": product.stock, "size": product.size, "categories": product.categories }
+      let producto = { "id": product.id, "name": product.name, "price": product.price, "image": product.image, "description": product.description, "stock": product.stock, "size": product.size, "categories": product.categories }
       const order = (element) => element["id"] === product.id;
       if (!myCart.some(order)) {
         localStorage.setItem(
@@ -33,9 +32,6 @@ const Product = (props) => {
         dispatch(addtoCart(user.id, { productId: product.id, price: product.price, amount: 1 }));
       }
   }
-  useEffect(() => {
-    dispatch(getProduct(props.match.match.params.id));
-  }, []);
 
   return (
     product && (
