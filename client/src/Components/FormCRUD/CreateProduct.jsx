@@ -174,7 +174,7 @@ const CreateProduct = () => {
             <Input placeholder="Talle" />
           </Form.Item>
 
-          <Form.Item name="image" label={<span></span>}>
+          <Form.Item name="image" label={<span>Imagen</span>}>
             <Input placeholder="Imagen" />
           </Form.Item>
 
