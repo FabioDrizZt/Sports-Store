@@ -159,11 +159,11 @@ const CreateProduct = () => {
             <Input placeholder="Stock" />
           </Form.Item>
 
-          {/* DNI */}
+          {/* Talle */}
 
           <Form.Item
             name="size"
-            label={<span></span>}
+            label={<span>Talle</span>}
             rules={[
               {
                 required: true,
