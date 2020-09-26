@@ -35,12 +35,9 @@ function Home(){
 
 
    return( 
-    <Link to="/products">
     <div className="home"> 
-        <button className="btn btn-dark">Catalogo</button>
-        <button className="btn btn-dark">Mi Perfil</button>
+
     </div>
-    </Link>
     )
 }
 
