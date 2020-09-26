@@ -76,7 +76,7 @@ const CreateProduct = () => {
           {/* Nombre */}
           <Form.Item
             name="name"
-            label={<span></span>}
+            label={<span>Nombre</span>}
             rules={[
               {
                 required: true,
@@ -88,13 +88,13 @@ const CreateProduct = () => {
             <Input placeholder="Nombre" />
           </Form.Item>
           {/* APELLIDO */}
-
           <Form.Item
             name="description"
             label={
               <span>
                 <Tooltip title="Hablame sobre ese producto">
                   <QuestionCircleOutlined />
+                   
                 </Tooltip>
               </span>
             }
