@@ -17,20 +17,24 @@ const Product = (props) => {
   function agregarAlCarrito() {
     // Carrito Invitado (LocalStore)
     if (!user.id) {
-      let myCart = JSON.parse(localStorage.getItem('myCart'));
-      let producto = { "id": product.id, "name": product.name, "price": product.price, "image": product.image, "description": product.description, "stock": product.stock, "size": product.size, "categories": product.categories }
+      let myCart = JSON.parse(localStorage.getItem("myCart"));
       const order = (element) => element["id"] === product.id;
       if (!myCart.some(order)) {
         localStorage.setItem(
           "myCart",
-          JSON.stringify(myCart.concat([{ id: product.id, amount: 1, "product": producto }]))
+          JSON.stringify(
+            myCart.concat([{ id: product.id, amount: 1, product: product }])
+          )
         );
       }
-     } else
-      // Carrito de Usuario (Base de datos)
-      {
-        dispatch(addtoCart(user.id, { productId: product.id, price: product.price, amount: 1 }));
-      }
+    } else
+      dispatch(
+        addtoCart(user.id, {
+          productId: product.id,
+          price: product.price,
+          amount: 1,
+        })
+      );
   }
 
   return (

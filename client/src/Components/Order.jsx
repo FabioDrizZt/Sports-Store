@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./Order.css";
 import { useDispatch, useSelector } from "react-redux";
 import { removeOrder, updateOrderAmount } from "../redux/actions";
-import { useLocalStorage } from './useLocalStorage'
 
 const Order = ({ order, up }) => {
   const dispatch = useDispatch();
