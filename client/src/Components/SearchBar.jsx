@@ -9,22 +9,27 @@ export default function SearchBar() {
   const dispatch = useDispatch();
 
   return (
-    <form className="form-inline my-2 my-lg-0">
-      <input
-        className="form-control mb-0"
-        type="search"
-        placeholder="Articulo..."
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <Link to="/Products">
-        <button
-          className="btn btn-warning"
-          type="submit"
-          onClick={(e) => dispatch(searchProducts(input))}
-        >
-          BUSCAR
-        </button>
-      </Link>
-    </form>
-  );
+    <div >
+      <div className="input-group md-form form-sm form-2 pl-0">
+    <input onChange={(e) => setInput(e.target.value)} 
+            className="form-control my-0 py-1 red-border" 
+            type="search" 
+            placeholder="Articulo..." 
+            aria-label="Search"
+            />
+    <div className="input-group-append">
+    <Link to="/Products">
+    <span onClick={(e) => dispatch(searchProducts(input))} type="submit" className="input-group-text lupa" ><i className="fas fa-search "
+          aria-hidden="true"></i></span>
+
+</Link>
+    </div>
+  
+  
+  </div>
+
+
+
+    </div>
+   );
 }
