@@ -94,7 +94,7 @@ const CreateProduct = () => {
               <span>
                 <Tooltip title="Hablame sobre ese producto">
                   <QuestionCircleOutlined />
-                   
+                  Descripción                   
                 </Tooltip>
               </span>
             }
