@@ -133,11 +133,11 @@ const CreateProduct = () => {
             <Input placeholder="Precio" />
           </Form.Item>
 
-          {/* EMAIL */}
+          {/* Stock */}
 
           <Form.Item
             name="stock"
-            label={<span></span>}
+            label={<span>Stock</span>}
             rules={[
               {
                 type: "",
