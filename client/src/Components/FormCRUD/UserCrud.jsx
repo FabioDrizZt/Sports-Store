@@ -20,12 +20,12 @@ function UserCrud() {
     dispatch(getUsers());
   }, [userId]);
 
+if(user&&user.role==="admin"){
   return (
     <React.Fragment>
       <NavBarAdmin />
       <div>
-        {users &&
-          user.role === "admin" &&
+        {users&&
           users.map((u) => (
             <div class="row">
               <div class="col-lg-8 mx-auto">
@@ -82,7 +82,10 @@ function UserCrud() {
           ))}
       </div>
     </React.Fragment>
-  );
+  )}
+  else{
+    return <h2 className="mt-4">Tienes que ser administrador para ver el contenido de esta página</h2>
+  }
 }
 
 export default UserCrud;

@@ -8,7 +8,8 @@ function OrdersTable() {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders);
   const [state, setState] = useState("");
-  const users = useSelector(state=>state.users)
+  const users = useSelector(state=>state.users);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getUsers())
@@ -44,7 +45,7 @@ function OrdersTable() {
     }
     return style;
   }
-
+  if(user&&user.role==="admin"){
   return (
     <div>
       <NavBarAdmin />
@@ -253,6 +254,9 @@ function OrdersTable() {
           );
         })}
     </div>
-  );
+  )}
+  else{
+    return <h2 className="mt-4">Tienes que ser administrador para ver el contenido de esta página</h2>
+  }
 }
 export default OrdersTable;
