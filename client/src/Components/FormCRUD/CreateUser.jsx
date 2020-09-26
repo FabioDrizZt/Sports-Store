@@ -54,7 +54,7 @@ const RegistrationForm = () => {
   };
   
   const history = useHistory();
-    usuarios.map(datos => {
+    usuarios&&usuarios.map(datos => {
       if(datos.email === valor.email && datos.DNI === valor.DNI) {
         history.push("/users/userok")
       }
