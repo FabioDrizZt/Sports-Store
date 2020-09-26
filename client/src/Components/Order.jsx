@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Order.css";
 import { useDispatch, useSelector } from "react-redux";
 import { removeOrder, updateOrderAmount } from "../redux/actions";
+import { useLocalStorage } from './useLocalStorage'
 
-const Order = ({ order }) => {
+const Order = ({ order, up }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
-
   function minusClick(e, id) {
-    e.preventDefault();
+    up();
     if (!user.id) {
       // Carrito Invitado (LocalStore)
       let myCart = JSON.parse(localStorage.getItem("myCart"));
@@ -32,7 +32,7 @@ const Order = ({ order }) => {
   }
 
   function plusClick(e, id) {
-    e.preventDefault();
+    up();
     if (!user.id) {
       // Carrito Invitado (LocalStore)
       let myCart = JSON.parse(localStorage.getItem("myCart"));
@@ -54,10 +54,13 @@ const Order = ({ order }) => {
     }
   };
 
-  function deleteItem(id) {
+  function deleteItem(e, id) {
+    up();
     if(user.id) {
+    // Carrito de Usuario (Base de datos)
       dispatch(removeOrder(order.id));
     } else {
+    // Carrito Invitado (LocalStore)
       var myCart = JSON.parse(localStorage.getItem("myCart"));
       myCart = myCart.filter((orden) => orden.id !== id);
       localStorage.setItem("myCart", JSON.stringify(myCart));
@@ -109,7 +112,7 @@ const Order = ({ order }) => {
                 SubTotal: ${order.amount * order.product.price}
                 <button
                   className="btn btn-danger"
-                  onClick={() => deleteItem(order.product.id)}
+                  onClick={(e) => deleteItem(e, order.product.id)}
                 >
                   Eliminar
                 </button>
