@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Rate } from "antd";
 import "antd/dist/antd.css";
 import "../Components/FormCRUD/CreateProduct.css";
-import { createReview, getReviews } from "../redux/actions";
+import { createReview, getReviews, getUserSession } from "../redux/actions";
 
 const desc = ["Malo", "Regular", "Bueno", "Muy Bueno", "Excelente !!"];
 
@@ -13,13 +13,12 @@ const Review = (props) => {
   const reviews = useSelector((state) => state.reviews);
   const user = useSelector((state) => state.user);
   const product = useSelector((state) => state.product);
-  const [myreview, setMyreview] = useState(
-    reviews.filter((rev) => rev.productId === props.id && rev.userId) ?? {
-      score: null,
-      description: null,
-      productId: props.id,
-    }
-  );
+  const [myreview, setMyreview] = useState({
+    description: null,
+    score: null,
+    productId: props.id,
+    userId: user.id,
+  });
 
   const total =
     reviews.reduce((prev, cur) => {
@@ -44,11 +43,7 @@ const Review = (props) => {
             <form
               className="containerPro"
               onSubmit={(e) => {
-                setMyreview({
-                  ...myreview,
-                  userId: user.id,
-                  productId: props.id,
-                });
+                e.preventDefault();
                 dispatch(createReview(myreview));
               }}
             >
@@ -56,10 +51,10 @@ const Review = (props) => {
               <Rate
                 allowClear={false}
                 tooltips={desc}
-                onChange={(s) => {
-                  setMyreview({ ...myreview, score: s });
-                }}
                 value={myreview.score}
+                onChange={(s) => {
+                  setMyreview({ ...myreview, userId: user.id, score: s });
+                }}
               />
               {myreview.score ? (
                 <span className="ant-rate-text">
@@ -76,9 +71,13 @@ const Review = (props) => {
                 name="description"
                 placeholder="¿Qué dirias del producto?"
                 value={myreview.description}
-                onChange={(e) =>
-                  setMyreview({ ...myreview, description: e.target.value })
-                }
+                onChange={(e) => {
+                  setMyreview({
+                    ...myreview,
+                    userId: user.id,
+                    description: e.target.value,
+                  });
+                }}
                 required
               />
               <button
@@ -95,7 +94,7 @@ const Review = (props) => {
           <div className="login">
             No tenes cuenta ?
             <Link className="nav-link" to="/users">
-              Registrate acá 
+              Registrate acá
             </Link>
           </div>
         )}

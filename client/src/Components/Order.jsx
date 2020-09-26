@@ -3,7 +3,6 @@ import "./Order.css";
 import { useDispatch, useSelector } from "react-redux";
 import { removeOrder, updateOrderAmount } from "../redux/actions";
 
-
 const Order = ({ order, up }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
