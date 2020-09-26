@@ -1,10 +1,13 @@
-import React, {useState} from "react";
-import { useDispatch } from "react-redux";
+import React, {useState, useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Tooltip, Button } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import "./CreateUser.css";
-import { createUser } from "../../redux/actions";
+import { createUser, getUsers } from "../../redux/actions";
 import { Redirect } from "react-router";
+import { useHistory } from "react-router-dom";
+
+
 
 const formItemLayout = {
   labelCol: {
@@ -40,17 +43,28 @@ const tailFormItemLayout = {
 const RegistrationForm = () => {
   const [form] = Form.useForm();
 
+  const usuarios = useSelector((state) => state.users)
+
   const dispatch = useDispatch();
-  const [redirect, setRedirect] = useState(false);
+  const [valor, setValor] = useState([]);
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    console.log("Received values of form: ", values.email);
     dispatch(createUser(values));
   };
+  
+  const history = useHistory();
+    usuarios.map(datos => {
+      if(datos.email === valor.email && datos.DNI === valor.DNI) {
+        history.push("/users/userok")
+      }
+    } )
+  // console.log(usuarios)
+  // console.log(valor)
 
-  if (redirect) {
-    return <Redirect to="/users/userok" />;
-  }
+      useEffect(() => {
+        dispatch(getUsers())
+      }, []);
 
   return (
     <>
@@ -62,10 +76,8 @@ const RegistrationForm = () => {
           form={form}
           name="register"
           onFinish={(values) => {
+            setValor(values)
             onFinish(values);
-            setTimeout(function () {
-              setRedirect(true);
-            }, 1000);
           }}
           scrollToFirstError
         >
