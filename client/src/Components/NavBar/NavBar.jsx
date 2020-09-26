@@ -23,23 +23,29 @@ export default function NavBar() {
   return (
     <div className="grid-container">
       <header className="header">
-        <div className="brand">
+        <div className="brand  col-6  col-sm-10  col-md-7 col-lg-5">
+        
+        <div >
           <button onClick={openMenu}>&#9776;</button>
-          <Link to="/">Sports Store</Link>
+          <Link className="sportsStore" to="/">Sports Store</Link>
         </div>
-        <div>
+        
+        </div>
+        <div className="col-sm-3 col-md-3 col-lg-4 busqueda">
           <SearchBar />
         </div>
 
         <div className="logCart">
           <Link to="/cart">
-            <img src={cart} alt="cart" className="mr-4 w-50" />
+            <img src={cart} alt="cart" className="mr-2 w-50 carrito" />
           </Link>
           {user.length===0 ?   <Link to="/login">
-            <img src={login} alt="login" className="mr-4 w-50" />
+            <img src={login} alt="login" className="col-10 caraUser mr-2 w-55" />
           </Link> : null}     
         </div>
-        <LoggedUser />
+    <div>
+      <LoggedUser />
+    </div>
       </header>
       <aside className="font sidebar">
         <button className="sidebar-close-button" onClick={closeMenu}>
