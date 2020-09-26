@@ -90,11 +90,38 @@ a:hover {
 .logCart {
   width: 17rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .logCart {
   width: 7.5rem;
 }
+
+@media screen and (max-width: 992px) {
+  .carrito {
+  display: none;
+}
+
+}
+
+@media screen and (max-width: 800px) {
+  .busqueda {
+  display: none;
+}
+}
+
+@media screen and (max-width: 600px) {
+  .logueado {
+  display: none;
+}
+}
+
+
+
+@media screen and (max-width: 573px) {
+  .sportsStore {
+  display: none;
+}
+}
+
