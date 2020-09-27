@@ -14,7 +14,11 @@ const Order = ({ order, up }) => {
       // Carrito Invitado (LocalStore)
       let myCart = JSON.parse(localStorage.getItem("myCart"));
       let newOrder = myCart.find((producto) => producto.id === id);
-      if (newOrder["amount"] > 1) newOrder["amount"] = newOrder.amount - 1;
+      if (newOrder["amount"] > 1) {
+        newOrder["amount"] = newOrder.amount - 1;
+      } else  {
+        alert("No puedes llevar menos de un producto");
+      }
       myCart = myCart.map(function (orden) {
         if (orden.id === id) return newOrder;
         else return orden;
@@ -37,7 +41,11 @@ const Order = ({ order, up }) => {
       // Carrito Invitado (LocalStore)
       let myCart = JSON.parse(localStorage.getItem("myCart"));
       let newOrder = myCart.find((producto) => producto.id === id);
-      if (newOrder["amount"] < order.product.stock)         newOrder["amount"] = newOrder.amount + 1;      
+      if (newOrder["amount"] < order.product.stock) {
+        newOrder["amount"] = newOrder.amount + 1;
+      } else {
+        alert("No puedes llevar más del inventario");
+      }   
       myCart = myCart.map(function (orden) {
         if (orden.id === id) return newOrder;
         else return orden;
@@ -82,39 +90,39 @@ const Order = ({ order, up }) => {
             <h2 className="name">{order.product.name}</h2>
           </Link>
           <h5 className="description">{order.product.description}</h5>
+          {order.product.stock <= 3 ?
           <h6 className="stock">
             Solo queda(n) {order.product.stock} unidades en inventario (hay más
             unidades en camino).
-          </h6>
+          </h6> : 
+          <h6 className="stock">
+            Solo queda(n) {order.product.stock} unidades en inventario.
+          </h6>}
           <h5 className="price">Precio: $ {order.product.price}</h5>
         </div>
         <div className="botones">
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Talle
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">
+          <div className="botonesCart">
+            <select className="btn btn-secondary dropdown-toggle">
+              <option disable selected="true" value>
+                Talle
+              </option>
+              <option>
                 {order.product.size}
-              </a>
-            </div>
+              </option>
+            </select>
           </div>
-          <div>
-            <button
-              className="btn btn-secondary"
-              onClick={(e) => {
-                minusClick(e, order.product.id);
-              }}
-            >
-              -
-            </button>
+          <div className="botonesCart">
+            <div className="botonMenos">
+              <button
+                className="btn btn-secondary"
+                onClick={(e) => {
+                  minusClick(e, order.product.id);
+                }}
+              >
+               - 
+              </button>
+            </div>
+            <div className="botonMas">
             <button
               className="btn btn-secondary"
               onClick={(e) => {
@@ -123,8 +131,9 @@ const Order = ({ order, up }) => {
             >
               +
             </button>
+            </div>
           </div>
-          <div>
+          <div className="botonEliminar">
             <button
               className="btn btn-danger"
               onClick={(e) => deleteItem(e, order.product.id)}
