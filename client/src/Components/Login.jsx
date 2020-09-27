@@ -4,8 +4,7 @@ import { useDispatch } from "react-redux";
 import { userLogin, gmailValidation } from "../redux/actions";
 import "./Login.css";
 import GoogleLogin from "react-google-login";
-const clientIdGoogle =
-  "383625474548-egt3upsk655amhkill9nvbilk6rp6l59.apps.googleusercontent.com";
+const clientIdGoogle = "383625474548-egt3upsk655amhkill9nvbilk6rp6l59.apps.googleusercontent.com";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -70,6 +69,11 @@ const Form = () => {
             required
           />
         </div>
+        <Link to={`/passwordReset`}>
+        <div className="password">
+        <p>¿Olvidaste tu contraseña?</p>
+        </div>
+        </Link>
         <div className="boton">
           <input className="submit" type="submit" value="Iniciar Sesión" />
         </div>{" "}
