@@ -18,3 +18,24 @@ h3 {
   color: rgb(87, 82, 82);
 }
 
+.inputSize {
+  width: 500px;
+}
+
+@media screen and (max-width: 879px) {
+  .inputSize {
+    width: 420px;
+  }
+}
+
+@media screen and (max-width: 659px) {
+  .inputSize {
+    width: 380px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .inputSize {
+    width: 300px;
+  }
+}

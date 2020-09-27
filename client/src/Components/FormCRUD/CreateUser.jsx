@@ -69,9 +69,9 @@ const RegistrationForm = () => {
   return (
     <>
       <h3>Unete a Sports Store</h3>
-      <div className="col-4 form-group containerUser">
+      <div className="col-4 col-sm-1 col-md-2 col-lg-2 form-group containerUser">
         <Form
-          className=""
+          className="allInputs"
           {...formItemLayout}
           form={form}
           name="register"
@@ -99,6 +99,7 @@ const RegistrationForm = () => {
             ]}
           >
             <Input
+              className="inputSize"
               placeholder="Nombre"
             />
           </Form.Item>
@@ -114,6 +115,7 @@ const RegistrationForm = () => {
             ]}
           >
             <Input
+              className="inputSize"
               placeholder="Apellido"
             />
           </Form.Item>
@@ -132,6 +134,7 @@ const RegistrationForm = () => {
             ]}
           >
             <Input
+              className="inputSize"
               placeholder="E-mail"
             />
           </Form.Item>
@@ -161,6 +164,7 @@ const RegistrationForm = () => {
             ]}
           >
             <Input
+              className="inputSize"
               placeholder="DNI"
 
               // value={input.DNI}
@@ -195,6 +199,7 @@ const RegistrationForm = () => {
             hasFeedback
           >
             <Input.Password
+              className="inputSize"
               placeholder="Constraseña"
             />
           </Form.Item>
@@ -221,6 +226,7 @@ const RegistrationForm = () => {
             ]}
           >
             <Input.Password
+              className="inputSize"
               placeholder="Confirmar Constraseña"
             />
           </Form.Item>
