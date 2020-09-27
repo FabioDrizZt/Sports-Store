@@ -26,4 +26,14 @@ router.post("/sendEmail", async (req, res, next) => {
     res.status(500);
   }
 });
+
+router.post("/passwordReset", async (req, res, next) => {
+  try {
+    await mailgun.passwordReset(req.body.email);
+    res.send("Email enviado");
+  } catch (e) {
+    console.log(e);
+    res.status(500);
+  }
+});
 module.exports = router;
