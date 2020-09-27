@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {getUserSession} from "../src/redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserSession, userLogin } from "../src/redux/actions";
 import "./App.css";
 import Catalogo from "./Components/Catalogo";
 import Product from "./Components/Product.jsx";
@@ -24,10 +24,13 @@ import MiPerfil from './Components/MiPerfil';
 import Checkout from './Components/Checkout';
 import Buyok from "./Components/BuyOk/Buyok";
 import EditProductOk from "./Components/EditProductOk/EditProductOk";
+import Error from "./Components/Error";
 
 function App() {
   const dispatch = useDispatch()
   const buttonUp = document.getElementById("button-up");
+  const user = useSelector((state) => state.user);
+
   buttonUp.addEventListener("click", scrollUp);
 
   function scrollUp() {
@@ -52,8 +55,7 @@ function App() {
       <Route exact path="/cart" component={Cart} />
       <Route exact path="/cart/checkout" component={Checkout} />
       <Route exact path="/cart/buyok" component={Buyok} />
-      
-      
+
       <Route exact path="/category" component={FormCategory} />
       <Route exact path="/formcrud" component={FormCrud} />
       <Route exact path="/login" component={Login} />
@@ -63,19 +65,17 @@ function App() {
       <Route exact path="/users" component={RegistrationForm} />
       <Route exact path="/users/userok" component={Userok} />
 
-
       {/* RUTAS DEL ADMINISTRADOR */}
-      <Route exact path="/admin" component={Admin} />
-      <Route exact path="/admin/users" component={UserCrud} />
-      <Route exact path="/admin/categories" component={FormCategory} />
-      <Route exact path="/admin/edit/product/:id" render={(match) => <EditProduct match={match} />} />
-      <Route exact path="/admin/myProducts" component={FormCrud} />
-      <Route exact path="/admin/newProduct" component={CreateProduct} />
-      <Route exact path="/admin/orders" component={OrdersTable} />
-      <Route exact path="/admin/productok" component={Productok} />
-      <Route exact path="/auth/me" component={MiPerfil} />
-      <Route exact path="/admin/myProducts/editProductsOk" component={EditProductOk} />
-      
+      <Route exact path="/admin" component={!user.role==="admin" ? Admin: Error} />
+      <Route exact path="/admin/users" component={!user.role==="admin" ? UserCrud: Error} />
+      <Route exact path="/admin/categories" component={!user.role==="admin" ? FormCategory: Error} />
+      <Route exact path="/admin/edit/product/:id" render={(match) => !user.role==="admin" ? <EditProduct match={match} />: Error} />
+      <Route exact path="/admin/myProducts" component={!user.role==="admin" ? FormCrud: Error} />
+      <Route exact path="/admin/newProduct" component={!user.role==="admin" ? CreateProduct: Error} />
+      <Route exact path="/admin/orders" component={!!user.role==="admin" ? OrdersTable: Error} />
+      <Route exact path="/admin/productok" component={!user.role==="admin" ? Productok: Error} />
+      <Route exact path="/auth/me" component={!user.id ? Admin: Error} />
+      <Route exact path="/admin/myProducts/editProductsOk" component={!user.id ? EditProductOk: Error} />
     </div>
   );
 }
