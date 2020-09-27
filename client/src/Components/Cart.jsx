@@ -63,12 +63,21 @@ const Cart = () => {
     <div className="empty">
       <img src="https://www.iconfinder.com/data/icons/outline-web-application-1/20/cart-512.png" alt="Carrito Vacio" width="30%"/>
       <h2>Tu carrito de compras está vacio!</h2>
-      <Link to="/login">
-      <button className="btn btn-warning">Incia sesión con tu cuenta</button>
+      <Link to="/products">
+        <button
+          className="btn btn-primary mt-4">
+          Volver al Catalogo
+        </button>
       </Link>
-      <Link to="/users">
-      <button className="btn btn-secondary">Regístrate ahora</button>
-      </Link>
+      { !user.id ? 
+      <div className="botonesRegistro">
+        <Link to="/login">
+        <button className="btn btn-warning">Incia sesión con tu cuenta</button>
+        </Link>
+        <Link to="/users">
+        <button className="btn btn-secondary">Regístrate ahora</button>
+        </Link> 
+      </div>: null}
     </div>
     :
     <div className="cart">
@@ -80,23 +89,24 @@ const Cart = () => {
       <div className="checkout">
         <h3>Monto total de tu compra ({totalAmount} productos): ${total}</h3>
       </div>
-      <Link to="/products">
-      <button
-        className="btn btn-primary mt-4"
-        onClick={() => window.history.back()}>
-        Volver al Catalogo
-      </button>
-      </Link>
+      <div className="botonesCarrito">
+        <Link to="/products">
         <button
-          className="btn btn-danger mt-4"
-          onClick={() => deleteCart()}>
-          Vaciar Carrito
+          className="btn btn-primary mt-4">
+          Volver al Catalogo
         </button>
-      <button
-        className="btn btn-success mt-4"
-        onClick={() => buy()}>
-        Realizar Compra
-      </button>
+        </Link>
+          <button
+            className="btn btn-danger mt-4"
+            onClick={() => deleteCart()}>
+            Vaciar Carrito
+          </button>
+        <button
+          className="btn btn-success mt-4"
+          onClick={() => buy()}>
+          Realizar Compra
+        </button>
+      </div>
       { check && user.id ?
         <div>
           <Checkout cart={cart}/>
@@ -117,7 +127,6 @@ const Cart = () => {
       <p>
       El precio y la disponibilidad de los productos están sujetos a cambio. En el carrito de compras puedes dejar temporalmente los productos que quieras. Aparecerá el precio más reciente de cada producto.
       <br/>
-      ¿Tienes una tarjeta de regalo o código promocional? Te pediremos que introduzcas el código de canjeo al momento de realizar el pago.
       </p>
     </div>
   );

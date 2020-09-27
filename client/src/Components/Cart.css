@@ -17,6 +17,15 @@
     justify-content: flex-end;
 }
 
+.botonesCarrito {
+    display: flex;
+    justify-content: space-around;
+}
+
+.botonesRegistro {
+    margin-top: 2%;
+}
+
 .empty {
     margin: 5%;
 }

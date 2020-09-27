@@ -37,11 +37,8 @@ const LoggedUser = () => {
                 Mi Perfil
               </button>
             </Link>
-            <button class="dropdown-item" type="button">
-              Ayuda
-            </button>
             <div className="card-footer">
-              <button onClick={() => dispatch(userLogout())}>
+              <button className="btn btn-secondary" onClick={() => dispatch(userLogout())}>
                 {" "}
                 Cerrar sesion{" "}
               </button>
