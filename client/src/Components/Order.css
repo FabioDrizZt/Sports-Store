@@ -40,14 +40,29 @@
 
 .botones{
   height: 100px;
+  width: 10%;
   display: flex;
   flex-direction: column;
-  width: 20%;
 }
 
-.btn {
-  margin: 2%;
-  width: auto;
+.botonesCart {
+  display: flex;
+  flex-direction: row;
+}
+
+.botonMenos {
+  margin: 5px;
+}
+
+.botonMas {
+  margin: 5px;
+}
+
+.botonEliminar {
+  margin: 3px;
+  display: flex;
+  justify-content: left;
+  
 }
 
 .subtotal {
