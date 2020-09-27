@@ -10,6 +10,9 @@ import * as C from '../redux/constants'
 const Checkout = (cart) => {
   const dispatch = useDispatch();
   const active = useSelector((state) => state.user);
+  const cs = useSelector((state) => state.cart);
+  var miCarritoDelStore = cs[0].cartId;
+  // console.log(miCarritoDelStore)
   const [input, setInput] = useState([]);
   console.log(input.ciudad);
 
@@ -17,7 +20,7 @@ const Checkout = (cart) => {
     email: active.email,
     name: active.name,
     addres: input.ciudad
-  }
+  };
 
   const [redirect, setRedirect] = useState(false);
 
@@ -28,7 +31,7 @@ const Checkout = (cart) => {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      await fetch(C.SERVER_ADDRESS+"/sendEmail", {
+      await fetch(C.SERVER_ADDRESS + "/sendEmail", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -42,7 +45,7 @@ const Checkout = (cart) => {
   return (
     <>
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           submit(e);
           setTimeout(function () {
             setRedirect(true);
@@ -65,7 +68,7 @@ const Checkout = (cart) => {
         </div>
           <button
           onClick={() => {
-            dispatch(updateOrder(cart, "procesando"));
+            dispatch(updateOrder(miCarritoDelStore, "procesando"));
           }}
           className="btn btn-primary">
             Confirmar
