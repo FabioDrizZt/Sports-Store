@@ -50,13 +50,12 @@ const Cart = () => {
   };
   //Vaciar carrito
   function deleteCart () {
-  user.id ? dispatch(removeCart(user.id)) : localStorage.setItem("myCart", JSON.stringify([]));
+    user.id ? dispatch(removeCart(user.id)) : localStorage.setItem("myCart", JSON.stringify([]));
+    setUpdate(!update);
   };
   //Para hacer checkout
   function buy() {
-    if (user.id && total > 0) {
-      setCheck(true);
-    } 
+    setCheck(true);
   };
 
   return (
@@ -101,7 +100,9 @@ const Cart = () => {
       { check && user.id ?
         <div>
           <Checkout cart={cart}/>
-        </div> : 
+        </div> : null
+      } 
+      { check ?
         <div>
           <h3>Aún no has iniciado sesión</h3>
           <Link to="/login">
@@ -110,7 +111,7 @@ const Cart = () => {
           <Link to="/users">
           <button className="btn btn-secondary">Regístrate ahora</button>
           </Link>
-        </div>
+        </div> : null
       }
       <hr/>
       <p>
