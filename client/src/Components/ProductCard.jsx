@@ -37,7 +37,7 @@ function ProductCard({
       }
   }
   return (
-    <div className=" col-sm-4 cardStyle p-4">
+    <div className="cardStyle p-4">
       <div className="text-left">
         <img className="card-img-top img" src={imagen} alt="Imagen Producto" />
         <h3 className="card-title">{name}</h3>
@@ -53,15 +53,15 @@ function ProductCard({
           <b>$ {price}</b>
         </p>
 
-        <Link to={`/products/${id}`}>
-
+      <Link to={`/products/${id}`}>
           <button className="b btn">
             Ver mas
           </button>
         </Link>
+        
         <button
           onClick={() => agregarAlCarrito()}
-          className={stock === 0 ? "btn btn-secondary" : "btn btn-success"}
+          className={stock === 0 ? "btn btn-secondary" : "btn btn-success "}
           disabled={stock === 0 ? true : false}
         >
           {stock === 0 ? "No disponible" : "Agregar a Carrito"}
