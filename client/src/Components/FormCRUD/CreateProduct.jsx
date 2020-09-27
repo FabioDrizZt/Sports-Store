@@ -76,7 +76,7 @@ const CreateProduct = () => {
           {/* Nombre */}
           <Form.Item
             name="name"
-            label={<span></span>}
+            label={<span>Nombre</span>}
             rules={[
               {
                 required: true,
@@ -88,13 +88,13 @@ const CreateProduct = () => {
             <Input placeholder="Nombre" />
           </Form.Item>
           {/* APELLIDO */}
-
           <Form.Item
             name="description"
             label={
               <span>
                 <Tooltip title="Hablame sobre ese producto">
                   <QuestionCircleOutlined />
+                  Descripción                   
                 </Tooltip>
               </span>
             }
@@ -111,7 +111,7 @@ const CreateProduct = () => {
 
           <Form.Item
             name="price"
-            label={<span></span>}
+            label={<span>Precio</span>}
             rules={[
               {
                 type: "",
@@ -133,11 +133,11 @@ const CreateProduct = () => {
             <Input placeholder="Precio" />
           </Form.Item>
 
-          {/* EMAIL */}
+          {/* Stock */}
 
           <Form.Item
             name="stock"
-            label={<span></span>}
+            label={<span>Stock</span>}
             rules={[
               {
                 type: "",
@@ -159,11 +159,11 @@ const CreateProduct = () => {
             <Input placeholder="Stock" />
           </Form.Item>
 
-          {/* DNI */}
+          {/* Talle */}
 
           <Form.Item
             name="size"
-            label={<span></span>}
+            label={<span>Talle</span>}
             rules={[
               {
                 required: true,
@@ -174,7 +174,7 @@ const CreateProduct = () => {
             <Input placeholder="Talle" />
           </Form.Item>
 
-          <Form.Item name="image" label={<span></span>}>
+          <Form.Item name="image" label={<span>Imagen</span>}>
             <Input placeholder="Imagen" />
           </Form.Item>
 

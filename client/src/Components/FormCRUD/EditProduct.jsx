@@ -1,9 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { updateProduct } from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import { Form, Input, Tooltip, Button } from "antd";
 import NavBarAdmin from "../NavBar/NavBarAdmin";
 import "../FormCRUD/CreateProduct.css";
 import { Redirect } from "react-router";
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 8,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 16,
+    },
+  },
+};
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0,
+    },
+    sm: {
+      span: 16,
+      offset: 8,
+    },
+  },
+};
+
 
 function EditProduct(props) {
   const dispatch = useDispatch();
@@ -42,7 +74,7 @@ function EditProduct(props) {
     input && (
       <>
         <NavBarAdmin />
-        <div className="containerAll">
+        <div className=" containerppp form-control-lg col-5">
           <form
             className="containerPro"
             onSubmit={(e) => {
@@ -55,7 +87,7 @@ function EditProduct(props) {
             <h3>Editar Producto</h3>
             <div className="form-group row">
               <label className="col-sm-2 col-form-label" for="name">
-                Nombre
+                Nombre:
               </label>
               <div className="col-sm-10">
                 <input
@@ -69,12 +101,17 @@ function EditProduct(props) {
               </div>
             </div>
             <div className="form-group row">
-              <label className="col-sm-2 col-form-label" for="description">
-                Descripción
+              <label 
+              className="col-sm-2 col-form-label" 
+              for="description"
+              style={{ marginLeft: -30 }}
+              >
+                Descripción:
               </label>
-              <div className="col-sm-10">
+              <div className="col-sm-10 ">
                 <input
-                  className="form-control"
+                  className="form-control "
+                  style={{ marginLeft: 27 }}
                   type="text"
                   id="description"
                   name="description"
@@ -86,9 +123,9 @@ function EditProduct(props) {
             </div>
             <div className="form-group row">
               <label className="col-sm-2 col-form-label" for="precio">
-                Precio
+                Precio:
               </label>
-              <div className="col-sm-2">
+              <div className="col-sm-3">
                 <input
                   className="form-control"
                   type="number"
@@ -103,9 +140,9 @@ function EditProduct(props) {
             </div>
             <div className="form-group row">
               <label for="stock" className="col-sm-2 col-form-label">
-                Stock
+                Stock:
               </label>
-              <div class="col-sm-2">
+              <div class="col-sm-3">
                 <input
                   className="form-control"
                   type="number"
@@ -120,9 +157,9 @@ function EditProduct(props) {
             </div>
             <div className="form-group row">
               <label className="col-sm-2 col-form-label" for="imagen">
-                Talle
+                Talle:
               </label>
-              <div className="col-sm-2">
+              <div className="col-sm-3">
                 <input
                   className="form-control"
                   type="text"
@@ -136,7 +173,7 @@ function EditProduct(props) {
             </div>
             <div className="form-group row">
               <label className="col-sm-2 col-form-label" for="imagen">
-                Imagen
+                Imagen:
               </label>
               <div className="col-sm-10">
                 <input
