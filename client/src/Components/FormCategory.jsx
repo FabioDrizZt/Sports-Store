@@ -24,7 +24,9 @@ function FormCategory() {
     Array.from(document.querySelectorAll("input")).forEach(
       (input) => (input.value = "")
     );
+    setInput({})
   }
+
 
   useEffect(()=>{
     dispatch(getCategories())
@@ -52,6 +54,7 @@ function FormCategory() {
                   name="name"
                   type="text"
                   className="form-control"
+                  value={input.name}
                   id="nameCategory"
                   placeholder="Ej. Zapatillas, Remeras, Botines, etc."
                   onChange={(e) => setInput({ ...input, name: e.target.value })}
@@ -64,6 +67,7 @@ function FormCategory() {
                   name="description"
                   type="text"
                   className="form-control"
+                  value={input.description}
                   id="descriptionCategory"
                   onChange={(e) =>
                     setInput({ ...input, description: e.target.value })
@@ -118,7 +122,8 @@ function FormCategory() {
                       className="btn btn-warning"
                       onClick={() => {
                         setEditar(!editar);
-                        setIdCategoria(x.id);
+                        setIdCategoria(x.id);                       
+                        setInput({name:x.name,description:x.description})
                       }}
                     >
                       EDITAR
