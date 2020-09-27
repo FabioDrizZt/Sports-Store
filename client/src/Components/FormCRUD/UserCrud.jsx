@@ -27,21 +27,21 @@ if(user&&user.role==="admin"){
       <div>
         {users&&
           users.map((u) => (
-            <div class="row">
-              <div class="col-lg-8 mx-auto">
-                <ul class="list-group shadow">
-                  <li class="list-group-item">
-                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                      <div class="media-body order-2 order-lg-1">
-                        <h2 class="mt-0 font-weight-bold mb-2">
+            <div className="row">
+              <div className="col-lg-8 mx-auto">
+                <ul className="list-group shadow">
+                  <li className="list-group-item">
+                    <div className="media align-items-lg-center flex-column flex-lg-row p-3">
+                      <div className="media-body order-2 order-lg-1">
+                        <h2 className="mt-0 font-weight-bold mb-2">
                           {u.name} {u.lastName} Id:{u.id}
                         </h2>
                         <p class="font-italic text-muted mb-0 large">
                           {u.description}
                         </p>
-                        <div class="d-flex align-items-center justify-content-between mt-1">
-                          <h3 class="font-weight-bold my-2">DNI:{u.DNI}</h3>
-                          <h5 class="font-weight-bold my-2">
+                        <div className="d-flex align-items-center justify-content-between mt-1">
+                          <h3 className="font-weight-bold my-2">DNI:{u.DNI}</h3>
+                          <h5 className="font-weight-bold my-2">
                             email: {u.email}
                           </h5>
                           <h5 class="font-weight-bold my-2">Role: {u.role}</h5>
