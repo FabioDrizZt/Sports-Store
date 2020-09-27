@@ -66,16 +66,16 @@ function App() {
       <Route exact path="/users/userok" component={Userok} />
 
       {/* RUTAS DEL ADMINISTRADOR */}
-      <Route exact path="/admin" component={!user.role==="admin" ? Admin: Error} />
-      <Route exact path="/admin/users" component={!user.role==="admin" ? UserCrud: Error} />
-      <Route exact path="/admin/categories" component={!user.role==="admin" ? FormCategory: Error} />
-      <Route exact path="/admin/edit/product/:id" render={(match) => !user.role==="admin" ? <EditProduct match={match} />: Error} />
-      <Route exact path="/admin/myProducts" component={!user.role==="admin" ? FormCrud: Error} />
-      <Route exact path="/admin/newProduct" component={!user.role==="admin" ? CreateProduct: Error} />
-      <Route exact path="/admin/orders" component={!!user.role==="admin" ? OrdersTable: Error} />
-      <Route exact path="/admin/productok" component={!user.role==="admin" ? Productok: Error} />
+      <Route exact path="/admin" component={user.role!=="admin" ? Admin: Error} />
+      <Route exact path="/admin/users" component={user.role!=="admin" ? UserCrud: Error} />
+      <Route exact path="/admin/categories" component={user.role!=="admin" ? FormCategory: Error} />
+      <Route exact path="/admin/edit/product/:id" render={(match) => user.role==="admin" ? <EditProduct match={match} />: Error} />
+      <Route exact path="/admin/myProducts" component={user.role!=="admin" ? FormCrud: Error} />
+      <Route exact path="/admin/newProduct" component={user.role!=="admin" ? CreateProduct: Error} />
+      <Route exact path="/admin/orders" component={user.role!=="admin" ? OrdersTable: Error} />
+      <Route exact path="/admin/productok" component={user.role!=="admin" ? Productok: Error} />
       <Route exact path="/auth/me" component={!user.id ? Admin: Error} />
-      <Route exact path="/admin/myProducts/editProductsOk" component={!user.id ? EditProductOk: Error} />
+      <Route exact path="/admin/myProducts/editProductsOk" component={user.role!=="admin" ? EditProductOk: Error} />
     </div>
   );
 }
