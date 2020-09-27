@@ -1,6 +1,7 @@
 import React, { useEffect }from "react";
 import { addtoCart, getOrders } from "../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
+import {Link} from "react-router-dom";
 import "./Home.css";
 
 function Home(){
@@ -34,9 +35,11 @@ function Home(){
     }, []);
 
    return( 
+    <Link to="/products">	
     <div className="home"> 
 
     </div>
+    </Link>	
     )
 }
 
