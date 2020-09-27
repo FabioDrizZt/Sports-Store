@@ -14,11 +14,9 @@ function UserCrud() {
   const users = useSelector((state) => state.users);
   const user = useSelector((state) => state.user);
 
-  const [userId, setUserId] = useState(null);
-
   useEffect(() => {
     dispatch(getUsers());
-  }, [userId]);
+  }, []);
 
 if(user&&user.role==="admin"){
   return (
@@ -68,8 +66,7 @@ if(user&&user.role==="admin"){
                     <span />
                     <button
                       className="btn btn-primary"
-                      onClick={() => {
-                        setUserId(u.id);
+                      onClick={() => {                       
                         dispatch(promoteUser(u.id));
                       }}
                     >

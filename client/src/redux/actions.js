@@ -206,7 +206,7 @@ export function updateOrder(orderId, state) {
 export function promoteUser(id) {
   return function (dispatch) {
     axios.put(`${C.SERVER_ADDRESS}/auth/promote/${id}`, id)
-      .then(res => { dispatch({ type: C.PROMOTE_USER, payload: id }) })
+      .then(res => { dispatch({ type: C.PROMOTE_USER, payload: res.data }) })
       .catch((error) => alert(error))
   }
 }//SXX : Crear Ruta para Cerrar un Carrito

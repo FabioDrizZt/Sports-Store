@@ -52,8 +52,10 @@ function rootReducer(state = initialState, action) {
             else alert("Ya Existe DNI o Email ver")
         } case C.CREATE_CATEGORY: {
             return { ...state, categories: state.categories.concat(action.payload) }
-        } case C.PROMOTE_USER: {
-            return { ...state }
+        } case C.PROMOTE_USER: {    
+            let index = state.users.findIndex(x=>x.id===action.payload.id);   
+            state.users[index]=action.payload;            
+            return { ...state, users: [...state.users]}
         } case C.CREATE_PRODUCT_CATEGORY: {
             return { ...state, productCategories: state.productCategories.concat(action.payload) }
         } case C.CREATE_REVIEW: {
