@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { User } = require("../db");
+const { User, Order } = require("../db");
 const passport = require("passport");
 const check = require("./check.js");
 
@@ -17,6 +17,17 @@ POST /auth/login*/
 server.post("/login", passport.authenticate("local"), function (req, res) {
   res.send(req.user);
 });
+
+/*S75 : Crear ruta de Login con Google
+POST /auth/login/google*/
+server.post('/login/google', (req, res) => {
+  const { name, lastName, email, password, role } = req.body;
+  User.findOrCreate({
+    where: { email },
+    defaults: { name, lastName, email, password, role }
+  }).then(user => res.send(user[0]))
+    .catch(err => res.send(err))
+})
 
 /* S64 : Crear ruta de logout
  POST /auth/logout*/
