@@ -67,7 +67,9 @@ function rootReducer(state = initialState, action) {
         } case C.UPDATE_PRODUCT: {
             return { ...state, products: state.products.filter(product => product.id !== action.payload.id) }
         } case C.UPDATE_CATEGORY: {
-            return { ...state, categories: [...state.categories.filter(x => x.id !== action.payload.id)].concat(action.payload) }
+            let index = state.categories.findIndex(x=>x.id===action.payload.id);   
+            state.categories[index]=action.payload;    
+            return { ...state, categories: [...state.categories]}
         } case C.UPDATE_ORDER_AMOUNT: {
             return { ...state, cart: state.cart.map(function (x) { if (x.id === action.payload.id) return action.payload; else return x }) }
         } case C.UPDATE_USER: {
