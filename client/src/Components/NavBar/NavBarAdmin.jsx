@@ -1,8 +1,11 @@
 import React from 'react';
 import './NavBarAdmin.css';
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 function NavBarAdmin() {
+  const user = useSelector((state) => state.user);
+  if(user.role==="admin"){
   return (
     <div className="containerNavAdmin">
     <div className="NavbarAdmin">
@@ -26,7 +29,7 @@ function NavBarAdmin() {
       </Link>
     </div>
     </div>
-  )
+  )}
 }
 
 export default NavBarAdmin;

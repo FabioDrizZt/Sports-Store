@@ -20,6 +20,10 @@
 
 .name {
   margin: 1px;
+  color: rgb(15, 15, 129);
+}
+.name:hover{
+  color: rgb(166, 255, 0);
 }
 
 .description {
