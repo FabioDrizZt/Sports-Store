@@ -8,27 +8,46 @@ const DOMAIN = 'sandboxbe92ef464470402f8a33075243995715.mailgun.org'
 const mg = mailgun({apiKey: MAILGUN_APIKEY, domain: DOMAIN});
 
 const sendEmail = async (email, name, addres) => {
-	console.log(addres)
 	const payload = {
 	  from: 'Sport Store <notificaciones@sportstore.site>',
 	  to: email,
 	  subject: 'Notificación de compra exitosa',
 	//   text: `Hola ${name}, le informamos que su compra ha sido exitosa y sera enviada a la dirección indicada: ${addres}. 
 	//   Apuntate a las notificaciones de el dev sin site.`,
-	  html: `<h1>Hola ${name}, le informamos que su compra ha sido exitosa y sera enviada a la dirección indicada: <strong>${addres}.</strong></h1>`,
+	  html: `<h1>Hola ${name}, le informamos que su compra ha sido exitosa y sera enviada a la dirección indicada: <strong>${addres}.</strong></h1>
+	  		<p>Si no ha realizado una solicitud para restauración de su contraseña o si tiene alguna pregunta, por favor
+	  		contacte con nosotros directamente enviando un email a <link value="soporte@sportstore.site">`,
 	};
-  
 	let success = true;
 	try {
 	  success = await mg.messages().send(payload);
 	} catch (e) {
 	  success = false;
 	}
-  
 	console.log(success);
   };
 
 //  	Ejemplo de uso de la funcion:
 //   send('tomas.didimo1407@gmail.com', 'Jose Padron', 'El Junquito 472');
 
-module.exports = {sendEmail};
+const passwordReset = async (email) => {
+	const payload = {
+	  from: 'Sport Store <notificaciones@sportstore.site>',
+	  to: email,
+	  subject: 'Solicitud de restauración de contraseña',
+	  html: `<p><strong>Estimado ${name}</strong>, hemos recibido su solicitud para restablecer la contraseña de su cuenta
+	  		 	en <strong> Sport Store </strong>.</p>
+			<p>Para proceder con la restauración, vaya al siguiente enlace:</p><link href="http://localhost:3000/login">
+			<p>Si no ha realizado una solicitud para restauración de su contraseña o si tiene alguna pregunta, por favor
+				contacte con nosotros directamente enviando un email a <link value="soporte@sportstore.site">`,
+	};
+	let success = true;
+	try {
+	  success = await mg.messages().send(payload);
+	} catch (e) {
+	  success = false;
+	}
+	console.log(success);
+  };
+
+module.exports = {sendEmail, passwordReset};
