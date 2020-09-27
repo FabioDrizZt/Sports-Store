@@ -285,12 +285,7 @@ export function removeReview(IdProduct, idReview) {
       .then((res) => { dispatch({ type: C.REMOVE_ORDER, payload: idReview }) })
       .catch((error) => alert(error));
   }
-}
-
-// ------------------------------------------------------------------------------------
-// --------------------------- GOOGLE VALIDATION --------------------------------------
-// ------------------------------------------------------------------------------------
-
+}// Validación con Google
 export const gmailValidation = (value) => {
   return function (dispatch) {
     axios.post("auth/login/google", value)

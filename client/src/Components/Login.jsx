@@ -24,12 +24,11 @@ const Form = () => {
     var myCart = JSON.parse(localStorage.getItem("myCart"));
 
     const gmail = {
-      access: "User",
+      role: "user",
       name: givenName, //obtenemos el nombre de las respuesta
-      surname: familyName, //obtenemos el apellido de las respuesta
+      lastName: familyName, //obtenemos el apellido de las respuesta
       email: email, //obtenemos el email de las respuesta
       password: googleId, //seteamos una password
-      img: imageUrl,
       guest: myCart,
     };
     dispatch(gmailValidation(gmail));
