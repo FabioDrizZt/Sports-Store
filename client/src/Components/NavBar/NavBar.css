@@ -1,4 +1,5 @@
 .grid-container {
+  padding-right: 3%;
   display: grid;
   grid-template-areas: "header";
   grid-template-rows: 5rem;
