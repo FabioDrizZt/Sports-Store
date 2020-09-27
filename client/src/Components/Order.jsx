@@ -68,64 +68,72 @@ const Order = ({ order, up }) => {
 
   return (
     <React.Fragment>
-      <div className="media align-items-lg-center flex-column flex-lg-row p-3">
-        <div className="media-body order-2 order-lg-1">
-          <h2 className="mt-0 font-weight-bold mb-2">
-            {order.product.name} ProdId:{order.product.id} OrderId {order.id}
+      <div className="order">
+        <div>
+          <img className="image"
+            src={order.product.image}
+            alt={order.product.name}
+          />
+        </div>    
+        <div className="info">
+          <h2 className="name">
+            {order.product.name}
           </h2>
-          <p className="font-italic text-muted mb-0 large">
+          <h5 className="description">
             {order.product.description}
-          </p>
-          <div className="d-flex align-items-center justify-content-between mt-1">
-            <h3 className="font-weight-bold my-2">
-              Precio: ${order.product.price}
-            </h3>
-
-            <h5 className="font-weight-bold my-2">
-              Inventario: {order.product.stock}
-            </h5>
-            <h5 className="font-weight-bold my-2">
-              Talle: {order.product.size}
-            </h5>
-            <span style={{ position: "-webkit-sticky", left: 0 }}>
-              <h3 className="font-weight-bold my-2">
-                <button
-                  onClick={(e) => {
-                    minusClick(e, order.product.id);
-                  }}
-                  style={{ width: "30px" }}
-                  className="btn btn-outline-success btn-sm"
-                >
-                  -
-                </button>
-                {"Cantidad:" + order.amount}
-                <button
-                  onClick={(e) => {
-                    plusClick(e, order.product.id);
-                  }}
-                  style={{ width: "30px" }}
-                  className="btn btn-outline-success btn-sm "
-                >
-                  +
-                </button>
-                SubTotal: ${order.amount * order.product.price}
-                <button
-                  className="btn btn-danger"
-                  onClick={(e) => deleteItem(e, order.product.id)}
-                >
-                  Eliminar
-                </button>
-              </h3>
-            </span>
-          </div>
+          </h5>
+          <h6 className="stock">
+            Solo queda(n) {order.product.stock} unidades en inventario (hay más unidades en camino).
+          </h6>
+          <h5 className="price">
+            Precio: $ {order.product.price}
+          </h5>
         </div>
-        <img
-          src={order.product.image}
-          alt={order.product.name}
-          width="200"
-          class="ml-lg-5 order-1 order-lg-2"
-        />
+          <div className="botones">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Talle
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">{order.product.size}</a>
+              </div>
+            </div>
+            <div>
+              <button
+                className="btn btn-secondary"
+                onClick={(e) => {
+                  minusClick(e, order.product.id);}}>
+                -
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={(e) => {
+                  plusClick(e, order.product.id);}}>
+                +
+              </button>
+            </div>
+            <div>
+              <button
+                className="btn btn-danger"
+                onClick={(e) => deleteItem(e, order.product.id)}>
+                Eliminar
+              </button>
+            </div>
+          </div>
+          <div className="subtotal">
+            <div>
+              <h5 className="amount">
+                Cantidad: {order.amount}
+              </h5>
+            </div>
+            <div>
+              <h4>
+              SubTotal: ${order.amount * order.product.price}
+              </h4>
+            </div>
+          </div>
       </div>
+      <hr/>
     </React.Fragment>
   );
 };

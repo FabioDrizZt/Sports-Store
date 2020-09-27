@@ -1,16 +1,18 @@
+import "./Cart.css";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { removeCart, getCartUser } from "../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
-import s from "./Cart.css";
+import { removeCart, getCartUser } from "../redux/actions";
 import Order from "./Order";
 import Checkout from "./Checkout";
+
 
 const Cart = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
   const [total, setTotal] = useState();
+  const [totalAmount, setTotalAmount] = useState(0);
   const [update, setUpdate] = useState(true);
   const [check, setCheck] = useState(false);
   var carritoActual;
@@ -22,12 +24,17 @@ const Cart = () => {
   var myCart = JSON.parse(localStorage.getItem("myCart"));
   // Tomamos los valores de para mapear el carrito según el tipo de usuario
   user.id ? (carritoActual = cart) : (carritoActual = myCart);
+
   useEffect(() => {
     user.id && dispatch(getCartUser(user.id));
     setTotal(carritoActual.reduce(function (prev, cur) {
       return prev + cur.product.price * cur.amount;
     }, 0))
-  }, [user, update, total]);
+    setTotalAmount(carritoActual.reduce(function (prev, cur) {
+      return prev + cur.amount;
+    }, 0)
+    )
+  }, [user, update, total, totalAmount]);
   //Para actualizar carrito automaticamente
   function updateCart () {
     setUpdate(!update);
@@ -35,6 +42,11 @@ const Cart = () => {
         return prev + cur.product.price * cur.amount;
       }, 0)
     )
+    setTotalAmount(carritoActual.reduce(function (prev, cur) {
+      return prev + cur.amount;
+    }, 0)
+    )
+    setUpdate(!update);
   };
   //Vaciar carrito
   function deleteCart () {
@@ -48,40 +60,64 @@ const Cart = () => {
   };
 
   return (
-    <div className={s.container}>
-      {carritoActual && carritoActual.map((ord) => <Order order={ord} up={updateCart} />)}
-      <div className={s.subtotal}>
-        <h2>TOTAL DE LA COMPRA</h2>
-        <h3 className={s.price}>${total}</h3>
+    (total === 0 ) ? 
+    <div className="empty">
+      <img src="https://www.iconfinder.com/data/icons/outline-web-application-1/20/cart-512.png" alt="Carrito Vacio" width="30%"/>
+      <h2>Tu carrito de compras está vacio!</h2>
+      <Link to="/login">
+      <button className="btn btn-warning">Incia sesión con tu cuenta</button>
+      </Link>
+      <Link to="/users">
+      <button className="btn btn-secondary">Regístrate ahora</button>
+      </Link>
+    </div>
+    :
+    <div className="cart">
+      <div className="tituloCart">
+        <h3>Mi carrito:</h3>
       </div>
+      <hr/>
+      {carritoActual && carritoActual.map((ord) => <div className='orderCart'><Order order={ord} up={updateCart} /></div> )}
+      <div className="checkout">
+        <h3>Monto total de tu compra ({totalAmount} productos): ${total}</h3>
+      </div>
+      <Link to="/products">
       <button
-        className="btn btn-success mt-4"
+        className="btn btn-primary mt-4"
         onClick={() => window.history.back()}>
-        Volver
+        Volver al Catalogo
       </button>
-      {carritoActual && carritoActual.length === 0 ? (
-        <div className="mt-4">
-          <h2>
-            <Link to="/products">Ir al cátalogo</Link>
-          </h2>
-        </div>
-      ) : (
+      </Link>
         <button
           className="btn btn-danger mt-4"
           onClick={() => deleteCart()}>
           Vaciar Carrito
         </button>
-      )}
       <button
         className="btn btn-success mt-4"
         onClick={() => buy()}>
         Realizar Compra
       </button>
-      {(total === 0 ) && <h1>Tu carrito está vacio!</h1>}
-      {(total > 0) && check && 
-        <div className={s.flex}>
+      { check && user.id ?
+        <div>
           <Checkout cart={cart}/>
-        </div>}
+        </div> : 
+        <div>
+          <h3>Aún no has iniciado sesión</h3>
+          <Link to="/login">
+          <button className="btn btn-warning">Incia sesión con tu cuenta</button>
+          </Link>
+          <Link to="/users">
+          <button className="btn btn-secondary">Regístrate ahora</button>
+          </Link>
+        </div>
+      }
+      <hr/>
+      <p>
+      El precio y la disponibilidad de los productos están sujetos a cambio. En el carrito de compras puedes dejar temporalmente los productos que quieras. Aparecerá el precio más reciente de cada producto.
+      <br/>
+      ¿Tienes una tarjeta de regalo o código promocional? Te pediremos que introduzcas el código de canjeo al momento de realizar el pago.
+      </p>
     </div>
   );
 };
