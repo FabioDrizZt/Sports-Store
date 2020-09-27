@@ -1,11 +1,79 @@
 .cardStyle {
 border: solid 1px grey;
 border-radius: 15px;
-margin: 20px;
+margin: 10px;
 width: 30%;
 display: inline-block;
 background-color: whitesmoke;
 }
+
+@media screen and (max-width: 971px) {
+    .cardStyle {
+        border: solid 1px grey;
+        border-radius: 15px;
+        margin: 10px;
+        width: 35%;
+        display: inline-block;
+        /* background-color: red; */
+  }
+  }
+
+  @media screen and (max-width: 837px) {
+    .cardStyle {
+        border: solid 1px grey;
+        border-radius: 15px;
+        margin: 10px;
+        width: 36%;
+        display: inline-block;
+        /* background-color: blue; */
+  }
+  }
+
+  @media screen and (max-width: 769px) {
+    .cardStyle {
+        border: solid 1px grey;
+        border-radius: 15px;
+        margin: 10px;
+        width: 40%;
+        display: inline-block;
+        /* background-color: purple; */
+  }
+  }
+
+  @media screen and (max-width: 700px) {
+    .cardStyle {
+        border: solid 1px grey;
+        border-radius: 15px;
+        margin: 10px;
+        width: 50%;
+        display: inline-block;
+        /* background-color: green; */
+  }
+  }
+
+  @media screen and (max-width: 574px) {
+    .cardStyle {
+        border: solid 1px grey;
+        border-radius: 15px;
+        margin: 10px;
+        width: 73%;
+        display: inline-block;
+        /* background-color: yellow; */
+  }
+  }
+  
+
+  @media screen and (max-width: 320px) {
+    .cardStyle {
+        border: solid 1px grey;
+        border-radius: 15px;
+        margin: 10px;
+        width: 90%;
+        display: inline-block;
+        /* background-color: orange; */
+  }
+  }
+  
 .button {
     display: flex;
     flex-direction: row-reverse;
@@ -24,6 +92,7 @@ background-color: whitesmoke;
     border-radius: 1rem;
 
 }
+
 .b {
     background: linear-gradient(to top, #004e92, #000428);
     color: white;

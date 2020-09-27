@@ -54,7 +54,7 @@ function Catalogo() {
             </button>
           </div>
         </div>
-        <div className="calatogo">
+        <div className="">
           <hr />
           <h1>Catálogo</h1>
           {products &&
