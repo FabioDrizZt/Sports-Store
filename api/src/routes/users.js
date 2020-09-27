@@ -5,7 +5,7 @@ const check = require("./check.js");
 // -----> ***** GET ***** <-----
 // S36 : Crear Ruta que retorne todos los Usuarios
 // GET /users
-server.get("/", check.isAuth, check.isAdmin, (req, res) => {
+server.get("/", (req, res) => {
   User.findAll({})
     .then((users) => { res.send(users); })
     .catch((err) => res.status(400).json({ err }));
