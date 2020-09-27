@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Order.css";
 import { useDispatch, useSelector } from "react-redux";
 import { removeOrder, updateOrderAmount } from "../redux/actions";
+import { Link } from "react-router-dom";
 
 const Order = ({ order, up }) => {
   const dispatch = useDispatch();
@@ -76,9 +77,11 @@ const Order = ({ order, up }) => {
           />
         </div>    
         <div className="info">
+          <Link to={`/products/${order.product.id}`}>
           <h2 className="name">
             {order.product.name}
           </h2>
+          </Link>
           <h5 className="description">
             {order.product.description}
           </h5>
