@@ -21,7 +21,7 @@ server.post("/login", passport.authenticate("local"), function (req, res) {
 /*S75 : Crear ruta de Login con Google
 POST /auth/login/google*/
 server.post('/login/google', (req, res) => {
-  const { name, surname, email, password, role, guest } = req.body;
+  const { name, lastName, email, password, role } = req.body;
   User.findOrCreate({
     where: { email },
     defaults: { name, lastName, email, password, role }

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { userLogin, gmailValidation } from "../redux/actions";
 import "./Login.css";
 import GoogleLogin from "react-google-login";
+
 const clientIdGoogle =
   "383625474548-egt3upsk655amhkill9nvbilk6rp6l59.apps.googleusercontent.com";
 
@@ -16,12 +17,8 @@ const Form = () => {
       email,
       familyName,
       givenName,
-      imageUrl,
       googleId,
     } = response.profileObj;
-
-    //guestCart
-    var myCart = JSON.parse(localStorage.getItem("myCart"));
 
     const gmail = {
       role: "user",
@@ -29,10 +26,8 @@ const Form = () => {
       lastName: familyName, //obtenemos el apellido de las respuesta
       email: email, //obtenemos el email de las respuesta
       password: googleId, //seteamos una password
-      guest: myCart,
     };
     dispatch(gmailValidation(gmail));
-    localStorage.clear();
   };
 
   const [redirect, setRedirect] = useState(false);
