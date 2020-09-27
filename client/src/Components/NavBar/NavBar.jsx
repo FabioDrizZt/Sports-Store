@@ -25,7 +25,7 @@ export default function NavBar() {
       <header className="header">
         <div className="brand  col-6  col-sm-10  col-md-7 col-lg-5">
         
-        <div >
+        <div className="sportsStoreContainer">
           <button onClick={openMenu}>&#9776;</button>
           <Link className="sportsStore" to="/">Sports Store</Link>
         </div>
