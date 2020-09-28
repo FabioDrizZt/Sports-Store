@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { addtoCart, getOrders } from "../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
-import { MDBCarousel, MDBCarouselCaption, MDBCarouselInner, MDBCarouselItem, MDBView, MDBMask, MDBContainer } from
-"mdbreact";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import ariel from './imagenes/ariel.jpeg'

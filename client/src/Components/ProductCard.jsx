@@ -2,7 +2,7 @@ import React from "react";
 import "./ProductCard.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addtoCart, getReviews } from "../redux/actions";
+import { addtoCart } from "../redux/actions";
 
 // Estaria bueno que cada producto tenga un subtitulo
 function ProductCard({

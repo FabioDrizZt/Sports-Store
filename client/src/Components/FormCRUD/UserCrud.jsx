@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers, promoteUser, removeUser } from "../../redux/actions";
 import NavBarAdmin from "../NavBar/NavBarAdmin";
-
-// const style = {
-//   width: "50%",
-//   margin: "2rem auto",
-//   position: "relative",
-// };
 
 function UserCrud() {
   const dispatch = useDispatch();
