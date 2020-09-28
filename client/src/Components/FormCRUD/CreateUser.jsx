@@ -4,10 +4,7 @@ import { Form, Input, Tooltip, Button } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import "./CreateUser.css";
 import { createUser, getUsers } from "../../redux/actions";
-import { Redirect } from "react-router";
 import { useHistory } from "react-router-dom";
-
-
 
 const formItemLayout = {
   labelCol: {
