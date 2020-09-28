@@ -6,6 +6,7 @@ import "./Home.css";
 import ariel from './imagenes/ariel.jpeg'
 import victor from './imagenes/victor.jpg'
 import tomas from './imagenes/tomas.jpeg'
+import gabriel from './imagenes/gabriel.jpeg'
 
 
 function Home() {
@@ -48,7 +49,7 @@ return(
             <div className="col-md-10">
               <h2 className="textColor display-4 font-weight-bold white-text pt-5 mb-2">Sports Store</h2>
               <hr className="hr-light"/>
-              <h4 className="textColor white-text my-4">Se feliz haciendo deportes.
+              <h4 className="textColor white-text my-4">Sé feliz haciendo deportes.
               Nosotros te apoyamos.
               </h4>
               <Link to="/products">
@@ -90,7 +91,7 @@ return(
   
             <div className="col-md-4 mb-1">
               <i className="fa fa-heart fa-4x red-text"></i>
-              <h4 className="my-4 font-weight-bold">Se feliz</h4>
+              <h4 className="my-4 font-weight-bold">Sé feliz</h4>
               <p className="grey-text">Deseamos que seas feliz haciendo la actividad deportiva que mas amas.
                   además, no está de más que te veas bien mientras lo haces.
               </p>
@@ -154,7 +155,7 @@ return(
     
         <hr className="my-5"/>
         <section id="examples" className="text-center">
-          <h2 className="mb-5 font-weight-bold">Quienes somos</h2>
+          <h2 className="mb-5 font-weight-bold">¿Quienes somos?</h2>
           <div className="row">    
             <div className="col-lg-4 col-md-12 mb-4">  
               <div className="view overlay z-depth-1-half">
@@ -235,15 +236,28 @@ return(
 
                 <div className="col-lg-4 col-md-6 mb-4">
     
-    <div className="view overlay z-depth-1-half">
-        <img src="" className="img-fluid" alt=""/>
-        <div className="mask rgba-white-slight"></div>
-    </div>
+                    <div className="view overlay z-depth-1-half">
+                        <img src="" className="img-fluid" alt=""/>
+                        <div className="mask rgba-white-slight"></div>
+                    </div>
+    
+                    <h4 className="my-4 font-weight-bold"></h4>
+                    <p className="grey-text"></p>
+    
+                </div>
 
-    <h4 className="my-4 font-weight-bold">Gabriel</h4>
-    <p className="grey-text">Texto de Gabriel</p>
+                <div className="col-lg-4 col-md-6 mb-4">
+    
+                    <div className="view overlay z-depth-1-half">
+                        <img src={gabriel} className="img-fluid" alt=""/>
+                        <div className="mask rgba-white-slight"></div>
+                    </div>
 
-</div>
+                    <h4 className="my-4 font-weight-bold">Gabriel Apaza</h4>
+                    <p className="grey-text">Enfrentando este nuevo desafio e incorporandome al mundo IT. 
+                    Superar mis limites. Y a seguir aprendiendo. </p>
+
+                </div>
     
             </div>
     
@@ -322,7 +336,7 @@ return(
     
         <section id="contact">
     
-            <h2 className="mb-5 font-weight-bold text-center">Se parte de Sports Store</h2>
+            <h2 className="mb-5 font-weight-bold text-center">Sé parte de Sports Store</h2>
     
             <div className="row">
     
