@@ -1,6 +1,5 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { getUserSession, userLogin } from "../src/redux/actions";
 import "./App.css";
 import Catalogo from "./Components/Catalogo";
@@ -15,6 +14,7 @@ import Cart from "./Components/Cart";
 import Order from "./Components/Order";
 import Admin from "./Components/Admin";
 import Login from "./Components/Login";
+import PasswordReset from "./Components/PasswordReset";
 import OrdersTable from "./Components/OrderTable/OrdersTable";
 import CreateProduct from './Components/FormCRUD/CreateProduct';
 import Productok from './Components/ProductOk/Productok';
@@ -24,10 +24,12 @@ import MiPerfil from './Components/MiPerfil';
 import Checkout from './Components/Checkout';
 import Buyok from "./Components/BuyOk/Buyok";
 import EditProductOk from "./Components/EditProductOk/EditProductOk";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
   const dispatch = useDispatch()
   const buttonUp = document.getElementById("button-up");
+  const user = useSelector((state) => state.user);
 
   buttonUp.addEventListener("click", scrollUp);
 
@@ -62,6 +64,7 @@ function App() {
       <Route exact path="/products" component={Catalogo} />
       <Route exact path="/users" component={RegistrationForm} />
       <Route exact path="/users/userok" component={Userok} />
+      <Route exact path="/users/passwordReset" component={PasswordReset} />
 
       {/* RUTAS DEL ADMINISTRADOR */}
       <Route exact path="/admin" component={Admin} />
