@@ -9,7 +9,7 @@ const PasswordReset = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState();
     const [redirect, setRedirect] = useState(false);
-    const [input, setInput] = useState([]);
+    const [input, setInput] = useState('');
 
     if (redirect) return <Redirect to="/" />;
 
