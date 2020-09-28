@@ -6,14 +6,10 @@ const check = require("./check.js");
 /* S67 : Crear ruta /promote
  POST /auth/promote/:id
  Promote convierte al usuario con ID: id a Admin*/
-server.put("/promote/:id", check.isAuth, check.isAdmin, (req, res) => {
-  User.findOne({
-    where: { id: req.params.id },
-  })
-    .then(usuario => usuario.update({ role: "admin" })
-    .then(user=>res.send(user))
-    )
-    .catch((err) => res.status(401).json({ err }));  
+ server.put("/promote/:id", check.isAuth, check.isAdmin, (req, res) => {
+  User.update({ role: "admin" }, { where: { id: req.params.id } })
+    .then((res) => res.status(200).send(res))
+    .catch((err) => res.send(err));
 });
 
 /*S63 : Crear ruta de Login
