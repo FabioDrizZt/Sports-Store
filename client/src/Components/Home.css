@@ -1,6 +1,30 @@
-.home {
-    height: 86.6vh;
-    width: 100%;
-    background-image: url('https://www.decathlon.cl/modules/ps_imageslider/images/58da9df6d954063b69c67b4b047af5e00c98a652_respira-deporte-1.jpg');
+html,
+body,
+header,
+#intro {
+    height: 100%;
+}
+
+#intro {
+    background: url("https://cdn.pixabay.com/photo/2014/12/15/17/18/prague-569352_960_720.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
+}
+
+.textColor {
+    color: white;
+}
+
+.orange-text {
+    color: orange;
+}
+
+.red-text {
+    color: red;
+}
+
+.blue-text {
+    color: blue;
 }
