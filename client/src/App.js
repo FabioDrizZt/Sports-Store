@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { getUserSession } from "../src/redux/actions";
 import "./App.css";
 import Catalogo from "./Components/Catalogo";
@@ -13,6 +14,7 @@ import Home from "./Components/Home";
 import Cart from "./Components/Cart";
 import Order from "./Components/Order";
 import Admin from "./Components/Admin";
+import MiPerfil from "./Components/MiPerfil";
 import Login from "./Components/Login";
 import PasswordReset from "./Components/PasswordReset";
 import OrdersTable from "./Components/OrderTable/OrdersTable";
@@ -23,7 +25,6 @@ import Userok from './Components/UserOk/UserOk';
 import Checkout from './Components/Checkout';
 import Buyok from "./Components/BuyOk/Buyok";
 import EditProductOk from "./Components/EditProductOk/EditProductOk";
-import { useDispatch } from "react-redux";
 
 function App() {
   const dispatch = useDispatch()
@@ -73,6 +74,7 @@ function App() {
       <Route exact path="/admin/newProduct" component={CreateProduct} />
       <Route exact path="/admin/orders" component={OrdersTable} />
       <Route exact path="/admin/productok" component={Productok} />
+      <Route exact path="/auth/me" component={MiPerfil} />
       <Route exact path="/admin/myProducts/editProductsOk" component={EditProductOk} />
     </div>
   );
