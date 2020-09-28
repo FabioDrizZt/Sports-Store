@@ -10,20 +10,3 @@
 .containerppp ::-webkit-input-placeholder {
     color: rgb(87, 82, 82);
 }
-
-
-/* .containerPro {
-    width: 60%;
-    height: 80%;
-    margin-top: 20px;
-    border: 1px solid grey;
-    border-radius: 20px;
-    padding: 15px;
-}
-
-.danger {
-    display: 'block';
-    margin-top: '7px';
-    color: red;
-    font-size: '13px';
-} */
