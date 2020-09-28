@@ -47,7 +47,7 @@ function Catalogo() {
                 })}
             </select>
             <button
-              className="btn btn-danger"
+              className="btn-dangerP"
               onClick={() => window.location.reload()}
             >
               Todos los Productos
