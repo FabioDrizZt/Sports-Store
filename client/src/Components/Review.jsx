@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Rate } from "antd";
 import "antd/dist/antd.css";
 import "../Components/FormCRUD/CreateProduct.css";
-import { createReview, getReviews, getUserSession } from "../redux/actions";
+import { createReview, getReviews } from "../redux/actions";
 
 const desc = ["Malo", "Regular", "Bueno", "Muy Bueno", "Excelente !!"];
 
