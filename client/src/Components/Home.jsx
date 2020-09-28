@@ -396,7 +396,7 @@ return(
 
         <div className="col-md-4 col-lg-3 col-xl-3">
             <h6 className="text-uppercase font-weight-bold">
-                <strong>Contactos</strong>
+                <strong>Contacts</strong>
             </h6>
             <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"/>
             <p>
