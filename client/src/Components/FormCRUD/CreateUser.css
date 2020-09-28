@@ -22,6 +22,10 @@ h3 {
   width: 500px;
 }
 
+.ant-btn-primaryG {
+  margin-left: 180px;
+}
+
 @media screen and (max-width: 879px) {
   .inputSize {
     width: 420px;

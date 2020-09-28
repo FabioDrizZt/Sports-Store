@@ -232,7 +232,7 @@ const RegistrationForm = () => {
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button className="ant-btn-primaryG" type="primary" htmlType="submit">
               Registrate
             </Button>
           </Form.Item>
