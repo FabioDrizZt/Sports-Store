@@ -45,6 +45,7 @@ const Review = (props) => {
               onSubmit={(e) => {
                 e.preventDefault();
                 dispatch(createReview(myreview));
+                console.log(reviews);
               }}
             >
               <h5>Tu valoración sobre el producto</h5>
