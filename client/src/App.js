@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { getUserSession, userLogin } from "../src/redux/actions";
+import { getUserSession } from "../src/redux/actions";
 import "./App.css";
 import Catalogo from "./Components/Catalogo";
 import Product from "./Components/Product.jsx";
@@ -20,7 +20,6 @@ import CreateProduct from './Components/FormCRUD/CreateProduct';
 import Productok from './Components/ProductOk/Productok';
 import RegistrationForm from './Components/FormCRUD/CreateUser';
 import Userok from './Components/UserOk/UserOk';
-import MiPerfil from './Components/MiPerfil';
 import Checkout from './Components/Checkout';
 import Buyok from "./Components/BuyOk/Buyok";
 import EditProductOk from "./Components/EditProductOk/EditProductOk";
