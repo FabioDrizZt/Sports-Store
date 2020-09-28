@@ -64,11 +64,7 @@ const Form = () => {
             required
           />
         </div>
-        <Link to={`/passwordReset`}>
-        <div className="password">
-        <p>¿Olvidaste tu contraseña?</p>
-        </div>
-        </Link>
+       
         <div className="boton">
           <input className="submitG" type="submit" value="Iniciar Sesión" />
         </div>{" "}
