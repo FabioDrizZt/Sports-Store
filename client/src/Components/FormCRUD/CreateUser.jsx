@@ -185,11 +185,11 @@ const RegistrationForm = () => {
                 validator(rule, value) {
                   // /[a-zA-Z\d]+/.test(value)
                   if (
-                    !/^(?=.*\d)(?=.*[A-Za-z])[A-Za-z0-9]{1,20}$/.test(value)
+                    !/^(?=.*\d)(?=.*[A-Za-z])[A-Za-z0-9]{5,20}$/.test(value)
                   ) {
                     // /^\w+$/
                     // ((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})
-                    return Promise.reject("Solamente numeros y letras");
+                    return Promise.reject("Sólo números y letras. Mínimo 5 caracteres");
                   }
                   // if(!/[a-zA-Z\d]+/.test(input.password))
                   return Promise.resolve();
