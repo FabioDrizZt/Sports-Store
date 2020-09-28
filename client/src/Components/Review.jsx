@@ -13,6 +13,8 @@ const Review = (props) => {
   const reviews = useSelector((state) => state.reviews);
   const user = useSelector((state) => state.user);
   const product = useSelector((state) => state.product);
+  const [check, setCheck] = useState(false);
+
   const [myreview, setMyreview] = useState({
     description: null,
     score: null,
@@ -37,7 +39,33 @@ const Review = (props) => {
         <h5>Valoración promedio del producto</h5>
         <Rate disabled value={total} />
         {total ? <span className="ant-rate-text">{desc[total - 1]}</span> : ""}
-        <hr />
+        <div>
+          <button
+            className="btn btn-success mt-4"
+            onClick={() => setCheck(!check)}
+          >
+            {check ? "Ocultar Valoraciones" : "Ver Todas las Valoraciones"}
+          </button>
+        </div>
+        {check &&
+          reviews &&
+          reviews.map((review) => {
+            return (
+              <div>
+                <Rate disabled value={review.score} />
+                {review.score ? (
+                  <span className="ant-rate-text">
+                    {desc[review.score - 1]}
+                  </span>
+                ) : (
+                  ""
+                )}
+                <div>{review.description}</div>
+                <hr />
+              </div>
+            );
+          })}
+
         {user.id ? (
           <div className="containerAll">
             <form
