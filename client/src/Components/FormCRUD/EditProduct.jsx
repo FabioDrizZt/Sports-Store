@@ -5,20 +5,6 @@ import NavBarAdmin from "../NavBar/NavBarAdmin";
 import "../FormCRUD/CreateProduct.css";
 import { Redirect } from "react-router";
 
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
-
-
 function EditProduct(props) {
   const dispatch = useDispatch();
   const idProduct = props.match.match.params.id;
