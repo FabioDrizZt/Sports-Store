@@ -12,7 +12,6 @@ const Checkout = (cart) => {
   const active = useSelector((state) => state.user);
   const cs = useSelector((state) => state.cart);
   var miCarritoDelStore = cs[0].cartId;
-  // console.log(miCarritoDelStore)
   const [input, setInput] = useState([]);
   console.log(input.ciudad);
 
