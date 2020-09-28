@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { updateProduct } from "../../redux/actions";
 import { useDispatch } from "react-redux";
-import { Form, Input, Tooltip, Button } from "antd";
 import NavBarAdmin from "../NavBar/NavBarAdmin";
 import "../FormCRUD/CreateProduct.css";
 import { Redirect } from "react-router";
