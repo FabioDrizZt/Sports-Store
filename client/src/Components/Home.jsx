@@ -5,6 +5,10 @@ import { MDBCarousel, MDBCarouselCaption, MDBCarouselInner, MDBCarouselItem, MDB
 "mdbreact";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import ariel from './imagenes/ariel.jpeg'
+import victor from './imagenes/victor.jpg'
+import tomas from './imagenes/tomas.jpeg'
+
 
 function Home() {
   const dispatch = useDispatch();
@@ -156,7 +160,7 @@ return(
           <div className="row">    
             <div className="col-lg-4 col-md-12 mb-4">  
               <div className="view overlay z-depth-1-half">
-                <img src="ariel.jpeg" className="img-fluid" alt=""/>
+                <img src={ariel} className="img-fluid" alt=""/>
                 <div className="mask rgba-white-slight">
                 </div>
               </div>
@@ -168,7 +172,7 @@ return(
 
             <div className="col-lg-4 col-md-6 mb-4">
               <div className="view overlay z-depth-1-half">
-                  <img src="./imagenes/victor.jpg" className="img-fluid" alt=""/>
+                  <img src={victor} className="img-fluid" alt=""/>
                   <div className="mask rgba-white-slight"></div>
               </div>
 
@@ -181,7 +185,7 @@ return(
                 <div className="col-lg-4 col-md-6 mb-4">
     
                     <div className="view overlay z-depth-1-half">
-                        <img src="./imagenes/tomas.jpeg" className="img-fluid" alt=""/>
+                        <img src={tomas} className="img-fluid" alt=""/>
                         <div className="mask rgba-white-slight"></div>
                     </div>
     
