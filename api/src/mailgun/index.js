@@ -14,9 +14,8 @@ const sendEmail = async (email, name, addres) => {
 	  subject: 'Notificación de compra exitosa',
 	//   text: `Hola ${name}, le informamos que su compra ha sido exitosa y sera enviada a la dirección indicada: ${addres}. 
 	//   Apuntate a las notificaciones de el dev sin site.`,
-	  html: `<h1>Hola ${name}, le informamos que su compra ha sido exitosa y sera enviada a la dirección indicada: <strong>${addres}.</strong></h1>
-	  		<p>Si no ha realizado una solicitud para restauración de su contraseña o si tiene alguna pregunta, por favor
-	  		contacte con nosotros directamente enviando un email a <link value="soporte@sportstore.site">`,
+	  html: `<h1>Hola ${name} ! Tu compra ha sido exitosa.</strong></h1>
+	  		<p>Hola ${name}, le informamos que su compra ha sido exitosa y sera enviada a la dirección indicada: <strong>${addres}.</p>`,
 	};
 	let success = true;
 	try {
