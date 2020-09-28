@@ -383,7 +383,7 @@ return(
 
         <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <h6 className="text-uppercase font-weight-bold">
-                <strong>Comienza tu experiencia</strong>
+                <strong>Start your experience</strong>
             </h6>
             <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style={{width:60}}/>
             <p>
