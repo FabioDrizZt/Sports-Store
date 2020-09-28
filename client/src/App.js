@@ -23,12 +23,11 @@ import Userok from './Components/UserOk/UserOk';
 import Checkout from './Components/Checkout';
 import Buyok from "./Components/BuyOk/Buyok";
 import EditProductOk from "./Components/EditProductOk/EditProductOk";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function App() {
   const dispatch = useDispatch()
   const buttonUp = document.getElementById("button-up");
-  const user = useSelector((state) => state.user);
 
   buttonUp.addEventListener("click", scrollUp);
 
@@ -74,7 +73,6 @@ function App() {
       <Route exact path="/admin/newProduct" component={CreateProduct} />
       <Route exact path="/admin/orders" component={OrdersTable} />
       <Route exact path="/admin/productok" component={Productok} />
-      <Route exact path="/auth/me" component={!user.id ? Admin : Error} />
       <Route exact path="/admin/myProducts/editProductsOk" component={EditProductOk} />
     </div>
   );
