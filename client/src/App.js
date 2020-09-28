@@ -1,6 +1,5 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { getUserSession, userLogin } from "../src/redux/actions";
 import "./App.css";
 import Catalogo from "./Components/Catalogo";
@@ -24,10 +23,12 @@ import MiPerfil from './Components/MiPerfil';
 import Checkout from './Components/Checkout';
 import Buyok from "./Components/BuyOk/Buyok";
 import EditProductOk from "./Components/EditProductOk/EditProductOk";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
   const dispatch = useDispatch()
   const buttonUp = document.getElementById("button-up");
+  const user = useSelector((state) => state.user);
 
   buttonUp.addEventListener("click", scrollUp);
 
