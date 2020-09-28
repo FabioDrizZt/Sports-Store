@@ -40,6 +40,17 @@
     color:white
 }
 
+.submitG{
+    margin-right:120px ;
+    border-radius: 5px;
+    border:none;
+    height: 42px;
+    width: 150px;
+    background-color: #0277bd;
+    margin-bottom: 20px;
+    color:white
+}
+
 .boton {
     display: flex;
     flex-direction: row-reverse;

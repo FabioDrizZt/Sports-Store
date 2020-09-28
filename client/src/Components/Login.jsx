@@ -70,7 +70,7 @@ const Form = () => {
         </div>
         </Link>
         <div className="boton">
-          <input className="submit" type="submit" value="Iniciar Sesión" />
+          <input className="submitG" type="submit" value="Iniciar Sesión" />
         </div>{" "}
         <div className="login">
           No tienes Cuenta
