@@ -113,13 +113,15 @@ server.put("/:idUser/cart", check.isAuth, (req, res) => {
 });
 // S70 : Crear Ruta para password reset
 // POST /users/:id/passwordReset
-server.put("/:id/passwordReset", check.isAuth, (req, res) => {
-  User.findByPk(req.params.id)
-    .then(user =>
+server.put("/reset", (req, res) => {
+  const id = req.body.id;
+  const password = req.body.password;
+  User.findByPk(id)
+    .then(user =>{
       user.update(
-        { password: req.body.password }
-      ).then(() => { res.send("Se ha cambiado la clave") })
-    ).catch((error) => { res.send(error); })
+        { password: password }
+      )}
+    ).catch((error) => { res.send(error) })
 });
 // -----> ***** DELETE ***** <-----
 // S37 : Crear Ruta para eliminar Usuario DELETE /users/:id

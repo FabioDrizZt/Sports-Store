@@ -58,13 +58,13 @@ const Form = () => {
           <input
             className="input"
             type="password"
-            placeholder="contraseña"
+            placeholder="Contraseña"
             value={input.password}
             onChange={(e) => setInput({ ...input, password: e.target.value })}
             required
           />
         </div>
-        <Link to={`/passwordReset`}>
+        <Link to={`/users/passwordReset`}>
         <div className="password">
         <p>¿Olvidaste tu contraseña?</p>
         </div>

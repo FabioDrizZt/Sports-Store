@@ -7,6 +7,7 @@ const authRouter = require("./auth.js");
 const userSession = require("./userSession");
 const router = Router();
 const mailgun = require("../mailgun");
+const { User } = require("../db.js");
 
 // load each router on a route
 // i.e: router.use('/auth', authRouter);
@@ -28,12 +29,11 @@ router.post("/sendEmail", async (req, res, next) => {
 });
 
 router.post("/passwordReset", async (req, res, next) => {
-  try {
-    await mailgun.passwordReset(req.body.email);
-    res.send("Email enviado");
-  } catch (e) {
-    console.log(e);
-    res.status(500);
-  }
+  User.findOne({where: { email: req.body.email }})
+    .then(user => {
+      mailgun.passwordReset(user.id, user.email);
+      res.send("Email enviado");
+  }).catch((error) => { res.status(500).send(error); })
 });
+
 module.exports = router;
