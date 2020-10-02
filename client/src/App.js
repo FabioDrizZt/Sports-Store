@@ -1,7 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getUserSession } from "../src/redux/actions";
+import { getUserSession, userLogin } from "../src/redux/actions";
 import "./App.css";
 import Catalogo from "./Components/Catalogo";
 import Product from "./Components/Product.jsx";
@@ -17,18 +16,23 @@ import Admin from "./Components/Admin";
 import MiPerfil from "./Components/MiPerfil";
 import Login from "./Components/Login";
 import PasswordReset from "./Components/PasswordReset";
+import Reset from "./Components/Reset";
 import OrdersTable from "./Components/OrderTable/OrdersTable";
 import CreateProduct from './Components/FormCRUD/CreateProduct';
 import Productok from './Components/ProductOk/Productok';
 import RegistrationForm from './Components/FormCRUD/CreateUser';
 import Userok from './Components/UserOk/UserOk';
+import MiPerfil from './Components/MiPerfil';
 import Checkout from './Components/Checkout';
 import Buyok from "./Components/BuyOk/Buyok";
 import EditProductOk from "./Components/EditProductOk/EditProductOk";
+import { useDispatch, useSelector } from "react-redux";
+
 
 function App() {
   const dispatch = useDispatch()
   const buttonUp = document.getElementById("button-up");
+  const user = useSelector((state) => state.user);
 
   buttonUp.addEventListener("click", scrollUp);
 
@@ -64,6 +68,7 @@ function App() {
       <Route exact path="/users" component={RegistrationForm} />
       <Route exact path="/users/userok" component={Userok} />
       <Route exact path="/users/passwordReset" component={PasswordReset} />
+      <Route path="/reset" component={Reset} />
 
       {/* RUTAS DEL ADMINISTRADOR */}
       <Route exact path="/admin" component={Admin} />
@@ -74,7 +79,8 @@ function App() {
       <Route exact path="/admin/newProduct" component={CreateProduct} />
       <Route exact path="/admin/orders" component={OrdersTable} />
       <Route exact path="/admin/productok" component={Productok} />
-      <Route exact path="/auth/me" component={MiPerfil} />
+      <Route exact path="/auth/me" component={!user.id ? Admin : Error} />
+
       <Route exact path="/admin/myProducts/editProductsOk" component={EditProductOk} />
     </div>
   );
