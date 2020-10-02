@@ -13,6 +13,7 @@ import Home from "./Components/Home";
 import Cart from "./Components/Cart";
 import Order from "./Components/Order";
 import Admin from "./Components/Admin";
+import MiPerfil from "./Components/MiPerfil";
 import Login from "./Components/Login";
 import PasswordReset from "./Components/PasswordReset";
 import Reset from "./Components/Reset";
@@ -26,6 +27,7 @@ import Checkout from './Components/Checkout';
 import Buyok from "./Components/BuyOk/Buyok";
 import EditProductOk from "./Components/EditProductOk/EditProductOk";
 import { useDispatch, useSelector } from "react-redux";
+
 
 function App() {
   const dispatch = useDispatch()
@@ -78,6 +80,7 @@ function App() {
       <Route exact path="/admin/orders" component={OrdersTable} />
       <Route exact path="/admin/productok" component={Productok} />
       <Route exact path="/auth/me" component={!user.id ? Admin : Error} />
+
       <Route exact path="/admin/myProducts/editProductsOk" component={EditProductOk} />
     </div>
   );

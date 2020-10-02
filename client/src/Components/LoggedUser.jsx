@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { userLogout, getMe } from "../redux/actions";
 
 const LoggedUser = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
+  const [redirect, setRedirect] = useState(false);
+  if (redirect) return <Redirect to="/" />;
   return (
     <React.Fragment>
       {user.length === 0 ? null : (
@@ -38,7 +39,13 @@ const LoggedUser = () => {
               </button>
             </Link>
             <div className="card-footer">
-              <button className="btn btn-secondary" onClick={() => dispatch(userLogout())}>
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  dispatch(userLogout());
+                  setRedirect(true);
+                }}
+              >
                 {" "}
                 Cerrar sesion{" "}
               </button>

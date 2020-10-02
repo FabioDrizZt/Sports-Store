@@ -8,23 +8,20 @@ const DOMAIN = 'sandboxbe92ef464470402f8a33075243995715.mailgun.org'
 const mg = mailgun({apiKey: MAILGUN_APIKEY, domain: DOMAIN});
 
 const sendEmail = async (email, name, addres) => {
-    const payload = {
-      from: 'Sport Store <notificaciones@sportstore.site>',
-      to: email,
-      subject: 'Notificación de compra exitosa',
-    //   text: `Hola ${name}, le informamos que su compra ha sido exitosa y sera enviada a la dirección indicada: ${addres}. 
-    //   Apuntate a las notificaciones de el dev sin site.`,
-      html: `<h1>Hola ${name}, le informamos que su compra ha sido exitosa y sera enviada a la dirección indicada: <strong>${addres}.</strong></h1>
-            <p>Si no ha realizado una solicitud para restauración de su contraseña o si tiene alguna pregunta, por favor
-            contacte con nosotros directamente enviando un email a <a href="mailto:ventas@sportstore.site">ventas@sportstore.site</a>`,
-    };
-    let success = true;
-    try {
-      success = await mg.messages().send(payload);
-    } catch (e) {
-      success = false;
-    }
-    console.log(success);
+	const payload = {
+	  from: 'Sport Store <notificaciones@sportstore.site>',
+	  to: email,
+	  subject: 'Notificación de compra exitosa',
+	  html: `<h1>Hola ${name} ! Tu compra ha sido exitosa.</strong></h1>
+	  		<p>Hola ${name}, le informamos que su compra ha sido exitosa y sera enviada a la dirección indicada: <strong>${addres}.</p>`,
+	};
+	let success = true;
+	try {
+	  success = await mg.messages().send(payload);
+	} catch (e) {
+	  success = false;
+	}
+	console.log(success);
   };
 
 //      Ejemplo de uso de la funcion:
